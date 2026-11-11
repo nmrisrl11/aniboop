@@ -16,7 +16,29 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
+
+## Tooling & Linting (OXC)
+
+This project is configured with the **OXC (Oxidation Compiler)** toolchain for high-performance linting and formatting:
+
+- **Lint with Oxlint:**
+  ```bash
+  npm run lint
+  ```
+- **Format with Oxfmt:**
+  ```bash
+  npm run format
+  npm run format:check
+  ```
+- **Lint with ESLint:**
+  ```bash
+  npm run lint:eslint
+  ```
+- **Run all linters:**
+  ```bash
+  npm run lint:all
+  ```
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 

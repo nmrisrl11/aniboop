@@ -17,15 +17,21 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## Setup and checks
 
 - Install dependencies with `npm ci` and start development with `npm run dev`. On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm.ps1`.
-- Run `npm run lint:all` for Oxlint and the remaining Next.js ESLint checks. Run `npm run format:check` for Oxfmt. Use the production build with `npm run build` to verify changes to routes, application code, or build configuration.
+- Run `npm run lint:all` for Oxlint, Next.js ESLint, and Tailwind CSS lint. Run `npm run format:check` for Oxfmt. Use the production build with `npm run build` to verify changes to routes, application code, or build configuration.
 - Prefer formatting only the files you changed. See the [development guide](docs/DEVELOPMENT.md) for the full command list.
 
 ## Code and design
 
 - Use TypeScript and the configured `@/` alias for imports across `src/`. Keep App Router pages and layouts as Server Components by default. Put browser state and event handling in the Client Components that need them.
-- Reuse the shadcn Radix primitives in [`src/components/ui`](src/components/ui). Keep both palettes in [`globals.css`](src/app/globals.css) and use semantic utilities such as `bg-card` and `text-foreground` across themes.
+- Use the [shadcn skill](.agents/skills/shadcn/SKILL.md) when adding or composing shadcn components. Reuse the Radix primitives in [`src/components/ui`](src/components/ui). Keep both palettes in [`globals.css`](src/app/globals.css) and use semantic utilities such as `bg-card` and `text-foreground` across themes.
 - Update shared product copy in [`src/lib/brand.ts`](src/lib/brand.ts). Use Allo Bold for display type, Inter for UI text, and system monospace for technical values. See the [brand guide](docs/BRAND.md) for typography, palette, and voice.
 - Keep boop activation and opening character details distinct when implementing the gallery. Preserve keyboard access and reduced-motion behavior. Review the [feature blueprint](docs/FEATURE_BLUEPRINT.md) for acceptance criteria.
+
+## Tailwind CSS lint
+
+- Use canonical Tailwind v4 utilities when an equivalent exists, such as `gap-1` for `gap-[4px]`, `data-active:` for `data-[active]:`, and `bg-linear-to-r` for `bg-gradient-to-r`. Use arbitrary values for values with no suitable utility or theme token.
+- Resolve conflicting utilities by keeping the one intended for that property and variant. Use explicit variants for differences across breakpoints, states, or data attributes.
+- After editing classes or the theme, run `npm run lint:tailwind` and resolve diagnostics introduced by the change, including warnings. Use `npm run lint:tailwind -- --dry-run` to preview automatic fixes. Review any changes made by `npm run lint:tailwind:fix`, format touched files with Oxfmt, and rerun the lint check.
 
 ## Documentation and Git
 

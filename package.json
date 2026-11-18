@@ -9,7 +9,9 @@
 		"lint": "oxlint .",
 		"lint:fix": "oxlint . --fix",
 		"lint:eslint": "eslint .",
-		"lint:all": "npm run lint && npm run lint:eslint",
+		"lint:all": "npm run lint && npm run lint:eslint && npm run lint:tailwind",
+		"lint:tailwind": "tailwind-lint --config src/app/globals.css \"src/**/*.{js,jsx,ts,tsx,css,mdx}\"",
+		"lint:tailwind:fix": "npm run lint:tailwind -- --fix",
 		"format": "oxfmt . --write",
 		"format:check": "oxfmt . --check"
 	},
@@ -35,6 +37,7 @@
 		"eslint-plugin-oxlint": "^1.93.0",
 		"oxfmt": "^0.78.0",
 		"oxlint": "^1.93.0",
+		"tailwind-lint": "^0.17.1",
 		"tailwindcss": "^4.3.5",
 		"typescript": "^6.0.3"
 	}

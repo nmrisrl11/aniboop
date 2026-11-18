@@ -43,3 +43,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 - Keep the affected guides in sync when changing behavior, configuration, commands, or project status. Use the [documentation map](docs/DOCUMENTATION.md) to find the right place and [`$sync-documentation`](.agents/skills/sync-documentation/SKILL.md) for a broader drift audit.
 - Use the [commit-and-push skill](.agents/skills/commit-and-push/SKILL.md) when asked to commit and push. It confirms the proposed commit and destination by default, with an explicit `--direct` option.
+
+## Mascot assets
+
+- Place incoming or unoptimized sprite sheets in `public/mascots/raw/`.
+- Use the [optimize-mascot skill](.agents/skills/optimize-mascot/SKILL.md) or run `npm run mascot:optimize` to prepare direction and reaction WebP sheets in `public/mascots/sheets/`. See the [gallery assets guide](docs/GALLERY_ASSETS.md#preparing-sprite-sheets) for requirements and options.

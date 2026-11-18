@@ -1,0 +1,3 @@
+display_name: Mascot Optimizer
+short_description: Optimize mascot sprite sheets from raw/ into sheets/
+default_prompt: Optimize the mascot sprite sheets in public/mascots/raw

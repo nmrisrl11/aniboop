@@ -13,7 +13,8 @@
 		"lint:tailwind": "tailwind-lint --config src/app/globals.css \"src/**/*.{js,jsx,ts,tsx,css,mdx}\"",
 		"lint:tailwind:fix": "npm run lint:tailwind -- --fix",
 		"format": "oxfmt . --write",
-		"format:check": "oxfmt . --check"
+		"format:check": "oxfmt . --check",
+		"mascot:optimize": "python .agents/skills/optimize-mascot/scripts/optimize.py"
 	},
 	"dependencies": {
 		"class-variance-authority": "^0.7.1",

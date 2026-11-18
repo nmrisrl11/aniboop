@@ -1,6 +1,24 @@
 # Gallery assets
 
-This is the implementation plan for real characters. The current grid generates text placeholders from their indices and has no catalog or character asset requests.
+The current grid generates text placeholders from their indices. The sprite optimizer runs separately from the app.
+
+## Preparing sprite sheets
+
+Put the direction and reaction sheets in `public/mascots/raw/`. Use PNG or WebP and name the files `<character-id>-directions` and `<character-id>-reactions` with the appropriate extension. Each sheet should be a 1080 × 1080 image with a 3 × 3 grid of 360 × 360 tiles.
+
+Run these commands from the repository root with Python 3 available as `python`.
+
+```sh
+python -m pip install Pillow numpy
+npm run mascot:optimize -- --dry-run
+npm run mascot:optimize
+```
+
+The dry run reports projected sizes without writing image files. The regular run writes WebP files to `public/mascots/sheets/`. By default it zeros out pixels with an alpha value of 1, clears RGB values under fully transparent pixels, and encodes color with lossy compression and the cleaned alpha channel at full quality. Use `--character <id>` to process one character’s sheets and `--move` to archive processed source sheets in `public/mascots/raw/archive/`.
+
+See the [optimize-mascot skill](../.agents/skills/optimize-mascot/SKILL.md) for agent usage and the [CLI guide](../.agents/skills/optimize-mascot/references/cli_usage.md) for all options.
+
+## Planned gallery delivery
 
 | Stage           | Load                                                                                                      | Cache and rendering                                                                                                                                                                   |
 | --------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

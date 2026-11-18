@@ -1,0 +1,14 @@
+{
+	"editor.defaultFormatter": "oxc.oxc-vscode",
+	"editor.formatOnSave": true,
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"typescript.preferences.importModuleSpecifier": "non-relative",
+	"javascript.preferences.importModuleSpecifier": "non-relative",
+	"tailwindCSS.experimental.configFile": "src/app/globals.css",
+	"tailwindCSS.classAttributes": ["class", "className", "ngClass", "class:list", "data-class"],
+	"tailwindCSS.classFunctions": ["clsx", "cn", "cva"],
+	"files.associations": {
+		".oxlintrc.json": "jsonc",
+		".oxfmtrc.json": "jsonc"
+	}
+}

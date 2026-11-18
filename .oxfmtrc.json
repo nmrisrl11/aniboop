@@ -1,4 +1,26 @@
 {
-  "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": []
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"endOfLine": "lf",
+	"printWidth": 100,
+	"tabWidth": 2,
+	"useTabs": true,
+	"semi": true,
+	"singleQuote": false,
+	"jsxSingleQuote": false,
+	"trailingComma": "all",
+	"bracketSpacing": true,
+	"arrowParens": "always",
+	"ignorePatterns": [
+		".agents/**",
+		".next/**",
+		"out/**",
+		"build/**",
+		"next-env.d.ts",
+		"package-lock.json"
+	],
+	"sortTailwindcss": {
+		"stylesheet": "./src/app/globals.css",
+		"functions": ["clsx", "cn", "cva"],
+		"preserveWhitespace": true
+	}
 }

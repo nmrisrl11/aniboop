@@ -18,27 +18,16 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
 
-## Tooling & Linting (OXC)
+## Linting and formatting
 
-This project is configured with the **OXC (Oxidation Compiler)** toolchain for high-performance linting and formatting:
-
-- **Lint with Oxlint:**
-  ```bash
-  npm run lint
-  ```
-- **Format with Oxfmt:**
-  ```bash
-  npm run format
-  npm run format:check
-  ```
-- **Lint with ESLint:**
-  ```bash
-  npm run lint:eslint
-  ```
-- **Run all linters:**
-  ```bash
-  npm run lint:all
-  ```
+| Command                | What it does                                                         |
+| ---------------------- | -------------------------------------------------------------------- |
+| `npm run lint`         | Runs Oxlint with React, TypeScript, and Next.js rules                |
+| `npm run lint:fix`     | Applies safe Oxlint fixes                                            |
+| `npm run lint:eslint`  | Runs the remaining Next.js ESLint checks                             |
+| `npm run lint:all`     | Runs both linters                                                    |
+| `npm run format`       | Formats files and sorts Tailwind classes using `src/app/globals.css` |
+| `npm run format:check` | Checks formatting without writing changes                            |
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
@@ -56,4 +45,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
 # aniboop

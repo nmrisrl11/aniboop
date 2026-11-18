@@ -1,0 +1,37 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Next.js: Dev",
+			"type": "npm",
+			"script": "dev",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Next.js: Build",
+			"type": "npm",
+			"script": "build",
+			"group": { "kind": "build", "isDefault": true },
+			"problemMatcher": []
+		},
+		{
+			"label": "Lint (Oxlint)",
+			"type": "npm",
+			"script": "lint",
+			"problemMatcher": []
+		},
+		{
+			"label": "Format (Oxfmt)",
+			"type": "npm",
+			"script": "format",
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Formatting (Oxfmt)",
+			"type": "npm",
+			"script": "format:check",
+			"problemMatcher": []
+		}
+	]
+}

@@ -1,14 +1,26 @@
 {
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["typescript", "react", "nextjs", "unicorn", "oxc"],
-  "categories": {
-    "correctness": "error"
-  },
-  "rules": {},
-  "env": {
-    "builtin": true,
-    "browser": true,
-    "node": true
-  },
-  "ignorePatterns": [".next/**", "node_modules/**", "dist/**", "out/**"]
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"plugins": ["eslint", "typescript", "react", "nextjs", "unicorn", "oxc"],
+	"categories": {
+		"correctness": "error"
+	},
+	"rules": {
+		"react/rules-of-hooks": "error",
+		"typescript/ban-ts-comment": "error",
+		"typescript/no-explicit-any": "error"
+	},
+	"env": {
+		"builtin": true,
+		"browser": true,
+		"node": true
+	},
+	"ignorePatterns": [
+		".agents/**",
+		".next/**",
+		"node_modules/**",
+		"build/**",
+		"dist/**",
+		"out/**",
+		"next-env.d.ts"
+	]
 }

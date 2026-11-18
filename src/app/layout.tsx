@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { ThemeProvider } from "@/components/theme-provider";
 import { brand } from "@/lib/brand";
 import "./globals.css";
 
@@ -42,17 +41,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
 	return (
-		<html lang="en" className={`${allo.variable} ${inter.variable}`} suppressHydrationWarning>
-			<body className="min-h-dvh antialiased">
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange
-				>
-					{children}
-				</ThemeProvider>
-			</body>
+		<html lang="en" className={`${allo.variable} ${inter.variable}`}>
+			<body className="min-h-dvh antialiased">{children}</body>
 		</html>
 	);
 }

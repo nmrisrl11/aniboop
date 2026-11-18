@@ -4,7 +4,7 @@
 
 AniBoop is a collection of chibi anime characters designed to react when you boop them. The planned gallery lets you explore the collection and download each character’s directional poses and reactions.
 
-The repository currently ships the branded landing page, light and dark themes, and social previews. See the feature blueprint for the gallery and mascot integration.
+The homepage currently previews the virtualized gallery with placeholder cards. Drag, scroll, or use the arrow keys to pan. See the feature blueprint for character search, mascot reactions, and downloads.
 
 ## Get started
 

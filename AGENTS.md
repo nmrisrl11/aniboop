@@ -2,7 +2,7 @@
 
 ## Project
 
-AniBoop is a collection of chibi anime characters designed to react when booped. The current Next.js App Router app ships a branded landing page, theme selection, and social previews. The explorable gallery, mascot reactions, and downloadable character assets are planned in the [feature blueprint](docs/FEATURE_BLUEPRINT.md).
+AniBoop is a collection of chibi anime characters designed to react when booped. The homepage is a pannable, virtualized placeholder grid. Mascot reactions, character search, and downloads are planned in the [feature blueprint](docs/FEATURE_BLUEPRINT.md).
 
 <!-- BEGIN:nextjs-agent-rules -->
 

@@ -4,6 +4,8 @@ AniBoop is an interactive collection of chibi anime characters. The signature in
 
 ## Copy
 
+The copy below includes planned gallery surfaces. The current preview displays placeholders and a short panning hint.
+
 | Surface              | Copy                                                                                                               |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | Name                 | AniBoop                                                                                                            |
@@ -40,7 +42,7 @@ Use tabular numerals where counts need to align. The two upright WOFF2 assets to
 | Boop lilac         | `#E9DCFF` | `#4A326E` |
 | Boop peach         | `#FFDBC5` | `#5B3538` |
 
-Use peach and lilac sparingly so the character artwork stays prominent. The concentric tap ripple serves as the favicon and appears in the landing page and social preview.
+Use peach and lilac sparingly so the character artwork stays prominent. The concentric tap ripple serves as the favicon and appears in the social preview.
 
 ## Corner shapes
 

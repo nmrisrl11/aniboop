@@ -2,6 +2,8 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@plugin "@toolwind/corner-shape";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
@@ -108,6 +110,15 @@
 	--chart-3: #71d1c5;
 	--chart-4: #f5b173;
 	--chart-5: #a7b5ff;
+}
+
+@utility squircle {
+	border-radius: min(2rem, 20%);
+
+	@supports (corner-shape: squircle) {
+		@apply corner-squircle;
+		border-radius: min(2.5rem, 25%);
+	}
 }
 
 @layer base {

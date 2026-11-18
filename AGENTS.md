@@ -27,6 +27,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Update shared product copy in [`src/lib/brand.ts`](src/lib/brand.ts). Use Allo Bold for display type, Inter for UI text, and system monospace for technical values. See the [brand guide](docs/BRAND.md) for typography, palette, and voice.
 - Keep boop activation and opening character details distinct when implementing the gallery. Preserve keyboard access and reduced-motion behavior. Review the [feature blueprint](docs/FEATURE_BLUEPRINT.md) for acceptance criteria.
 
+## Corner shapes
+
+- Use `squircle` when a card, banner, or other surface should have corners that scale with its dimensions. The utility supplies both radii in [`globals.css`](src/app/globals.css). Use it on its own so competing radius classes do not override the fallback.
+- When a shared component already has a size-specific `rounded-*` radius, add `corner-squircle` to enhance that radius. Use `rounded-full` alone for intentional circles and pills. Preserve keyboard focus indicators on interactive elements.
+- Keep the baseline radius outside the feature query and native-only changes inside `@supports (corner-shape: squircle)`. Verify both paths when changing the shared utility.
+
 ## Tailwind CSS lint
 
 - Use canonical Tailwind v4 utilities when an equivalent exists, such as `gap-1` for `gap-[4px]`, `data-active:` for `data-[active]:`, and `bg-linear-to-r` for `bg-gradient-to-r`. Use arbitrary values for values with no suitable utility or theme token.

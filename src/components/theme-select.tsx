@@ -17,7 +17,7 @@ export function ThemeSelect() {
 		<label className="flex items-center gap-2 text-sm text-muted-foreground">
 			Theme
 			<select
-				className="min-h-11 rounded-md border border-input bg-card px-2.5 text-card-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+				className="min-h-11 rounded-md border border-input bg-card px-2.5 text-card-foreground corner-squircle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
 				value={hydrated ? (theme ?? "system") : "system"}
 				onChange={(event) => setTheme(event.target.value)}
 				disabled={!hydrated}

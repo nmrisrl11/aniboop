@@ -29,6 +29,7 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/turbopack": "^4.3.5",
+		"@toolwind/corner-shape": "^0.0.8-3",
 		"@types/node": "^26.6.6",
 		"@types/react": "^19.3.0",
 		"@types/react-dom": "^19.3.0",

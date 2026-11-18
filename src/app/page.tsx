@@ -26,7 +26,7 @@ export default function Home() {
 
 				<section
 					aria-label="Character collection"
-					className="flex min-h-70 flex-col items-center justify-center gap-5 rounded-[2rem] border bg-card px-6 py-10 text-center"
+					className="flex min-h-70 flex-col items-center justify-center gap-5 squircle border bg-card px-6 py-10 text-center"
 				>
 					<div className="grid size-36 place-items-center rounded-full bg-boop-lilac">
 						<div className="grid size-26 place-items-center rounded-full bg-boop-peach">

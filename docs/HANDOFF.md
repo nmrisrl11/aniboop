@@ -31,6 +31,8 @@ Framing checks covered all 16 center previews and 288 playback poses. An isolate
 
 A local production test in a 1440 × 900 Chromium viewport fetched 33 WebPs for opening the gallery, moving the mouse, and booping once. Repeating the visit in the same browser reused all 33 from cache with zero image bytes transferred. Browser checks also covered gaze across cards, drag followed by a touch tap, and keyboard boops with reduced motion. Physical-phone profiling and deployed cache verification remain open.
 
+Repeated mouse boops with slight pointer movement kept neighboring mascots in their last gaze pose during each press. Chromium also verified that a drag still pans and unpressed movement resumes gaze tracking.
+
 ## Where to pick up
 
 For gallery changes, start with the [feature blueprint](FEATURE_BLUEPRINT.md) and [gallery asset guide](GALLERY_ASSETS.md#gallery-loading). Keep booping distinct from opening **View & download**. Test tap versus drag, keyboard access, reduced motion, and long pans on a representative phone. Confirm distribution rights and applicable attribution before publishing downloads.

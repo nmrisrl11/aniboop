@@ -15,9 +15,13 @@ function move(event: PointerEvent) {
 	});
 }
 
-function reset() {
+function cancelPendingMove() {
 	cancelAnimationFrame(frame);
 	frame = 0;
+}
+
+function reset() {
+	cancelPendingMove();
 	if (!point) return;
 	point = null;
 	for (const listener of listeners) listener(null);
@@ -30,7 +34,8 @@ function leave(event: PointerEvent) {
 export function subscribeToPagePointer(listener: Listener) {
 	if (listeners.size === 0) {
 		window.addEventListener("pointermove", move, { passive: true });
-		window.addEventListener("pointerdown", reset, { capture: true, passive: true });
+		// Keep the last displayed gaze during a press. Unpressed movement resumes tracking.
+		window.addEventListener("pointerdown", cancelPendingMove, { capture: true, passive: true });
 		window.addEventListener("pointerout", leave);
 		window.addEventListener("blur", reset);
 	}
@@ -40,7 +45,7 @@ export function subscribeToPagePointer(listener: Listener) {
 		listeners.delete(listener);
 		if (listeners.size > 0) return;
 		window.removeEventListener("pointermove", move);
-		window.removeEventListener("pointerdown", reset, true);
+		window.removeEventListener("pointerdown", cancelPendingMove, true);
 		window.removeEventListener("pointerout", leave);
 		window.removeEventListener("blur", reset);
 		reset();

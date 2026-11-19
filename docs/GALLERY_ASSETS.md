@@ -18,7 +18,7 @@ The production build emits the gallery's center previews and compact pose sheets
 
 ### Gallery-wide cursor tracking
 
-Visible mascots follow the cursor across the gallery, including over captions and gaps, once their direction sheets decode. One shared pointer listener delivers the latest position each animation frame. A press resets the gaze. Tracking resumes on movement after release and after the grid stops panning. Touch-only and reduced-motion visitors use the center-pose previews until they trigger a reaction.
+Visible mascots follow the cursor across the gallery, including over captions and gaps, once their direction sheets decode. One shared pointer listener delivers the latest position each animation frame. A press keeps each mascot's last gaze pose. Panning resets gaze to the center pose. Tracking resumes on the next unpressed movement once the grid is still. Touch-only and reduced-motion visitors use the center-pose previews until they trigger a reaction.
 
 ## Adding a mascot
 

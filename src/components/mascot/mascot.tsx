@@ -3,13 +3,8 @@
 // Adapted from nmrisrl-v2 and page-mascot. See PAGE-MASCOT-LICENSE.txt.
 import { REACTIONS, type Reaction } from "@/lib/mascot-sprites";
 import { cn } from "@/lib/utils";
-import {
-	type CSSProperties,
-	type PointerEvent as ReactPointerEvent,
-	useEffect,
-	useRef,
-	useState,
-} from "react";
+import { type CSSProperties, useEffect, useRef, useState } from "react";
+import { subscribeToPagePointer } from "./page-pointer";
 import { useMascotGesture } from "./use-mascot-gesture";
 
 export { REACTIONS, type Reaction } from "@/lib/mascot-sprites";
@@ -21,6 +16,7 @@ const SECTOR = (Math.PI * 2) / CLOCKWISE_CELLS.length;
 const HYSTERESIS = 0.12;
 const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
 const GAZE_DELAY = 160;
+const DIRECTION_RETRY_DELAY = 2000;
 const DEFAULT_PAYOFFS: readonly Reaction[] = ["heart", "sparkle", "delighted"];
 const BOOP_END = 560;
 const DIZZY_END = 1100;
@@ -73,10 +69,10 @@ function decodeSheet(url: string) {
 	return decoded;
 }
 
-function aim(box: DOMRect, x: number, y: number, sector: number) {
+function aim(box: DOMRect, x: number, y: number, sector: number, deadZone: number) {
 	const dx = x - (box.left + box.width / 2);
 	const dy = y - (box.top + box.height / 2);
-	if (Math.hypot(dx, dy) < box.width / 3) return -1;
+	if (Math.hypot(dx, dy) < deadZone) return -1;
 
 	const angle = Math.atan2(dy, dx);
 	const delta = angle - sector * SECTOR;
@@ -97,6 +93,8 @@ export type MascotProps = {
 	className?: string;
 	tabIndex?: number;
 	trackPointer?: boolean;
+	/** Follow the cursor across the page, including when a center preview is supplied. */
+	trackAcrossPage?: boolean;
 	mode?: "cycle" | "random" | "escalate";
 	/** Overrides the expression pool for the selected mode. */
 	payoffs?: readonly Reaction[];
@@ -128,6 +126,7 @@ function MascotButton({
 	className,
 	tabIndex,
 	trackPointer = true,
+	trackAcrossPage = !preview,
 	mode = "cycle",
 	payoffs,
 	pinchReaction = "surprised",
@@ -142,55 +141,101 @@ function MascotButton({
 	const animation = useRef<Animation | undefined>(undefined);
 	const cycleStep = useRef(0);
 	const boops = useRef({ count: 0, at: 0 });
-	const gaze = useRef({ sector: -1, version: 0, timer: undefined as number | undefined });
+	const directionsReady = useRef(false);
 	const [sector, setSector] = useState(-1);
-	const [directionsReady, setDirectionsReady] = useState(false);
 	const [reaction, setReaction] = useState<Reaction | null>(null);
 
 	useEffect(() => {
+		const button = buttonRef.current;
+		if (!button) return;
 		const finePointer = window.matchMedia("(any-hover: hover) and (any-pointer: fine)");
 		const reducedMotion = window.matchMedia(REDUCED_MOTION);
-		let frame = 0;
-		const hover = gaze.current;
+		let currentSector = -1;
+		let timer: number | undefined;
+		let loading = false;
+		let retryAfter = 0;
+		let disposed = false;
+		let unsubscribe: (() => void) | undefined;
 
-		const move = (event: PointerEvent) => {
-			if (event.pointerType === "touch" || event.buttons !== 0) return;
-			cancelAnimationFrame(frame);
-			frame = requestAnimationFrame(() => {
-				const box = buttonRef.current?.getBoundingClientRect();
-				if (!box) return;
-				hover.sector = aim(box, event.clientX, event.clientY, hover.sector);
-				setSector(hover.sector);
-			});
+		const reset = () => {
+			window.clearTimeout(timer);
+			timer = undefined;
+			currentSector = -1;
+			setSector(-1);
+		};
+
+		const load = async () => {
+			timer = undefined;
+			loading = true;
+			const loaded = await decodeSheet(directions);
+			loading = false;
+			if (disposed) return;
+			if (!loaded) {
+				retryAfter = performance.now() + DIRECTION_RETRY_DELAY;
+				return;
+			}
+			directionsReady.current = true;
+			setSector(currentSector);
+		};
+
+		const update = (point: { x: number; y: number } | null) => {
+			if (!point) {
+				reset();
+				return;
+			}
+			const box = button.getBoundingClientRect();
+			const deadZone = preview && trackAcrossPage ? 12 : box.width / 3;
+			const nextSector = aim(box, point.x, point.y, currentSector, deadZone);
+			const changed = nextSector !== currentSector;
+			currentSector = nextSector;
+			if (!preview || directionsReady.current) {
+				if (changed) setSector(currentSector);
+			} else if (!trackAcrossPage && currentSector === -1) {
+				reset();
+			} else if (!loading && timer === undefined && performance.now() >= retryAfter) {
+				if (trackAcrossPage) void load();
+				else timer = window.setTimeout(load, GAZE_DELAY);
+			}
+		};
+
+		const moveWithinButton = (event: PointerEvent) => {
+			if (event.pointerType !== "touch" && event.buttons === 0) {
+				update({ x: event.clientX, y: event.clientY });
+			}
 		};
 
 		const syncTracking = () => {
-			window.removeEventListener("pointermove", move);
-			cancelAnimationFrame(frame);
-			clearGaze(hover);
-			setSector(-1);
+			unsubscribe?.();
+			unsubscribe = undefined;
+			reset();
 			if (reducedMotion.matches) {
 				animation.current?.cancel();
 				if (squashRef.current) squashRef.current.style.transform = "";
 			}
-			if (!preview && trackPointer && finePointer.matches && !reducedMotion.matches) {
-				window.addEventListener("pointermove", move, { passive: true });
+			if (!trackPointer || reducedMotion.matches) return;
+			if (trackAcrossPage) {
+				if (finePointer.matches) unsubscribe = subscribeToPagePointer(update);
+			} else {
+				button.addEventListener("pointermove", moveWithinButton, { passive: true });
+				button.addEventListener("pointerleave", reset);
+				unsubscribe = () => {
+					button.removeEventListener("pointermove", moveWithinButton);
+					button.removeEventListener("pointerleave", reset);
+				};
 			}
 		};
 
-		if (!preview && trackPointer && finePointer.matches && !reducedMotion.matches) {
-			window.addEventListener("pointermove", move, { passive: true });
-		}
-		if (!preview) finePointer.addEventListener("change", syncTracking);
+		syncTracking();
+		if (trackAcrossPage) finePointer.addEventListener("change", syncTracking);
 		reducedMotion.addEventListener("change", syncTracking);
 		return () => {
-			window.removeEventListener("pointermove", move);
+			disposed = true;
+			unsubscribe?.();
 			finePointer.removeEventListener("change", syncTracking);
 			reducedMotion.removeEventListener("change", syncTracking);
-			cancelAnimationFrame(frame);
-			clearGaze(hover);
+			window.clearTimeout(timer);
 		};
-	}, [preview, trackPointer]);
+	}, [directions, preview, trackAcrossPage, trackPointer]);
 
 	useEffect(() => {
 		const scheduled = playback.current;
@@ -209,26 +254,6 @@ function MascotButton({
 			});
 		}
 		return reactionSheet.current;
-	};
-
-	const moveWithinPreview = (event: ReactPointerEvent<HTMLButtonElement>) => {
-		if (!preview || !trackPointer || event.pointerType === "touch" || event.buttons !== 0) return;
-		if (window.matchMedia(REDUCED_MOTION).matches) return;
-		const hover = gaze.current;
-		const box = event.currentTarget.getBoundingClientRect();
-		hover.sector = aim(box, event.clientX, event.clientY, hover.sector);
-		setSector(hover.sector);
-		if (hover.sector === -1) {
-			clearGaze(hover);
-		} else if (!directionsReady && hover.timer === undefined) {
-			const version = hover.version;
-			hover.timer = window.setTimeout(async () => {
-				const loaded = await decodeSheet(directions);
-				if (version !== hover.version) return;
-				hover.timer = undefined;
-				setDirectionsReady(loaded);
-			}, GAZE_DELAY);
-		}
 	};
 
 	const clearPlayback = () => {
@@ -339,7 +364,7 @@ function MascotButton({
 	const spriteStyle =
 		reaction !== null
 			? sprite(reactions, REACTIONS.indexOf(reaction))
-			: preview && (!directionsReady || direction === CENTER_CELL)
+			: preview && direction === CENTER_CELL
 				? sprite(preview)
 				: sprite(directions, direction);
 
@@ -360,18 +385,6 @@ function MascotButton({
 			onFocus={preview ? undefined : loadReactions}
 			onContextMenu={(event) => event.preventDefault()}
 			{...gesture}
-			onPointerMove={(event) => {
-				gesture.onPointerMove(event);
-				moveWithinPreview(event);
-			}}
-			onPointerLeave={
-				preview
-					? () => {
-							clearGaze(gaze.current);
-							setSector(-1);
-						}
-					: undefined
-			}
 		>
 			<span
 				ref={squashRef}
@@ -382,11 +395,4 @@ function MascotButton({
 			</span>
 		</button>
 	);
-}
-
-function clearGaze(gaze: { sector: number; timer: number | undefined; version: number }) {
-	window.clearTimeout(gaze.timer);
-	gaze.timer = undefined;
-	gaze.sector = -1;
-	gaze.version += 1;
 }

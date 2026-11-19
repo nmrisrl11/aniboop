@@ -16,7 +16,7 @@ The grid calculates a window from viewport dimensions and cell size. It maps coo
 
 The local [Mascot component](../src/components/mascot/mascot.tsx) adapts the portfolio implementation and [page-mascot](https://github.com/nilbuild/page-mascot) under its [MIT license](../src/components/mascot/PAGE-MASCOT-LICENSE.txt). The component accepts sprite URLs, a reaction mode and pool, hold and release expressions, and an optional reaction callback. A pointer that moves beyond the drag threshold before a hold starts pans the grid. An active hold or two-finger pinch controls the mascot until release. Reduced motion disables gaze tracking and deformation while preserving expression changes.
 
-See the [gallery assets guide](GALLERY_ASSETS.md) for the current loading behavior and how the catalog could scale.
+The homepage resolves the content-hashed WebP URLs during the production build and passes them to the grid. One [shared pointer listener](../src/components/mascot/page-pointer.ts) updates the gaze of visible mascots. The grid suspends tracking while it pans. See the [gallery assets guide](GALLERY_ASSETS.md) for request timing and cache behavior.
 
 ## Theme
 

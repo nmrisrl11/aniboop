@@ -3,7 +3,8 @@ export const brand = {
 	title: "AniBoop | Boop & Download Chibi Anime Characters",
 	slogan: "Little characters. Big reactions.",
 	headline: "Pick a character. Give it a boop.",
-	galleryInstructions: "Tap or hold a character. Drag, scroll, or use arrow keys to explore.",
+	galleryInstructions:
+		"Tap or hold a character to boop. Drag, scroll, or use arrow keys to explore.",
 	intro:
 		"Explore a collection of chibi anime characters. Tap one to see it react, then download its poses and reactions.",
 	description:

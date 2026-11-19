@@ -1,11 +1,12 @@
 "use client";
 
 import { Mascot } from "@/components/mascot/mascot";
-import { type Character, characterAssets, characters } from "@/data/characters";
+import type { GalleryCharacter } from "@/data/characters";
 import { memo, useCallback, useState } from "react";
 import ThiingsGrid, { DRAG_THRESHOLD, type ItemConfig } from "./thiings-grid";
 
-const PREVIEW_SIZE = 124;
+const GRID_SIZE = 252;
+const PREVIEW_SIZE = 168;
 const MIN_VISIBLE_RATIO = 0.01;
 const MIN_FOCUS_RATIO = 0.5;
 type TileVisibility = "outside" | "partial" | "focusable";
@@ -17,7 +18,7 @@ const CharacterTile = memo(function CharacterTile({
 	character,
 	isMoving,
 }: {
-	character: Character;
+	character: GalleryCharacter;
 	isMoving: boolean;
 }) {
 	const [visibility, setVisibility] = useState<TileVisibility>("outside");
@@ -53,8 +54,9 @@ const CharacterTile = memo(function CharacterTile({
 		};
 	}, []);
 
+	const { preview, galleryDirections, reactions } = character;
 	return (
-		<div className="absolute inset-1.5 flex flex-col items-center justify-center gap-1 squircle border bg-card px-2">
+		<div className="absolute inset-2 flex flex-col items-center justify-center gap-2 squircle border bg-card px-4 py-2.5 text-card-foreground shadow-xs">
 			<div
 				ref={observeArt}
 				className="shrink-0"
@@ -62,7 +64,9 @@ const CharacterTile = memo(function CharacterTile({
 			>
 				{visibility !== "outside" && (
 					<Mascot
-						{...characterAssets(character.id)}
+						preview={preview}
+						directions={galleryDirections}
+						reactions={reactions}
 						label={character.name}
 						size={PREVIEW_SIZE}
 						className="squircle"
@@ -70,29 +74,31 @@ const CharacterTile = memo(function CharacterTile({
 						dragThreshold={DRAG_THRESHOLD}
 						tabIndex={visibility === "focusable" ? 0 : -1}
 						trackPointer={!isMoving}
+						trackAcrossPage
 					/>
 				)}
 			</div>
-			<span className="max-w-full truncate text-center text-sm font-medium text-foreground">
-				{character.name}
-			</span>
+			<div className="max-w-full text-center">
+				<p className="truncate text-sm font-semibold">{character.name}</p>
+				<p className="truncate text-xs text-muted-foreground">{character.series}</p>
+			</div>
 		</div>
 	);
 });
 
-function renderItem({ gridIndex, isMoving }: ItemConfig) {
-	return (
-		<CharacterTile character={characters[gridIndex % characters.length]} isMoving={isMoving} />
+export function CharacterGrid({ characters }: { characters: readonly GalleryCharacter[] }) {
+	const renderItem = useCallback(
+		({ gridIndex, isMoving }: ItemConfig) => (
+			<CharacterTile character={characters[gridIndex % characters.length]} isMoving={isMoving} />
+		),
+		[characters],
 	);
-}
-
-export function CharacterGrid() {
 	return (
 		<ThiingsGrid
 			className="focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
 			label="Character gallery"
 			describedBy="grid-instructions"
-			gridSize={176}
+			gridSize={GRID_SIZE}
 			renderItem={renderItem}
 		/>
 	);

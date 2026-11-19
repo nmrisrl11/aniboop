@@ -6,19 +6,19 @@ The local [Mascot component](../src/components/mascot/mascot.tsx) accepts matchi
 
 ## Gallery loading
 
-| Stage                | Asset loaded                                                                                                               |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| Initial view or pan  | A 248 × 248 center-pose WebP for each mascot entering view. Overscan cells reserve space.                                  |
-| Cursor tracking      | The hovered mascot's direction sheet after a short delay near an edge of its button. Tracking pauses while the grid moves. |
-| Boop, hold, or pinch | The selected mascot's reaction sheet. The current pose stays visible until the sheet decodes.                              |
+| Stage                | Asset loaded                                                                                              |
+| -------------------- | --------------------------------------------------------------------------------------------------------- |
+| Initial view or pan  | A 248 × 248 center-pose WebP for each mascot entering view. Overscan cells reserve space.                 |
+| Cursor tracking      | A 504 × 504 WebP with nine poses for each visible mascot, requested when an unpressed fine pointer moves. |
+| Boop, hold, or pinch | The selected mascot's reaction sheet. The current pose stays visible until the sheet decodes.             |
 
 Repeated tiles share asset URLs. The browser can reuse image responses, and the component shares in-flight sprite sheet decodes across copies. Focusing a card with Tab only needs its preview. A drag that begins on a mascot yields to the grid before triggering a reaction.
 
-### Proposed gallery-wide cursor tracking
+The production build emits the gallery's center previews, compact direction sheets, and reaction sheets at content-hashed Next.js static URLs. Next.js serves them with `Cache-Control: public, max-age=31536000, immutable`. Editing a WebP changes its URL on the next build. The homepage passes these URLs to the grid, which requests the files at the stages above.
 
-Use a smaller nine-pose WebP sheet for each visible mascot on devices with a fine pointer. Each visible mascot can then follow the pointer across the gallery as soon as its sheet loads. The browser changes the position of the loaded image to select a pose. Keep the center-pose previews for touch-only and reduced-motion visitors, and continue loading reaction sheets on demand.
+### Gallery-wide cursor tracking
 
-In the 390 × 540 Chromium test, the nine center-pose previews transferred about 90 KiB. The existing full-size direction sheets for those same characters total about 1.17 MiB. Measure a smaller sheet's transfer size and visual quality before deciding on its dimensions.
+Visible mascots follow the cursor across the gallery, including over captions and gaps, once their direction sheets decode. One shared pointer listener delivers the latest position each animation frame. A press resets the gaze. Tracking resumes on movement after release and after the grid stops panning. Touch-only and reduced-motion visitors use the center-pose previews until they trigger a reaction.
 
 ## Adding a mascot
 
@@ -33,7 +33,7 @@ Run this from the repository root with your character's metadata.
 npm run mascot:add -- --id star-cat --name "Star Cat" --series "Original Characters"
 ```
 
-The command validates the pair, runs the optimizer, and generates the center-pose preview. It writes two WebPs to `public/mascots/sheets/` and one to `public/mascots/previews/`, then appends the catalog entry. It leaves the originals in `raw/` and rejects an ID already in the catalog. Open the gallery to check the pose and boop, then include the catalog change and the three generated WebPs when committing the mascot.
+The command validates the pair, runs the optimizer, and generates the center-pose preview and compact direction sheet. It writes two WebPs to `public/mascots/sheets/` and two to `public/mascots/previews/`, then appends the catalog entry. It leaves the originals in `raw/` and rejects an ID already in the catalog. Open the gallery to check the gaze and boop, then include the catalog change and the four generated WebPs when committing the mascot.
 
 ## Preparing sprite sheets
 
@@ -52,12 +52,12 @@ The dry run reports projected sizes without writing image files. The regular run
 
 See the [optimize-mascot skill](../.agents/skills/optimize-mascot/SKILL.md) for agent usage and the [CLI guide](../.agents/skills/optimize-mascot/references/cli_usage.md) for all options.
 
-The [preview generator](../scripts/generate-mascot-previews.py) crops the center cell from each optimized direction sheet and writes `public/mascots/previews/<character-id>.webp`. Pass `--character <id>` to rebuild a single preview. Use [Adding a mascot](#adding-a-mascot) when the character also needs a catalog entry.
+The [preview generator](../scripts/generate-mascot-previews.py) writes `public/mascots/previews/<character-id>.webp` from the center cell and `public/mascots/previews/<character-id>-directions.webp` from all nine cells. Pass `--character <id>` to rebuild both gallery assets for one character. Use [Adding a mascot](#adding-a-mascot) when the character also needs a catalog entry.
 
 ## Scaling the catalog
 
 The current catalog fits in the client bundle. If the metadata grows enough to affect startup, publish versioned static catalog pages keyed by index range and load the pages needed for the visible window. A distant pan should be able to request its pages directly. Use catalog revisions in cache keys. Consider a database when editing or search needs server-side queries.
 
-Assets currently use same-origin paths under `public/mascots/`. Cloudflare R2 with a custom domain is an option for moving images off the app deployment. Keep the same paths under a versioned prefix for long-lived caching and update the shared asset URL builder. Cloudflare recommends a custom domain for cached production traffic. [Cloudflare R2 public buckets](https://developers.cloudflare.com/r2/buckets/public-buckets/)
+The repository keeps source WebPs under `public/mascots/`. The gallery uses same-origin, content-hashed build output. Cloudflare R2 with a custom domain is an option for moving images off the app deployment. Preserve content-versioned URLs if moving the files to another host. Cloudflare recommends a custom domain for cached production traffic. [Cloudflare R2 public buckets](https://developers.cloudflare.com/r2/buckets/public-buckets/)
 
 When downloads are added, keep them separate from previews and fetch them on demand. Show formats, usage terms, and applicable attribution. Profile long pans, cold transfer, first-boop latency, and image memory on a representative phone as the catalog grows.

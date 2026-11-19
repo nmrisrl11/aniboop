@@ -1,4 +1,4 @@
-"""Generate WebP previews from the center cells of the optimized direction sheets."""
+"""Generate static previews and smaller direction sheets for the gallery."""
 
 import argparse
 from pathlib import Path
@@ -6,11 +6,19 @@ from pathlib import Path
 from PIL import Image
 
 ASSETS_DIR = Path(__file__).resolve().parents[1] / "public" / "mascots"
+GALLERY_CELL_SIZE = 168
+
+
+def save_webp(image, output, quality):
+    temporary = output.with_suffix(".tmp.webp")
+    image.save(temporary, quality=quality, alpha_quality=100, method=6)
+    temporary.replace(output)
+    print(f"{output.name}: {output.stat().st_size:,} bytes")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--character", help="Generate the preview for one character ID")
+    parser.add_argument("--character", help="Generate the gallery assets for one character ID")
     parser.add_argument("--assets-dir", type=Path, default=ASSETS_DIR)
     args = parser.parse_args()
     character = args.character
@@ -29,15 +37,21 @@ def main():
             if width != height or width % 3:
                 parser.error(f"{sheet.name} must be a square 3×3 sprite sheet")
             cell = width // 3
-            preview = image.convert("RGBA").resize(
+            rgba = image.convert("RGBA")
+            preview = rgba.resize(
                 (248, 248), Image.Resampling.LANCZOS, (cell, cell, cell * 2, cell * 2)
             )
+            directions = Image.new("RGBA", (GALLERY_CELL_SIZE * 3, GALLERY_CELL_SIZE * 3))
+            for row in range(3):
+                for column in range(3):
+                    # Resize each pose separately so the filter cannot sample across cells.
+                    pose = rgba.crop(
+                        (column * cell, row * cell, (column + 1) * cell, (row + 1) * cell)
+                    ).resize((GALLERY_CELL_SIZE, GALLERY_CELL_SIZE), Image.Resampling.LANCZOS)
+                    directions.paste(pose, (column * GALLERY_CELL_SIZE, row * GALLERY_CELL_SIZE))
 
-        output = previews / f"{sheet.stem.removesuffix('-directions')}.webp"
-        temporary = output.with_suffix(".tmp.webp")
-        preview.save(temporary, quality=78, alpha_quality=100, method=6)
-        temporary.replace(output)
-        print(f"{output.name}: {output.stat().st_size:,} bytes")
+        save_webp(preview, previews / f"{sheet.stem.removesuffix('-directions')}.webp", 78)
+        save_webp(directions, previews / sheet.name, 65)
 
 
 if __name__ == "__main__":

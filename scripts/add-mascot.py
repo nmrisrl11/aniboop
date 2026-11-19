@@ -59,6 +59,7 @@ def add_mascot(character, staging):
         Path("sheets") / f"{character_id}-directions.webp",
         Path("sheets") / f"{character_id}-reactions.webp",
         Path("previews") / f"{character_id}.webp",
+        Path("previews") / f"{character_id}-directions.webp",
     ]
     for relative_path in output_paths:
         destination = ASSETS / relative_path
@@ -112,7 +113,7 @@ def main():
         parser.exit(1, f"mascot:add: {error}\n")
     finally:
         lock.unlink()
-    print(f"Added {args.id} to the catalog with two optimized sheets and one preview.")
+    print(f"Added {args.id} to the catalog with two optimized sheets and two gallery assets.")
 
 
 if __name__ == "__main__":

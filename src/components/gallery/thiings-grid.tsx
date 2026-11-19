@@ -3,7 +3,7 @@
 // Adapted from Thiings Grid by Charlie Clark (MIT). See THIINGS-GRID-LICENSE.txt.
 import { Component, createRef, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
 
-const DRAG_THRESHOLD = 5;
+export const DRAG_THRESHOLD = 5;
 const FRICTION_PER_MS = 0.997;
 const MIN_VELOCITY = 0.05 / 16;
 const MAX_VELOCITY = 3;
@@ -194,6 +194,10 @@ class ThiingsGrid extends Component<ThiingsGridProps, State> {
 	private handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
 		const gesture = this.gesture;
 		if (gesture?.pointerId !== event.pointerId) return;
+		if (!gesture.active && event.defaultPrevented) {
+			this.gesture = null;
+			return;
+		}
 
 		const dx = event.clientX - gesture.origin.x;
 		const dy = event.clientY - gesture.origin.y;
@@ -257,7 +261,7 @@ class ThiingsGrid extends Component<ThiingsGridProps, State> {
 
 	private handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
 		if (
-			event.target !== event.currentTarget ||
+			event.defaultPrevented ||
 			event.altKey ||
 			event.ctrlKey ||
 			event.metaKey ||
@@ -268,6 +272,7 @@ class ThiingsGrid extends Component<ThiingsGridProps, State> {
 
 		const direction = arrowOffsets[event.key as keyof typeof arrowOffsets];
 		event.preventDefault();
+		event.currentTarget.focus({ preventScroll: true });
 		this.panBy(direction.x * this.props.gridSize, direction.y * this.props.gridSize);
 	};
 
@@ -286,7 +291,7 @@ class ThiingsGrid extends Component<ThiingsGridProps, State> {
 					position: "absolute",
 					inset: 0,
 					touchAction: "pinch-zoom",
-					overflow: "hidden",
+					overflow: "clip",
 					cursor: isDragging ? "grabbing" : "grab",
 				}}
 				onPointerDown={this.handlePointerDown}

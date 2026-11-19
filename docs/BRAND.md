@@ -4,7 +4,7 @@ AniBoop is an interactive collection of chibi anime characters. The signature in
 
 ## Copy
 
-The copy below includes planned gallery surfaces. The current preview displays placeholders and a short panning hint.
+The copy below includes planned gallery surfaces. The homepage displays character names and a short instruction for interacting with the gallery.
 
 | Surface              | Copy                                                                                                               |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------ |

@@ -10,11 +10,13 @@
 
 ## Gallery
 
-The homepage is a Server Component that renders a client viewport. [CharacterGrid](../src/components/gallery/character-grid.tsx) assigns a text placeholder to each cell passed to its renderer. The viewport uses an [adaptation of Thiings Grid](https://github.com/charlieclark/thiings-grid/blob/a1607d3cee9e6969f5f504f0c253ee94aa50bf54/lib/ThiingsGrid.tsx) with its [MIT license](../src/components/gallery/THIINGS-GRID-LICENSE.txt).
+The homepage is a Server Component that renders a client viewport. [CharacterGrid](../src/components/gallery/character-grid.tsx) repeats the [TypeScript catalog](../src/data/characters.ts) by taking the spiral cell index modulo the catalog length. The viewport uses an [adaptation of Thiings Grid](https://github.com/charlieclark/thiings-grid/blob/a1607d3cee9e6969f5f504f0c253ee94aa50bf54/lib/ThiingsGrid.tsx) with its [MIT license](../src/components/gallery/THIINGS-GRID-LICENSE.txt).
 
-The grid calculates a window from viewport dimensions and cell size. It maps coordinates to stable spiral indices and mounts the visible cells plus a buffer. Pointer movement updates one translated layer once per animation frame. React updates the cell window when the center crosses a cell or the viewport resizes. Panning supports pointer drag, wheel and trackpad input, and arrow keys. Reduced motion disables drag momentum.
+The grid calculates a window from viewport dimensions and cell size. It maps coordinates to stable spiral indices and mounts the visible cells plus a buffer. Pointer movement updates one translated layer once per animation frame. React updates the cell window when the center crosses a cell or the viewport resizes. A shared intersection observer mounts mascot buttons and artwork as they enter view. Tab reaches buttons with at least half of their area visible. Arrow keys pan from the grid or a focused mascot. Reduced motion disables drag momentum.
 
-The preview generates placeholders from their indices. See the [gallery asset plan](GALLERY_ASSETS.md) for how to page the character catalog, prioritize and cache previews, and load reactions and downloads on demand.
+The local [Mascot component](../src/components/mascot/mascot.tsx) adapts the portfolio implementation and [page-mascot](https://github.com/nilbuild/page-mascot) under its [MIT license](../src/components/mascot/PAGE-MASCOT-LICENSE.txt). The component accepts sprite URLs, a reaction mode and pool, hold and release expressions, and an optional reaction callback. A pointer that moves beyond the drag threshold before a hold starts pans the grid. An active hold or two-finger pinch controls the mascot until release. Reduced motion disables gaze tracking and deformation while preserving expression changes.
+
+See the [gallery assets guide](GALLERY_ASSETS.md) for the current loading behavior and how the catalog could scale.
 
 ## Theme
 

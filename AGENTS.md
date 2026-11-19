@@ -2,7 +2,7 @@
 
 ## Project
 
-AniBoop is a collection of chibi anime characters designed to react when booped. The homepage is a pannable, virtualized placeholder grid. Mascot reactions, character search, and downloads are planned in the [feature blueprint](docs/FEATURE_BLUEPRINT.md).
+AniBoop is a collection of chibi anime characters designed to react when booped. The homepage is a pannable, virtualized grid backed by the [character catalog](src/data/characters.ts). Character search, details, and downloads are planned in the [feature blueprint](docs/FEATURE_BLUEPRINT.md).
 
 <!-- BEGIN:nextjs-agent-rules -->
 
@@ -47,4 +47,4 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## Mascot assets
 
 - Place incoming or unoptimized sprite sheets in `public/mascots/raw/`.
-- Use the [optimize-mascot skill](.agents/skills/optimize-mascot/SKILL.md) or run `npm run mascot:optimize` to prepare direction and reaction WebP sheets in `public/mascots/sheets/`. See the [gallery assets guide](docs/GALLERY_ASSETS.md#preparing-sprite-sheets) for requirements and options.
+- Use the [optimize-mascot skill](.agents/skills/optimize-mascot/SKILL.md) or run `npm run mascot:optimize` to prepare direction and reaction WebP sheets in `public/mascots/sheets/`. Generate gallery previews from those sheets and add the character to the catalog. See the [gallery assets guide](docs/GALLERY_ASSETS.md#preparing-sprite-sheets) for the commands.

@@ -10,7 +10,7 @@
 
 ## Gallery
 
-The homepage is a Server Component that renders a client viewport. [CharacterGrid](../src/components/gallery/character-grid.tsx) repeats the [TypeScript catalog](../src/data/characters.ts) by taking the spiral cell index modulo the catalog length. The viewport uses an [adaptation of Thiings Grid](https://github.com/charlieclark/thiings-grid/blob/a1607d3cee9e6969f5f504f0c253ee94aa50bf54/lib/ThiingsGrid.tsx) with its [MIT license](../src/components/gallery/THIINGS-GRID-LICENSE.txt).
+The homepage is a Server Component that renders a client viewport. [CharacterGrid](../src/components/gallery/character-grid.tsx) repeats the [character catalog](../src/data/characters.json) by taking the spiral cell index modulo the catalog length. The viewport uses an [adaptation of Thiings Grid](https://github.com/charlieclark/thiings-grid/blob/a1607d3cee9e6969f5f504f0c253ee94aa50bf54/lib/ThiingsGrid.tsx) with its [MIT license](../src/components/gallery/THIINGS-GRID-LICENSE.txt).
 
 The grid calculates a window from viewport dimensions and cell size. It maps coordinates to stable spiral indices and mounts the visible cells plus a buffer. Pointer movement updates one translated layer once per animation frame. React updates the cell window when the center crosses a cell or the viewport resizes. A shared intersection observer mounts mascot buttons and artwork as they enter view. Tab reaches buttons with at least half of their area visible. Arrow keys pan from the grid or a focused mascot. Reduced motion disables drag momentum.
 

@@ -5,4 +5,4 @@ Place new character sprite sheets here. Each character has two sheets, with nine
 1. `<character-id>-directions.webp` or `.png` for head directions.
 2. `<character-id>-reactions.webp` or `.png` for reaction expressions.
 
-Run `npm run mascot:optimize` from the repository root to write optimized WebP sheets to `public/mascots/sheets/`. See the [gallery assets guide](../../../docs/GALLERY_ASSETS.md#preparing-sprite-sheets) for prerequisites and options.
+Run `npm run mascot:add -- --id <id> --name "<name>" --series "<series>"` from the repository root to generate the optimized sheets and preview and add the character to the catalog. See [Adding a mascot](../../../docs/GALLERY_ASSETS.md#adding-a-mascot) for prerequisites and file sizes.

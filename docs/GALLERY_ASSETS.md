@@ -1,6 +1,6 @@
 # Gallery assets
 
-The [character catalog](../src/data/characters.ts) holds stable IDs, display names, series, and any custom reaction order. Asset URLs are derived from the character ID. The endless grid repeats the catalog in spiral order, so a cell resolves to the same character whenever you pan back within the same catalog version. Append entries to keep the original spiral positions in order.
+The [character catalog](../src/data/characters.json) holds stable IDs, display names, and series. The [TypeScript adapter](../src/data/characters.ts) derives asset URLs and applies custom reaction orders. The endless grid repeats the catalog in spiral order, so a cell resolves to the same character whenever you pan back within the same catalog version.
 
 The local [Mascot component](../src/components/mascot/mascot.tsx) accepts matching 3 × 3 sheets from any character. The direction sheet has the front-facing pose in the center. Reaction slot names follow the upstream order of blink, heart, sparkle, surprised, wink, bashful, sleepy, dizzy, and delighted. Nomer's first slot is neutral, so his cycle starts with the grin in the second slot and wraps through all nine.
 
@@ -20,11 +20,26 @@ Use a smaller nine-pose WebP sheet for each visible mascot on devices with a fin
 
 In the 390 × 540 Chromium test, the nine center-pose previews transferred about 90 KiB. The existing full-size direction sheets for those same characters total about 1.17 MiB. Measure a smaller sheet's transfer size and visual quality before deciding on its dimensions.
 
+## Adding a mascot
+
+Install the Python image tools once with `python -m pip install Pillow numpy`. Put two 1080 × 1080 sheets in `public/mascots/raw/`. Each sheet must be a 3 × 3 grid of 360 × 360 tiles. Use PNG or WebP and the same lowercase, hyphenated character ID for both files.
+
+- `<id>-directions.png` or `<id>-directions.webp`
+- `<id>-reactions.png` or `<id>-reactions.webp`
+
+Run this from the repository root with your character's metadata.
+
+```sh
+npm run mascot:add -- --id star-cat --name "Star Cat" --series "Original Characters"
+```
+
+The command validates the pair, runs the optimizer, and generates the center-pose preview. It writes two WebPs to `public/mascots/sheets/` and one to `public/mascots/previews/`, then appends the catalog entry. It leaves the originals in `raw/` and rejects an ID already in the catalog. Open the gallery to check the pose and boop, then include the catalog change and the three generated WebPs when committing the mascot.
+
 ## Preparing sprite sheets
 
 Put the direction and reaction sheets in `public/mascots/raw/`. Use PNG or WebP and name the files `<character-id>-directions` and `<character-id>-reactions` with the appropriate extension. Each sheet should be a 1080 × 1080 image with a 3 × 3 grid of 360 × 360 tiles.
 
-Run these commands from the repository root with Python 3 available as `python`.
+For asset-only work, run these commands from the repository root with Python 3 available as `python`.
 
 ```sh
 python -m pip install Pillow numpy
@@ -37,7 +52,7 @@ The dry run reports projected sizes without writing image files. The regular run
 
 See the [optimize-mascot skill](../.agents/skills/optimize-mascot/SKILL.md) for agent usage and the [CLI guide](../.agents/skills/optimize-mascot/references/cli_usage.md) for all options.
 
-The [preview generator](../scripts/generate-mascot-previews.py) crops the center cell from each optimized direction sheet and writes `public/mascots/previews/<character-id>.webp`. Pass `--character <id>` to rebuild a single preview. Add the matching catalog entry with the same ID as the files.
+The [preview generator](../scripts/generate-mascot-previews.py) crops the center cell from each optimized direction sheet and writes `public/mascots/previews/<character-id>.webp`. Pass `--character <id>` to rebuild a single preview. Use [Adding a mascot](#adding-a-mascot) when the character also needs a catalog entry.
 
 ## Scaling the catalog
 

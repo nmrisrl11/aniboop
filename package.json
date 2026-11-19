@@ -14,7 +14,8 @@
 		"lint:tailwind:fix": "npm run lint:tailwind -- --fix",
 		"format": "oxfmt . --write",
 		"format:check": "oxfmt . --check",
-		"mascot:optimize": "python .agents/skills/optimize-mascot/scripts/optimize.py"
+		"mascot:optimize": "python .agents/skills/optimize-mascot/scripts/optimize.py",
+		"mascot:add": "python scripts/add-mascot.py"
 	},
 	"dependencies": {
 		"class-variance-authority": "^0.7.1",

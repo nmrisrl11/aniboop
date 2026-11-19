@@ -5,12 +5,16 @@ from pathlib import Path
 
 from PIL import Image
 
+ASSETS_DIR = Path(__file__).resolve().parents[1] / "public" / "mascots"
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--character", help="Generate the preview for one character ID")
-    character = parser.parse_args().character
-    assets = Path(__file__).resolve().parents[1] / "public" / "mascots"
+    parser.add_argument("--assets-dir", type=Path, default=ASSETS_DIR)
+    args = parser.parse_args()
+    character = args.character
+    assets = args.assets_dir
     sheets = sorted((assets / "sheets").glob("*-directions.webp"))
     if character:
         sheets = [sheet for sheet in sheets if sheet.stem == f"{character}-directions"]

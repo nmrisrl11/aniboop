@@ -20,14 +20,14 @@ AniBoop is an interactive collection of chibi anime mascots. The intended experi
 
 Each catalog entry uses two full-size WebP sheets in `public/mascots/sheets/`, a center still in `public/mascots/previews/`, and two compact pose sheets in `public/mascots/gallery-sheets/`. The still and compact sheets share the same framing. Run `git status --short --branch` to check the current working tree and branch.
 
-- To add a mascot, install Pillow and NumPy once with `python -m pip install Pillow numpy`. Put the matching 1080 × 1080 `<id>-directions` and `<id>-reactions` PNG or WebP files in `public/mascots/raw/`, then run `npm run mascot:add -- --id <id> --name "<name>" --series "<series>"`. The command keeps the raw files and appends the catalog entry after the two optimized sheets, center preview, and compact pose sheets are ready. [Adding a mascot](GALLERY_ASSETS.md#adding-a-mascot) covers the full workflow.
+- To add a mascot, install Pillow and NumPy once with `python -m pip install Pillow numpy`. Put the matching 1080 × 1080 `<id>-directions` and `<id>-reactions` PNG or WebP files in `public/mascots/raw/`, then run `npm run mascot:add -- --id <id> --name "<name>" --series "<series>"`. A successful run appends the catalog entry and moves the originals to the Git-ignored `raw/processed/` folder. [Adding a mascot](GALLERY_ASSETS.md#adding-a-mascot) covers the full workflow.
 - The sibling `../mascot-maker` project supplied the character metadata. Its catalog includes a fox that is excluded from AniBoop. The sibling `../threadfx` project is the reference for Oxc, editor settings, Tailwind lint, and reusable agent workflows.
 
 ## Last verification
 
-The gallery and mascot workflow commits passed `npm run lint:all`, `npm run format:check`, and `npm run build`. The add command was tested with a temporary mascot and with missing, invalid, duplicate, and conflicting inputs.
+The 29-character gallery passed `npm run lint:all`, `npm run format:check`, and `npm run build`. The archive workflow was tested with existing destination files and a simulated catalog write failure. Browser checks confirmed that the preview, gaze, and boop assets load for Ichigo, Armin, Boruto, Hinata Hyuga, Kageyama, Mikasa, and Yusuke.
 
-Framing checks covered all 16 center previews and 288 playback poses. An isolated `mascot:add` run and a batch rebuild verified the output folders and confirmed that the normal batch skips uncataloged source sheets.
+Earlier framing checks covered the original 16 center previews and 288 playback poses. A batch preview rebuild verified that the generator skips uncataloged source sheets when run against the project's asset directory.
 
 A local production test in a 1440 × 900 Chromium viewport fetched 33 WebPs for opening the gallery, moving the mouse, and booping once. Repeating the visit in the same browser reused all 33 from cache with zero image bytes transferred. Browser checks also covered gaze across cards, drag followed by a touch tap, and keyboard boops with reduced motion. Physical-phone profiling and deployed cache verification remain open.
 

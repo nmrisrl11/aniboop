@@ -253,7 +253,7 @@ def parse_arguments() -> argparse.Namespace:
         "--archive-dir",
         type=str,
         default=None,
-        help="Directory to move raw files into when --move is enabled (default: <src>/archive).",
+        help="Directory to move raw files into when --move is enabled (default: <src>/processed).",
     )
     parser.add_argument(
         "--dry-run",
@@ -306,6 +306,15 @@ def main() -> int:
         print(f"No mascot sheets found in '{src_dir}'{filter_msg}.")
         print("Drop unoptimized sheets into that directory or provide --src <path>.")
         return 0
+
+    archive_path = None
+    if args.move and not args.dry_run:
+        archive_path = Path(args.archive_dir).resolve() if args.archive_dir else (src_dir / "processed")
+        for source in files_to_process:
+            destination = archive_path / source.name
+            if destination.exists() or destination.is_symlink():
+                print(f"  [ERROR] Archive destination already exists: {destination}")
+                return 2
 
     mode_label = "[DRY-RUN] " if args.dry_run else ""
     print(f"{mode_label}Mascot Sprite Sheet Optimizer")
@@ -361,14 +370,16 @@ def main() -> int:
             return 2
 
     # Move raw files if requested
-    if args.move and not args.dry_run:
-        archive_path = Path(args.archive_dir).resolve() if args.archive_dir else (src_dir / "archive")
+    if archive_path is not None:
         archive_path.mkdir(parents=True, exist_ok=True)
         print(f"\nMoving processed raw files to archive: {archive_path}")
         for res in results:
             src = res["src_path"]
             if src.is_file():
                 dest_archive = archive_path / src.name
+                if dest_archive.exists() or dest_archive.is_symlink():
+                    print(f"  [ERROR] Archive destination already exists: {dest_archive}")
+                    return 2
                 shutil.move(str(src), str(dest_archive))
                 if args.verbose:
                     print(f"  Archived: {src.name} -> {dest_archive}")

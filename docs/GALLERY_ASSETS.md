@@ -33,7 +33,7 @@ Run this from the repository root with your character's metadata.
 npm run mascot:add -- --id star-cat --name "Star Cat" --series "Original Characters"
 ```
 
-The command validates the pair, runs the optimizer, and generates the center-pose preview and two compact pose sheets. It writes two WebPs to `public/mascots/sheets/`, one still to `public/mascots/previews/`, and two playback sheets to `public/mascots/gallery-sheets/`. It then appends the catalog entry. It leaves the originals in `raw/` and rejects an ID already in the catalog. Open the gallery to check the framing, gaze, and boop, then include the catalog change and the five generated WebPs when committing the mascot.
+The command validates the pair, runs the optimizer, and generates the center-pose preview and two compact pose sheets. It writes two WebPs to `public/mascots/sheets/`, one still to `public/mascots/previews/`, and two playback sheets to `public/mascots/gallery-sheets/`. A successful run appends the catalog entry and moves the original pair to `public/mascots/raw/processed/`. The command rejects duplicate catalog IDs and existing archive files with the same names. For multiple characters, run the command once per complete pair. Git tracks the raw folder's README and ignores the source sheets, including the processed copies. Open the gallery to check the framing, gaze, and boop, then include the catalog change and the five generated WebPs when committing the mascot.
 
 ## Preparing sprite sheets
 
@@ -48,7 +48,7 @@ npm run mascot:optimize
 python scripts/generate-mascot-previews.py
 ```
 
-The dry run reports projected sizes without writing image files. The regular run writes WebP files to `public/mascots/sheets/`. By default it zeros out pixels with an alpha value of 1, clears RGB values under fully transparent pixels, and encodes color with lossy compression and the cleaned alpha channel at full quality. Use `--character <id>` to process one character’s sheets and `--move` to archive processed source sheets in `public/mascots/raw/archive/`.
+The dry run reports projected sizes without writing image files. The regular run writes WebP files to `public/mascots/sheets/`. By default it zeros out pixels with an alpha value of 1, clears RGB values under fully transparent pixels, and encodes color with lossy compression and the cleaned alpha channel at full quality. Use `--character <id>` to process one character’s sheets. For standalone optimization, `--move` archives the source sheets in `public/mascots/raw/processed/`; use `mascot:add` for new catalog entries.
 
 See the [optimize-mascot skill](../.agents/skills/optimize-mascot/SKILL.md) for agent usage and the [CLI guide](../.agents/skills/optimize-mascot/references/cli_usage.md) for all options.
 

@@ -26,6 +26,10 @@
 /temp/
 __pycache__/
 
+# Local mascot source sheets
+/public/mascots/raw/*
+!/public/mascots/raw/README.md
+
 # debug
 npm-debug.log*
 yarn-debug.log*

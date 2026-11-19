@@ -4,7 +4,7 @@ The optimizer prepares sprite sheets as WebP using lossy color compression and f
 
 ---
 
-## Standard Project Flow
+## Standalone Optimization Flow
 
 ```text
 [Incoming Character Sheets]
@@ -19,7 +19,7 @@ The optimizer prepares sprite sheets as WebP using lossy color compression and f
    public/mascots/sheets/
           │
           ▼
-   (Optional: --move raw files to archive/)
+   (Optional: --move raw files to processed/)
 ```
 
 ---

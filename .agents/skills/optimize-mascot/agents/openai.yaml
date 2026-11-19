@@ -1,3 +1,4 @@
-display_name: Mascot Optimizer
-short_description: Optimize mascot sprite sheets from raw/ into sheets/
-default_prompt: Optimize the mascot sprite sheets in public/mascots/raw
+interface:
+  display_name: "Mascot Optimizer"
+  short_description: "Add mascots, optimize sheets, and archive sources"
+  default_prompt: "Use $optimize-mascot to add new mascots from public/mascots/raw to the catalog."

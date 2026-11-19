@@ -47,5 +47,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## Mascot assets
 
 - Place incoming or unoptimized sprite sheets in `public/mascots/raw/`.
-- Use `npm run mascot:add` to optimize both sheets, generate the preview and compact pose sheets, and append the character to the catalog. See [Adding a mascot](docs/GALLERY_ASSETS.md#adding-a-mascot) for the required arguments. Use the [optimize-mascot skill](.agents/skills/optimize-mascot/SKILL.md) for asset-only work.
+- Use `npm run mascot:add` to optimize both sheets, generate the preview and compact pose sheets, append the character to the catalog, and move the originals to `public/mascots/raw/processed/`. See [Adding a mascot](docs/GALLERY_ASSETS.md#adding-a-mascot) and the [optimize-mascot skill](.agents/skills/optimize-mascot/SKILL.md) for the workflow.
 - Keep still previews in `public/mascots/previews/` and compact playback sheets in `public/mascots/gallery-sheets/`.

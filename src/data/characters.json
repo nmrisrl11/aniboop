@@ -78,5 +78,70 @@
 		"id": "midoriya",
 		"name": "Izuku Midoriya (Deku)",
 		"series": "My Hero Academia"
+	},
+	{
+		"id": "light",
+		"name": "Light Yagami",
+		"series": "Death Note"
+	},
+	{
+		"id": "gon",
+		"name": "Gon Freecss",
+		"series": "Hunter × Hunter"
+	},
+	{
+		"id": "bakugo",
+		"name": "Katsuki Bakugo",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "todoroki",
+		"name": "Shoto Todoroki",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "sasuke",
+		"name": "Sasuke Uchiha",
+		"series": "Naruto"
+	},
+	{
+		"id": "sakura",
+		"name": "Sakura Haruno",
+		"series": "Naruto"
+	},
+	{
+		"id": "ichigo",
+		"name": "Ichigo Kurosaki",
+		"series": "Bleach"
+	},
+	{
+		"id": "armin",
+		"name": "Armin Arlert",
+		"series": "Attack on Titan"
+	},
+	{
+		"id": "boruto",
+		"name": "Boruto Uzumaki",
+		"series": "Boruto: Naruto Next Generations"
+	},
+	{
+		"id": "hinata-hyuga",
+		"name": "Hinata Hyuga",
+		"series": "Naruto"
+	},
+	{
+		"id": "kageyama",
+		"name": "Tobio Kageyama",
+		"series": "Haikyu!!"
+	},
+	{
+		"id": "mikasa",
+		"name": "Mikasa Ackerman",
+		"series": "Attack on Titan"
+	},
+	{
+		"id": "yusuke",
+		"name": "Yusuke Urameshi",
+		"series": "Yu Yu Hakusho"
 	}
 ]

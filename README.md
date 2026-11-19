@@ -17,11 +17,12 @@ Open [localhost:3000](http://localhost:3000).
 
 ## Documentation
 
-| Guide                                              | Contents                                        |
-| -------------------------------------------------- | ----------------------------------------------- |
-| [Brand](docs/BRAND.md)                             | Product copy, typography, palette, and identity |
-| [Architecture](docs/ARCHITECTURE.md)               | App Router, theme tokens, assets, and metadata  |
-| [Feature blueprint](docs/FEATURE_BLUEPRINT.md)     | Gallery, mascot reactions, and downloads        |
-| [Development](docs/DEVELOPMENT.md)                 | Build, lint, formatting, and editor setup       |
-| [Documentation maintenance](docs/DOCUMENTATION.md) | Guide ownership and documentation sync workflow |
-| [Agent instructions](AGENTS.md)                    | Repository-specific agent guidance              |
+| Guide                                              | Contents                                         |
+| -------------------------------------------------- | ------------------------------------------------ |
+| [Brand](docs/BRAND.md)                             | Product copy, typography, palette, and identity  |
+| [Architecture](docs/ARCHITECTURE.md)               | App Router, theme tokens, assets, and metadata   |
+| [Feature blueprint](docs/FEATURE_BLUEPRINT.md)     | Gallery, mascot reactions, and downloads         |
+| [Gallery assets](docs/GALLERY_ASSETS.md)           | Sprite sheets, gallery loading, and mascot setup |
+| [Development](docs/DEVELOPMENT.md)                 | Build, lint, formatting, and editor setup        |
+| [Documentation maintenance](docs/DOCUMENTATION.md) | Guide ownership and documentation sync workflow  |
+| [Agent instructions](AGENTS.md)                    | Repository-specific agent guidance               |

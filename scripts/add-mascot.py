@@ -1,4 +1,4 @@
-"""Prepare a mascot's gallery assets and append it to the local catalog."""
+"""Prepare gallery assets, register a mascot, and archive its source sheets."""
 
 import argparse
 import json
@@ -12,6 +12,8 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "public" / "mascots"
+RAW = ASSETS / "raw"
+PROCESSED = RAW / "processed"
 CATALOG = ROOT / "src" / "data" / "characters.json"
 OPTIMIZER = ROOT / ".agents" / "skills" / "optimize-mascot" / "scripts" / "optimize.py"
 PREVIEW_GENERATOR = ROOT / "scripts" / "generate-mascot-previews.py"
@@ -21,7 +23,7 @@ def find_raw_sheet(character_id, kind):
     stem = f"{character_id}-{kind}"
     matches = [
         path
-        for path in (ASSETS / "raw").glob(f"{stem}.*")
+        for path in RAW.glob(f"{stem}.*")
         if path.is_file() and path.suffix.lower() in {".png", ".webp"}
     ]
     if len(matches) != 1:
@@ -43,6 +45,11 @@ def add_mascot(character, staging):
         raise ValueError(f"{character_id} is already in the catalog.")
 
     sheets = [find_raw_sheet(character_id, kind) for kind in ("directions", "reactions")]
+    archive_pairs = [(sheet, PROCESSED / sheet.name) for sheet in sheets]
+    for _, destination in archive_pairs:
+        if destination.exists() or destination.is_symlink():
+            raise ValueError(f"An archived source already exists in raw/processed for {destination.name}.")
+
     for sheet in sheets:
         subprocess.run(
             [sys.executable, str(OPTIMIZER), "--src", str(sheet), "--dest", str(staging / "sheets")],
@@ -72,6 +79,7 @@ def add_mascot(character, staging):
         json.dumps([*catalog, character], ensure_ascii=False, indent="\t") + "\n", encoding="utf-8"
     )
     published = []
+    archived = []
     try:
         for relative_path in output_paths:
             destination = ASSETS / relative_path
@@ -81,8 +89,16 @@ def add_mascot(character, staging):
                 published.append(destination)
         if CATALOG.read_bytes() != original_catalog:
             raise ValueError("The catalog changed during generation. Run the command again.")
+        PROCESSED.mkdir(exist_ok=True)
+        for sheet, destination in archive_pairs:
+            if destination.exists() or destination.is_symlink():
+                raise ValueError(f"An archived source already exists in raw/processed for {destination.name}.")
+            sheet.rename(destination)
+            archived.append((sheet, destination))
         updated_catalog.replace(CATALOG)
     except Exception:
+        for sheet, destination in reversed(archived):
+            destination.rename(sheet)
         for destination in published:
             destination.unlink()
         raise
@@ -114,7 +130,7 @@ def main():
         parser.exit(1, f"mascot:add: {error}\n")
     finally:
         lock.unlink()
-    print(f"Added {args.id} to the catalog with two optimized sheets and three gallery assets.")
+    print(f"Added {args.id} to the catalog with five WebPs and moved its originals to raw/processed.")
 
 
 if __name__ == "__main__":

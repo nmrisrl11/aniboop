@@ -10,11 +10,11 @@ The local [Mascot component](../src/components/mascot/mascot.tsx) accepts matchi
 | -------------------- | --------------------------------------------------------------------------------------------------------- |
 | Initial view or pan  | A 248 × 248 center-pose WebP for each mascot entering view. Overscan cells reserve space.                 |
 | Cursor tracking      | A 504 × 504 WebP with nine poses for each visible mascot, requested when an unpressed fine pointer moves. |
-| Boop, hold, or pinch | The selected mascot's reaction sheet. The current pose stays visible until the sheet decodes.             |
+| Boop, hold, or pinch | The selected mascot's 504 × 504 reaction sheet. The current pose stays visible until the sheet decodes.   |
 
 Repeated tiles share asset URLs. The browser can reuse image responses, and the component shares in-flight sprite sheet decodes across copies. Focusing a card with Tab only needs its preview. A drag that begins on a mascot yields to the grid before triggering a reaction.
 
-The production build emits the gallery's center previews, compact direction sheets, and reaction sheets at content-hashed Next.js static URLs. Next.js serves them with `Cache-Control: public, max-age=31536000, immutable`. Editing a WebP changes its URL on the next build. The homepage passes these URLs to the grid, which requests the files at the stages above.
+The production build emits the gallery's center previews and compact pose sheets at content-hashed Next.js static URLs. Next.js serves them with `Cache-Control: public, max-age=31536000, immutable`. Editing a WebP changes its URL on the next build. The homepage passes these URLs to the grid, which requests the files at the stages above.
 
 ### Gallery-wide cursor tracking
 
@@ -33,7 +33,7 @@ Run this from the repository root with your character's metadata.
 npm run mascot:add -- --id star-cat --name "Star Cat" --series "Original Characters"
 ```
 
-The command validates the pair, runs the optimizer, and generates the center-pose preview and compact direction sheet. It writes two WebPs to `public/mascots/sheets/` and two to `public/mascots/previews/`, then appends the catalog entry. It leaves the originals in `raw/` and rejects an ID already in the catalog. Open the gallery to check the gaze and boop, then include the catalog change and the four generated WebPs when committing the mascot.
+The command validates the pair, runs the optimizer, and generates the center-pose preview and two compact pose sheets. It writes two WebPs to `public/mascots/sheets/`, one still to `public/mascots/previews/`, and two playback sheets to `public/mascots/gallery-sheets/`. It then appends the catalog entry. It leaves the originals in `raw/` and rejects an ID already in the catalog. Open the gallery to check the framing, gaze, and boop, then include the catalog change and the five generated WebPs when committing the mascot.
 
 ## Preparing sprite sheets
 
@@ -52,7 +52,7 @@ The dry run reports projected sizes without writing image files. The regular run
 
 See the [optimize-mascot skill](../.agents/skills/optimize-mascot/SKILL.md) for agent usage and the [CLI guide](../.agents/skills/optimize-mascot/references/cli_usage.md) for all options.
 
-The [preview generator](../scripts/generate-mascot-previews.py) writes `public/mascots/previews/<character-id>.webp` from the center cell and `public/mascots/previews/<character-id>-directions.webp` from all nine cells. Pass `--character <id>` to rebuild both gallery assets for one character. Use [Adding a mascot](#adding-a-mascot) when the character also needs a catalog entry.
+The [preview generator](../scripts/generate-mascot-previews.py) processes the catalog when run against the repository's asset directory. It centers the visible artwork of the neutral pose horizontally and aligns it to a shared baseline. A single proportional transform applies to all 18 poses. The generator reduces the scale when a wider or taller pose needs more clearance. It writes `<character-id>.webp` to `previews/` and the matching `-directions.webp` and `-reactions.webp` to `gallery-sheets/`. Pass `--character <id>` to rebuild all three gallery assets for one character from its optimized direction and reaction pair. Use [Adding a mascot](#adding-a-mascot) when the character also needs a catalog entry.
 
 ## Scaling the catalog
 

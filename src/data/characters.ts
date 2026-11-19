@@ -23,8 +23,8 @@ export function getGalleryCharacters(): Promise<GalleryCharacter[]> {
 			const [preview, galleryDirections, reactions]: { default: StaticImageData }[] =
 				await Promise.all([
 					import(`../../public/mascots/previews/${id}.webp`),
-					import(`../../public/mascots/previews/${id}-directions.webp`),
-					import(`../../public/mascots/sheets/${id}-reactions.webp`),
+					import(`../../public/mascots/gallery-sheets/${id}-directions.webp`),
+					import(`../../public/mascots/gallery-sheets/${id}-reactions.webp`),
 				]);
 			return {
 				...character,

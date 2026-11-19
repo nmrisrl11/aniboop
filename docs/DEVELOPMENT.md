@@ -16,7 +16,7 @@ Install the npm lockfile dependencies with `npm ci` and run `npm run dev`.
 | `npm run format`            | Format project files and sort Tailwind classes                      |
 | `npm run format:check`      | Check formatting                                                    |
 | `npm run mascot:optimize`   | Optimize raw mascot sprite sheets in `public/mascots/raw`           |
-| `npm run mascot:add`        | Generate four WebP assets and add a mascot to the character catalog |
+| `npm run mascot:add`        | Generate five WebP assets and add a mascot to the character catalog |
 
 The [VS Code workspace settings](../.vscode/settings.json) configure Oxfmt on save and point Tailwind IntelliSense at the global stylesheet. The workspace also includes tasks and Next.js debug profiles.
 

@@ -1,6 +1,7 @@
+import { ThemeProvider } from "@/components/theme-provider";
+import { brand } from "@/lib/brand";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { brand } from "@/lib/brand";
 import "./globals.css";
 
 const allo = localFont({
@@ -41,8 +42,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
 	return (
-		<html lang="en" className={`${allo.variable} ${inter.variable}`}>
-			<body className="min-h-dvh antialiased">{children}</body>
+		<html lang="en" className={`${allo.variable} ${inter.variable}`} suppressHydrationWarning>
+			<body className="min-h-dvh antialiased">
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					storageKey="aniboop-appearance"
+					enableSystem
+					disableTransitionOnChange
+				>
+					{children}
+				</ThemeProvider>
+			</body>
 		</html>
 	);
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Mascot } from "@/components/mascot/mascot";
+import { Mascot, type MascotProps } from "@/components/mascot/mascot";
 import type { GalleryCharacter } from "@/data/characters";
 import { memo, useCallback, useState } from "react";
 import ThiingsGrid, { DRAG_THRESHOLD, type ItemConfig } from "./thiings-grid";
@@ -10,6 +10,7 @@ const PREVIEW_SIZE = 168;
 const MIN_VISIBLE_RATIO = 0.01;
 const MIN_FOCUS_RATIO = 0.5;
 type TileVisibility = "outside" | "partial" | "focusable";
+export type BoopOrder = NonNullable<MascotProps["mode"]>;
 
 const visibilityCallbacks = new WeakMap<Element, (entry: IntersectionObserverEntry) => void>();
 let tileObserver: IntersectionObserver | undefined;
@@ -17,9 +18,11 @@ let tileObserver: IntersectionObserver | undefined;
 const CharacterTile = memo(function CharacterTile({
 	character,
 	isMoving,
+	boopOrder,
 }: {
 	character: GalleryCharacter;
 	isMoving: boolean;
+	boopOrder: BoopOrder;
 }) {
 	const [visibility, setVisibility] = useState<TileVisibility>("outside");
 	const observeArt = useCallback((element: HTMLDivElement | null) => {
@@ -70,6 +73,7 @@ const CharacterTile = memo(function CharacterTile({
 						label={character.name}
 						size={PREVIEW_SIZE}
 						className="squircle"
+						mode={boopOrder}
 						payoffs={character.payoffs}
 						dragThreshold={DRAG_THRESHOLD}
 						tabIndex={visibility === "focusable" ? 0 : -1}
@@ -86,16 +90,25 @@ const CharacterTile = memo(function CharacterTile({
 	);
 });
 
-export function CharacterGrid({ characters }: { characters: readonly GalleryCharacter[] }) {
+export function CharacterGrid({
+	characters,
+	boopOrder,
+}: {
+	characters: readonly GalleryCharacter[];
+	boopOrder: BoopOrder;
+}) {
 	const renderItem = useCallback(
-		({ gridIndex, isMoving }: ItemConfig) => (
-			<CharacterTile character={characters[gridIndex % characters.length]} isMoving={isMoving} />
-		),
-		[characters],
+		({ gridIndex, isMoving }: ItemConfig) => {
+			const character = characters[gridIndex % characters.length];
+			return character ? (
+				<CharacterTile character={character} isMoving={isMoving} boopOrder={boopOrder} />
+			) : null;
+		},
+		[characters, boopOrder],
 	);
 	return (
 		<ThiingsGrid
-			className="focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
+			className="z-0 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
 			label="Character gallery"
 			describedBy="grid-instructions"
 			gridSize={GRID_SIZE}

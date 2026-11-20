@@ -4,7 +4,7 @@ AniBoop is an interactive collection of chibi anime characters. The signature in
 
 ## Copy
 
-The copy below includes planned gallery surfaces. The homepage displays character names and a short instruction for interacting with the gallery.
+The copy below includes planned gallery surfaces. The homepage displays character names and gallery controls. The gallery instructions are available to screen readers.
 
 | Surface              | Copy                                                                                                               |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -14,9 +14,11 @@ The copy below includes planned gallery surfaces. The homepage displays characte
 | Homepage headline    | Pick a character. Give it a boop.                                                                                  |
 | Homepage description | Explore a collection of chibi anime characters. Tap one to see it react, then download its poses and reactions.    |
 | Meta description     | Browse chibi anime mascots, boop them to see them react, and download their directional poses and reaction assets. |
-| Gallery hint         | Drag to explore · Tap to boop                                                                                      |
+| Gallery instructions | Tap or hold a character to boop. Drag, scroll, or use arrow keys to explore.                                       |
 | Card action          | View & download                                                                                                    |
 | Detail labels        | Directions, Reactions, Download                                                                                    |
+
+The dock uses Boop order, Appearance, and Catalog. Boop order offers In order, Random, and Build up. Appearance offers System, Light, and Dark.
 
 Use search topics naturally in relevant pages. Start with chibi anime characters, anime mascots, interactive chibi characters, downloadable chibi poses, and chibi reaction assets.
 

@@ -1,6 +1,6 @@
 # Feature blueprint
 
-The homepage repeats the character catalog across a pannable grid. Visible mascots follow an unpressed fine pointer while the grid is still. Click, tap, Enter, or Space cycles through the mascot's configured reactions. A hold or two-finger pinch on the mascot triggers a separate reaction. Search, character details, and downloads are planned.
+The homepage repeats the character catalog across a pannable grid. Visible mascots follow an unpressed fine pointer while the grid is still. Click, tap, Enter, or Space plays a reaction using the selected Boop order. In order cycles through the configured reactions, Random picks one each time, and Build up plays a dizzy reaction after four quick boops. A hold or two-finger pinch on the mascot triggers a separate reaction. The dock also opens the catalog, which lists characters by series and shows the totals. Search, character details, and downloads are planned.
 
 | Area              | Planned behavior                                                                               | Acceptance criteria                                                                                                          |
 | ----------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |

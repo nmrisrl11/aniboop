@@ -18,9 +18,11 @@ The local [Mascot component](../src/components/mascot/mascot.tsx) adapts the por
 
 The homepage resolves the content-hashed WebP URLs during the production build and passes them to the grid. One [shared pointer listener](../src/components/mascot/page-pointer.ts) updates the gaze of visible mascots. The grid suspends tracking while it pans. See the [gallery assets guide](GALLERY_ASSETS.md) for request timing and cache behavior.
 
+The [gallery dock](../src/components/gallery/gallery-dock.tsx) floats over the bottom of the pannable viewport and controls the reaction mode across visible mascots. The dock surface receives pointer input across its full area. The surrounding fade lets pointer input pass through to the grid. The catalog groups the same character data by series and uses the existing still previews.
+
 ## Theme
 
-The preview follows the system color preference through CSS. Light values live in `:root` and dark values override those tokens inside `prefers-color-scheme`. Tailwind exposes the tokens through `@theme inline`. Use semantic utilities such as `bg-card`, `text-foreground`, and `border-input` across both palettes.
+The appearance control defaults to the system color preference. The root [theme provider](../src/components/theme-provider.tsx) uses `next-themes` to persist the preference and apply the correct class before the first paint. Light tokens are defined in `:root` and dark overrides live in `.dark`. Tailwind exposes both palettes through `@theme inline`. Use semantic utilities such as `bg-card`, `text-foreground`, and `border-input` across both palettes.
 
 ## Fonts and metadata
 

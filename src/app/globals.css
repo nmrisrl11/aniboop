@@ -129,5 +129,12 @@
 	}
 	body {
 		@apply bg-background font-sans text-foreground;
+		background-image: url("/aniboop-watermark.svg");
+	}
+
+	@media (forced-colors: active) {
+		body {
+			background-image: none;
+		}
 	}
 }

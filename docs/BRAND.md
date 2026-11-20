@@ -44,6 +44,8 @@ Use tabular numerals where counts need to align. The two upright WOFF2 assets to
 
 Use peach and lilac sparingly so the character artwork stays prominent. The concentric tap ripple serves as the favicon and appears in the social preview.
 
+The body background repeats a faint [AniBoop wordmark](../public/aniboop-watermark.svg) in staggered rows. The SVG uses Allo Bold outlines and the primary tint for each color scheme.
+
 ## Corner shapes
 
 Use `squircle` on cards, banners, tiles, and other surfaces that need adaptive corners. The radius scales with the element in both dimensions and caps at 2 rem for the rounded fallback and 2.5 rem for the native squircle. This keeps corners modest on short banners and compact tiles. For controls with a fixed radius, pair `corner-squircle` with the existing `rounded-*` utility. Keep `rounded-full` for circles such as the tap ripple.

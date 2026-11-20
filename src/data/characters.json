@@ -143,5 +143,60 @@
 		"id": "yusuke",
 		"name": "Yusuke Urameshi",
 		"series": "Yu Yu Hakusho"
+	},
+	{
+		"id": "bachira",
+		"name": "Meguru Bachira",
+		"series": "Blue Lock"
+	},
+	{
+		"id": "gohan",
+		"name": "Son Gohan",
+		"series": "Dragon Ball Z"
+	},
+	{
+		"id": "hyoma",
+		"name": "Hyoma Chigiri",
+		"series": "Blue Lock"
+	},
+	{
+		"id": "kawaki",
+		"name": "Kawaki",
+		"series": "Boruto: Naruto Next Generations"
+	},
+	{
+		"id": "mitsuki",
+		"name": "Mitsuki",
+		"series": "Boruto: Naruto Next Generations"
+	},
+	{
+		"id": "nagi",
+		"name": "Seishiro Nagi",
+		"series": "Blue Lock"
+	},
+	{
+		"id": "noelle",
+		"name": "Noelle Silva",
+		"series": "Black Clover"
+	},
+	{
+		"id": "piccolo",
+		"name": "Piccolo",
+		"series": "Dragon Ball Z"
+	},
+	{
+		"id": "rukia",
+		"name": "Rukia Kuchiki",
+		"series": "Bleach"
+	},
+	{
+		"id": "sarada",
+		"name": "Sarada Uchiha",
+		"series": "Boruto: Naruto Next Generations"
+	},
+	{
+		"id": "yuno",
+		"name": "Yuno Grinberryall",
+		"series": "Black Clover"
 	}
 ]

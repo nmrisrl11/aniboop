@@ -1,10 +1,12 @@
 # Gallery assets
 
-The [character catalog](../src/data/characters.json) holds stable IDs, display names, and series. The [TypeScript adapter](../src/data/characters.ts) derives asset URLs and applies custom reaction orders. The endless grid repeats the catalog in spiral order, so a cell resolves to the same character whenever you pan back within the same catalog version.
+The [character catalog](../src/data/characters.json) holds stable IDs, display names, and series. The endless grid repeats the catalog in spiral order, so a cell resolves to the same character whenever you pan back within the same catalog version.
 
-The local [Mascot component](../src/components/mascot/mascot.tsx) accepts matching 3 × 3 sheets from any character. The direction sheet has the front-facing pose in the center. Reaction slot names follow the upstream order of blink, heart, sparkle, surprised, wink, bashful, sleepy, dizzy, and delighted. Nomer's first slot is neutral, so his cycle starts with the grin in the second slot and wraps through all nine.
+The local [Mascot component](../src/components/mascot/mascot.tsx) accepts matching 3 × 3 sheets from any character. The direction sheet has the front-facing pose in the center. Reaction slot names follow the upstream order of blink, heart, sparkle, surprised, wink, bashful, sleepy, dizzy, and delighted.
 
 ## Gallery loading
+
+The [homepage](../src/app/page.tsx) calls `getGalleryCharacters` in the [catalog adapter](../src/data/characters.ts). The adapter imports the center previews from `public/mascots/previews/` and the compact direction and reaction sheets from `public/mascots/gallery-sheets/`. [CharacterGrid](../src/components/gallery/character-grid.tsx) passes those three URLs to each visible mascot. The full-size sheets in `public/mascots/sheets/` are inputs to the preview generator.
 
 | Stage                | Asset loaded                                                                                              |
 | -------------------- | --------------------------------------------------------------------------------------------------------- |
@@ -26,6 +28,8 @@ Install the Python image tools once with `python -m pip install Pillow numpy`. P
 
 - `<id>-directions.png` or `<id>-directions.webp`
 - `<id>-reactions.png` or `<id>-reactions.webp`
+
+Use `Dragon Ball` for characters from both `Dragon Ball` and `Dragon Ball Z` so the catalog lists them together.
 
 Run this from the repository root with your character's metadata.
 

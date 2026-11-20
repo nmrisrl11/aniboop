@@ -74,7 +74,6 @@ const CharacterTile = memo(function CharacterTile({
 						size={PREVIEW_SIZE}
 						className="squircle"
 						mode={boopOrder}
-						payoffs={character.payoffs}
 						dragThreshold={DRAG_THRESHOLD}
 						tabIndex={visibility === "focusable" ? 0 : -1}
 						trackPointer={!isMoving}

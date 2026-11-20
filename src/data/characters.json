@@ -1,10 +1,5 @@
 [
 	{
-		"id": "nomer",
-		"name": "Nomer",
-		"series": "Creator Mascot"
-	},
-	{
 		"id": "edward",
 		"name": "Edward Elric",
 		"series": "Fullmetal Alchemist"
@@ -72,7 +67,7 @@
 	{
 		"id": "goku",
 		"name": "Son Goku",
-		"series": "Dragon Ball Z"
+		"series": "Dragon Ball"
 	},
 	{
 		"id": "midoriya",
@@ -152,7 +147,7 @@
 	{
 		"id": "gohan",
 		"name": "Son Gohan",
-		"series": "Dragon Ball Z"
+		"series": "Dragon Ball"
 	},
 	{
 		"id": "hyoma",
@@ -182,7 +177,7 @@
 	{
 		"id": "piccolo",
 		"name": "Piccolo",
-		"series": "Dragon Ball Z"
+		"series": "Dragon Ball"
 	},
 	{
 		"id": "rukia",
@@ -232,7 +227,7 @@
 	{
 		"id": "krillin",
 		"name": "Krillin",
-		"series": "Dragon Ball Z"
+		"series": "Dragon Ball"
 	},
 	{
 		"id": "kurama",
@@ -257,12 +252,12 @@
 	{
 		"id": "trunks",
 		"name": "Trunks",
-		"series": "Dragon Ball Z"
+		"series": "Dragon Ball"
 	},
 	{
 		"id": "vegeta",
 		"name": "Vegeta",
-		"series": "Dragon Ball Z"
+		"series": "Dragon Ball"
 	},
 	{
 		"id": "yoo-jin-ho",

@@ -1,4 +1,3 @@
-import { REACTIONS, type Reaction } from "@/lib/mascot-sprites";
 import type { StaticImageData } from "next/image";
 import catalog from "./characters.json";
 
@@ -6,14 +5,10 @@ export type GalleryCharacter = {
 	id: string;
 	name: string;
 	series: string;
-	payoffs?: readonly Reaction[];
 	preview: string;
 	galleryDirections: string;
 	reactions: string;
 };
-
-// Nomer's first reaction cell is neutral. Start with the grin.
-const nomerPayoffs = [...REACTIONS.slice(1), REACTIONS[0]];
 
 export function getGalleryCharacters(): Promise<GalleryCharacter[]> {
 	return Promise.all(
@@ -28,7 +23,6 @@ export function getGalleryCharacters(): Promise<GalleryCharacter[]> {
 				]);
 			return {
 				...character,
-				payoffs: id === "nomer" ? nomerPayoffs : undefined,
 				preview: preview.default.src,
 				galleryDirections: galleryDirections.default.src,
 				reactions: reactions.default.src,

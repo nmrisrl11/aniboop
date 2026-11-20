@@ -198,5 +198,80 @@
 		"id": "yuno",
 		"name": "Yuno Grinberryall",
 		"series": "Black Clover"
+	},
+	{
+		"id": "beru",
+		"name": "Beru",
+		"series": "Solo Leveling"
+	},
+	{
+		"id": "bulma",
+		"name": "Bulma",
+		"series": "Dragon Ball"
+	},
+	{
+		"id": "cha-hae-in",
+		"name": "Cha Hae-In",
+		"series": "Solo Leveling"
+	},
+	{
+		"id": "genos",
+		"name": "Genos",
+		"series": "One Punch Man"
+	},
+	{
+		"id": "hiei",
+		"name": "Hiei",
+		"series": "Yu Yu Hakusho"
+	},
+	{
+		"id": "igris",
+		"name": "Igris",
+		"series": "Solo Leveling"
+	},
+	{
+		"id": "krillin",
+		"name": "Krillin",
+		"series": "Dragon Ball Z"
+	},
+	{
+		"id": "kurama",
+		"name": "Kurama",
+		"series": "Yu Yu Hakusho"
+	},
+	{
+		"id": "kuwabara",
+		"name": "Kazuma Kuwabara",
+		"series": "Yu Yu Hakusho"
+	},
+	{
+		"id": "sanji",
+		"name": "Sanji",
+		"series": "One Piece"
+	},
+	{
+		"id": "touka",
+		"name": "Touka Kirishima",
+		"series": "Tokyo Ghoul"
+	},
+	{
+		"id": "trunks",
+		"name": "Trunks",
+		"series": "Dragon Ball Z"
+	},
+	{
+		"id": "vegeta",
+		"name": "Vegeta",
+		"series": "Dragon Ball Z"
+	},
+	{
+		"id": "yoo-jin-ho",
+		"name": "Yoo Jin-Ho",
+		"series": "Solo Leveling"
+	},
+	{
+		"id": "zoro",
+		"name": "Roronoa Zoro",
+		"series": "One Piece"
 	}
 ]

@@ -268,5 +268,155 @@
 		"id": "zoro",
 		"name": "Roronoa Zoro",
 		"series": "One Piece"
+	},
+	{
+		"id": "aizawa",
+		"name": "Shota Aizawa",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "all-might",
+		"name": "All Might",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "alphonse",
+		"name": "Alphonse Elric",
+		"series": "Fullmetal Alchemist"
+	},
+	{
+		"id": "amon",
+		"name": "Kōtarō Amon",
+		"series": "Tokyo Ghoul"
+	},
+	{
+		"id": "brook",
+		"name": "Brook",
+		"series": "One Piece"
+	},
+	{
+		"id": "carla",
+		"name": "Carla",
+		"series": "Fairy Tail"
+	},
+	{
+		"id": "chopper",
+		"name": "Tony Tony Chopper",
+		"series": "One Piece"
+	},
+	{
+		"id": "erza",
+		"name": "Erza Scarlet",
+		"series": "Fairy Tail"
+	},
+	{
+		"id": "franky",
+		"name": "Franky",
+		"series": "One Piece"
+	},
+	{
+		"id": "gray",
+		"name": "Gray Fullbuster",
+		"series": "Fairy Tail"
+	},
+	{
+		"id": "happy",
+		"name": "Happy",
+		"series": "Fairy Tail"
+	},
+	{
+		"id": "hide",
+		"name": "Hideyoshi Nagachika",
+		"series": "Tokyo Ghoul"
+	},
+	{
+		"id": "iida",
+		"name": "Tenya Iida",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "inosuke",
+		"name": "Inosuke Hashibira",
+		"series": "Demon Slayer"
+	},
+	{
+		"id": "jinbe",
+		"name": "Jinbe",
+		"series": "One Piece"
+	},
+	{
+		"id": "kakashi",
+		"name": "Kakashi Hatake",
+		"series": "Naruto"
+	},
+	{
+		"id": "killua",
+		"name": "Killua Zoldyck",
+		"series": "Hunter × Hunter"
+	},
+	{
+		"id": "kurapika",
+		"name": "Kurapika",
+		"series": "Hunter × Hunter"
+	},
+	{
+		"id": "l-lawliet",
+		"name": "L Lawliet",
+		"series": "Death Note"
+	},
+	{
+		"id": "leorio",
+		"name": "Leorio Paradinight",
+		"series": "Hunter × Hunter"
+	},
+	{
+		"id": "lucy",
+		"name": "Lucy Heartfilia",
+		"series": "Fairy Tail"
+	},
+	{
+		"id": "misa",
+		"name": "Misa Amane",
+		"series": "Death Note"
+	},
+	{
+		"id": "nami",
+		"name": "Nami",
+		"series": "One Piece"
+	},
+	{
+		"id": "nezuko",
+		"name": "Nezuko Kamado",
+		"series": "Demon Slayer"
+	},
+	{
+		"id": "ochaco",
+		"name": "Ochaco Uraraka",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "robin",
+		"name": "Nico Robin",
+		"series": "One Piece"
+	},
+	{
+		"id": "ryuk",
+		"name": "Ryuk",
+		"series": "Death Note"
+	},
+	{
+		"id": "usopp",
+		"name": "Usopp",
+		"series": "One Piece"
+	},
+	{
+		"id": "wendy",
+		"name": "Wendy Marvell",
+		"series": "Fairy Tail"
+	},
+	{
+		"id": "zenitsu",
+		"name": "Zenitsu Agatsuma",
+		"series": "Demon Slayer"
 	}
 ]

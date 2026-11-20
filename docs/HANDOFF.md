@@ -26,7 +26,7 @@ Each catalog entry uses two full-size WebP sheets in `public/mascots/sheets/`, a
 
 ## Last verification
 
-The 29-character gallery passed `npm run lint:all`, `npm run format:check`, and `npm run build`. The archive workflow was tested with existing destination files and a simulated catalog write failure. Browser checks confirmed that the preview, gaze, and boop assets load for Ichigo, Armin, Boruto, Hinata Hyuga, Kageyama, Mikasa, and Yusuke.
+The 100-character gallery passed `npm run lint:all`, `npm run format:check`, and `npm run build` after the latest batch. Browser checks confirmed that previews, gaze poses, and boop reactions load for all 16 characters in that batch. Earlier archive checks covered existing destination files and a simulated catalog write failure.
 
 Earlier framing checks covered the original 16 center previews and 288 playback poses. A batch preview rebuild verified that the generator skips uncataloged source sheets when run against the project's asset directory.
 

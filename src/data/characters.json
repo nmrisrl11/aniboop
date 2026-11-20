@@ -418,5 +418,85 @@
 		"id": "zenitsu",
 		"name": "Zenitsu Agatsuma",
 		"series": "Demon Slayer"
+	},
+	{
+		"id": "cc",
+		"name": "C.C.",
+		"series": "Code Geass"
+	},
+	{
+		"id": "chad",
+		"name": "Yasutora Sado",
+		"series": "Bleach"
+	},
+	{
+		"id": "erwin",
+		"name": "Erwin Smith",
+		"series": "Attack on Titan"
+	},
+	{
+		"id": "hange",
+		"name": "Hange Zoë",
+		"series": "Attack on Titan"
+	},
+	{
+		"id": "historia",
+		"name": "Historia Reiss",
+		"series": "Attack on Titan"
+	},
+	{
+		"id": "julius",
+		"name": "Julius Novachrono",
+		"series": "Black Clover"
+	},
+	{
+		"id": "kallen",
+		"name": "Kallen Stadtfeld",
+		"series": "Code Geass"
+	},
+	{
+		"id": "kunigami",
+		"name": "Rensuke Kunigami",
+		"series": "Blue Lock"
+	},
+	{
+		"id": "levi",
+		"name": "Levi Ackerman",
+		"series": "Attack on Titan"
+	},
+	{
+		"id": "liebe",
+		"name": "Liebe",
+		"series": "Black Clover"
+	},
+	{
+		"id": "orihime",
+		"name": "Orihime Inoue",
+		"series": "Bleach"
+	},
+	{
+		"id": "reiner",
+		"name": "Reiner Braun",
+		"series": "Attack on Titan"
+	},
+	{
+		"id": "renji",
+		"name": "Renji Abarai",
+		"series": "Bleach"
+	},
+	{
+		"id": "suzaku",
+		"name": "Suzaku Kururugi",
+		"series": "Code Geass"
+	},
+	{
+		"id": "uryu",
+		"name": "Uryū Ishida",
+		"series": "Bleach"
+	},
+	{
+		"id": "yami",
+		"name": "Yami Sukehiro",
+		"series": "Black Clover"
 	}
 ]

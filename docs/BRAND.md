@@ -18,7 +18,7 @@ The copy below includes planned gallery surfaces. The homepage displays characte
 | Card action          | View & download                                                                                                    |
 | Detail labels        | Directions, Reactions, Download                                                                                    |
 
-The top bar includes Component, Credits, the GitHub repository link, the current boop order, Catalog, and Appearance. Boop order offers In order, Random, and Build up. Appearance offers System, Light, and Dark. The catalog title shows the character total and switches to a match count when search or a series filter is active.
+The top bar includes Component, Credits, the GitHub repository link, the current boop order, Catalog, and Appearance. Below the medium breakpoint, Catalog stays in the header and the secondary controls move into More options. Boop order offers In order, Random, and Build up. Appearance offers System, Light, and Dark. The catalog title shows the character total and switches to a match count when search or a series filter is active.
 
 Use search topics naturally in relevant pages. Start with chibi anime characters, anime mascots, interactive chibi characters, downloadable chibi poses, and chibi reaction assets.
 

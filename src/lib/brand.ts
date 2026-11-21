@@ -8,6 +8,7 @@ export const brand = {
 	galleryInstructions:
 		"Tap or hold a character to boop. Drag, scroll, or use arrow keys to explore.",
 	galleryControls: {
+		moreOptions: "More options",
 		boopOrder: "Boop order",
 		orders: {
 			cycle: { label: "In order", description: "Cycle through reactions." },

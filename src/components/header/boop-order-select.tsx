@@ -11,7 +11,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { brand } from "@/lib/brand";
-import { Flame, Repeat, Shuffle } from "lucide-react";
+import { ChevronDown, Flame, Repeat, Shuffle } from "lucide-react";
 
 const copy = brand.galleryControls;
 const icons = { cycle: Repeat, random: Shuffle, escalate: Flame };
@@ -20,9 +20,13 @@ const orders: readonly BoopOrder[] = ["cycle", "random", "escalate"];
 export function BoopOrderSelect({
 	value,
 	onValueChange,
+	triggerClassName = "h-8 gap-1.5 px-2 text-xs font-semibold",
+	showSetting = false,
 }: {
 	value: BoopOrder;
 	onValueChange: (order: BoopOrder) => void;
+	triggerClassName?: string;
+	showSetting?: boolean;
 }) {
 	const SelectedIcon = icons[value];
 
@@ -32,11 +36,19 @@ export function BoopOrderSelect({
 				<Button
 					variant="ghost"
 					size="sm"
-					className="h-8 gap-1.5 rounded-lg px-2 text-xs font-semibold"
+					className={triggerClassName}
 					aria-label={`${copy.boopOrder}, ${copy.orders[value].label}`}
 				>
-					<SelectedIcon data-icon="inline-start" aria-hidden="true" />
-					{copy.orders[value].label}
+					<SelectedIcon data-icon={showSetting ? undefined : "inline-start"} aria-hidden="true" />
+					{showSetting ? (
+						<>
+							<span className="flex-1 text-left">{copy.boopOrder}</span>
+							<span className="text-xs text-muted-foreground">{copy.orders[value].label}</span>
+							<ChevronDown aria-hidden="true" className="size-3.5 text-muted-foreground" />
+						</>
+					) : (
+						copy.orders[value].label
+					)}
 				</Button>
 			</DropdownMenuTrigger>
 

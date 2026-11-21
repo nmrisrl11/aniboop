@@ -1,6 +1,6 @@
 # Development
 
-Install the npm lockfile dependencies with `npm ci` and run `npm run dev`.
+Use Node.js 22.12 or later and npm. Install the lockfile dependencies with `npm ci`, then run `npm run dev`. On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm.ps1`.
 
 | Command                     | Purpose                                                             |
 | --------------------------- | ------------------------------------------------------------------- |

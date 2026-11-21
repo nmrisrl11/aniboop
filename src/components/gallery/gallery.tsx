@@ -1,6 +1,6 @@
 "use client";
 
-import { AppHeader } from "@/components/app-header";
+import { AppHeader } from "@/components/header/app-header";
 import { CharacterGrid } from "@/components/gallery/character-grid";
 import type { BoopOrder } from "@/components/mascot/mascot";
 import type { GalleryCharacter } from "@/data/characters";

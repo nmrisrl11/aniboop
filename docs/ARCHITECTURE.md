@@ -1,12 +1,18 @@
 # Architecture
 
-| Area                                       | Location                                        |
-| ------------------------------------------ | ----------------------------------------------- |
-| App Router and homepage                    | [`src/app`](../src/app)                         |
-| Shared brand copy                          | [`src/lib/brand.ts`](../src/lib/brand.ts)       |
-| Tailwind v4 theme and shadcn CSS variables | [`src/app/globals.css`](../src/app/globals.css) |
-| shadcn Radix Nova configuration            | [`components.json`](../components.json)         |
-| shadcn component source                    | [`src/components/ui`](../src/components/ui)     |
+| Area                                       | Location                                                  |
+| ------------------------------------------ | --------------------------------------------------------- |
+| App Router and homepage                    | [`src/app`](../src/app)                                   |
+| Header layout and boop-order control       | [`src/components/header`](../src/components/header)       |
+| Character catalog and search               | [`src/components/catalog`](../src/components/catalog)     |
+| Component guide, credits, and GitHub link  | [`src/components/resources`](../src/components/resources) |
+| Theme provider and appearance control      | [`src/components/theme`](../src/components/theme)         |
+| Gallery viewport and tiles                 | [`src/components/gallery`](../src/components/gallery)     |
+| Mascot rendering and gestures              | [`src/components/mascot`](../src/components/mascot)       |
+| Shared brand copy                          | [`src/lib/brand.ts`](../src/lib/brand.ts)                 |
+| Tailwind v4 theme and shadcn CSS variables | [`src/app/globals.css`](../src/app/globals.css)           |
+| shadcn Radix Nova configuration            | [`components.json`](../components.json)                   |
+| shadcn component source                    | [`src/components/ui`](../src/components/ui)               |
 
 ## Gallery
 
@@ -18,11 +24,15 @@ The local [Mascot component](../src/components/mascot/mascot.tsx) adapts the por
 
 The homepage resolves the content-hashed WebP URLs during the production build and passes them to the grid. One [shared pointer listener](../src/components/mascot/page-pointer.ts) updates the gaze of visible mascots. The grid suspends tracking while it pans. See the [gallery assets guide](GALLERY_ASSETS.md) for request timing and cache behavior.
 
-The [app header](../src/components/app-header.tsx) composes the component guide, credits, GitHub repository link, boop order, character catalog, and theme switcher. Each control handles its own interaction, and the gallery shares the selected boop order with the grid. The [character catalog](../src/components/character-catalog.tsx) uses shadcn Input and Select controls above its scrolling results. It groups and normalizes the data once per catalog change, applies text queries after a 150 ms pause, and cancels any pending query when the dialog closes. The [component guide](../src/components/component-docs-modal.tsx) uses shadcn Code Block with Shiki syntax highlighting, which loads when the guide opens.
+## Header and catalog
+
+The [app header](../src/components/header/app-header.tsx) composes the component guide, credits, GitHub repository link, boop order, character catalog, and theme switcher. Below 48 rem, the wordmark and Catalog stay visible alongside the [More options popover](../src/components/header/header-options.tsx), which contains the secondary controls. The gallery shares the selected boop order with the grid.
+
+The [character catalog](../src/components/catalog/character-catalog.tsx) uses shadcn Input and Select controls above its scrolling results. It groups and normalizes the data once per catalog change, applies text queries after a 150 ms pause, and cancels any pending query when the dialog closes. The [component guide](../src/components/resources/component-docs-modal.tsx) uses shadcn Code Block with Shiki syntax highlighting, which loads when the guide opens.
 
 ## Theme
 
-The appearance control defaults to the system color preference. The root [theme provider](../src/components/theme-provider.tsx) uses `next-themes` to persist the preference and apply the correct class before the first paint. Light tokens are defined in `:root` and dark overrides live in `.dark`. Tailwind exposes both palettes through `@theme inline`. Use semantic utilities such as `bg-card`, `text-foreground`, and `border-input` across both palettes.
+The appearance control defaults to the system color preference. The root [theme provider](../src/components/theme/theme-provider.tsx) uses `next-themes` to persist the preference and apply the correct class before the first paint. Light tokens are defined in `:root` and dark overrides live in `.dark`. Tailwind exposes both palettes through `@theme inline`. Use semantic utilities such as `bg-card`, `text-foreground`, and `border-input` across both palettes.
 
 ## Fonts and metadata
 

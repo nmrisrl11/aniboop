@@ -10,7 +10,7 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { brand } from "@/lib/brand";
-import { Monitor, Moon, Sun } from "lucide-react";
+import { ChevronDown, Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
 
@@ -21,7 +21,10 @@ const subscribeToHydration = () => () => {};
 const clientSnapshot = () => true;
 const serverSnapshot = () => false;
 
-export function ThemeSwitcher() {
+export function ThemeSwitcher({
+	triggerClassName = "text-muted-foreground",
+	showSetting = false,
+}: { triggerClassName?: string; showSetting?: boolean } = {}) {
 	const { theme, setTheme } = useTheme();
 	const hydrated = useSyncExternalStore(subscribeToHydration, clientSnapshot, serverSnapshot);
 	const appearance = hydrated && (theme === "light" || theme === "dark") ? theme : "system";
@@ -32,12 +35,19 @@ export function ThemeSwitcher() {
 			<DropdownMenuTrigger asChild>
 				<Button
 					variant="ghost"
-					size="icon"
-					className="text-muted-foreground max-[420px]:size-7"
+					size={showSetting ? "default" : "icon"}
+					className={triggerClassName}
 					title={copy.appearance}
 					aria-label={`${copy.appearance}, ${copy.themes[appearance]}`}
 				>
 					<ThemeIcon aria-hidden="true" />
+					{showSetting && (
+						<>
+							<span className="flex-1 text-left">{copy.appearance}</span>
+							<span className="text-xs text-muted-foreground">{copy.themes[appearance]}</span>
+							<ChevronDown aria-hidden="true" className="size-3.5 text-muted-foreground" />
+						</>
+					)}
 				</Button>
 			</DropdownMenuTrigger>
 

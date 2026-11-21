@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 import { brand } from "@/lib/brand";
 import type { Metadata } from "next";
 import localFont from "next/font/local";

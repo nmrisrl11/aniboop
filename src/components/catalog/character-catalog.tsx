@@ -165,14 +165,14 @@ export function CharacterCatalog({ characters }: { characters: readonly Characte
 				<Button
 					variant="secondary"
 					size="sm"
-					className="h-8 gap-2 rounded-lg px-2.5 text-xs font-semibold max-[420px]:gap-1 max-[420px]:px-1.5"
+					className="h-11 gap-2 rounded-xl px-3.5 text-sm font-semibold md:h-8 md:rounded-lg md:px-2.5 md:text-xs"
 					aria-label={`${copy.catalog}, ${copy.characterCount(characterCount)}`}
 					aria-keyshortcuts="Control+K Meta+K"
 					title={copy.catalog}
 				>
 					<Library data-icon="inline-start" aria-hidden="true" />
-					<span className="hidden min-[480px]:inline">{copy.catalog}</span>
-					<span className="hidden h-5 min-w-5 place-items-center rounded-full bg-card px-1.5 text-[10px] font-bold text-foreground tabular-nums shadow-xs min-[400px]:grid">
+					{copy.catalog}
+					<span className="hidden h-5 min-w-5 place-items-center rounded-full bg-card px-1.5 text-[10px] font-bold text-foreground tabular-nums shadow-xs md:grid">
 						{characterCount}
 					</span>
 				</Button>

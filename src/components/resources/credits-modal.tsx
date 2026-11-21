@@ -18,18 +18,15 @@ const projects = [
 	{ ...copy.mascot, icon: Pointer },
 ];
 
-export function CreditsModal() {
+export function CreditsModal({
+	triggerClassName = "h-8 gap-1.5 px-2.5 text-xs text-muted-foreground",
+}: { triggerClassName?: string } = {}) {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button
-					variant="ghost"
-					size="sm"
-					aria-label={copy.trigger}
-					className="h-8 gap-1.5 rounded-lg px-2.5 text-xs text-muted-foreground duration-150 hover:bg-muted hover:text-foreground motion-safe:active:scale-[0.97] max-[420px]:size-7 max-[420px]:px-0"
-				>
+				<Button variant="ghost" size="sm" aria-label={copy.trigger} className={triggerClassName}>
 					<Heart aria-hidden="true" />
-					<span className="hidden sm:inline">{copy.trigger}</span>
+					{copy.trigger}
 				</Button>
 			</DialogTrigger>
 

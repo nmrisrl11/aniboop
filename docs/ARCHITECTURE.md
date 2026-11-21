@@ -26,9 +26,29 @@ The homepage resolves the content-hashed WebP URLs during the production build a
 
 ## Header and catalog
 
-The [app header](../src/components/header/app-header.tsx) composes the component guide, credits, GitHub repository link, boop order, character catalog, and theme switcher. Below 48 rem, the wordmark and Catalog stay visible alongside the [More options popover](../src/components/header/header-options.tsx), which contains the secondary controls. The gallery shares the selected boop order with the grid.
+The [app header](../src/components/header/app-header.tsx) composes the component guide, credits, GitHub repository link, boop order, character catalog, theme switcher, and reaction sound toggle. Below 48 rem, the wordmark and Catalog stay visible alongside the [More options popover](../src/components/header/header-options.tsx), which contains the secondary controls. The gallery shares the selected boop order with the grid.
 
 The [character catalog](../src/components/catalog/character-catalog.tsx) uses shadcn Input and Select controls above its scrolling results. It groups and normalizes the data once per catalog change, applies text queries after a 150 ms pause, and cancels any pending query when the dialog closes. The [component guide](../src/components/resources/component-docs-modal.tsx) uses shadcn Code Block with Shiki syntax highlighting, which loads when the guide opens.
+
+## Reaction audio
+
+[Gallery](../src/components/gallery/gallery.tsx) owns the [sound hook](../src/hooks/use-reaction-sound.ts) and passes its playback callback through the grid to `Mascot.onReact`. The callback receives the expression after the reaction sheet decodes and as each frame is selected for display. Build up can emit both blink and its follow-up expression, and an interrupted sequence skips callbacks for its canceled frames. Standalone Mascot instances can supply their own callback.
+
+Enabling sound creates one Web Audio context during the button activation so delayed hold and pinch frames can use it. The hook synthesizes each cue on first use, caches the buffer, and plays up to three overlapping cues across the gallery. Muting stops active cues immediately. A suspended context can resume on the next gallery interaction, and frames shown while audio is unavailable remain silent.
+
+The [presets](../src/lib/audio/reaction-sounds.ts) are keyed by the nine names in the reaction atlas. Each preset uses the parameter order of [ZzFXMicro 1.4.0](https://github.com/KilledByAPixel/ZzFX/blob/master/ZzFXMicro.js). The local [ZzFX port](../src/lib/audio/zzfx.ts) builds audio buffers using Web Audio. It has no npm dependency or audio asset requests. See the [MIT license](../src/lib/audio/ZzFX-LICENSE.txt) and use the [ZzFX sound designer](https://killedbyapixel.github.io/ZzFX/) to audition changes.
+
+| Expression | Sound                   |
+| ---------- | ----------------------- |
+| Blink      | Soft eyelid tick        |
+| Heart      | Warm double pulse       |
+| Sparkle    | High glint with an echo |
+| Surprised  | Quick upward squeak     |
+| Wink       | Two-tone chirp          |
+| Bashful    | Soft falling note       |
+| Sleepy     | Slow, low sigh          |
+| Dizzy      | Cycling wobble          |
+| Delighted  | Bright rising chime     |
 
 ## Theme
 

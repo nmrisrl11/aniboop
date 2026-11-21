@@ -2,6 +2,7 @@
 
 import { Mascot, type BoopOrder } from "@/components/mascot/mascot";
 import type { GalleryCharacter } from "@/data/characters";
+import type { Reaction } from "@/lib/mascot-sprites";
 import { memo, useCallback, useState } from "react";
 import ThiingsGrid, { DRAG_THRESHOLD, type ItemConfig } from "./thiings-grid";
 
@@ -18,10 +19,12 @@ const CharacterTile = memo(function CharacterTile({
 	character,
 	isMoving,
 	boopOrder,
+	onReact,
 }: {
 	character: GalleryCharacter;
 	isMoving: boolean;
 	boopOrder: BoopOrder;
+	onReact?: (reaction: Reaction) => void;
 }) {
 	const [visibility, setVisibility] = useState<TileVisibility>("outside");
 	const observeArt = useCallback((element: HTMLDivElement | null) => {
@@ -73,6 +76,7 @@ const CharacterTile = memo(function CharacterTile({
 						size={PREVIEW_SIZE}
 						className="squircle"
 						mode={boopOrder}
+						onReact={onReact}
 						dragThreshold={DRAG_THRESHOLD}
 						tabIndex={visibility === "focusable" ? 0 : -1}
 						trackPointer={!isMoving}
@@ -91,18 +95,25 @@ const CharacterTile = memo(function CharacterTile({
 export function CharacterGrid({
 	characters,
 	boopOrder,
+	onReact,
 }: {
 	characters: readonly GalleryCharacter[];
 	boopOrder: BoopOrder;
+	onReact?: (reaction: Reaction) => void;
 }) {
 	const renderItem = useCallback(
 		({ gridIndex, isMoving }: ItemConfig) => {
 			const character = characters[gridIndex % characters.length];
 			return character ? (
-				<CharacterTile character={character} isMoving={isMoving} boopOrder={boopOrder} />
+				<CharacterTile
+					character={character}
+					isMoving={isMoving}
+					boopOrder={boopOrder}
+					onReact={onReact}
+				/>
 			) : null;
 		},
-		[characters, boopOrder],
+		[characters, boopOrder, onReact],
 	);
 	return (
 		<ThiingsGrid

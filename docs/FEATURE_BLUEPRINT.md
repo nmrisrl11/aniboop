@@ -9,4 +9,10 @@ The homepage repeats the character catalog across a pannable grid. Visible masco
 | Downloads         | Offer the selected character’s directional poses and reactions.                                | Downloads match their labels. Confirm distribution rights and show applicable usage terms and attribution. |
 | Performance       | Keep grid previews small and load full reaction or download assets on demand.                  | Check panning, first-boop latency, and cold-load transfer on a representative mobile connection.           |
 
+## Reaction sounds
+
+Use the speaker button in the header or **More options → Reaction sounds** on smaller screens. Sound starts off each time the page loads. Turn it on to hear a cue for each displayed expression across all boop orders. For a hold or pinch, the default cues are surprised when it starts, dizzy if it lasts 1.4 seconds, and delighted when released. Panning and gaze tracking are silent.
+
+See [Reaction audio](ARCHITECTURE.md#reaction-audio) for the sound mapping and callback integration.
+
 [Thiings Grid reference](https://github.com/charlieclark/thiings-grid)

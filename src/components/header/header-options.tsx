@@ -1,6 +1,7 @@
 "use client";
 
 import { BoopOrderSelect } from "@/components/header/boop-order-select";
+import { ReactionSoundToggle } from "@/components/header/reaction-sound-toggle";
 import { ComponentDocsModal } from "@/components/resources/component-docs-modal";
 import { CreditsModal } from "@/components/resources/credits-modal";
 import type { BoopOrder } from "@/components/mascot/mascot";
@@ -18,9 +19,13 @@ const copy = brand.galleryControls;
 export function HeaderOptions({
 	boopOrder,
 	onBoopOrderChange,
+	soundEnabled,
+	onSoundToggle,
 }: {
 	boopOrder: BoopOrder;
 	onBoopOrderChange: (order: BoopOrder) => void;
+	soundEnabled: boolean;
+	onSoundToggle: () => void;
 }) {
 	const [open, setOpen] = useState(false);
 
@@ -63,6 +68,12 @@ export function HeaderOptions({
 						triggerClassName={optionClass}
 					/>
 					<ThemeSwitcher showSetting triggerClassName={optionClass} />
+					<ReactionSoundToggle
+						enabled={soundEnabled}
+						onToggle={onSoundToggle}
+						showLabel
+						className={optionClass}
+					/>
 				</div>
 				<div className="flex flex-col gap-0.5 pt-1.5">
 					<ComponentDocsModal triggerClassName={optionClass} />

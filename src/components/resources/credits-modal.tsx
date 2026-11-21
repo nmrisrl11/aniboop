@@ -10,12 +10,13 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { brand } from "@/lib/brand";
-import { ExternalLink, Heart, LayoutGrid, Pointer } from "lucide-react";
+import { ExternalLink, Heart, LayoutGrid, Pointer, Volume2 } from "lucide-react";
 
 const copy = brand.credits;
 const projects = [
 	{ ...copy.grid, icon: LayoutGrid },
 	{ ...copy.mascot, icon: Pointer },
+	{ ...copy.sound, icon: Volume2 },
 ];
 
 export function CreditsModal({

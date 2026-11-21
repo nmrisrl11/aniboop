@@ -10,6 +10,9 @@ export const brand = {
 	galleryControls: {
 		moreOptions: "More options",
 		boopOrder: "Boop order",
+		reactionSound: "Reaction sounds",
+		soundOn: "On",
+		soundOff: "Off",
 		orders: {
 			cycle: { label: "In order", description: "Cycle through reactions." },
 			random: { label: "Random", description: "Pick a random reaction." },
@@ -44,6 +47,10 @@ export const brand = {
 			["size", "Width and height of the mascot in pixels."],
 			["mode", "Reaction order. Choose cycle, random, or escalate."],
 			["trackPointer", "Enable pointer tracking."],
+			[
+				"onReact",
+				"Optional callback that receives each displayed reaction, including hold and pinch expressions.",
+			],
 		],
 	},
 	credits: {
@@ -61,6 +68,12 @@ export const brand = {
 			author: "Kamran Ahmed",
 			href: "https://github.com/nilbuild/page-mascot",
 			description: "Inspired the mascot physics, pointer tracking, and gesture reactions.",
+		},
+		sound: {
+			title: "ZzFX",
+			author: "Frank Force",
+			href: "https://github.com/KilledByAPixel/ZzFX",
+			description: "Generates the sound for each mascot reaction.",
 		},
 		artworkTitle: "Anime artwork & characters",
 		artworkDescription:

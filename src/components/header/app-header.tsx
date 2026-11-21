@@ -6,6 +6,7 @@ import {
 import { ComponentDocsModal } from "@/components/resources/component-docs-modal";
 import { CreditsModal } from "@/components/resources/credits-modal";
 import { HeaderOptions } from "@/components/header/header-options";
+import { ReactionSoundToggle } from "@/components/header/reaction-sound-toggle";
 import type { BoopOrder } from "@/components/mascot/mascot";
 import { RepositoryLink } from "@/components/resources/repository-link";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
@@ -15,10 +16,14 @@ export function AppHeader({
 	characters,
 	boopOrder,
 	onBoopOrderChange,
+	soundEnabled,
+	onSoundToggle,
 }: {
 	characters: readonly CharacterCatalogEntry[];
 	boopOrder: BoopOrder;
 	onBoopOrderChange: (order: BoopOrder) => void;
+	soundEnabled: boolean;
+	onSoundToggle: () => void;
 }) {
 	return (
 		<header className="sticky inset-x-0 top-0 z-20 flex h-16 w-full shrink-0 items-center justify-between gap-4 border-b border-border bg-card px-4 shadow-xs select-none sm:px-5 md:h-14">
@@ -42,7 +47,17 @@ export function AppHeader({
 				<div className="hidden md:block">
 					<ThemeSwitcher />
 				</div>
-				<HeaderOptions boopOrder={boopOrder} onBoopOrderChange={onBoopOrderChange} />
+				<ReactionSoundToggle
+					enabled={soundEnabled}
+					onToggle={onSoundToggle}
+					className="hidden md:inline-flex"
+				/>
+				<HeaderOptions
+					boopOrder={boopOrder}
+					onBoopOrderChange={onBoopOrderChange}
+					soundEnabled={soundEnabled}
+					onSoundToggle={onSoundToggle}
+				/>
 			</div>
 		</header>
 	);

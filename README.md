@@ -26,6 +26,7 @@ Explore **139 chibi characters across 20 anime series** in an endless, pannable 
 
 - **Pan** by dragging, scrolling, or using the arrow keys while the gallery is focused.
 - **Boop** by clicking, tapping, or pressing Enter or Space on a focused character. Hold or use a two-finger pinch for a different reaction. Boop order offers **In order**, **Random**, and **Build up**.
+- **Turn on Reaction sounds** with the speaker button or under More options on smaller screens. Each expression has its own sound, including during holds and pinches.
 - **Find a character** in Catalog. Search by name or series, or filter by series. Press **Ctrl+K** or **Cmd+K** to open it. The [catalog data](src/data/characters.json) drives both the dialog and the grid.
 - **Use More options** on smaller screens for boop order, appearance, the component guide, credits, and the GitHub link. Appearance supports System, Light, and Dark.
 
@@ -66,4 +67,4 @@ Open [localhost:3000](http://localhost:3000). Run `npm run lint:all` and `npm ru
 
 ## Credits
 
-The pannable grid adapts [Thiings Grid](https://github.com/charlieclark/thiings-grid) by Charlie Clark. The mascot interactions build on [page-mascot](https://github.com/nilbuild/page-mascot) by Kamran Ahmed. Anime characters belong to their original creators and studios.
+The pannable grid adapts [Thiings Grid](https://github.com/charlieclark/thiings-grid) by Charlie Clark. The mascot interactions build on [page-mascot](https://github.com/nilbuild/page-mascot) by Kamran Ahmed. Reaction sounds use [ZzFX](https://github.com/KilledByAPixel/ZzFX) by Frank Force. Anime characters belong to their original creators and studios.

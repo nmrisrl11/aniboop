@@ -498,5 +498,100 @@
 		"id": "yami",
 		"name": "Yami Sukehiro",
 		"series": "Black Clover"
+	},
+	{
+		"id": "asahi",
+		"name": "Asahi Azumane",
+		"series": "Haikyu!!"
+	},
+	{
+		"id": "daichi",
+		"name": "Daichi Sawamura",
+		"series": "Haikyu!!"
+	},
+	{
+		"id": "gaara",
+		"name": "Gaara",
+		"series": "Naruto"
+	},
+	{
+		"id": "genya",
+		"name": "Genya Shinazugawa",
+		"series": "Demon Slayer"
+	},
+	{
+		"id": "hohenheim",
+		"name": "Van Hohenheim",
+		"series": "Fullmetal Alchemist"
+	},
+	{
+		"id": "izumi",
+		"name": "Izumi Curtis",
+		"series": "Fullmetal Alchemist"
+	},
+	{
+		"id": "jiraiya",
+		"name": "Jiraiya",
+		"series": "Naruto"
+	},
+	{
+		"id": "kanao",
+		"name": "Kanao Tsuyuri",
+		"series": "Demon Slayer"
+	},
+	{
+		"id": "nishinoya",
+		"name": "Yū Nishinoya",
+		"series": "Haikyu!!"
+	},
+	{
+		"id": "riza",
+		"name": "Riza Hawkeye",
+		"series": "Fullmetal Alchemist"
+	},
+	{
+		"id": "rock-lee",
+		"name": "Rock Lee",
+		"series": "Naruto"
+	},
+	{
+		"id": "roy",
+		"name": "Roy Mustang",
+		"series": "Fullmetal Alchemist"
+	},
+	{
+		"id": "shikamaru",
+		"name": "Shikamaru Nara",
+		"series": "Naruto"
+	},
+	{
+		"id": "sugawara",
+		"name": "Kōshi Sugawara",
+		"series": "Haikyu!!"
+	},
+	{
+		"id": "tanaka",
+		"name": "Ryūnosuke Tanaka",
+		"series": "Haikyu!!"
+	},
+	{
+		"id": "tsukishima",
+		"name": "Kei Tsukishima",
+		"series": "Haikyu!!"
+	},
+	{
+		"id": "tsunade",
+		"name": "Tsunade",
+		"series": "Naruto"
+	},
+	{
+		"id": "winry",
+		"name": "Winry Rockbell",
+		"series": "Fullmetal Alchemist"
+	},
+	{
+		"id": "yamaguchi",
+		"name": "Tadashi Yamaguchi",
+		"series": "Haikyu!!"
 	}
 ]

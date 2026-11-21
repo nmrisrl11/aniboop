@@ -593,5 +593,105 @@
 		"id": "yamaguchi",
 		"name": "Tadashi Yamaguchi",
 		"series": "Haikyu!!"
+	},
+	{
+		"id": "aoyama",
+		"name": "Yuga Aoyama",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "bang",
+		"name": "Bang",
+		"series": "One Punch Man"
+	},
+	{
+		"id": "fubuki",
+		"name": "Fubuki",
+		"series": "One Punch Man"
+	},
+	{
+		"id": "hagakure",
+		"name": "Toru Hagakure",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "jiro",
+		"name": "Kyoka Jiro",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "kaminari",
+		"name": "Denki Kaminari",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "king",
+		"name": "King",
+		"series": "One Punch Man"
+	},
+	{
+		"id": "kirishima",
+		"name": "Eijiro Kirishima",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "koda",
+		"name": "Koji Koda",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "mina",
+		"name": "Mina Ashido",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "mineta",
+		"name": "Minoru Mineta",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "momo",
+		"name": "Momo Yaoyorozu",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "mumen-rider",
+		"name": "Mumen Rider",
+		"series": "One Punch Man"
+	},
+	{
+		"id": "ojiro",
+		"name": "Mashirao Ojiro",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "sato",
+		"name": "Rikido Sato",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "sero",
+		"name": "Hanta Sero",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "shoji",
+		"name": "Mezo Shoji",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "tatsumaki",
+		"name": "Tatsumaki",
+		"series": "One Punch Man"
+	},
+	{
+		"id": "tokoyami",
+		"name": "Fumikage Tokoyami",
+		"series": "My Hero Academia"
+	},
+	{
+		"id": "tsuyu",
+		"name": "Tsuyu Asui",
+		"series": "My Hero Academia"
 	}
 ]

@@ -26,7 +26,7 @@ Each catalog entry uses two full-size WebP sheets in `public/mascots/sheets/`, a
 
 ## Last verification
 
-The 119-character gallery passed `npm run lint:all`, `npm run format:check`, and `npm run build` after the component reorganization. Chromium checks covered the compact header down to 320 px, landscape layout, touch and keyboard activation, and focus restoration after closing dialogs. The latest mascot batch checks confirmed previews, gaze poses, and boop reactions for all 19 additions and eight replacements.
+The 139-character gallery passed `npm run lint:all`, `npm run format:check`, and `npm run build`. A Chromium run confirmed that preview, gaze, and boop assets load for all 20 characters in the latest batch. Earlier Chromium checks after the component reorganization covered the compact header down to 320 px, landscape layout, touch and keyboard activation, and focus restoration after closing dialogs.
 
 Earlier framing checks covered the original 16 center previews and 288 playback poses. A batch preview rebuild verified that the generator skips uncataloged source sheets when run against the project's asset directory. Archive checks covered existing destination files and a simulated catalog write failure.
 

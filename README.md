@@ -2,7 +2,7 @@
 
 **Little characters. Big reactions.**
 
-Explore **119 chibi characters across 20 anime series** in an endless, pannable gallery. Move your cursor to see them look back, or boop one for a reaction.
+Explore **139 chibi characters across 20 anime series** in an endless, pannable gallery. Move your cursor to see them look back, or boop one for a reaction.
 
 ## Featured characters
 

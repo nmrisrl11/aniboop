@@ -81,6 +81,8 @@ function aim(box: DOMRect, x: number, y: number, sector: number, deadZone: numbe
 	return (Math.round(angle / SECTOR) + CLOCKWISE_CELLS.length) % CLOCKWISE_CELLS.length;
 }
 
+export type BoopOrder = "cycle" | "random" | "escalate";
+
 export type MascotProps = {
 	/** URLs of the matching 3×3 sprite sheets. */
 	directions: string;
@@ -95,7 +97,7 @@ export type MascotProps = {
 	trackPointer?: boolean;
 	/** Follow the cursor across the page, including when a center preview is supplied. */
 	trackAcrossPage?: boolean;
-	mode?: "cycle" | "random" | "escalate";
+	mode?: BoopOrder;
 	/** Overrides the expression pool for the selected mode. */
 	payoffs?: readonly Reaction[];
 	pinchReaction?: Reaction;

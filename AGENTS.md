@@ -2,7 +2,7 @@
 
 ## Project
 
-AniBoop is a collection of chibi anime characters designed to react when booped. The homepage is a pannable, virtualized grid backed by the [character catalog](src/data/characters.json). Character search, details, and downloads are planned in the [feature blueprint](docs/FEATURE_BLUEPRINT.md).
+AniBoop is a collection of chibi anime characters designed to react when booped. The homepage is a pannable, virtualized grid backed by the [character catalog](src/data/characters.json). The catalog dialog supports search by name or series and filtering by series. Character details and downloads are planned in the [feature blueprint](docs/FEATURE_BLUEPRINT.md).
 
 <!-- BEGIN:nextjs-agent-rules -->
 

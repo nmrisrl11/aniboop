@@ -18,7 +18,7 @@ The local [Mascot component](../src/components/mascot/mascot.tsx) adapts the por
 
 The homepage resolves the content-hashed WebP URLs during the production build and passes them to the grid. One [shared pointer listener](../src/components/mascot/page-pointer.ts) updates the gaze of visible mascots. The grid suspends tracking while it pans. See the [gallery assets guide](GALLERY_ASSETS.md) for request timing and cache behavior.
 
-The [gallery dock](../src/components/gallery/gallery-dock.tsx) floats over the bottom of the pannable viewport and controls the reaction mode across visible mascots. The dock surface receives pointer input across its full area. The surrounding fade lets pointer input pass through to the grid. The catalog groups the same character data by series and uses the existing still previews.
+The [app header](../src/components/app-header.tsx) composes the component guide, credits, GitHub repository link, boop order, character catalog, and theme switcher. Each control handles its own interaction, and the gallery shares the selected boop order with the grid. The [character catalog](../src/components/character-catalog.tsx) uses shadcn Input and Select controls above its scrolling results. It groups and normalizes the data once per catalog change, applies text queries after a 150 ms pause, and cancels any pending query when the dialog closes. The [component guide](../src/components/component-docs-modal.tsx) uses shadcn Code Block with Shiki syntax highlighting, which loads when the guide opens.
 
 ## Theme
 

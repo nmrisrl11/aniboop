@@ -18,7 +18,7 @@ The copy below includes planned gallery surfaces. The homepage displays characte
 | Card action          | View & download                                                                                                    |
 | Detail labels        | Directions, Reactions, Download                                                                                    |
 
-The dock uses Boop order, Appearance, and Catalog. Boop order offers In order, Random, and Build up. Appearance offers System, Light, and Dark.
+The top bar includes Component, Credits, the GitHub repository link, the current boop order, Catalog, and Appearance. Boop order offers In order, Random, and Build up. Appearance offers System, Light, and Dark. The catalog title shows the character total and switches to a match count when search or a series filter is active.
 
 Use search topics naturally in relevant pages. Start with chibi anime characters, anime mascots, interactive chibi characters, downloadable chibi poses, and chibi reaction assets.
 
@@ -36,17 +36,15 @@ Use tabular numerals where counts need to align. The two upright WOFF2 assets to
 
 | Role               | Light     | Dark      |
 | ------------------ | --------- | --------- |
-| Background         | `#FFF9F2` | `#171321` |
-| Card               | `#FFFFFF` | `#231D30` |
-| Foreground         | `#21192D` | `#F8F5FF` |
-| Primary            | `#6A3BD1` | `#BDA7FF` |
-| Primary foreground | `#F6F3FF` | `#171321` |
-| Boop lilac         | `#E9DCFF` | `#4A326E` |
-| Boop peach         | `#FFDBC5` | `#5B3538` |
+| Background         | `#FAFAFA` | `#09090B` |
+| Card               | `#FFFFFF` | `#131316` |
+| Foreground         | `#18181B` | `#FAFAFA` |
+| Primary            | `#18181B` | `#FAFAFA` |
+| Primary foreground | `#FAFAFA` | `#09090B` |
 
-Use peach and lilac sparingly so the character artwork stays prominent. The concentric tap ripple serves as the favicon and appears in the social preview.
+Neutral app surfaces keep the character artwork prominent. The concentric tap ripple serves as the favicon and appears in the social preview.
 
-The body background repeats a faint [AniBoop wordmark](../public/aniboop-watermark.svg) in staggered rows. The SVG uses Allo Bold outlines and the primary tint for each color scheme.
+The body background repeats the [AniBoop wordmark](../public/aniboop-watermark.svg) in staggered rows. Each Allo Bold wordmark is tilted 24 degrees, and the SVG uses a neutral tint for the active color scheme.
 
 ## Corner shapes
 

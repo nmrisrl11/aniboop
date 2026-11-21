@@ -1,6 +1,6 @@
 "use client";
 
-import { Mascot, type MascotProps } from "@/components/mascot/mascot";
+import { Mascot, type BoopOrder } from "@/components/mascot/mascot";
 import type { GalleryCharacter } from "@/data/characters";
 import { memo, useCallback, useState } from "react";
 import ThiingsGrid, { DRAG_THRESHOLD, type ItemConfig } from "./thiings-grid";
@@ -10,7 +10,6 @@ const PREVIEW_SIZE = 168;
 const MIN_VISIBLE_RATIO = 0.01;
 const MIN_FOCUS_RATIO = 0.5;
 type TileVisibility = "outside" | "partial" | "focusable";
-export type BoopOrder = NonNullable<MascotProps["mode"]>;
 
 const visibilityCallbacks = new WeakMap<Element, (entry: IntersectionObserverEntry) => void>();
 let tileObserver: IntersectionObserver | undefined;

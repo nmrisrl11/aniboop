@@ -2,9 +2,9 @@
 
 **Little characters. Big reactions.**
 
-AniBoop is a collection of chibi anime characters designed to react when you boop them. The planned gallery lets you explore the collection and download each character’s directional poses and reactions.
+AniBoop is a collection of chibi anime characters designed to react when you boop them.
 
-The homepage shows the character catalog in an endless, virtualized grid. Visible characters follow your cursor. Tap or hold a character to see a reaction. Drag, scroll, or use the arrow keys to pan. Use the bottom dock to change the boop order or appearance, or browse the catalog by series. See the feature blueprint for search, character details, and download plans.
+The homepage shows the character catalog in an endless, virtualized grid. Visible characters follow your cursor. Tap or hold a character to see a reaction. Drag, scroll, or use the arrow keys to pan. Use the top bar to change the boop order or appearance. Open Catalog to search for a character or browse by series, or press Ctrl+K on Windows and Linux or Cmd+K on macOS. See the [feature blueprint](docs/FEATURE_BLUEPRINT.md) for character details and download plans.
 
 ## Get started
 

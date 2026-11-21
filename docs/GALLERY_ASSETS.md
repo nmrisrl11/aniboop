@@ -39,6 +39,8 @@ npm run mascot:add -- --id star-cat --name "Star Cat" --series "Original Charact
 
 The command validates the pair, runs the optimizer, and generates the center-pose preview and two compact pose sheets. It writes two WebPs to `public/mascots/sheets/`, one still to `public/mascots/previews/`, and two playback sheets to `public/mascots/gallery-sheets/`. A successful run appends the catalog entry and moves the original pair to `public/mascots/raw/processed/`. The command rejects duplicate catalog IDs and existing archive files with the same names. For multiple characters, run the command once per complete pair. Git tracks the raw folder's README and ignores the source sheets, including the processed copies. Open the gallery to check the framing, gaze, and boop, then include the catalog change and the five generated WebPs when committing the mascot.
 
+When the catalog changes, update the [README](../README.md) using the number of catalog entries and the number of distinct `series` values. For a batch, update the totals after the final addition. Check the [featured previews](../README.md#featured-characters) when a featured character's ID, name, or preview path changes. Keep the lineup curated and include any README edits with the catalog change.
+
 ## Replacing an existing mascot
 
 Before replacing artwork, copy and verify the five existing WebPs under `public/old-version/mascots/`, keeping their `sheets/`, `previews/`, and `gallery-sheets/` paths. Git ignores this backup folder. Use the asset-only workflow to regenerate the WebPs for the existing ID and keep its catalog entry intact. Verify the new preview, gaze, and boop in the gallery before archiving the incoming source pair.

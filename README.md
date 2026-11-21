@@ -4,7 +4,23 @@
 
 Explore **119 chibi characters across 20 anime series** in an endless, pannable gallery. Move your cursor to see them look back, or boop one for a reaction.
 
-<img src="public/mascots/previews/goku.webp" alt="Son Goku" width="96"> <img src="public/mascots/previews/edward.webp" alt="Edward Elric" width="96"> <img src="public/mascots/previews/tanjiro.webp" alt="Tanjiro Kamado" width="96">
+## Featured characters
+
+<p>
+  <img src="public/mascots/previews/naruto.webp" alt="Naruto Uzumaki" width="88">
+  <img src="public/mascots/previews/luffy.webp" alt="Monkey D. Luffy" width="88">
+  <img src="public/mascots/previews/goku.webp" alt="Son Goku" width="88">
+  <img src="public/mascots/previews/midoriya.webp" alt="Izuku Midoriya (Deku)" width="88">
+  <img src="public/mascots/previews/asta.webp" alt="Asta" width="88">
+</p>
+
+<p>
+  <img src="public/mascots/previews/eren.webp" alt="Eren Yeager" width="88">
+  <img src="public/mascots/previews/lelouch.webp" alt="Lelouch vi Britannia" width="88">
+  <img src="public/mascots/previews/saitama.webp" alt="Saitama" width="88">
+  <img src="public/mascots/previews/jinwoo.webp" alt="Sung Jinwoo" width="88">
+  <img src="public/mascots/previews/kaneki.webp" alt="Ken Kaneki" width="88">
+</p>
 
 ## Explore the gallery
 

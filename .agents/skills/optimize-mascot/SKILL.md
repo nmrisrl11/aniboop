@@ -16,6 +16,7 @@ If `public/mascots/sheets/` does not exist yet in a project, this skill automati
 - Scan only the top level of `public/mascots/raw/` for matching `<id>-directions` and `<id>-reactions` sheets. Each sheet must be 1080 × 1080. Check the catalog for existing IDs and use project metadata for each display name and series.
 - For each complete new pair, run `npm run mascot:add -- --id <id> --name "<name>" --series "<series>"` from the repository root. Run additions sequentially because they share a catalog.
 - Verify the catalog entry, five generated WebPs, and both originals under `public/mascots/raw/processed/`. Leave incomplete or failed pairs in the raw inbox and report the issue. The README is the tracked file in the raw folder. The source sheets and processed archive are Git-ignored.
+- After the last successful addition in a batch, update the README character and series totals from the catalog and check affected featured previews. Include the README edits with the catalog change.
 
 See [Adding a mascot](../../../docs/GALLERY_ASSETS.md#adding-a-mascot) for output paths and gallery checks.
 

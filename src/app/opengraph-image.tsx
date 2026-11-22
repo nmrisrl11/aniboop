@@ -1,11 +1,18 @@
 import { ImageResponse } from "next/og";
 import { brand } from "@/lib/brand";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const alt = "AniBoop. Little characters. Big reactions.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+	const [logo, icon] = await Promise.all([
+		readFile(join(process.cwd(), "public/brand/aniboop-logo.svg"), "base64"),
+		readFile(join(process.cwd(), "src/app/icon.svg"), "base64"),
+	]);
+
 	return new ImageResponse(
 		<div
 			style={{
@@ -20,26 +27,12 @@ export default function OpenGraphImage() {
 			}}
 		>
 			<div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-				<div style={{ fontSize: 110, fontWeight: 700, letterSpacing: -5 }}>{brand.name}</div>
+				{/* oxlint-disable-next-line next/no-img-element -- ImageResponse renders native images. */}
+				<img src={`data:image/svg+xml;base64,${logo}`} width={450} height={125} alt="" />
 				<div style={{ color: "#6a3bd1", fontSize: 36, fontWeight: 700 }}>{brand.slogan}</div>
 			</div>
-			<div
-				style={{
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
-					width: 250,
-					height: 250,
-					borderRadius: 72,
-					background: "#6a3bd1",
-				}}
-			>
-				<svg width="176" height="176" viewBox="0 0 64 64" aria-hidden="true">
-					<circle cx="32" cy="32" r="22" fill="none" stroke="#d0bdf9" strokeWidth="3" />
-					<circle cx="32" cy="32" r="14" fill="none" stroke="#f6f3ff" strokeWidth="3" />
-					<circle cx="32" cy="32" r="6" fill="#ffdbc5" />
-				</svg>
-			</div>
+			{/* oxlint-disable-next-line next/no-img-element -- ImageResponse renders native images. */}
+			<img src={`data:image/svg+xml;base64,${icon}`} width={250} height={250} alt="" />
 		</div>,
 		size,
 	);

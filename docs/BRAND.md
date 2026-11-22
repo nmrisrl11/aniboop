@@ -26,7 +26,7 @@ Use search topics naturally in relevant pages. Start with chibi anime characters
 
 | Token          | Family                                     | Use                                                     |
 | -------------- | ------------------------------------------ | ------------------------------------------------------- |
-| `font-heading` | Allo Bold                                  | Wordmark and major headings                             |
+| `font-heading` | Allo Bold                                  | Major headings                                          |
 | `font-sans`    | Inter Variable, with system sans fallbacks | Navigation, character names, controls, and descriptions |
 | `font-mono`    | System monospace                           | Filenames, dimensions, and file sizes                   |
 
@@ -42,7 +42,11 @@ Use tabular numerals where counts need to align. The two upright WOFF2 assets to
 | Primary            | `#18181B` | `#FAFAFA` |
 | Primary foreground | `#FAFAFA` | `#09090B` |
 
-Neutral app surfaces keep the character artwork prominent. The concentric tap ripple serves as the favicon and appears in the social preview.
+Neutral app surfaces keep the character artwork prominent.
+
+## Logo and marks
+
+The [full-color AniBoop logo](../public/brand/aniboop-logo.svg) appears in the header and social preview. The [purple tap mark](../src/app/icon.svg) appears in the favicon, install icons, and social preview. Render raster icons directly from the tap-mark SVG at their target sizes. Use an opaque, full-bleed purple background for launcher masks and the Apple touch icon. See [Fonts and metadata](ARCHITECTURE.md#fonts-and-metadata) for the published assets.
 
 The body background repeats the [flat AniBoop wordmark](../public/aniboop-watermark.svg) in staggered rows. Each mark is tilted 24 degrees, and the SVG uses a neutral tint for the active theme.
 

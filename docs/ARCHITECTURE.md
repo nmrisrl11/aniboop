@@ -26,7 +26,7 @@ The homepage resolves the content-hashed WebP URLs during the production build a
 
 ## Header and catalog
 
-The [app header](../src/components/header/app-header.tsx) composes the component guide, credits, GitHub repository link, boop order, character catalog, theme switcher, and reaction sound toggle. Below 48 rem, the wordmark and Catalog stay visible alongside the [More options popover](../src/components/header/header-options.tsx), which contains the secondary controls. The gallery shares the selected boop order with the grid.
+The [app header](../src/components/header/app-header.tsx) composes the component guide, credits, GitHub repository link, boop order, character catalog, theme switcher, and reaction sound toggle. Below 48 rem, the full-color logo and Catalog stay visible alongside the [More options popover](../src/components/header/header-options.tsx), which contains the secondary controls. The gallery shares the selected boop order with the grid.
 
 The [character catalog](../src/components/catalog/character-catalog.tsx) uses shadcn Input and Select controls above its scrolling results. It groups and normalizes the data once per catalog change, applies text queries after a 150 ms pause, and cancels any pending query when the dialog closes. The [component guide](../src/components/resources/component-docs-modal.tsx) uses shadcn Code Block with Shiki syntax highlighting, which loads when the guide opens.
 
@@ -58,4 +58,6 @@ The appearance control defaults to the system color preference. The root [theme 
 
 The root layout loads Allo Bold and the upright Latin subset of Inter Variable through `next/font/local`. Both are served from the app with `font-display: swap` and global preloading disabled. Use `font-heading font-bold` for display type, `font-sans` for interface text, and `font-mono` for technical values that benefit from a system monospace face.
 
-Next.js derives favicon and social image routes from `icon.svg` and `opengraph-image.tsx`. Set `ANIBOOP_URL` to the public origin at build time when deploying so metadata resolves share images against the correct host.
+Next.js adds browser icon links from the [SVG tap mark](../src/app/icon.svg), [ICO favicon](../src/app/favicon.ico) with 16, 32, and 48 px frames, and [180 px Apple touch icon](../src/app/apple-icon.png). The [manifest route](../src/app/manifest.ts) serves `/manifest.webmanifest` with 192 px and 512 px PNGs from [public/icons](../public/icons). It also declares a separate, opaque 512 px maskable icon for launchers that crop icons to a system shape.
+
+The [social image route](../src/app/opengraph-image.tsx) combines the same full-color SVG used in the header with the tap mark and slogan. Next.js uses the 1200 × 630 PNG for Open Graph and Twitter cards. Set `ANIBOOP_URL` to the public origin at build time when deploying so metadata resolves share images against the correct host.

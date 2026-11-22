@@ -27,11 +27,14 @@ export function ReactionSoundToggle({
 			title={reactionSound}
 			onClick={onToggle}
 		>
-			<Icon aria-hidden="true" data-icon={showLabel ? "inline-start" : undefined} />
+			<Icon
+				aria-hidden="true"
+				className={showLabel ? "size-4 shrink-0 text-muted-foreground" : undefined}
+			/>
 			{showLabel && (
 				<>
-					{reactionSound}
-					<span aria-hidden="true" className="ml-auto text-xs text-muted-foreground">
+					<span className="flex-1 text-left">{reactionSound}</span>
+					<span aria-hidden="true" className="text-xs text-muted-foreground">
 						{enabled ? soundOn : soundOff}
 					</span>
 				</>

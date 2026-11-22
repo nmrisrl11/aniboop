@@ -35,16 +35,20 @@ export function BoopOrderSelect({
 			<DropdownMenuTrigger asChild>
 				<Button
 					variant="ghost"
-					size="sm"
+					size={showSetting ? "default" : "sm"}
 					className={triggerClassName}
 					aria-label={`${copy.boopOrder}, ${copy.orders[value].label}`}
 				>
-					<SelectedIcon data-icon={showSetting ? undefined : "inline-start"} aria-hidden="true" />
+					<SelectedIcon
+						className={showSetting ? "size-4 shrink-0 text-muted-foreground" : undefined}
+						data-icon={showSetting ? undefined : "inline-start"}
+						aria-hidden="true"
+					/>
 					{showSetting ? (
 						<>
 							<span className="flex-1 text-left">{copy.boopOrder}</span>
 							<span className="text-xs text-muted-foreground">{copy.orders[value].label}</span>
-							<ChevronDown aria-hidden="true" className="size-3.5 text-muted-foreground" />
+							<ChevronDown aria-hidden="true" className="size-3.5 shrink-0 text-muted-foreground" />
 						</>
 					) : (
 						<span className="grid">

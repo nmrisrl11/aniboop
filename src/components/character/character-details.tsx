@@ -1,11 +1,11 @@
 "use client";
 
+import type { GalleryCharacter } from "@/data/characters";
+import { useDownload } from "@/hooks/use-download";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { CharacterDetailsDialog } from "./character-details-dialog";
 import { CharacterDetailsDrawer } from "./character-details-drawer";
 import { CharacterDetailsTabs } from "./character-details-tabs";
-import { useCharacterDownload } from "./use-character-download";
-import type { GalleryCharacter } from "@/data/characters";
-import { useMediaQuery } from "@/hooks/use-media-query";
 
 export function CharacterDetails({
 	character,
@@ -19,11 +19,11 @@ export function CharacterDetails({
 	onBackToCatalog?: () => void;
 }) {
 	const isDesktop = useMediaQuery("(min-width: 768px)");
-	const { handleDownload } = useCharacterDownload();
+	const { downloadFile } = useDownload();
 
 	if (!character) return null;
 
-	const tabsContent = <CharacterDetailsTabs character={character} onDownload={handleDownload} />;
+	const tabsContent = <CharacterDetailsTabs character={character} onDownload={downloadFile} />;
 
 	if (isDesktop) {
 		return (

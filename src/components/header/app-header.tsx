@@ -5,8 +5,8 @@ import {
 import { BoopOrderSelect } from "@/components/header/boop-order-select";
 import { HeaderOptions } from "@/components/header/header-options";
 import { ReactionSoundToggle } from "@/components/header/reaction-sound-toggle";
+import { MascotGuide } from "@/components/mascot-guide/mascot-guide";
 import type { BoopOrder } from "@/components/mascot/mascot";
-import { ComponentDocsModal } from "@/components/resources/component-docs-modal";
 import { CreditsModal } from "@/components/resources/credits-modal";
 import { RepositoryLink } from "@/components/resources/repository-link";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
@@ -49,7 +49,7 @@ export function AppHeader({
 				</h1>
 				<div className="hidden items-center gap-2 md:flex">
 					<div aria-hidden="true" className="mx-1 h-4 w-px bg-border" />
-					<ComponentDocsModal />
+					<MascotGuide />
 					<CreditsModal />
 					<RepositoryLink />
 				</div>

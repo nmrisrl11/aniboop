@@ -2,9 +2,9 @@
 
 import { BoopOrderSelect } from "@/components/header/boop-order-select";
 import { ReactionSoundToggle } from "@/components/header/reaction-sound-toggle";
-import { ComponentDocsModal } from "@/components/resources/component-docs-modal";
-import { CreditsModal } from "@/components/resources/credits-modal";
+import { MascotGuide } from "@/components/mascot-guide/mascot-guide";
 import type { BoopOrder } from "@/components/mascot/mascot";
+import { CreditsModal } from "@/components/resources/credits-modal";
 import { RepositoryLink } from "@/components/resources/repository-link";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,8 @@ import { brand } from "@/lib/brand";
 import { Ellipsis } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const optionClass = "h-11 w-full justify-start gap-2.5 px-3 text-sm";
+const optionClass =
+	"h-10 w-full justify-start gap-2.5 rounded-lg px-2.5 text-sm font-medium text-foreground hover:bg-muted active:scale-[0.99] transition-transform";
 const copy = brand.galleryControls;
 
 export function HeaderOptions({
@@ -55,7 +56,7 @@ export function HeaderOptions({
 			</PopoverTrigger>
 			<PopoverContent
 				align="end"
-				sideOffset={16}
+				sideOffset={8}
 				collisionPadding={12}
 				aria-label={copy.moreOptions}
 				className="max-h-(--radix-popover-content-available-height) w-72 max-w-(--radix-popover-content-available-width) gap-0 overflow-y-auto rounded-xl border border-border p-1.5 shadow-lg ring-0 corner-squircle md:hidden data-open:animate-none data-closed:animate-none"
@@ -76,7 +77,7 @@ export function HeaderOptions({
 					/>
 				</div>
 				<div className="flex flex-col gap-0.5 pt-1.5">
-					<ComponentDocsModal triggerClassName={optionClass} />
+					<MascotGuide triggerClassName={optionClass} />
 					<CreditsModal triggerClassName={optionClass} />
 					<RepositoryLink showLabel className={optionClass} />
 				</div>

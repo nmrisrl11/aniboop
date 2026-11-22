@@ -83,21 +83,7 @@ export const brand = {
 	componentGuide: {
 		trigger: "Component",
 		title: "Using the Mascot component",
-		description: "Add a React mascot that looks toward your pointer and reacts when you boop it.",
-		propsTitle: "Props in this example",
-		props: [
-			["preview", "Optional URL for the resting image."],
-			["directions", "URL for the 3 × 3 WebP sheet with eight gaze directions and a center pose."],
-			["reactions", "URL for the 3 × 3 WebP reaction sheet."],
-			["label", "Character name announced by screen readers."],
-			["size", "Width and height of the mascot in pixels."],
-			["mode", "Reaction order. Choose cycle, random, or escalate."],
-			["trackPointer", "Enable pointer tracking."],
-			[
-				"onReact",
-				"Optional callback that receives each displayed reaction, including hold and pinch expressions.",
-			],
-		],
+		description: "Add an interactive chibi mascot that tracks your cursor and reacts when booped.",
 	},
 	credits: {
 		trigger: "Credits",

@@ -29,14 +29,14 @@ const projects = [
 ];
 
 export function CreditsModal({
-	triggerClassName = "h-8 gap-1.5 px-2.5 text-xs text-muted-foreground",
+	triggerClassName = "h-8 gap-1.5 px-2.5 text-xs font-medium text-muted-foreground hover:text-foreground",
 }: { triggerClassName?: string } = {}) {
 	const isDesktop = useMediaQuery("(min-width: 768px)");
 
 	const trigger = (
-		<Button variant="ghost" size="sm" aria-label={copy.trigger} className={triggerClassName}>
-			<Heart aria-hidden="true" />
-			{copy.trigger}
+		<Button variant="ghost" size="default" aria-label={copy.trigger} className={triggerClassName}>
+			<Heart className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+			<span className="flex-1 text-left">{copy.trigger}</span>
 		</Button>
 	);
 

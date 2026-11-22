@@ -40,12 +40,15 @@ export function ThemeSwitcher({
 					title={copy.appearance}
 					aria-label={`${copy.appearance}, ${copy.themes[appearance]}`}
 				>
-					<ThemeIcon aria-hidden="true" />
+					<ThemeIcon
+						className={showSetting ? "size-4 shrink-0 text-muted-foreground" : undefined}
+						aria-hidden="true"
+					/>
 					{showSetting && (
 						<>
 							<span className="flex-1 text-left">{copy.appearance}</span>
 							<span className="text-xs text-muted-foreground">{copy.themes[appearance]}</span>
-							<ChevronDown aria-hidden="true" className="size-3.5 text-muted-foreground" />
+							<ChevronDown aria-hidden="true" className="size-3.5 shrink-0 text-muted-foreground" />
 						</>
 					)}
 				</Button>

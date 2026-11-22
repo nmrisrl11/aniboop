@@ -4,6 +4,8 @@ The [character catalog](../src/data/characters.json) holds stable IDs, display n
 
 The local [Mascot component](../src/components/mascot/mascot.tsx) accepts matching 3 × 3 sheets from any character. The direction sheet has the front-facing pose in the center. Reaction slot names follow the upstream order of blink, heart, sparkle, surprised, wink, bashful, sleepy, dizzy, and delighted.
 
+See [character artwork licensing](LICENSING.md#artwork-and-branding) before reusing or redistributing gallery images.
+
 ## Gallery loading
 
 The [homepage](../src/app/page.tsx) calls `getGalleryCharacters` in the [catalog adapter](../src/data/characters.ts). The adapter imports the center previews from `public/mascots/previews/` and the compact direction and reaction sheets from `public/mascots/gallery-sheets/`. [CharacterGrid](../src/components/gallery/character-grid.tsx) passes those three URLs to each visible mascot. The full-size sheets in `public/mascots/sheets/` are inputs to the preview generator.

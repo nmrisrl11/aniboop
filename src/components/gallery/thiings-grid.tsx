@@ -1,6 +1,6 @@
 "use client";
 
-// Adapted from Thiings Grid by Charlie Clark (MIT). See THIINGS-GRID-LICENSE.txt.
+// Adapted from Thiings Grid by Charlie Clark (MIT). See THIRD_PARTY_NOTICES.txt.
 import { Component, createRef, type KeyboardEvent, type PointerEvent, type ReactNode } from "react";
 
 export const DRAG_THRESHOLD = 5;

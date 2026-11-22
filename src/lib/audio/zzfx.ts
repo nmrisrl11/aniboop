@@ -1,4 +1,4 @@
-// ZzFXMicro 1.4.0 by Frank Force, MIT. See ZzFX-LICENSE.txt.
+// ZzFXMicro 1.4.0 by Frank Force, MIT. See THIRD_PARTY_NOTICES.txt.
 // https://github.com/KilledByAPixel/ZzFX/blob/master/ZzFXMicro.js
 // The caller owns the AudioContext and playback. This port only builds the buffer.
 

@@ -1,6 +1,6 @@
 "use client";
 
-// Adapted from nmrisrl-v2 and page-mascot. See PAGE-MASCOT-LICENSE.txt.
+// Adapted from nmrisrl-v2 and page-mascot. See THIRD_PARTY_NOTICES.txt.
 import { REACTIONS, type Reaction } from "@/lib/mascot-sprites";
 import { cn } from "@/lib/utils";
 import { type CSSProperties, useEffect, useRef, useState } from "react";

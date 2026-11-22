@@ -71,3 +71,7 @@ Open [localhost:3000](http://localhost:3000). Run `npm run lint:all` and `npm ru
 ## Credits
 
 The pannable grid adapts [Thiings Grid](https://github.com/charlieclark/thiings-grid) by Charlie Clark. The mascot interactions build on [page-mascot](https://github.com/nilbuild/page-mascot) by Kamran Ahmed. Reaction sounds use [ZzFX](https://github.com/KilledByAPixel/ZzFX) by Frank Force. Anime characters belong to their original creators and studios.
+
+## License
+
+AniBoop's original software and associated documentation are available under the [MIT License](LICENSE). Anime characters, mascot artwork, and AniBoop branding are outside the MIT grant. Fonts and third-party code carry their own license terms. See [Licensing and third-party notices](docs/LICENSING.md) for scope and attribution.

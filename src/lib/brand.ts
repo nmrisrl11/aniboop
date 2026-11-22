@@ -1,8 +1,9 @@
 export const brand = {
 	name: "AniBoop",
+	language: "en",
 	repositoryUrl: "https://github.com/nmrisrl11/aniboop",
 	repositoryLabel: "AniBoop on GitHub",
-	title: "AniBoop | Boop & Download Chibi Anime Characters",
+	title: "AniBoop | Interactive Chibi Anime Characters",
 	slogan: "Little characters. Big reactions.",
 	headline: "Pick a character. Give it a boop.",
 	galleryInstructions:
@@ -82,5 +83,6 @@ export const brand = {
 	intro:
 		"Explore a collection of chibi anime characters. Tap one to see it react, then download its poses and reactions.",
 	description:
-		"Browse chibi anime mascots, boop them to see them react, and download their directional poses and reaction assets.",
+		"Explore a pannable gallery of chibi anime characters. Boop mascots to see them react, or search the catalog by character name or anime series.",
+	keywords: ["chibi anime characters", "anime mascots", "interactive character gallery"],
 };

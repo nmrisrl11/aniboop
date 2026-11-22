@@ -4,6 +4,8 @@
 
 Explore **139 chibi characters across 20 anime series** in an endless, pannable gallery. Move your cursor to see them look back, or boop one for a reaction.
 
+[Open AniBoop](https://aniboop.nmrisrl.dev) at its official address. If the official domain is unavailable, open [aniboop.vercel.app](https://aniboop.vercel.app) directly. See the [domain and outage guide](docs/SEO.md#backup-access-on-vercel) for recovery steps.
+
 ## Featured characters
 
 <p>
@@ -55,15 +57,16 @@ Open [localhost:3000](http://localhost:3000). Run `npm run lint:all` and `npm ru
 
 ## Documentation
 
-| Guide                                              | Contents                                         |
-| -------------------------------------------------- | ------------------------------------------------ |
-| [Brand](docs/BRAND.md)                             | Product copy, typography, palette, and identity  |
-| [Architecture](docs/ARCHITECTURE.md)               | App Router, theme tokens, assets, and metadata   |
-| [Feature blueprint](docs/FEATURE_BLUEPRINT.md)     | Gallery, mascot reactions, and downloads         |
-| [Gallery assets](docs/GALLERY_ASSETS.md)           | Sprite sheets, gallery loading, and mascot setup |
-| [Development](docs/DEVELOPMENT.md)                 | Build, lint, formatting, and editor setup        |
-| [Documentation maintenance](docs/DOCUMENTATION.md) | Guide ownership and documentation sync workflow  |
-| [Agent instructions](AGENTS.md)                    | Repository-specific agent guidance               |
+| Guide                                              | Contents                                           |
+| -------------------------------------------------- | -------------------------------------------------- |
+| [Brand](docs/BRAND.md)                             | Product copy, typography, palette, and identity    |
+| [Architecture](docs/ARCHITECTURE.md)               | App Router, theme tokens, assets, and metadata     |
+| [SEO and site discovery](docs/SEO.md)              | Metadata, production origin, and crawler endpoints |
+| [Feature blueprint](docs/FEATURE_BLUEPRINT.md)     | Gallery, mascot reactions, and downloads           |
+| [Gallery assets](docs/GALLERY_ASSETS.md)           | Sprite sheets, gallery loading, and mascot setup   |
+| [Development](docs/DEVELOPMENT.md)                 | Build, lint, formatting, and editor setup          |
+| [Documentation maintenance](docs/DOCUMENTATION.md) | Guide ownership and documentation sync workflow    |
+| [Agent instructions](AGENTS.md)                    | Repository-specific agent guidance                 |
 
 ## Credits
 

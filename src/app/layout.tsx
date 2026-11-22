@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { brand } from "@/lib/brand";
+import { publicSiteUrl } from "@/lib/site";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -20,29 +21,21 @@ const inter = localFont({
 	preload: false,
 });
 
-const siteUrl = process.env.ANIBOOP_URL;
-
 export const metadata: Metadata = {
-	metadataBase: siteUrl ? new URL(siteUrl) : undefined,
+	metadataBase: publicSiteUrl,
 	applicationName: brand.name,
-	title: { default: brand.title, template: "%s | AniBoop" },
+	title: { default: brand.title, template: `%s | ${brand.name}` },
 	description: brand.description,
-	openGraph: {
-		type: "website",
-		siteName: brand.name,
-		title: brand.title,
-		description: brand.description,
-	},
-	twitter: {
-		card: "summary_large_image",
-		title: brand.title,
-		description: brand.description,
-	},
+	robots: publicSiteUrl ? undefined : { index: false, follow: true },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
 	return (
-		<html lang="en" className={`${allo.variable} ${inter.variable}`} suppressHydrationWarning>
+		<html
+			lang={brand.language}
+			className={`${allo.variable} ${inter.variable}`}
+			suppressHydrationWarning
+		>
 			<body className="min-h-dvh antialiased">
 				<ThemeProvider
 					attribute="class"

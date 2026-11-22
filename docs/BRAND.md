@@ -6,21 +6,21 @@ AniBoop is an interactive collection of chibi anime characters. The signature in
 
 The copy below includes planned gallery surfaces. The homepage displays character names and gallery controls. The gallery instructions are available to screen readers.
 
-| Surface              | Copy                                                                                                               |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| Name                 | AniBoop                                                                                                            |
-| Browser title        | AniBoop \| Boop & Download Chibi Anime Characters                                                                  |
-| Slogan               | Little characters. Big reactions.                                                                                  |
-| Homepage headline    | Pick a character. Give it a boop.                                                                                  |
-| Homepage description | Explore a collection of chibi anime characters. Tap one to see it react, then download its poses and reactions.    |
-| Meta description     | Browse chibi anime mascots, boop them to see them react, and download their directional poses and reaction assets. |
-| Gallery instructions | Tap or hold a character to boop. Drag, scroll, or use arrow keys to explore.                                       |
-| Card action          | View & download                                                                                                    |
-| Detail labels        | Directions, Reactions, Download                                                                                    |
+| Surface              | Copy                                                                                                                                           |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                 | AniBoop                                                                                                                                        |
+| Browser title        | AniBoop \| Interactive Chibi Anime Characters                                                                                                  |
+| Slogan               | Little characters. Big reactions.                                                                                                              |
+| Homepage headline    | Pick a character. Give it a boop.                                                                                                              |
+| Homepage description | Explore a collection of chibi anime characters. Tap one to see it react, then download its poses and reactions.                                |
+| Meta description     | Explore a pannable gallery of chibi anime characters. Boop mascots to see them react, or search the catalog by character name or anime series. |
+| Gallery instructions | Tap or hold a character to boop. Drag, scroll, or use arrow keys to explore.                                                                   |
+| Card action          | View & download                                                                                                                                |
+| Detail labels        | Directions, Reactions, Download                                                                                                                |
 
 The top bar includes Component, Credits, the GitHub repository link, the current boop order, Catalog, Appearance, and Reaction sounds. Below the medium breakpoint, Catalog stays in the header and the secondary controls move into More options. Boop order offers In order, Random, and Build up. Appearance offers System, Light, and Dark. Reaction sounds displays On or Off in More options. The catalog title shows the character total and switches to a match count when search or a series filter is active.
 
-Use search topics naturally in relevant pages. Start with chibi anime characters, anime mascots, interactive chibi characters, downloadable chibi poses, and chibi reaction assets.
+Use search topics naturally in relevant pages. Start with chibi anime characters, anime mascots, and interactive character galleries. See [SEO and site discovery](SEO.md) for the metadata fields and how to verify them.
 
 ## Typography
 

@@ -44,7 +44,7 @@ Use tabular numerals where counts need to align. The two upright WOFF2 assets to
 
 Neutral app surfaces keep the character artwork prominent. The concentric tap ripple serves as the favicon and appears in the social preview.
 
-The body background repeats the [AniBoop wordmark](../public/aniboop-watermark.svg) in staggered rows. Each Allo Bold wordmark is tilted 24 degrees, and the SVG uses a neutral tint for the active color scheme.
+The body background repeats the [flat AniBoop wordmark](../public/aniboop-watermark.svg) in staggered rows. Each mark is tilted 24 degrees, and the SVG uses a neutral tint for the active theme.
 
 ## Corner shapes
 

@@ -154,7 +154,12 @@
 	}
 	body {
 		@apply bg-background font-sans text-foreground;
+		color-scheme: light;
 		background-image: url("/aniboop-watermark.svg");
+	}
+
+	.dark body {
+		color-scheme: dark;
 	}
 
 	@media (forced-colors: active) {

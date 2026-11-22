@@ -29,6 +29,7 @@ __pycache__/
 # Local mascot source sheets
 /public/mascots/raw/*
 !/public/mascots/raw/README.md
+/public/mascots/sheets/
 /public/old-version/
 
 # debug

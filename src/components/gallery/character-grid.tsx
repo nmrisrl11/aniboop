@@ -2,6 +2,7 @@
 
 import { Mascot, type BoopOrder } from "@/components/mascot/mascot";
 import type { GalleryCharacter } from "@/data/characters";
+import { brand } from "@/lib/brand";
 import type { Reaction } from "@/lib/mascot-sprites";
 import { memo, useCallback, useState } from "react";
 import ThiingsGrid, { DRAG_THRESHOLD, type ItemConfig } from "./thiings-grid";
@@ -118,7 +119,7 @@ export function CharacterGrid({
 	return (
 		<ThiingsGrid
 			className="z-0 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
-			label="Character gallery"
+			label={brand.galleryHeading}
 			describedBy="grid-instructions"
 			gridSize={GRID_SIZE}
 			renderItem={renderItem}

@@ -1,8 +1,28 @@
-# AniBoop conversation handoff
+# Load AniBoop project context
 
-Open the AniBoop workspace and paste this into the new conversation.
+Open the AniBoop repository in a new agent chat and paste this prompt. Append your task on a new line if you already have one.
 
-> Read `docs/HANDOFF.md` and `AGENTS.md`, check the current Git status, then use that context for my next request.
+> Load the AniBoop project context by following `docs/HANDOFF.md`. If I included a task, use that context and proceed. Otherwise, summarize the app, checkout state, and open work in a few bullets.
+
+## Context-loading workflow
+
+1. Read [AGENTS.md](../AGENTS.md), the [README](../README.md), and the product and implementation overview below. Use the README for the project’s purpose and setup and `AGENTS.md` for repository rules and applicable skills.
+2. Run `git status --short --branch` and `git log -5 --oneline` from the repository root. Review relevant working changes if a task was supplied. Preserve existing edits. If Git is unavailable, continue with the files and say which checkout details you could not verify.
+3. Read the [architecture guide](ARCHITECTURE.md) and the [feature blueprint](FEATURE_BLUEPRINT.md). Use the map below to locate the main subsystems. Confirm current behavior against the checkout, and use the blueprint for intended behavior and acceptance criteria. Treat the verification notes in this handoff as historical.
+4. Open the source, guides, and skills relevant to the request before editing. Trace the implementation from its normal entry point, and identify existing components, hooks, and utilities you can reuse. Follow `AGENTS.md` for the local Next.js documentation requirement before writing code.
+5. For a context-only request, leave the checkout untouched and summarize what runs, the branch and working tree state, and what is planned or unverified. If the user included a task, proceed with it after loading context.
+
+## Codebase map
+
+| Area                            | Start here                                                                                                                                                                                                                                                                                                                                                                   |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Startup, routes, and build      | [App Router](../src/app), [homepage](../src/app/page.tsx), [root layout](../src/app/layout.tsx), [Next.js configuration](../next.config.ts), [npm scripts and dependencies](../package.json)                                                                                                                                                                                 |
+| Gallery and catalog data        | [Catalog JSON](../src/data/characters.json) → [asset resolver](../src/data/characters.ts) → [Gallery](../src/components/gallery/gallery.tsx) → [CharacterGrid](../src/components/gallery/character-grid.tsx) → [Thiings Grid](../src/components/gallery/thiings-grid.tsx). The [catalog dialog](../src/components/catalog/character-catalog.tsx) uses the same gallery data. |
+| Interactions and sound          | [Mascot](../src/components/mascot/mascot.tsx), [gesture hook](../src/components/mascot/use-mascot-gesture.ts), [shared pointer tracking](../src/components/mascot/page-pointer.ts), [sound hook](../src/hooks/use-reaction-sound.ts), [audio presets and synthesis](../src/lib/audio)                                                                                        |
+| Header, dialogs, and appearance | [Header](../src/components/header), [resource dialogs](../src/components/resources), [theme provider and switcher](../src/components/theme), [UI primitives](../src/components/ui), [global CSS](../src/app/globals.css), [brand copy](../src/lib/brand.ts), [brand guide](BRAND.md)                                                                                         |
+| Asset preparation and delivery  | [Sprite layout](../src/lib/mascot-sprites.ts), [asset scripts](../scripts), [gallery asset guide](GALLERY_ASSETS.md), [licensing](LICENSING.md)                                                                                                                                                                                                                              |
+| Deployment and discovery        | [Public origin](../src/lib/site.ts), [metadata and discovery routes](../src/app), [SEO and deployment guide](SEO.md)                                                                                                                                                                                                                                                         |
+| Local development and docs      | [Development commands](DEVELOPMENT.md), [guide ownership](DOCUMENTATION.md), [repository skills](../.agents/skills)                                                                                                                                                                                                                                                          |
 
 ## Product
 
@@ -27,7 +47,7 @@ Each catalog entry has two local full-size WebP sheets in the Git-ignored `publi
 - To add a mascot, install Pillow and NumPy once with `python -m pip install Pillow numpy`. Put the matching 1080 × 1080 `<id>-directions` and `<id>-reactions` PNG or WebP files in `public/mascots/raw/`, then run `npm run mascot:add -- --id <id> --name "<name>" --series "<series>"`. A successful run appends the catalog entry and moves the originals to the Git-ignored `raw/processed/` folder. [Adding a mascot](GALLERY_ASSETS.md#adding-a-mascot) covers the full workflow.
 - The sibling `../mascot-maker` project supplied the character metadata. Its catalog includes a fox that is excluded from AniBoop. The sibling `../threadfx` project is the reference for Oxc, editor settings, Tailwind lint, and reusable agent workflows.
 
-## Last verification
+## Historical verification
 
 The 139-character gallery passed `npm run lint:all`, `npm run format:check`, and `npm run build`. A Chromium run confirmed that preview, gaze, and boop assets load for all 20 characters in the latest batch. Earlier Chromium checks after the component reorganization covered the compact header down to 320 px, landscape layout, touch and keyboard activation, and focus restoration after closing dialogs.
 

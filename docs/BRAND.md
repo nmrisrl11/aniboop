@@ -14,6 +14,7 @@ The copy below includes planned gallery surfaces. The homepage displays characte
 | Homepage headline    | Pick a character. Give it a boop.                                                                                                              |
 | Homepage description | Explore a collection of chibi anime characters. Tap one to see it react, then download its poses and reactions.                                |
 | Meta description     | Explore a pannable gallery of chibi anime characters. Boop mascots to see them react, or search the catalog by character name or anime series. |
+| Gallery heading      | Chibi anime character gallery                                                                                                                  |
 | Gallery instructions | Tap or hold a character to boop. Drag, scroll, or use arrow keys to explore.                                                                   |
 | Card action          | View & download                                                                                                                                |
 | Detail labels        | Directions, Reactions, Download                                                                                                                |
@@ -46,7 +47,7 @@ Neutral app surfaces keep the character artwork prominent.
 
 ## Logo and marks
 
-The [full-color AniBoop logo](../public/brand/aniboop-logo.svg) appears in the header and social preview. The [purple tap mark](../src/app/icon.svg) appears in the favicon and install icons. Render raster icons directly from the tap-mark SVG at their target sizes. Use an opaque, full-bleed purple background for launcher masks and the Apple touch icon. See [Fonts and metadata](ARCHITECTURE.md#fonts-and-metadata) for the published assets.
+The [full-color AniBoop logo](../public/brand/aniboop-logo.svg) appears in the app header, the [README](../README.md) heading, and the social preview. The [purple tap mark](../src/app/icon.svg) appears in the favicon and install icons. Render raster icons directly from the tap-mark SVG at their target sizes. Use an opaque, full-bleed purple background for launcher masks and the Apple touch icon. See [Fonts and metadata](ARCHITECTURE.md#fonts-and-metadata) for the published assets.
 
 The body background repeats the [flat AniBoop wordmark](../public/aniboop-watermark.svg) in staggered rows. Each mark is tilted 24 degrees, and the SVG uses a neutral tint for the active theme.
 

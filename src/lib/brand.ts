@@ -1,11 +1,13 @@
 export const brand = {
 	name: "AniBoop",
+	author: "Nomer Icban Israel",
 	language: "en",
 	repositoryUrl: "https://github.com/nmrisrl11/aniboop",
 	repositoryLabel: "AniBoop on GitHub",
 	title: "AniBoop | Interactive Chibi Anime Characters",
 	slogan: "Little characters. Big reactions.",
 	headline: "Pick a character. Give it a boop.",
+	galleryHeading: "Chibi anime character gallery",
 	galleryInstructions:
 		"Tap or hold a character to boop. Drag, scroll, or use arrow keys to explore.",
 	galleryControls: {
@@ -29,6 +31,8 @@ export const brand = {
 		filterSeries: "Filter by anime series",
 		allSeries: "All series",
 		catalogResults: "Character results",
+		portraitAlt: (name: string) => `Chibi portrait of ${name}`,
+		portraitTitle: (name: string, series: string) => `${name} from ${series}`,
 		characterCount: (count: number) => `${count} ${count === 1 ? "character" : "characters"}`,
 		matchCount: (count: number) => `${count} ${count === 1 ? "match" : "matches"}`,
 		noCatalogResults: "No characters found",

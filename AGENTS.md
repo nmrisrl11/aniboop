@@ -4,6 +4,8 @@
 
 AniBoop is a collection of chibi anime characters designed to react when booped. The homepage is a pannable, virtualized grid backed by the [character catalog](src/data/characters.json). The catalog dialog supports search by name or series and filtering by series. Character details and downloads are planned in the [feature blueprint](docs/FEATURE_BLUEPRINT.md).
 
+For a fresh agent conversation, use the [project context workflow](docs/HANDOFF.md) to load the codebase map and check the current checkout.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know

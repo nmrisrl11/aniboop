@@ -33,6 +33,7 @@ export function AppHeader({
 					<Image
 						src="/brand/aniboop-logo.svg"
 						alt={brand.name}
+						title={brand.name}
 						width={90}
 						height={25}
 						loading="eager"

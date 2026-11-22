@@ -27,6 +27,7 @@ export function Gallery({ characters }: { characters: readonly GalleryCharacter[
 				onPointerUpCapture={resumeSound}
 				onClickCapture={resumeSound}
 			>
+				<h2 className="sr-only">{brand.galleryHeading}</h2>
 				<CharacterGrid characters={characters} boopOrder={boopOrder} onReact={playReactionSound} />
 			</main>
 			<p id="grid-instructions" className="sr-only">

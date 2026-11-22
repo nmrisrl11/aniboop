@@ -13,7 +13,7 @@ In the AniBoop project on Vercel, go to **Settings → Environment Variables**, 
 | Production build with `ANIBOOP_URL`                          | Canonical URL, `index, follow`, and `WebSite` structured data | Lists the homepage and is advertised in `robots.txt` |
 | `next dev`, Vercel previews, or builds without `ANIBOOP_URL` | `noindex, follow`                                             | Returns 404 and is omitted from `robots.txt`         |
 
-`robots.txt` allows crawling in both cases so search crawlers can read the homepage's robots meta tag. Use deployment access controls for private previews. See [Google's robots meta tag documentation](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag) and [Vercel's system environment variables](https://vercel.com/docs/environment-variables/system-environment-variables).
+On localhost and in preview builds, SEO extensions will show `noindex, follow` and an empty canonical field. `robots.txt` allows crawling in both cases so search crawlers can read the homepage's robots meta tag. Use deployment access controls for private previews. See [Google's robots meta tag documentation](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag) and [Vercel's system environment variables](https://vercel.com/docs/environment-variables/system-environment-variables).
 
 ## Backup access on Vercel
 
@@ -47,6 +47,10 @@ If the official hostname stops resolving or fails TLS, the browser cannot reach 
 
 Use search topics such as “chibi anime characters” and “anime mascots” naturally in the title and description where they fit. Google Search ignores the keywords meta tag. See [Google's supported meta tags](https://developers.google.com/search/docs/crawling-indexing/special-tags#unsupported-tags-and-attributes).
 
+The root layout also emits author and publisher metadata from [brand copy](../src/lib/brand.ts). The gallery has a screen-reader heading. Catalog portraits use character-specific alt text and title attributes.
+
+Keep the social preview at 1200 × 630 pixels. Recompress replacement PNGs losslessly with a tool such as Oxipng and compare the decoded pixels and color metadata with the source before updating the tracked file.
+
 `llms.txt` follows a proposal for giving agents a brief site overview and relevant links. Crawler access is governed by `robots.txt` and deployment access controls. See the [llms.txt proposal](https://llmstxt.org/).
 
 Next.js prerenders this Route Handler at build time. It reads shared brand copy and the production origin, with no request-time data or revalidation interval. A production build lists `/llms.txt` as static. A checked-in `public/llms.txt` would also be static, but its links and copy would need to be maintained by hand. Both forms still use CDN requests and transfer bytes each time a client fetches them. See [Vercel's CDN usage documentation](https://vercel.com/docs/manage-cdn-usage).
@@ -71,7 +75,7 @@ curl.exe -fsS http://localhost:3000/llms.txt
 curl.exe -fsS http://localhost:3000/manifest.webmanifest
 ```
 
-- Check the HTML for one title, description, canonical, and robots tag. Check the keywords, `og:*`, and `twitter:*` tags, and fetch the advertised image path from the same server to verify it serves a PNG.
+- Check the HTML for one title, description, canonical, and robots tag. Check the author, publisher, keywords, `og:*`, and `twitter:*` tags, and fetch the advertised image path from the same server to verify it serves a 1200 × 630 PNG.
 - Compare the canonical URL, `og:url`, sitemap entry, `llms.txt` gallery link, and JSON-LD `url`. Check the two regular icons and the maskable icon listed by the manifest.
 - Repeat without `ANIBOOP_URL` to confirm `noindex, follow`, a 404 from `/sitemap.xml`, and no sitemap directive in `robots.txt`.
 - After deployment, repeat the checks against the public HTTPS origin. Use URL Inspection and submit `/sitemap.xml` in Search Console. Validate the `WebSite` object with the Schema Markup Validator. See [Google's sitemap instructions](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap) and the [Schema Markup Validator](https://validator.schema.org/).

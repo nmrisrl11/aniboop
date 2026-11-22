@@ -24,6 +24,8 @@ const inter = localFont({
 export const metadata: Metadata = {
 	metadataBase: publicSiteUrl,
 	applicationName: brand.name,
+	authors: [{ name: brand.author }],
+	publisher: brand.name,
 	title: { default: brand.title, template: `%s | ${brand.name}` },
 	description: brand.description,
 	robots: publicSiteUrl ? undefined : { index: false, follow: true },

@@ -53,7 +53,8 @@ const CatalogResults = memo(function CatalogResults({ groups }: { groups: Catalo
 							>
 								<Image
 									src={preview}
-									alt=""
+									alt={copy.portraitAlt(name)}
+									title={copy.portraitTitle(name, series)}
 									width={36}
 									height={36}
 									unoptimized

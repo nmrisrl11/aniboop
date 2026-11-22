@@ -38,9 +38,16 @@ function DropdownMenuContent({
 }
 
 function DropdownMenuRadioGroup({
+	className,
 	...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.RadioGroup>) {
-	return <DropdownMenuPrimitive.RadioGroup data-slot="dropdown-menu-radio-group" {...props} />;
+	return (
+		<DropdownMenuPrimitive.RadioGroup
+			data-slot="dropdown-menu-radio-group"
+			className={cn("flex flex-col gap-1", className)}
+			{...props}
+		/>
+	);
 }
 
 function DropdownMenuRadioItem({

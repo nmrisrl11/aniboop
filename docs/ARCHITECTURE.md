@@ -30,7 +30,7 @@ The [app header](../src/components/header/app-header.tsx) composes the component
 
 The [character catalog](../src/components/catalog/character-catalog.tsx) uses shadcn Input and Select controls above its scrolling results. The dialog height is constrained by the viewport and stays steady as results change. The results reserve scrollbar space on systems with classic scrollbars. The catalog groups and normalizes the data once per catalog change, applies text queries after a 150 ms pause, and cancels any pending query when the dialog closes. The [component guide](../src/components/resources/component-docs-modal.tsx) uses shadcn Code Block with Shiki syntax highlighting, which loads when the guide opens.
 
-Shared dialogs, dropdowns, popovers, and selects fade in place when their transitions are enabled.
+Shared dialogs, dropdowns, popovers, and selects fade in place when their transitions are enabled. The Boop order and Appearance menus use the shared dropdown radio group, which leaves 4 px between options. Boop order gives the selected option a checkmark and uses a stronger fill for the focused option.
 
 ## Reaction audio
 
@@ -55,6 +55,8 @@ The [presets](../src/lib/audio/reaction-sounds.ts) are keyed by the nine names i
 ## Theme
 
 The appearance control defaults to the system color preference. The root [theme provider](../src/components/theme/theme-provider.tsx) uses `next-themes` to persist the preference and apply the correct class before the first paint. Light tokens are defined in `:root` and dark overrides live in `.dark`. Tailwind exposes both palettes through `@theme inline`. Use semantic utilities such as `bg-card`, `text-foreground`, and `border-input` across both palettes.
+
+The [brand palette](BRAND.md#palette) defines the surface and interaction colors. The install manifest uses the light canvas color for its startup background and theme color.
 
 ## Fonts and metadata
 

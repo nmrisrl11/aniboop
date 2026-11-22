@@ -35,21 +35,25 @@ Use tabular numerals where counts need to align. The two upright WOFF2 assets to
 
 ## Palette
 
-| Role               | Light     | Dark      |
-| ------------------ | --------- | --------- |
-| Background         | `#FAFAFA` | `#09090B` |
-| Card               | `#FFFFFF` | `#131316` |
-| Foreground         | `#18181B` | `#FAFAFA` |
-| Primary            | `#18181B` | `#FAFAFA` |
-| Primary foreground | `#FAFAFA` | `#09090B` |
+| Role                 | Light     | Dark      |
+| -------------------- | --------- | --------- |
+| Background           | `#F3EFFA` | `#15121D` |
+| Card                 | `#FEFCFF` | `#211D2B` |
+| Foreground           | `#241B35` | `#F6F3FF` |
+| Muted foreground     | `#665C75` | `#BDB2CD` |
+| Primary and focus    | `#6A3BD1` | `#BCA4FF` |
+| Primary foreground   | `#FFFFFF` | `#23143C` |
+| Secondary            | `#EDE4FF` | `#382953` |
+| Secondary foreground | `#4D288E` | `#E4D6FF` |
+| Accent               | `#E7DBFB` | `#453260` |
 
-Neutral app surfaces keep the character artwork prominent.
+The wordmark's violet anchors the palette. A pale lavender canvas and near-white cards frame the artwork in light mode. Dark mode uses a muted plum canvas with slightly lighter cards to give dark silhouettes room to read. The secondary fill appears on the Catalog button and the selected Boop order option at rest. The accent fill marks highlighted and pressed states. Primary violet is used for primary actions and focus rings. Series captions use the muted foreground.
 
 ## Logo and marks
 
 The [full-color AniBoop logo](../public/brand/aniboop-logo.svg) appears in the app header, the [README](../README.md) heading, and the social preview. The [purple tap mark](../src/app/icon.svg) appears in the favicon and install icons. Render raster icons directly from the tap-mark SVG at their target sizes. Use an opaque, full-bleed purple background for launcher masks and the Apple touch icon. See [Fonts and metadata](ARCHITECTURE.md#fonts-and-metadata) for the published assets.
 
-The body background repeats the [flat AniBoop wordmark](../public/aniboop-watermark.svg) in staggered rows. Each mark is tilted 24 degrees, and the SVG uses a neutral tint for the active theme.
+The body background repeats the [flat AniBoop wordmark](../public/aniboop-watermark.svg) in staggered rows. Each mark is tilted 24 degrees and uses the active theme's violet at low opacity.
 
 ## Corner shapes
 

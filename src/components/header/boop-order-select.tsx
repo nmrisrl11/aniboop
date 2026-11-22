@@ -82,7 +82,7 @@ export function BoopOrderSelect({
 								key={order}
 								value={order}
 								textValue={label}
-								className="min-h-12 gap-2.5 rounded-lg py-1.5 pl-2 data-[state=checked]:bg-accent"
+								className="min-h-12 gap-2.5 rounded-lg py-1.5 pl-2 data-[state=checked]:not-focus:bg-secondary"
 							>
 								<span
 									aria-hidden="true"

@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="144" height="72" viewBox="0 0 144 72">
   <style>
-    svg { color: #18181b }
-    use { opacity: .09 }
+    svg { color: #6a3bd1 }
+    use { opacity: .10 }
     .cls-1 { fill-opacity: .5 }
     .cls-1, .cls-2 { fill-rule: evenodd }
     @media (prefers-color-scheme: dark) {
-      svg { color: #fafafa }
-      use { opacity: .11 }
+      svg { color: #bca4ff }
+      use { opacity: .09 }
     }
   </style>
   <defs>

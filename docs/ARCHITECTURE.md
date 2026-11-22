@@ -5,7 +5,7 @@
 | App Router and homepage                    | [`src/app`](../src/app)                                   |
 | Header layout and boop-order control       | [`src/components/header`](../src/components/header)       |
 | Character catalog and search               | [`src/components/catalog`](../src/components/catalog)     |
-| Character details modal and downloads      | [`src/components/character`](../src/components/character) |
+| Character details and downloads            | [`src/components/character`](../src/components/character) |
 | Component guide, credits, and GitHub link  | [`src/components/resources`](../src/components/resources) |
 | Theme provider and appearance control      | [`src/components/theme`](../src/components/theme)         |
 | Gallery viewport and tiles                 | [`src/components/gallery`](../src/components/gallery)     |
@@ -33,11 +33,11 @@ The [character catalog](../src/components/catalog/character-catalog.tsx) decompo
 
 Shared dialogs, dropdowns, popovers, and selects fade in place when their transitions are enabled. The Boop order and Appearance menus use the shared dropdown radio group, which leaves 4 px between options. Boop order gives the selected option a checkmark and uses a stronger fill for the focused option.
 
-All modal surfaces ([CharacterCatalog](../src/components/catalog/character-catalog.tsx), [CharacterDetailsModal](../src/components/character/character-details-modal.tsx), [ComponentDocsModal](../src/components/resources/component-docs-modal.tsx), and [CreditsModal](../src/components/resources/credits-modal.tsx)) adapt responsively: rendering as centered Radix dialogs on desktop ($\ge 48\text{rem}$) and slide-up Vaul drawers with bottom-sheet drag-to-dismiss gestures on mobile ($< 48\text{rem}$), synchronized via [useMediaQuery](../src/hooks/use-media-query.ts) (`useSyncExternalStore`).
+All modal surfaces ([CharacterCatalog](../src/components/catalog/character-catalog.tsx), [CharacterDetails](../src/components/character/character-details.tsx), [ComponentDocsModal](../src/components/resources/component-docs-modal.tsx), and [CreditsModal](../src/components/resources/credits-modal.tsx)) adapt responsively: rendering as centered Radix dialogs on desktop ($\ge 48\text{rem}$) and slide-up Vaul drawers with bottom-sheet drag-to-dismiss gestures on mobile ($< 48\text{rem}$), synchronized via [useMediaQuery](../src/hooks/use-media-query.ts) (`useSyncExternalStore`).
 
 ## Character details and downloads
 
-The [character details modal](../src/components/character/character-details-modal.tsx) provides a full preview of a character's 3×3 directional gaze poses and emotional reactions, alongside direct download actions for sprite sheets and still previews. It is accessible from the dedicated corner squircle button on each grid tile or by clicking a character in the catalog.
+The [character details](../src/components/character/character-details.tsx) component provides a full preview of a character's 3×3 directional gaze poses and emotional reactions, alongside direct download actions for sprite sheets and still previews. It is accessible from the dedicated corner squircle button on each grid tile or by clicking a character in the catalog.
 
 To maximize mobile rendering performance and eliminate GPU composite overhead, modal overlays use a crisp dimmed scrim (`bg-black/70`) without expensive backdrop filter blurs. Additionally, the catalog and details modal are mutually exclusive: selecting a character in the catalog closes the catalog before opening the details dialog; when opened from the catalog, a `Back to catalog` navigation button allows returning to the active catalog search without losing filter or query state. Sprite sheet previews slice the cached 3×3 compact WebPs via CSS backgrounds to eliminate extra network requests.
 

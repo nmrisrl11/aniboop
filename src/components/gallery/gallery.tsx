@@ -1,6 +1,6 @@
 "use client";
 
-import { CharacterDetailsModal } from "@/components/character/character-details-modal";
+import { CharacterDetails } from "@/components/character/character-details";
 import { CharacterGrid } from "@/components/gallery/character-grid";
 import { AppHeader } from "@/components/header/app-header";
 import type { BoopOrder } from "@/components/mascot/mascot";
@@ -75,7 +75,7 @@ export function Gallery({ characters }: { characters: readonly GalleryCharacter[
 					onSelectCharacter={handleSelectFromGrid}
 				/>
 			</main>
-			<CharacterDetailsModal
+			<CharacterDetails
 				character={selectedCharacter}
 				open={selectedCharacter !== null}
 				onOpenChange={handleDetailsOpenChange}

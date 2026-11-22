@@ -20,21 +20,27 @@ import {
 } from "@/components/ui/select";
 import type { GalleryCharacter } from "@/data/characters";
 import { brand } from "@/lib/brand";
-import { Library, Search, X } from "lucide-react";
+import { ChevronRight, Library, Search, X } from "lucide-react";
 import Image from "next/image";
-import { memo, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const copy = brand.galleryControls;
 const SEARCH_DELAY_MS = 150;
 
-export type CharacterCatalogEntry = Pick<GalleryCharacter, "id" | "name" | "series" | "preview">;
+export type CharacterCatalogEntry = GalleryCharacter;
 type CatalogGroup = {
 	series: string;
 	searchSeries: string;
 	members: { character: CharacterCatalogEntry; searchName: string }[];
 };
 
-const CatalogResults = memo(function CatalogResults({ groups }: { groups: CatalogGroup[] }) {
+const CatalogResults = memo(function CatalogResults({
+	groups,
+	onSelect,
+}: {
+	groups: CatalogGroup[];
+	onSelect?: (character: CharacterCatalogEntry) => void;
+}) {
 	return (
 		<div className="flex flex-col gap-5 sm:gap-6">
 			{groups.map(({ series, members }) => (
@@ -46,25 +52,39 @@ const CatalogResults = memo(function CatalogResults({ groups }: { groups: Catalo
 						</span>
 					</h3>
 					<ul role="list" className="grid gap-2 min-[420px]:grid-cols-2 sm:grid-cols-3">
-						{members.map(({ character: { id, name, preview } }) => (
-							<li
-								key={id}
-								className="flex min-w-0 items-center gap-2.5 rounded-xl bg-muted/60 p-2 corner-squircle"
-							>
-								<Image
-									src={preview}
-									alt={copy.portraitAlt(name)}
-									title={copy.portraitTitle(name, series)}
-									width={36}
-									height={36}
-									unoptimized
-									className="shrink-0 rounded-lg bg-card corner-squircle"
-								/>
-								<span className="min-w-0 text-sm leading-snug font-medium wrap-break-word">
-									{name}
-								</span>
-							</li>
-						))}
+						{members.map(({ character }) => {
+							const { id, name, series: charSeries, preview } = character;
+							return (
+								<li key={id}>
+									<button
+										type="button"
+										onClick={() => onSelect?.(character)}
+										className="group flex w-full min-w-0 items-center justify-between gap-2.5 rounded-xl bg-muted/60 p-2 text-left transition-all duration-160 ease-out corner-squircle hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring active:scale-[0.98]"
+										aria-label={`${brand.characterDetails.viewAndDownload}: ${name}`}
+										title={`${brand.characterDetails.viewAndDownload}: ${name}`}
+									>
+										<div className="flex min-w-0 items-center gap-2.5">
+											<Image
+												src={preview}
+												alt={copy.portraitAlt(name)}
+												title={copy.portraitTitle(name, charSeries)}
+												width={36}
+												height={36}
+												unoptimized
+												className="shrink-0 rounded-lg bg-card transition-transform duration-160 ease-out corner-squircle group-hover:scale-105"
+											/>
+											<span className="truncate text-sm font-semibold transition-colors group-hover:text-primary">
+												{name}
+											</span>
+										</div>
+										<ChevronRight
+											className="size-4 shrink-0 text-muted-foreground/40 transition-all duration-160 ease-out group-hover:translate-x-0.5 group-hover:text-foreground"
+											aria-hidden="true"
+										/>
+									</button>
+								</li>
+							);
+						})}
 					</ul>
 				</section>
 			))}
@@ -72,8 +92,31 @@ const CatalogResults = memo(function CatalogResults({ groups }: { groups: Catalo
 	);
 });
 
-export function CharacterCatalog({ characters }: { characters: readonly CharacterCatalogEntry[] }) {
-	const [open, setOpen] = useState(false);
+export function CharacterCatalog({
+	characters,
+	open: controlledOpen,
+	onOpenChange: controlledOnOpenChange,
+	onSelectCharacter,
+}: {
+	characters: readonly CharacterCatalogEntry[];
+	open?: boolean;
+	onOpenChange?: (open: boolean) => void;
+	onSelectCharacter?: (character: CharacterCatalogEntry) => void;
+}) {
+	const [internalOpen, setInternalOpen] = useState(false);
+	const isControlled = controlledOpen !== undefined;
+	const open = isControlled ? controlledOpen : internalOpen;
+	const setOpen = useCallback(
+		(next: boolean | ((previous: boolean) => boolean)) => {
+			const value = typeof next === "function" ? next(open) : next;
+			if (controlledOnOpenChange) {
+				controlledOnOpenChange(value);
+			} else {
+				setInternalOpen(value);
+			}
+		},
+		[open, controlledOnOpenChange],
+	);
 
 	const [searchQuery, setSearchQuery] = useState("");
 	const [appliedQuery, setAppliedQuery] = useState("");
@@ -95,7 +138,7 @@ export function CharacterCatalog({ characters }: { characters: readonly Characte
 		};
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, [open]);
+	}, [open, setOpen]);
 
 	const query = searchQuery.trim().toLowerCase();
 
@@ -285,7 +328,7 @@ export function CharacterCatalog({ characters }: { characters: readonly Characte
 							</Button>
 						</div>
 					) : (
-						<CatalogResults groups={groups} />
+						<CatalogResults groups={groups} onSelect={onSelectCharacter} />
 					)}
 				</div>
 			</DialogContent>

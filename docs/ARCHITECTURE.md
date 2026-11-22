@@ -5,6 +5,7 @@
 | App Router and homepage                    | [`src/app`](../src/app)                                   |
 | Header layout and boop-order control       | [`src/components/header`](../src/components/header)       |
 | Character catalog and search               | [`src/components/catalog`](../src/components/catalog)     |
+| Character details modal and downloads      | [`src/components/character`](../src/components/character) |
 | Component guide, credits, and GitHub link  | [`src/components/resources`](../src/components/resources) |
 | Theme provider and appearance control      | [`src/components/theme`](../src/components/theme)         |
 | Gallery viewport and tiles                 | [`src/components/gallery`](../src/components/gallery)     |
@@ -31,6 +32,12 @@ The [app header](../src/components/header/app-header.tsx) composes the component
 The [character catalog](../src/components/catalog/character-catalog.tsx) uses shadcn Input and Select controls above its scrolling results. The dialog height is constrained by the viewport and stays steady as results change. The results reserve scrollbar space on systems with classic scrollbars. The catalog groups and normalizes the data once per catalog change, applies text queries after a 150 ms pause, and cancels any pending query when the dialog closes. The [component guide](../src/components/resources/component-docs-modal.tsx) uses shadcn Code Block with Shiki syntax highlighting, which loads when the guide opens.
 
 Shared dialogs, dropdowns, popovers, and selects fade in place when their transitions are enabled. The Boop order and Appearance menus use the shared dropdown radio group, which leaves 4 px between options. Boop order gives the selected option a checkmark and uses a stronger fill for the focused option.
+
+## Character details and downloads
+
+The [character details modal](../src/components/character/character-details-modal.tsx) provides a full preview of a character's 3×3 directional gaze poses and emotional reactions, alongside direct download actions for sprite sheets and still previews. It is accessible from the dedicated corner squircle button on each grid tile or by clicking a character in the catalog.
+
+To prevent GPU composite overhead from stacked `backdrop-blur-sm` layers, the catalog and details modal are mutually exclusive. Selecting a character in the catalog closes the catalog before opening the details dialog; when opened from the catalog, a `Back to catalog` navigation button allows returning to the active catalog search without losing filter or query state. Sprite sheet previews slice the cached 3×3 compact WebPs via CSS backgrounds to eliminate extra network requests.
 
 ## Reaction audio
 

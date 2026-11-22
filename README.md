@@ -32,7 +32,7 @@ Explore **139 chibi characters across 20 anime series** in an endless, pannable 
 - **Find a character** in Catalog. Search by name or series, or filter by series. Press **Ctrl+K** or **Cmd+K** to open it. The [catalog data](src/data/characters.json) drives both the dialog and the grid.
 - **Use More options** on smaller screens for boop order, appearance, the component guide, credits, and the GitHub link. Appearance supports System, Light, and Dark.
 
-Character details and asset downloads are planned. See the [feature blueprint](docs/FEATURE_BLUEPRINT.md).
+- **View details & download assets** by clicking the card action on any tile, or choosing a character from the Catalog. Inspect directional gaze poses, preview emotional reactions, and download the sprite sheets.
 
 ## Get started
 

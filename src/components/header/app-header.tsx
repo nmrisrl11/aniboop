@@ -10,6 +10,7 @@ import { ComponentDocsModal } from "@/components/resources/component-docs-modal"
 import { CreditsModal } from "@/components/resources/credits-modal";
 import { RepositoryLink } from "@/components/resources/repository-link";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
+import type { GalleryCharacter } from "@/data/characters";
 import { brand } from "@/lib/brand";
 import Image from "next/image";
 
@@ -19,12 +20,18 @@ export function AppHeader({
 	onBoopOrderChange,
 	soundEnabled,
 	onSoundToggle,
+	catalogOpen,
+	onCatalogOpenChange,
+	onSelectCharacter,
 }: {
 	characters: readonly CharacterCatalogEntry[];
 	boopOrder: BoopOrder;
 	onBoopOrderChange: (order: BoopOrder) => void;
 	soundEnabled: boolean;
 	onSoundToggle: () => void;
+	catalogOpen?: boolean;
+	onCatalogOpenChange?: (open: boolean) => void;
+	onSelectCharacter?: (character: GalleryCharacter) => void;
 }) {
 	return (
 		<header className="sticky inset-x-0 top-0 z-20 flex h-16 w-full shrink-0 items-center justify-between gap-4 border-b border-border bg-card px-4 shadow-xs select-none sm:px-5 md:h-14">
@@ -51,7 +58,12 @@ export function AppHeader({
 				<div className="hidden md:block">
 					<BoopOrderSelect value={boopOrder} onValueChange={onBoopOrderChange} />
 				</div>
-				<CharacterCatalog characters={characters} />
+				<CharacterCatalog
+					characters={characters}
+					open={catalogOpen}
+					onOpenChange={onCatalogOpenChange}
+					onSelectCharacter={onSelectCharacter}
+				/>
 				<div className="hidden md:block">
 					<ThemeSwitcher />
 				</div>

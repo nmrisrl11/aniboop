@@ -1,8 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { cn } from "cn";
 import { Dialog as DialogPrimitive } from "radix-ui";
+import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { XIcon } from "lucide-react";
@@ -27,7 +27,7 @@ function DialogOverlay({
 		<DialogPrimitive.Overlay
 			data-slot="dialog-overlay"
 			className={cn(
-				"fixed inset-0 z-50 bg-black/60 duration-150 supports-backdrop-filter:backdrop-blur-sm motion-safe:data-[state=closed]:animate-out motion-safe:data-[state=closed]:fade-out-0 motion-safe:data-[state=open]:animate-in motion-safe:data-[state=open]:fade-in-0",
+				"fixed inset-0 z-50 bg-black/70 duration-150 motion-safe:data-[state=closed]:animate-out motion-safe:data-[state=closed]:fade-out-0 motion-safe:data-[state=open]:animate-in motion-safe:data-[state=open]:fade-in-0",
 				className,
 			)}
 			{...props}

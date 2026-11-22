@@ -9,6 +9,14 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+	Drawer,
+	DrawerContent,
+	DrawerDescription,
+	DrawerHeader,
+	DrawerTitle,
+	DrawerTrigger,
+} from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
 import {
 	Select,
@@ -19,6 +27,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import type { GalleryCharacter } from "@/data/characters";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { brand } from "@/lib/brand";
 import { ChevronRight, Library, Search, X } from "lucide-react";
 import Image from "next/image";
@@ -188,6 +197,7 @@ export function CharacterCatalog({
 	}, [catalogGroups, appliedQuery, selectedSeries]);
 
 	const characterCount = characters.length;
+	const isDesktop = useMediaQuery("(min-width: 768px)");
 	const countLabel =
 		appliedQuery || selectedSeries !== "all"
 			? copy.matchCount(matchCount)
@@ -203,43 +213,156 @@ export function CharacterCatalog({
 		searchRef.current?.focus();
 	}
 
-	return (
-		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogTrigger asChild>
-				<Button
-					variant="secondary"
-					size="sm"
-					className="h-11 gap-2 rounded-xl px-3.5 text-sm font-semibold md:h-8 md:rounded-lg md:px-2.5 md:text-xs"
-					aria-label={`${copy.catalog}, ${copy.characterCount(characterCount)}`}
-					aria-keyshortcuts="Control+K Meta+K"
-					title={copy.catalog}
-				>
-					<Library data-icon="inline-start" aria-hidden="true" />
-					{copy.catalog}
-					<span className="hidden h-5 min-w-5 place-items-center rounded-full bg-card px-1.5 text-[10px] font-bold text-foreground tabular-nums shadow-xs md:grid">
-						{characterCount}
-					</span>
-				</Button>
-			</DialogTrigger>
+	const trigger = (
+		<Button
+			variant="secondary"
+			size="sm"
+			className="h-11 gap-2 rounded-xl px-3.5 text-sm font-semibold md:h-8 md:rounded-lg md:px-2.5 md:text-xs"
+			aria-label={`${copy.catalog}, ${copy.characterCount(characterCount)}`}
+			aria-keyshortcuts="Control+K Meta+K"
+			title={copy.catalog}
+		>
+			<Library data-icon="inline-start" aria-hidden="true" />
+			{copy.catalog}
+			<span className="hidden h-5 min-w-5 place-items-center rounded-full bg-card px-1.5 text-[10px] font-bold text-foreground tabular-nums shadow-xs md:grid">
+				{characterCount}
+			</span>
+		</Button>
+	);
 
-			<DialogContent
-				className="h-168 max-w-3xl"
-				onOpenAutoFocus={() => {
-					const active = document.activeElement;
-					returnFocusRef.current =
-						active instanceof HTMLElement && active !== document.body ? active : null;
-				}}
-				onCloseAutoFocus={(event) => {
-					const opener = returnFocusRef.current;
-					returnFocusRef.current = null;
-					if (!opener?.isConnected) return;
-					event.preventDefault();
-					opener.focus();
-				}}
+	const searchAndResults = (
+		<>
+			<div className="shrink-0 border-b border-border px-4 pb-3 sm:px-6">
+				<div className="grid gap-2 min-[500px]:grid-cols-[minmax(0,1fr)_minmax(0,10rem)] sm:grid-cols-[minmax(0,1fr)_12rem] sm:gap-3">
+					<div className="relative flex items-center">
+						<Search
+							aria-hidden="true"
+							className="pointer-events-none absolute left-3 size-4 text-muted-foreground"
+						/>
+						<Input
+							ref={searchRef}
+							type="text"
+							aria-label={copy.searchCatalog}
+							value={searchQuery}
+							onChange={(event) => updateSearch(event.target.value)}
+							placeholder={copy.catalogSearchPlaceholder}
+							className="h-11 px-9"
+						/>
+						{searchQuery && (
+							<Button
+								variant="ghost"
+								size="icon-sm"
+								onClick={clearSearch}
+								className="absolute right-1 text-muted-foreground"
+								aria-label={copy.clearSearch}
+							>
+								<X aria-hidden="true" />
+							</Button>
+						)}
+					</div>
+					<Select value={selectedSeries} onValueChange={setSelectedSeries}>
+						<SelectTrigger
+							aria-label={copy.filterSeries}
+							className="w-full min-w-0 data-[size=default]:h-11 *:data-[slot=select-value]:min-w-0 *:data-[slot=select-value]:truncate"
+						>
+							<SelectValue />
+						</SelectTrigger>
+						<SelectContent
+							position="popper"
+							align="end"
+							sideOffset={4}
+							collisionPadding={12}
+							className="max-w-(--radix-select-content-available-width) motion-reduce:animate-none"
+						>
+							<SelectGroup>
+								<SelectItem value="all">{copy.allSeries}</SelectItem>
+								{catalogGroups.map(({ series, members }) => (
+									<SelectItem key={series} value={series}>
+										{series} ({members.length})
+									</SelectItem>
+								))}
+							</SelectGroup>
+						</SelectContent>
+					</Select>
+				</div>
+			</div>
+
+			<div
+				ref={resultsRef}
+				role="region"
+				aria-label={copy.catalogResults}
+				tabIndex={0}
+				className="catalog-scrollbar min-h-0 flex-1 scrollbar-gutter-stable overflow-y-auto overscroll-contain px-4 py-4 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring sm:px-6 sm:py-5"
 			>
-				<DialogHeader>
+				{groups.length === 0 ? (
+					<div className="flex min-h-36 flex-col items-center justify-center gap-2 py-4 text-center">
+						<p className="text-sm font-semibold">{copy.noCatalogResults}</p>
+						<p className="text-sm text-muted-foreground">{copy.catalogSearchHint}</p>
+						<Button
+							variant="outline"
+							onClick={() => {
+								clearSearch();
+								setSelectedSeries("all");
+							}}
+							className="mt-1"
+						>
+							{copy.resetSearch}
+						</Button>
+					</div>
+				) : (
+					<CatalogResults groups={groups} onSelect={onSelectCharacter} />
+				)}
+			</div>
+		</>
+	);
+
+	if (isDesktop) {
+		return (
+			<Dialog open={open} onOpenChange={setOpen}>
+				<DialogTrigger asChild>{trigger}</DialogTrigger>
+
+				<DialogContent
+					className="h-168 max-w-3xl"
+					onOpenAutoFocus={() => {
+						const active = document.activeElement;
+						returnFocusRef.current =
+							active instanceof HTMLElement && active !== document.body ? active : null;
+					}}
+					onCloseAutoFocus={(event) => {
+						const opener = returnFocusRef.current;
+						returnFocusRef.current = null;
+						if (!opener?.isConnected) return;
+						event.preventDefault();
+						opener.focus();
+					}}
+				>
+					<DialogHeader>
+						<div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+							<DialogTitle>{copy.catalog}</DialogTitle>
+							<span
+								role="status"
+								className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium whitespace-nowrap text-muted-foreground tabular-nums"
+							>
+								{countLabel}
+							</span>
+						</div>
+						<DialogDescription>{copy.catalogDescription}</DialogDescription>
+					</DialogHeader>
+
+					{searchAndResults}
+				</DialogContent>
+			</Dialog>
+		);
+	}
+
+	return (
+		<Drawer open={open} onOpenChange={setOpen}>
+			<DrawerTrigger asChild>{trigger}</DrawerTrigger>
+
+			<DrawerContent className="max-h-[88dvh] overflow-hidden p-0">
+				<DrawerHeader className="px-4 pt-3 pb-2 sm:px-6">
 					<div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-						<DialogTitle>{copy.catalog}</DialogTitle>
+						<DrawerTitle>{copy.catalog}</DrawerTitle>
 						<span
 							role="status"
 							className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium whitespace-nowrap text-muted-foreground tabular-nums"
@@ -247,91 +370,11 @@ export function CharacterCatalog({
 							{countLabel}
 						</span>
 					</div>
-					<DialogDescription>{copy.catalogDescription}</DialogDescription>
-				</DialogHeader>
+					<DrawerDescription>{copy.catalogDescription}</DrawerDescription>
+				</DrawerHeader>
 
-				<div className="shrink-0 border-b border-border px-4 pb-3 sm:px-6">
-					<div className="grid gap-2 min-[500px]:grid-cols-[minmax(0,1fr)_minmax(0,10rem)] sm:grid-cols-[minmax(0,1fr)_12rem] sm:gap-3">
-						<div className="relative flex items-center">
-							<Search
-								aria-hidden="true"
-								className="pointer-events-none absolute left-3 size-4 text-muted-foreground"
-							/>
-							<Input
-								ref={searchRef}
-								type="text"
-								aria-label={copy.searchCatalog}
-								value={searchQuery}
-								onChange={(event) => updateSearch(event.target.value)}
-								placeholder={copy.catalogSearchPlaceholder}
-								className="h-11 px-9"
-							/>
-							{searchQuery && (
-								<Button
-									variant="ghost"
-									size="icon-sm"
-									onClick={clearSearch}
-									className="absolute right-1 text-muted-foreground"
-									aria-label={copy.clearSearch}
-								>
-									<X aria-hidden="true" />
-								</Button>
-							)}
-						</div>
-						<Select value={selectedSeries} onValueChange={setSelectedSeries}>
-							<SelectTrigger
-								aria-label={copy.filterSeries}
-								className="w-full min-w-0 data-[size=default]:h-11 *:data-[slot=select-value]:min-w-0 *:data-[slot=select-value]:truncate"
-							>
-								<SelectValue />
-							</SelectTrigger>
-							<SelectContent
-								position="popper"
-								align="end"
-								sideOffset={4}
-								collisionPadding={12}
-								className="max-w-(--radix-select-content-available-width) motion-reduce:animate-none"
-							>
-								<SelectGroup>
-									<SelectItem value="all">{copy.allSeries}</SelectItem>
-									{catalogGroups.map(({ series, members }) => (
-										<SelectItem key={series} value={series}>
-											{series} ({members.length})
-										</SelectItem>
-									))}
-								</SelectGroup>
-							</SelectContent>
-						</Select>
-					</div>
-				</div>
-
-				<div
-					ref={resultsRef}
-					role="region"
-					aria-label={copy.catalogResults}
-					tabIndex={0}
-					className="catalog-scrollbar min-h-0 flex-1 scrollbar-gutter-stable overflow-y-auto overscroll-contain px-4 py-4 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring sm:px-6 sm:py-5"
-				>
-					{groups.length === 0 ? (
-						<div className="flex min-h-36 flex-col items-center justify-center gap-2 py-4 text-center">
-							<p className="text-sm font-semibold">{copy.noCatalogResults}</p>
-							<p className="text-sm text-muted-foreground">{copy.catalogSearchHint}</p>
-							<Button
-								variant="outline"
-								onClick={() => {
-									clearSearch();
-									setSelectedSeries("all");
-								}}
-								className="mt-1"
-							>
-								{copy.resetSearch}
-							</Button>
-						</div>
-					) : (
-						<CatalogResults groups={groups} onSelect={onSelectCharacter} />
-					)}
-				</div>
-			</DialogContent>
-		</Dialog>
+				{searchAndResults}
+			</DrawerContent>
+		</Drawer>
 	);
 }

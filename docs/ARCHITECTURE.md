@@ -62,6 +62,6 @@ The root layout loads Allo Bold and the upright Latin subset of Inter Variable t
 
 Next.js adds browser icon links from the [SVG tap mark](../src/app/icon.svg), [ICO favicon](../src/app/favicon.ico) with 16, 32, and 48 px frames, and [180 px Apple touch icon](../src/app/apple-icon.png). The [manifest route](../src/app/manifest.ts) serves `/manifest.webmanifest` with 192 px and 512 px PNGs from [public/icons](../public/icons). It also declares a separate, opaque 512 px maskable icon for launchers that crop icons to a system shape.
 
-The [social image route](../src/app/opengraph-image.tsx) combines the same full-color SVG used in the header with the tap mark and slogan. Next.js uses the 1200 × 630 PNG for Open Graph and Twitter cards. See [SEO and site discovery](SEO.md) for the production origin, crawler rules, and verification steps.
+The [static social preview](../src/app/opengraph-image.png) shows the light gallery behind the full-color logo, slogan, and a short description. Next.js uses the 1200 × 630 PNG for Open Graph and X cards. See [SEO and site discovery](SEO.md) for the production origin, crawler rules, and verification steps.
 
 AniBoop's official hostname is `aniboop.nmrisrl.dev`. The [Vercel backup runbook](SEO.md#backup-access-on-vercel) records the status of `aniboop.vercel.app` and covers access during a parent-domain outage.

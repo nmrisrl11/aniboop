@@ -179,7 +179,7 @@ export function CharacterCatalog({ characters }: { characters: readonly Characte
 			</DialogTrigger>
 
 			<DialogContent
-				className="max-w-3xl"
+				className="h-168 max-w-3xl"
 				onOpenAutoFocus={() => {
 					const active = document.activeElement;
 					returnFocusRef.current =
@@ -266,7 +266,7 @@ export function CharacterCatalog({ characters }: { characters: readonly Characte
 					role="region"
 					aria-label={copy.catalogResults}
 					tabIndex={0}
-					className="catalog-scrollbar min-h-0 overflow-y-auto overscroll-contain px-4 py-4 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring sm:px-6 sm:py-5"
+					className="catalog-scrollbar min-h-0 flex-1 scrollbar-gutter-stable overflow-y-auto overscroll-contain px-4 py-4 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring sm:px-6 sm:py-5"
 				>
 					{groups.length === 0 ? (
 						<div className="flex min-h-36 flex-col items-center justify-center gap-2 py-4 text-center">

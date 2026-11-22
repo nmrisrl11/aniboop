@@ -47,7 +47,17 @@ export function BoopOrderSelect({
 							<ChevronDown aria-hidden="true" className="size-3.5 text-muted-foreground" />
 						</>
 					) : (
-						copy.orders[value].label
+						<span className="grid">
+							{orders.map((order) => (
+								<span
+									key={order}
+									aria-hidden={order !== value || undefined}
+									className="col-start-1 row-start-1 aria-hidden:invisible"
+								>
+									{copy.orders[order].label}
+								</span>
+							))}
+						</span>
 					)}
 				</Button>
 			</DropdownMenuTrigger>

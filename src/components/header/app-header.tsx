@@ -43,7 +43,8 @@ export function AppHeader({
 						title={brand.name}
 						width={90}
 						height={25}
-						loading="eager"
+						priority
+						className="aspect-90/25 h-6.25 w-22.5"
 					/>
 				</h1>
 				<div className="hidden items-center gap-2 md:flex">

@@ -57,7 +57,7 @@ export function CharacterDetailsDrawer({
 								width={56}
 								height={56}
 								unoptimized
-								className="size-full object-contain"
+								className="aspect-square size-full object-contain"
 							/>
 						</div>
 						<div className="min-w-0 flex-1">

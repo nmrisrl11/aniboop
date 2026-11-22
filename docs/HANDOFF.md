@@ -49,7 +49,7 @@ Each catalog entry has two local full-size WebP sheets in the Git-ignored `publi
 
 ## Historical verification
 
-The 139-character gallery passed `npm run lint:all`, `npm run format:check`, and `npm run build`. A Chromium run confirmed that preview, gaze, and boop assets load for all 20 characters in the latest batch. Earlier Chromium checks after the component reorganization covered the compact header down to 320 px, landscape layout, touch and keyboard activation, and focus restoration after closing dialogs.
+The 139-character gallery passed `npm run lint:all`, `npm run format:check`, and `npm run build`. A Chromium run confirmed that preview, gaze, and boop assets load for all 20 characters in the latest batch. Catalog trigger props forwarding, form control identification, and lazy-loaded image aspect-ratio styling were audited and verified clean in Chromium DevTools. Earlier Chromium checks after the component reorganization covered the compact header down to 320 px, landscape layout, touch and keyboard activation, and focus restoration after closing dialogs.
 
 Earlier framing checks covered the original 16 center previews and 288 playback poses. A batch preview rebuild verified that the generator skips uncataloged source sheets when run against the project's asset directory. Archive checks covered existing destination files and a simulated catalog write failure.
 

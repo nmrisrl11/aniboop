@@ -13,7 +13,7 @@ import {
 import type { CatalogGroup } from "./types";
 import { brand } from "@/lib/brand";
 import { Search, X } from "lucide-react";
-import type { RefObject } from "react";
+import { type RefObject, useId } from "react";
 
 const copy = brand.galleryControls;
 
@@ -34,8 +34,10 @@ export function CatalogSearchFilter({
 	catalogGroups: readonly CatalogGroup[];
 	searchRef: RefObject<HTMLInputElement | null>;
 }) {
+	const searchInputId = useId();
+
 	return (
-		<div className="shrink-0 border-b border-border px-4 pb-3 sm:px-6">
+		<search className="shrink-0 border-b border-border px-4 pb-3 sm:px-6">
 			<div className="grid gap-2 min-[500px]:grid-cols-[minmax(0,1fr)_minmax(0,10rem)] sm:grid-cols-[minmax(0,1fr)_12rem] sm:gap-3">
 				<div className="relative flex items-center">
 					<Search
@@ -44,7 +46,10 @@ export function CatalogSearchFilter({
 					/>
 					<Input
 						ref={searchRef}
+						id={searchInputId}
+						name="search"
 						type="text"
+						autoComplete="off"
 						aria-label={copy.searchCatalog}
 						value={searchQuery}
 						onChange={(event) => onSearchChange(event.target.value)}
@@ -63,7 +68,7 @@ export function CatalogSearchFilter({
 						</Button>
 					)}
 				</div>
-				<Select value={selectedSeries} onValueChange={onSeriesChange}>
+				<Select name="series" value={selectedSeries} onValueChange={onSeriesChange}>
 					<SelectTrigger
 						aria-label={copy.filterSeries}
 						className="w-full min-w-0 data-[size=default]:h-11 *:data-[slot=select-value]:min-w-0 *:data-[slot=select-value]:truncate"
@@ -88,6 +93,6 @@ export function CatalogSearchFilter({
 					</SelectContent>
 				</Select>
 			</div>
-		</div>
+		</search>
 	);
 }

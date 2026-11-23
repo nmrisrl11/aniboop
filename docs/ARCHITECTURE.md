@@ -1,19 +1,19 @@
 # Architecture
 
-| Area                                       | Location                                                  |
-| ------------------------------------------ | --------------------------------------------------------- |
-| App Router and homepage                    | [`src/app`](../src/app)                                   |
-| Header layout and boop-order control       | [`src/components/header`](../src/components/header)       |
-| Character catalog and search               | [`src/components/catalog`](../src/components/catalog)     |
-| Character details and downloads            | [`src/components/character`](../src/components/character) |
-| Component guide, credits, and GitHub link  | [`src/components/resources`](../src/components/resources) |
-| Theme provider and appearance control      | [`src/components/theme`](../src/components/theme)         |
-| Gallery viewport and tiles                 | [`src/components/gallery`](../src/components/gallery)     |
-| Mascot rendering and gestures              | [`src/components/mascot`](../src/components/mascot)       |
-| Shared brand copy                          | [`src/lib/brand.ts`](../src/lib/brand.ts)                 |
-| Tailwind v4 theme and shadcn CSS variables | [`src/app/globals.css`](../src/app/globals.css)           |
-| shadcn Radix Nova configuration            | [`components.json`](../components.json)                   |
-| shadcn component source                    | [`src/components/ui`](../src/components/ui)               |
+| Area                                       | Location                                                                                                                   |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| App Router and homepage                    | [`src/app`](../src/app)                                                                                                    |
+| Header layout and boop-order control       | [`src/components/header`](../src/components/header)                                                                        |
+| Character catalog and search               | [`src/components/catalog`](../src/components/catalog)                                                                      |
+| Character details and downloads            | [`src/components/character`](../src/components/character)                                                                  |
+| Mascot guide, credits, and GitHub link     | [`src/components/mascot-guide`](../src/components/mascot-guide), [`src/components/resources`](../src/components/resources) |
+| Theme provider and appearance control      | [`src/components/theme`](../src/components/theme)                                                                          |
+| Gallery viewport and tiles                 | [`src/components/gallery`](../src/components/gallery)                                                                      |
+| Mascot rendering and gestures              | [`src/components/mascot`](../src/components/mascot)                                                                        |
+| Shared brand copy                          | [`src/lib/brand.ts`](../src/lib/brand.ts)                                                                                  |
+| Tailwind v4 theme and shadcn CSS variables | [`src/app/globals.css`](../src/app/globals.css)                                                                            |
+| shadcn Radix Nova configuration            | [`components.json`](../components.json)                                                                                    |
+| shadcn component source                    | [`src/components/ui`](../src/components/ui)                                                                                |
 
 ## Gallery
 

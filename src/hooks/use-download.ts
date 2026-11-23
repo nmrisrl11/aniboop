@@ -22,6 +22,18 @@ export function useDownload() {
 		}
 	}, []);
 
+	const downloadText = useCallback((content: string, filename: string, mimeType = "text/plain") => {
+		const blob = new Blob([content], { type: `${mimeType};charset=utf-8` });
+		const blobUrl = URL.createObjectURL(blob);
+		const link = document.createElement("a");
+		link.href = blobUrl;
+		link.download = filename;
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+		URL.revokeObjectURL(blobUrl);
+	}, []);
+
 	const downloadMultiple = useCallback(
 		async (items: readonly { url: string; filename: string }[]) => {
 			setDownloading(true);
@@ -38,5 +50,5 @@ export function useDownload() {
 		[downloadFile],
 	);
 
-	return { downloadFile, downloadMultiple, downloading };
+	return { downloadFile, downloadText, downloadMultiple, downloading };
 }

@@ -2,12 +2,12 @@ import {
 	CharacterCatalog,
 	type CharacterCatalogEntry,
 } from "@/components/catalog/character-catalog";
+import { Credits } from "@/components/credits/credits";
 import { BoopOrderSelect } from "@/components/header/boop-order-select";
 import { HeaderOptions } from "@/components/header/header-options";
 import { ReactionSoundToggle } from "@/components/header/reaction-sound-toggle";
 import { MascotGuide } from "@/components/mascot-guide/mascot-guide";
 import type { BoopOrder } from "@/components/mascot/mascot";
-import { CreditsModal } from "@/components/resources/credits-modal";
 import { RepositoryLink } from "@/components/resources/repository-link";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import type { GalleryCharacter } from "@/data/characters";
@@ -50,7 +50,7 @@ export function AppHeader({
 				<div className="hidden items-center gap-2 md:flex">
 					<div aria-hidden="true" className="mx-1 h-4 w-px bg-border" />
 					<MascotGuide />
-					<CreditsModal />
+					<Credits />
 					<RepositoryLink />
 				</div>
 			</div>

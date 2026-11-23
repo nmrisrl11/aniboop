@@ -1,10 +1,10 @@
 "use client";
 
+import { Credits } from "@/components/credits/credits";
 import { BoopOrderSelect } from "@/components/header/boop-order-select";
 import { ReactionSoundToggle } from "@/components/header/reaction-sound-toggle";
 import { MascotGuide } from "@/components/mascot-guide/mascot-guide";
 import type { BoopOrder } from "@/components/mascot/mascot";
-import { CreditsModal } from "@/components/resources/credits-modal";
 import { RepositoryLink } from "@/components/resources/repository-link";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import { Button } from "@/components/ui/button";
@@ -78,7 +78,7 @@ export function HeaderOptions({
 				</div>
 				<div className="flex flex-col gap-0.5 pt-1.5">
 					<MascotGuide triggerClassName={optionClass} />
-					<CreditsModal triggerClassName={optionClass} />
+					<Credits triggerClassName={optionClass} />
 					<RepositoryLink showLabel className={optionClass} />
 				</div>
 			</PopoverContent>

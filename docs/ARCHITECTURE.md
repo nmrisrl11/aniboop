@@ -1,19 +1,19 @@
 # Architecture
 
-| Area                                       | Location                                                                                                                   |
-| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| App Router and homepage                    | [`src/app`](../src/app)                                                                                                    |
-| Header layout and boop-order control       | [`src/components/header`](../src/components/header)                                                                        |
-| Character catalog and search               | [`src/components/catalog`](../src/components/catalog)                                                                      |
-| Character details and downloads            | [`src/components/character`](../src/components/character)                                                                  |
-| Mascot guide, credits, and GitHub link     | [`src/components/mascot-guide`](../src/components/mascot-guide), [`src/components/resources`](../src/components/resources) |
-| Theme provider and appearance control      | [`src/components/theme`](../src/components/theme)                                                                          |
-| Gallery viewport and tiles                 | [`src/components/gallery`](../src/components/gallery)                                                                      |
-| Mascot rendering and gestures              | [`src/components/mascot`](../src/components/mascot)                                                                        |
-| Shared brand copy                          | [`src/lib/brand.ts`](../src/lib/brand.ts)                                                                                  |
-| Tailwind v4 theme and shadcn CSS variables | [`src/app/globals.css`](../src/app/globals.css)                                                                            |
-| shadcn Radix Nova configuration            | [`components.json`](../components.json)                                                                                    |
-| shadcn component source                    | [`src/components/ui`](../src/components/ui)                                                                                |
+| Area                                       | Location                                                                                                                                                                          |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| App Router and homepage                    | [`src/app`](../src/app)                                                                                                                                                           |
+| Header layout and boop-order control       | [`src/components/header`](../src/components/header)                                                                                                                               |
+| Character catalog and search               | [`src/components/catalog`](../src/components/catalog)                                                                                                                             |
+| Character details and downloads            | [`src/components/character`](../src/components/character)                                                                                                                         |
+| Mascot guide, credits, and GitHub link     | [`src/components/mascot-guide`](../src/components/mascot-guide), [`src/components/credits`](../src/components/credits), [`src/components/resources`](../src/components/resources) |
+| Theme provider and appearance control      | [`src/components/theme`](../src/components/theme)                                                                                                                                 |
+| Gallery viewport and tiles                 | [`src/components/gallery`](../src/components/gallery)                                                                                                                             |
+| Mascot rendering and gestures              | [`src/components/mascot`](../src/components/mascot)                                                                                                                               |
+| Shared brand copy                          | [`src/lib/brand.ts`](../src/lib/brand.ts)                                                                                                                                         |
+| Tailwind v4 theme and shadcn CSS variables | [`src/app/globals.css`](../src/app/globals.css)                                                                                                                                   |
+| shadcn Radix Nova configuration            | [`components.json`](../components.json)                                                                                                                                           |
+| shadcn component source                    | [`src/components/ui`](../src/components/ui)                                                                                                                                       |
 
 ## Gallery
 
@@ -33,7 +33,7 @@ The [character catalog](../src/components/catalog/character-catalog.tsx) decompo
 
 Shared dialogs, dropdowns, popovers, and selects fade in place when their transitions are enabled. The Boop order and Appearance menus use the shared dropdown radio group, which leaves 4 px between options. Boop order gives the selected option a checkmark and uses a stronger fill for the focused option.
 
-All modal surfaces ([CharacterCatalog](../src/components/catalog/character-catalog.tsx), [CharacterDetails](../src/components/character/character-details.tsx), [MascotGuide](../src/components/mascot-guide/mascot-guide.tsx), and [CreditsModal](../src/components/resources/credits-modal.tsx)) adapt responsively: rendering as centered Radix dialogs on desktop ($\ge 48\text{rem}$) and slide-up Vaul drawers with bottom-sheet drag-to-dismiss gestures on mobile ($< 48\text{rem}$), synchronized via [useMediaQuery](../src/hooks/use-media-query.ts) (`useSyncExternalStore`).
+All modal surfaces ([CharacterCatalog](../src/components/catalog/character-catalog.tsx), [CharacterDetails](../src/components/character/character-details.tsx), [MascotGuide](../src/components/mascot-guide/mascot-guide.tsx), and [Credits](../src/components/credits/credits.tsx)) adapt responsively: rendering as centered Radix dialogs on desktop ($\ge 48\text{rem}$) and slide-up Vaul drawers with bottom-sheet drag-to-dismiss gestures on mobile ($< 48\text{rem}$), synchronized via [useMediaQuery](../src/hooks/use-media-query.ts) (`useSyncExternalStore`).
 
 ## Character details and downloads
 

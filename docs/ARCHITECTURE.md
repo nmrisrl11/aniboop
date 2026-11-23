@@ -37,7 +37,7 @@ All modal surfaces ([CharacterCatalog](../src/components/catalog/character-catal
 
 ## Character details and downloads
 
-The [character details](../src/components/character/character-details.tsx) component provides sprite sheet downloads for both directional poses and emotional reactions, alongside resolution selection between 1080 HD (Cloudflare R2) and 504 Web. It is accessible from the dedicated corner squircle button on each grid tile or by clicking a character in the catalog.
+The [character details](../src/components/character/character-details.tsx) component provides sprite sheet downloads for both directional poses and emotional reactions, alongside resolution selection between 1080 HD ([Cloudflare R2](R2_STORAGE.md)) and 504 Web. It is accessible from the dedicated corner squircle button on each grid tile or by clicking a character in the catalog.
 
 To maximize mobile rendering performance and eliminate GPU composite overhead, modal overlays use a crisp dimmed scrim (`bg-black/70`) without expensive backdrop filter blurs. Additionally, the catalog and details modal are mutually exclusive: selecting a character in the catalog closes the catalog before opening the details dialog; when opened from the catalog, a `Back to catalog` navigation button allows returning to the active catalog search without losing filter or query state. Sprite sheet previews slice the cached 3×3 compact WebPs via CSS backgrounds to eliminate extra network requests.
 

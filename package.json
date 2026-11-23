@@ -16,7 +16,8 @@
 		"format": "oxfmt . --write",
 		"format:check": "oxfmt . --check",
 		"mascot:optimize": "python .agents/skills/optimize-mascot/scripts/optimize.py",
-		"mascot:add": "python scripts/add-mascot.py"
+		"mascot:add": "python scripts/add-mascot.py",
+		"mascot:sync-r2": "python scripts/sync-r2.py"
 	},
 	"dependencies": {
 		"class-variance-authority": "^0.7.1",

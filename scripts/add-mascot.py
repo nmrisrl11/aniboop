@@ -17,6 +17,7 @@ PROCESSED = RAW / "processed"
 CATALOG = ROOT / "src" / "data" / "characters.json"
 OPTIMIZER = ROOT / ".agents" / "skills" / "optimize-mascot" / "scripts" / "optimize.py"
 PREVIEW_GENERATOR = ROOT / "scripts" / "generate-mascot-previews.py"
+R2_SYNC = ROOT / "scripts" / "sync-r2.py"
 
 
 def find_raw_sheet(character_id, kind):
@@ -131,6 +132,8 @@ def main():
     finally:
         lock.unlink()
     print(f"Added {args.id} to the catalog with five WebPs and moved its originals to raw/processed.")
+    if R2_SYNC.is_file():
+        subprocess.run([sys.executable, str(R2_SYNC), "--character", args.id], cwd=ROOT)
 
 
 if __name__ == "__main__":

@@ -53,7 +53,7 @@ Open [localhost:3000](http://localhost:3000). Run `npm run lint:all` and `npm ru
 | Interface     | Tailwind CSS 4, shadcn/ui with Radix primitives & Vaul drawer, Lucide, next-themes |
 | Code examples | shadcn Code Block with Shiki syntax highlighting                                   |
 | Code quality  | Oxlint, Next.js ESLint, Tailwind CSS lint, and Oxfmt                               |
-| Mascot assets | WebP sprite sheets with Python, Pillow, and NumPy for asset preparation            |
+| Mascot assets | WebP sprite sheets with Python, Pillow, NumPy, and Cloudflare R2                   |
 
 ## Documentation
 
@@ -64,6 +64,7 @@ Open [localhost:3000](http://localhost:3000). Run `npm run lint:all` and `npm ru
 | [SEO and site discovery](docs/SEO.md)              | Metadata, production origin, and crawler endpoints    |
 | [Feature blueprint](docs/FEATURE_BLUEPRINT.md)     | Gallery, mascot reactions, and downloads              |
 | [Gallery assets](docs/GALLERY_ASSETS.md)           | Sprite sheets, gallery loading, and mascot setup      |
+| [Cloudflare R2 storage](docs/R2_STORAGE.md)        | HD master sheet offloading, sync CLI, and CORS        |
 | [Development](docs/DEVELOPMENT.md)                 | Build, lint, formatting, and editor setup             |
 | [Documentation maintenance](docs/DOCUMENTATION.md) | Guide ownership and documentation sync workflow       |
 | [Agent instructions](AGENTS.md)                    | Repository-specific agent guidance                    |

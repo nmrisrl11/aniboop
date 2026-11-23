@@ -16,7 +16,8 @@ Use Node.js 22.12 or later and npm. Install the lockfile dependencies with `npm 
 | `npm run format`            | Format project files and sort Tailwind classes                      |
 | `npm run format:check`      | Check formatting                                                    |
 | `npm run mascot:optimize`   | Optimize raw mascot sprite sheets in `public/mascots/raw`           |
-| `npm run mascot:add`        | Generate five WebPs, add the mascot, and archive the original pair. |
+| `npm run mascot:add`        | Generate five WebPs, add the mascot, archive originals, and sync R2 |
+| `npm run mascot:sync-r2`    | Sync or audit 1080 master sheets with Cloudflare R2 storage         |
 
 The [VS Code workspace settings](../.vscode/settings.json) configure Oxfmt on save and point Tailwind IntelliSense at the global stylesheet. The workspace also includes tasks and Next.js debug profiles.
 
@@ -43,6 +44,6 @@ Copy `.env.example` to `.env.local` to customize settings during local developme
 | `ANIBOOP_URL`               | Build / Server   | Official public URL (e.g. `https://aniboop.nmrisrl.dev`). Required in production builds for canonical metadata, sitemap generation, and search engine indexability. | Unset in local dev and preview builds (`noindex, follow`).                 |
 | `NEXT_PUBLIC_R2_ASSETS_URL` | Client / Browser | Base public origin for Cloudflare R2 holding full-size 1080 × 1080 master sheets (e.g. `https://assets.aniboop.nmrisrl.dev` or public R2 URL).                      | When unset, HD downloads fall back to local compact sheets without errors. |
 
-See the [SEO and site discovery guide](SEO.md) for domain verification and the [gallery assets guide](GALLERY_ASSETS.md#scaling-the-catalog) for Cloudflare R2 details.
+See the [SEO and site discovery guide](SEO.md) for domain verification and the [R2 storage guide](R2_STORAGE.md) for Cloudflare R2 setup, CORS, and sync workflows.
 
 The [gallery assets guide](GALLERY_ASSETS.md#adding-a-mascot) covers Python requirements, adding a mascot, and regenerating individual assets.

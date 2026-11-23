@@ -17,7 +17,7 @@ The copy below includes planned gallery surfaces. The homepage displays characte
 | Gallery heading      | Chibi anime character gallery                                                                                                                  |
 | Gallery instructions | Tap or hold a character to boop. Drag, scroll, or use arrow keys to explore.                                                                   |
 | Card action          | View & download                                                                                                                                |
-| Detail labels        | Directions, Reactions, Download                                                                                                                |
+| Detail labels        | Directions, Reactions, Resolution (1080 HD, 504 Web)                                                                                           |
 
 The top bar includes Component, Credits, the GitHub repository link, the current boop order, Catalog, Appearance, and Reaction sounds. Below the medium breakpoint, Catalog stays in the header and the secondary controls move into More options. Boop order offers In order, Random, and Build up. Appearance offers System, Light, and Dark. Reaction sounds displays On or Off in More options. The catalog title shows the character total and switches to a match count when search or a series filter is active.
 

@@ -205,6 +205,11 @@
 		color-scheme: dark;
 	}
 
+	button:not(:disabled),
+	[role="button"]:not(:disabled) {
+		cursor: pointer;
+	}
+
 	@media (forced-colors: active) {
 		body {
 			background-image: none;

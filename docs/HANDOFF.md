@@ -61,6 +61,6 @@ Repeated mouse boops with slight pointer movement kept neighboring mascots in th
 
 For gallery changes, start with the [feature blueprint](FEATURE_BLUEPRINT.md) and [gallery asset guide](GALLERY_ASSETS.md#gallery-loading). Keep booping distinct from opening **View & download**. Test tap versus drag, keyboard access, reduced motion, and long pans on a representative phone. Confirm distribution rights and applicable attribution before publishing downloads.
 
-Cloudflare R2 is planned for full-size downloads. The gallery currently serves tracked previews and compact pose sheets. See [Scaling the catalog](GALLERY_ASSETS.md#scaling-the-catalog).
+Cloudflare R2 hosts full-size 1080 × 1080 master sheets via `NEXT_PUBLIC_R2_ASSETS_URL`, falling back to local compact sheets when unset. The gallery currently serves tracked previews and compact pose sheets. See [Scaling the catalog](GALLERY_ASSETS.md#scaling-the-catalog).
 
 Read [AGENTS.md](../AGENTS.md) before editing. The [development guide](DEVELOPMENT.md) lists setup and checks. Use `npm ci`, `npm run dev`, `npm run lint:all`, and `npm run format:check`. Use `npm run build` for runtime or build changes. Use the [documentation sync skill](../.agents/skills/sync-documentation/SKILL.md) for guide updates and the [commit-and-push skill](../.agents/skills/commit-and-push/SKILL.md) when asked to publish changes. Commit and push defaults to confirmation. An explicit `--direct` applies only to that invocation.

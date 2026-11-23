@@ -24,4 +24,15 @@ Tailwind lint uses [`src/app/globals.css`](../src/app/globals.css) and checks so
 
 The [commit-and-push skill](../.agents/skills/commit-and-push/SKILL.md) documents the repository workflow for preparing a conventional commit and pushing it.
 
+## Environment variables
+
+Copy `.env.example` to `.env.local` to customize settings during local development.
+
+| Variable                    | Scope            | Purpose                                                                                                                                                             | Default / Fallback                                                         |
+| --------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `ANIBOOP_URL`               | Build / Server   | Official public URL (e.g. `https://aniboop.nmrisrl.dev`). Required in production builds for canonical metadata, sitemap generation, and search engine indexability. | Unset in local dev and preview builds (`noindex, follow`).                 |
+| `NEXT_PUBLIC_R2_ASSETS_URL` | Client / Browser | Base public origin for Cloudflare R2 holding full-size 1080 × 1080 master sheets (e.g. `https://assets.aniboop.nmrisrl.dev` or public R2 URL).                      | When unset, HD downloads fall back to local compact sheets without errors. |
+
+See the [SEO and site discovery guide](SEO.md) for domain verification and the [gallery assets guide](GALLERY_ASSETS.md#scaling-the-catalog) for Cloudflare R2 details.
+
 The [gallery assets guide](GALLERY_ASSETS.md#adding-a-mascot) covers Python requirements, adding a mascot, and regenerating individual assets.

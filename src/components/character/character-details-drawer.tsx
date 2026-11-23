@@ -34,7 +34,7 @@ export function CharacterDetailsDrawer({
 	return (
 		<Drawer open={open} onOpenChange={onOpenChange}>
 			<DrawerContent className="max-h-[88dvh] overflow-hidden p-0">
-				<DrawerHeader className="border-b border-border bg-muted/30 px-5 pt-3 pb-4">
+				<DrawerHeader className="border-b border-border px-5 pt-3 pb-4">
 					{onBackToCatalog && (
 						<div className="mb-2">
 							<Button

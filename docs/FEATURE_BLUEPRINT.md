@@ -1,13 +1,13 @@
 # Feature blueprint
 
-The homepage repeats the character catalog across a pannable grid. Visible mascots follow an unpressed fine pointer while the grid is still. Click, tap, Enter, or Space plays a reaction using the selected Boop order. In order cycles through the configured reactions, Random picks one each time, and Build up plays a dizzy reaction after four quick boops. A hold or two-finger pinch on the mascot triggers a separate reaction. Dragging pans without triggering a boop, and reduced motion disables gaze tracking and deformation. The top bar opens the catalog, where users can search by character name or series and filter by series. Users can view character details and download assets from the catalog or through the card action on each character tile. Full-size raw downloads will use Cloudflare R2 when enabled.
+The homepage repeats the character catalog across a pannable grid. Visible mascots follow an unpressed fine pointer while the grid is still. Click, tap, Enter, or Space plays a reaction using the selected Boop order. In order cycles through the configured reactions, Random picks one each time, and Build up plays a dizzy reaction after four quick boops. A hold or two-finger pinch on the mascot triggers a separate reaction. Dragging pans without triggering a boop, and reduced motion disables gaze tracking and deformation. The top bar opens the catalog, where users can search by character name or series and filter by series. Users can view character details and download assets from the catalog or through the card action on each character tile. Full-size raw downloads will use Cloudflare R2 when enabled via `NEXT_PUBLIC_R2_ASSETS_URL`, with fallback to compact local sheets.
 
-| Area              | Behavior                                                                                       | Status      |
-| ----------------- | ---------------------------------------------------------------------------------------------- | ----------- |
-| Gallery           | Let users open character details from the catalog or grid tiles.                               | Implemented |
-| Character details | Open a character through a separate View & download action. Show its Directions and Reactions. | Implemented |
-| Downloads         | Offer the selected character’s directional poses, reactions, and still preview.                | Implemented |
-| Performance       | Keep grid previews small and load full reaction or download assets on demand.                  | Implemented |
+| Area              | Behavior                                                                                                                    | Status      |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| Gallery           | Let users open character details from the catalog or grid tiles.                                                            | Implemented |
+| Character details | Open a character through a separate View & download action with resolution selection.                                       | Implemented |
+| Downloads         | Offer high-resolution (1080 HD) and web-ready (504 Web) sprite sheets for directional poses and reactions.                  | Implemented |
+| Performance       | Keep grid previews small, load full sheets on demand, and offload master sheet downloads to Cloudflare R2 with zero egress. | Implemented |
 
 ## Reaction sounds
 

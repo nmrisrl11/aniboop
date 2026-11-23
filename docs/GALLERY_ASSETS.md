@@ -72,4 +72,4 @@ The current catalog fits in the client bundle. If the metadata grows enough to a
 
 Git tracks the gallery previews and compact pose sheets. The gallery serves them from same-origin, content-hashed build output. Preserve content-versioned URLs if moving gallery assets to another host.
 
-When downloads are added, fetch the full-size sheets from Cloudflare R2 on demand. Show formats, usage terms, and applicable attribution. Profile long pans, cold transfer, first-boop latency, and image memory on a representative phone as the catalog grows.
+When downloads are added, fetch the full-size sheets from Cloudflare R2 on demand using `NEXT_PUBLIC_R2_ASSETS_URL` to offload bandwidth and eliminate egress fees. When unset, downloads fall back to local compact sheets. Show formats, usage terms, and applicable attribution. Profile long pans, cold transfer, first-boop latency, and image memory on a representative phone as the catalog grows.

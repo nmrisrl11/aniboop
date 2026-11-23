@@ -4,7 +4,7 @@ import { Mascot, type BoopOrder } from "@/components/mascot/mascot";
 import type { GalleryCharacter } from "@/data/characters";
 import { brand } from "@/lib/brand";
 import type { Reaction } from "@/lib/mascot-sprites";
-import { Download } from "lucide-react";
+import { Maximize2 } from "lucide-react";
 import { memo, useCallback, useState } from "react";
 import ThiingsGrid, { DRAG_THRESHOLD, type ItemConfig } from "./thiings-grid";
 
@@ -93,11 +93,11 @@ const CharacterTile = memo(function CharacterTile({
 					type="button"
 					tabIndex={visibility === "focusable" ? 0 : -1}
 					onClick={() => onSelectCharacter(character)}
-					className="absolute top-2.5 right-2.5 z-10 flex size-7 items-center justify-center rounded-lg text-muted-foreground/70 transition-all duration-160 ease-out corner-squircle hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring active:scale-95"
+					className="absolute top-2.5 right-2.5 z-10 flex size-7 scale-80 items-center justify-center rounded-lg text-muted-foreground/70 opacity-0 transition-all duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] corner-squircle group-hover/tile:scale-100 group-hover/tile:opacity-100 hover:scale-110 hover:bg-muted hover:text-foreground focus-visible:scale-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-ring active:scale-95 motion-reduce:scale-100 motion-reduce:transition-opacity max-md:scale-100 max-md:opacity-75"
 					aria-label={`${brand.characterDetails.viewAndDownload}: ${character.name}`}
 					title={`${brand.characterDetails.viewAndDownload}: ${character.name}`}
 				>
-					<Download className="size-3.5" aria-hidden="true" />
+					<Maximize2 className="size-3.5" aria-hidden="true" />
 				</button>
 			)}
 			<div className="max-w-full text-center select-none">

@@ -3,9 +3,9 @@
 import type { GalleryCharacter } from "@/data/characters";
 import { useDownload } from "@/hooks/use-download";
 import { useMediaQuery } from "@/hooks/use-media-query";
+import { CharacterDetailsContent } from "./character-details-content";
 import { CharacterDetailsDialog } from "./character-details-dialog";
 import { CharacterDetailsDrawer } from "./character-details-drawer";
-import { CharacterDetailsTabs } from "./character-details-tabs";
 
 export function CharacterDetails({
 	character,
@@ -23,7 +23,7 @@ export function CharacterDetails({
 
 	if (!character) return null;
 
-	const tabsContent = <CharacterDetailsTabs character={character} onDownload={downloadFile} />;
+	const content = <CharacterDetailsContent character={character} onDownload={downloadFile} />;
 
 	if (isDesktop) {
 		return (
@@ -33,7 +33,7 @@ export function CharacterDetails({
 				onOpenChange={onOpenChange}
 				onBackToCatalog={onBackToCatalog}
 			>
-				{tabsContent}
+				{content}
 			</CharacterDetailsDialog>
 		);
 	}
@@ -45,7 +45,7 @@ export function CharacterDetails({
 			onOpenChange={onOpenChange}
 			onBackToCatalog={onBackToCatalog}
 		>
-			{tabsContent}
+			{content}
 		</CharacterDetailsDrawer>
 	);
 }

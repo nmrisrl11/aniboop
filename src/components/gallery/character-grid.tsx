@@ -4,7 +4,7 @@ import { Mascot, type BoopOrder } from "@/components/mascot/mascot";
 import type { GalleryCharacter } from "@/data/characters";
 import { brand } from "@/lib/brand";
 import type { Reaction } from "@/lib/mascot-sprites";
-import { Maximize2 } from "lucide-react";
+import { Maximize2Icon } from "lucide-react";
 import { memo, useCallback, useState } from "react";
 import ThiingsGrid, { DRAG_THRESHOLD, type ItemConfig } from "./thiings-grid";
 
@@ -97,7 +97,7 @@ const CharacterTile = memo(function CharacterTile({
 					aria-label={`${brand.characterDetails.viewAndDownload}: ${character.name}`}
 					title={`${brand.characterDetails.viewAndDownload}: ${character.name}`}
 				>
-					<Maximize2 className="size-3.5" aria-hidden="true" />
+					<Maximize2Icon className="size-3.5" aria-hidden="true" />
 				</button>
 			)}
 			<div className="max-w-full text-center select-none">

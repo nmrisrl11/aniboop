@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { brand } from "@/lib/brand";
 import { cn } from "cn";
-import { Heart } from "lucide-react";
+import { HeartIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 
 const copy = brand.credits;
@@ -20,7 +20,7 @@ export function CreditsTrigger({ className, ...props }: ComponentProps<typeof Bu
 			)}
 			{...props}
 		>
-			<Heart className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+			<HeartIcon className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
 			<span className="flex-1 text-left">{copy.trigger}</span>
 		</Button>
 	);

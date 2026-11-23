@@ -24,6 +24,16 @@ Tailwind lint uses [`src/app/globals.css`](../src/app/globals.css) and checks so
 
 The [commit-and-push skill](../.agents/skills/commit-and-push/SKILL.md) documents the repository workflow for preparing a conventional commit and pushing it.
 
+## Icon conventions
+
+Icons are provided by `lucide-react`. Follow these conventions across all components:
+
+- **Canonical `*Icon` exports**: Import icons directly using the `Icon` suffix (e.g. `import { HomeIcon, SearchIcon, CheckIcon } from "lucide-react"`).
+- **No import aliases**: Do not use import renaming aliases such as `import { Home as HomeIcon }` or `import { Check as CheckIcon }`. Lucide React exports canonical `*Icon` variants directly; always import those directly instead.
+- **No unsuffixed icon imports**: Avoid importing bare icon names such as `Home` or `Search` to prevent naming collisions with domain models or components and maintain consistent symbol naming throughout the codebase.
+- **Type annotations**: Use `type LucideIcon` imported directly from `lucide-react` when passing icon components as props or defining icon maps.
+- **Third-party component additions**: When adding or updating shadcn components, inspect the imports and update any generated unsuffixed icon imports to match this rule.
+
 ## Environment variables
 
 Copy `.env.example` to `.env.local` to customize settings during local development.

@@ -10,7 +10,7 @@ import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { brand } from "@/lib/brand";
-import { Ellipsis } from "lucide-react";
+import { EllipsisIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const optionClass =
@@ -51,7 +51,7 @@ export function HeaderOptions({
 					aria-label={copy.moreOptions}
 					title={copy.moreOptions}
 				>
-					<Ellipsis aria-hidden="true" className="size-5" />
+					<EllipsisIcon aria-hidden="true" className="size-5" />
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent

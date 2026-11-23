@@ -10,12 +10,12 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { brand } from "@/lib/brand";
-import { ChevronDown, Monitor, Moon, Sun } from "lucide-react";
+import { ChevronDownIcon, MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
 
 const copy = brand.galleryControls;
-const icons = { system: Monitor, light: Sun, dark: Moon };
+const icons = { system: MonitorIcon, light: SunIcon, dark: MoonIcon };
 const themes = ["system", "light", "dark"] as const;
 const subscribeToHydration = () => () => {};
 const clientSnapshot = () => true;
@@ -48,7 +48,10 @@ export function ThemeSwitcher({
 						<>
 							<span className="flex-1 text-left">{copy.appearance}</span>
 							<span className="text-xs text-muted-foreground">{copy.themes[appearance]}</span>
-							<ChevronDown aria-hidden="true" className="size-3.5 shrink-0 text-muted-foreground" />
+							<ChevronDownIcon
+								aria-hidden="true"
+								className="size-3.5 shrink-0 text-muted-foreground"
+							/>
 						</>
 					)}
 				</Button>

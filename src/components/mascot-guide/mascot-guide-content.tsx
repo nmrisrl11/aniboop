@@ -12,7 +12,7 @@ import {
 import { useCopy } from "@/hooks/use-copy";
 import { useDownload } from "@/hooks/use-download";
 import { useHighlightedCode } from "@/hooks/use-highlighted-code";
-import { Check, Copy, Download, FileCodeIcon } from "lucide-react";
+import { CheckIcon, CopyIcon, DownloadIcon, FileCodeIcon } from "lucide-react";
 import { useCallback } from "react";
 import { MASCOT_SOURCE_CODE, USAGE_SNIPPET } from "./mascot-source";
 
@@ -65,7 +65,7 @@ export function MascotGuideContent() {
 									onClick={handleDownloadComponent}
 									className="inline-flex cursor-pointer items-center gap-1 font-semibold text-primary underline underline-offset-4 transition-colors hover:text-primary/80"
 								>
-									<Download className="size-3" aria-hidden="true" />
+									<DownloadIcon className="size-3" aria-hidden="true" />
 									mascot.tsx
 								</button>{" "}
 								(or{" "}
@@ -76,12 +76,12 @@ export function MascotGuideContent() {
 								>
 									{copied ? (
 										<span className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
-											<Check className="size-3" aria-hidden="true" />
+											<CheckIcon className="size-3" aria-hidden="true" />
 											copied!
 										</span>
 									) : (
 										<>
-											<Copy className="size-3" aria-hidden="true" />
+											<CopyIcon className="size-3" aria-hidden="true" />
 											copy code
 										</>
 									)}

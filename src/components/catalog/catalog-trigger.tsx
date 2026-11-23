@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { brand } from "@/lib/brand";
 import { cn } from "cn";
-import { Library } from "lucide-react";
+import { LibraryIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 
 const copy = brand.galleryControls;
@@ -26,7 +26,7 @@ export function CatalogTrigger({
 			title={copy.catalog}
 			{...props}
 		>
-			<Library data-icon="inline-start" aria-hidden="true" />
+			<LibraryIcon data-icon="inline-start" aria-hidden="true" />
 			{copy.catalog}
 			<span className="hidden h-5 min-w-5 place-items-center rounded-full bg-card px-1.5 text-[10px] font-bold text-foreground tabular-nums shadow-xs md:grid">
 				{characterCount}

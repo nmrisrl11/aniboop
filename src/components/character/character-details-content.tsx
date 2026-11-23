@@ -5,7 +5,7 @@ import type { GalleryCharacter } from "@/data/characters";
 import { getMascotAssetUrl, type SheetQuality } from "@/lib/assets";
 import { brand } from "@/lib/brand";
 import { cn } from "cn";
-import { ShieldAlert } from "lucide-react";
+import { ShieldAlertIcon } from "lucide-react";
 import { useState } from "react";
 import { getSpriteStyle } from "./character-details-utils";
 
@@ -131,7 +131,7 @@ export function CharacterDetailsContent({
 
 			{/* License and usage terms */}
 			<section className="flex gap-3 rounded-xl border border-border/80 bg-muted/40 p-3.5 text-xs text-muted-foreground corner-squircle">
-				<ShieldAlert className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+				<ShieldAlertIcon className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
 				<div className="flex flex-col gap-1">
 					<h5 className="font-semibold text-foreground">{copy.licenseNoticeTitle}</h5>
 					<p className="leading-relaxed">{copy.licenseNotice}</p>

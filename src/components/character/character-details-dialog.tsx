@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import type { GalleryCharacter } from "@/data/characters";
 import { brand } from "@/lib/brand";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeftIcon } from "lucide-react";
 import Image from "next/image";
 import type { ReactNode } from "react";
 
@@ -44,7 +44,7 @@ export function CharacterDetailsDialog({
 								onClick={onBackToCatalog}
 								className="-ml-2 h-7 gap-1 rounded-lg px-2 text-xs font-semibold text-muted-foreground transition-all duration-160 ease-out corner-squircle hover:bg-muted hover:text-foreground active:scale-95"
 							>
-								<ArrowLeft data-icon="inline-start" aria-hidden="true" />
+								<ArrowLeftIcon data-icon="inline-start" aria-hidden="true" />
 								Back to catalog
 							</Button>
 						</div>

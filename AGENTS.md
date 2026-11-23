@@ -29,6 +29,13 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Update shared product copy in [`src/lib/brand.ts`](src/lib/brand.ts). Use Allo Bold for display type, Inter for UI text, and system monospace for technical values. See the [brand guide](docs/BRAND.md) for typography, palette, and voice.
 - Keep boop activation and opening character details distinct when implementing the gallery. Preserve keyboard access and reduced-motion behavior. Review the [feature blueprint](docs/FEATURE_BLUEPRINT.md) for acceptance criteria.
 
+## Icon usage
+
+- Always import icons directly from `lucide-react` with their canonical `*Icon` suffix (e.g. `HomeIcon`, `SearchIcon`, `XIcon`, `CheckIcon`, `ChevronRightIcon`).
+- Never import icons using their base un-suffixed name (e.g. `import { Home }`), and never use rename aliases (e.g. `import { Home as HomeIcon }` or `import { Check as CheckIcon }`). Import the canonical `HomeIcon` or `CheckIcon` directly from `lucide-react`.
+- When typing Lucide icon components or props, import `type LucideIcon` from `lucide-react`.
+- When adding or generating components from shadcn/ui or external sources, audit generated icon imports and update them to use direct suffixed `*Icon` exports before committing.
+
 ## Corner shapes
 
 - Use `squircle` when a card, banner, or other surface should have corners that scale with its dimensions. The utility supplies both radii in [`globals.css`](src/app/globals.css). Use it on its own so competing radius classes do not override the fallback.

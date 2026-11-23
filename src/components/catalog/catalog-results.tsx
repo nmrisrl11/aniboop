@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import type { CatalogGroup, CharacterCatalogEntry } from "./types";
 import { brand } from "@/lib/brand";
-import { ChevronRight } from "lucide-react";
+import { ChevronRightIcon } from "lucide-react";
 import Image from "next/image";
 import { memo, type RefObject } from "react";
 
@@ -72,7 +72,7 @@ export const CatalogResults = memo(function CatalogResults({
 														{name}
 													</span>
 												</div>
-												<ChevronRight
+												<ChevronRightIcon
 													className="size-4 shrink-0 text-muted-foreground/40 transition-all duration-160 ease-out group-hover:translate-x-0.5 group-hover:text-foreground"
 													aria-hidden="true"
 												/>

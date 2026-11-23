@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { brand } from "@/lib/brand";
-import { Volume2, VolumeX } from "lucide-react";
+import { Volume2Icon, VolumeXIcon } from "lucide-react";
 
 export function ReactionSoundToggle({
 	enabled,
@@ -14,7 +14,7 @@ export function ReactionSoundToggle({
 	showLabel?: boolean;
 }) {
 	const { reactionSound, soundOn, soundOff } = brand.galleryControls;
-	const Icon = enabled ? Volume2 : VolumeX;
+	const Icon = enabled ? Volume2Icon : VolumeXIcon;
 
 	return (
 		<Button

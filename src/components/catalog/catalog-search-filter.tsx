@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import type { CatalogGroup } from "./types";
 import { brand } from "@/lib/brand";
-import { Search, X } from "lucide-react";
+import { SearchIcon, XIcon } from "lucide-react";
 import { type RefObject, useId } from "react";
 
 const copy = brand.galleryControls;
@@ -40,7 +40,7 @@ export function CatalogSearchFilter({
 		<search className="shrink-0 border-b border-border px-4 pb-3 sm:px-6">
 			<div className="grid gap-2 min-[500px]:grid-cols-[minmax(0,1fr)_minmax(0,10rem)] sm:grid-cols-[minmax(0,1fr)_12rem] sm:gap-3">
 				<div className="relative flex items-center">
-					<Search
+					<SearchIcon
 						aria-hidden="true"
 						className="pointer-events-none absolute left-3 size-4 text-muted-foreground"
 					/>
@@ -64,7 +64,7 @@ export function CatalogSearchFilter({
 							className="absolute right-1 text-muted-foreground"
 							aria-label={copy.clearSearch}
 						>
-							<X aria-hidden="true" />
+							<XIcon aria-hidden="true" />
 						</Button>
 					)}
 				</div>

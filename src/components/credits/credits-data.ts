@@ -1,5 +1,5 @@
 import { brand } from "@/lib/brand";
-import { LayoutGrid, Pointer, Volume2, type LucideIcon } from "lucide-react";
+import { LayoutGridIcon, PointerIcon, Volume2Icon, type LucideIcon } from "lucide-react";
 
 export interface CreditProject {
 	readonly title: string;
@@ -12,7 +12,7 @@ export interface CreditProject {
 const copy = brand.credits;
 
 export const CREDITS_PROJECTS: readonly CreditProject[] = [
-	{ ...copy.grid, icon: LayoutGrid },
-	{ ...copy.mascot, icon: Pointer },
-	{ ...copy.sound, icon: Volume2 },
+	{ ...copy.grid, icon: LayoutGridIcon },
+	{ ...copy.mascot, icon: PointerIcon },
+	{ ...copy.sound, icon: Volume2Icon },
 ];

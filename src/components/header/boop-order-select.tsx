@@ -11,10 +11,10 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { brand } from "@/lib/brand";
-import { ChevronDown, Flame, Repeat, Shuffle } from "lucide-react";
+import { ChevronDownIcon, FlameIcon, RepeatIcon, ShuffleIcon } from "lucide-react";
 
 const copy = brand.galleryControls;
-const icons = { cycle: Repeat, random: Shuffle, escalate: Flame };
+const icons = { cycle: RepeatIcon, random: ShuffleIcon, escalate: FlameIcon };
 const orders: readonly BoopOrder[] = ["cycle", "random", "escalate"];
 
 export function BoopOrderSelect({
@@ -48,7 +48,10 @@ export function BoopOrderSelect({
 						<>
 							<span className="flex-1 text-left">{copy.boopOrder}</span>
 							<span className="text-xs text-muted-foreground">{copy.orders[value].label}</span>
-							<ChevronDown aria-hidden="true" className="size-3.5 shrink-0 text-muted-foreground" />
+							<ChevronDownIcon
+								aria-hidden="true"
+								className="size-3.5 shrink-0 text-muted-foreground"
+							/>
 						</>
 					) : (
 						<span className="grid">

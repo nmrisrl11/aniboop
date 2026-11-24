@@ -2,7 +2,7 @@
 
 | Area                                         | Location                                                                                                                                                                          |
 | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| App Router and homepage                      | [`src/app`](../src/app)                                                                                                                                                           |
+| App Router, homepage, and status routes      | [`src/app`](../src/app)                                                                                                                                                           |
 | Header layout and boop-order control         | [`src/components/header`](../src/components/header)                                                                                                                               |
 | Intro splash screen and session guard        | [`src/components/splash`](../src/components/splash), [`src/lib/splash.ts`](../src/lib/splash.ts), [`src/styles/splash.css`](../src/styles/splash.css)                             |
 | Character catalog and search                 | [`src/components/catalog`](../src/components/catalog)                                                                                                                             |
@@ -69,6 +69,14 @@ The [presets](../src/lib/audio/reaction-sounds.ts) are keyed by the nine names i
 The appearance control defaults to the system color preference. The root [theme provider](../src/components/theme/theme-provider.tsx) uses `next-themes` to persist the preference and apply the correct class before the first paint. Light tokens are defined in `:root` and dark overrides live in `.dark`. Tailwind exposes both palettes through `@theme inline`. Use semantic utilities such as `bg-card`, `text-foreground`, and `border-input` across both palettes.
 
 The [brand palette](BRAND.md#palette) defines the surface and interaction colors. The install manifest uses the light canvas color for its startup background and theme color.
+
+## App Router status routes
+
+Root App Router conventions handle unmatched routes, runtime errors, and route-transition loading states using shared copy from [`src/lib/brand.ts`](../src/lib/brand.ts):
+
+- [`src/app/not-found.tsx`](../src/app/not-found.tsx) is a zero-JS Server Component that displays the centered AniBoop sticker logo with the pure-CSS splash pop, wobble, and double-hop animation from [`src/styles/splash.css`](../src/styles/splash.css) (skipped under reduced motion), a concise message, and a link back to `/`.
+- [`src/app/error.tsx`](../src/app/error.tsx) is a Client Component error boundary with the same open-canvas sticker layout, logging the error, showing `error.digest` when available, and offering **Try again** (`retry ?? reset`) alongside a link back to `/`.
+- [`src/app/loading.tsx`](../src/app/loading.tsx) renders a centered [bloom loader](../src/components/ui/image-loader.tsx) inside `<main aria-busy="true">` for route-transition fallbacks.
 
 ## Fonts and metadata
 

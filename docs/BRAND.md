@@ -52,7 +52,7 @@ The wordmark's violet anchors the palette. A pale lavender canvas and near-white
 
 ## Logo and marks
 
-The [full-color AniBoop logo](../public/brand/aniboop-logo.svg) appears in the intro splash screen, the app header, the [README](../README.md) heading, and the social preview. The [purple tap mark](../src/app/icon.svg) appears in the favicon and install icons. Render raster icons directly from the tap-mark SVG at their target sizes. Use an opaque, full-bleed purple background for launcher masks and the Apple touch icon. See [Fonts and metadata](ARCHITECTURE.md#fonts-and-metadata) for the published assets.
+The [full-color AniBoop logo](../public/brand/aniboop-logo.svg) appears in the intro splash screen, the app header, the 404 and error pages, the [README](../README.md) heading, and the social preview. The [purple tap mark](../src/app/icon.svg) appears in the favicon and install icons. Render raster icons directly from the tap-mark SVG at their target sizes. Use an opaque, full-bleed purple background for launcher masks and the Apple touch icon. See [Fonts and metadata](ARCHITECTURE.md#fonts-and-metadata) for the published assets.
 
 The body background repeats the [flat AniBoop wordmark](../public/aniboop-watermark.svg) in staggered rows. Each mark is tilted 24 degrees and uses the active theme's violet at low opacity.
 

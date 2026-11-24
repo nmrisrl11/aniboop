@@ -93,6 +93,24 @@ export const brand = {
 		artworkDescription:
 			"Characters belong to their original creators and studios. AniBoop is an educational, non-commercial fan tribute.",
 	},
+	statusPages: {
+		notFound: {
+			title: "Page not found",
+			heading: "Page not found",
+			description: "The page you’re looking for doesn’t exist or may have moved.",
+			action: "Back to gallery",
+		},
+		error: {
+			heading: "Something went wrong",
+			description: "The gallery ran into an unexpected error. Try again or return home.",
+			tryAgain: "Try again",
+			backHome: "Back to gallery",
+			digestLabel: "Error ID",
+		},
+		loading: {
+			label: "Loading gallery",
+		},
+	},
 	intro:
 		"Explore a collection of chibi anime characters. Tap one to see it react, then download its poses and reactions.",
 	description:

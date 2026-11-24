@@ -49,7 +49,7 @@ Open [localhost:3000](http://localhost:3000). Run `npm run lint:all` and `npm ru
 
 | Area          | Stack                                                                              |
 | ------------- | ---------------------------------------------------------------------------------- |
-| App           | Next.js 16 App Router, React 19, TypeScript, and Turbopack                         |
+| App           | Next.js 16 App Router, React 19, TypeScript, Turbopack, and Vercel Analytics       |
 | Interface     | Tailwind CSS 4, shadcn/ui with Radix primitives & Vaul drawer, Lucide, next-themes |
 | Code examples | shadcn Code Block with Shiki syntax highlighting                                   |
 | Code quality  | Oxlint, Next.js ESLint, Tailwind CSS lint, and Oxfmt                               |

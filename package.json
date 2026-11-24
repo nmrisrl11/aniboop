@@ -20,6 +20,7 @@
 		"mascot:sync-r2": "python scripts/sync-r2.py"
 	},
 	"dependencies": {
+		"@vercel/analytics": "^2.0.1",
 		"class-variance-authority": "^0.7.1",
 		"cn": "^0.5.2",
 		"lucide-react": "^1.75.0",

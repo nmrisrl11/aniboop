@@ -86,4 +86,4 @@ Next.js adds browser icon links from the [SVG tap mark](../src/app/icon.svg), [I
 
 The [static social preview](../src/app/opengraph-image.png) shows the light gallery behind the full-color logo, slogan, and a short description. Next.js uses the 1200 × 630 PNG for Open Graph and X cards. See [SEO and site discovery](SEO.md) for the production origin, crawler rules, and verification steps.
 
-AniBoop's official hostname is `aniboop.nmrisrl.dev`. The [Vercel backup runbook](SEO.md#backup-access-on-vercel) records the status of `aniboop.vercel.app` and covers access during a parent-domain outage.
+AniBoop's official hostname is `aniboop.nmrisrl.dev`. The [Vercel backup runbook](SEO.md#backup-access-on-vercel) records the status of `aniboop.vercel.app` and covers access during a parent-domain outage. The [root layout](../src/app/layout.tsx) also renders `<Analytics />` from `@vercel/analytics/next` to collect Vercel Web Analytics when deployed on Vercel with Analytics enabled (bypassed locally).

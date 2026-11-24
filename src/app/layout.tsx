@@ -2,6 +2,7 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 import { brand } from "@/lib/brand";
 import { publicSiteUrl } from "@/lib/site";
 import { splashInitScript } from "@/lib/splash";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 				>
 					{children}
 				</ThemeProvider>
+				<Analytics />
 			</body>
 		</html>
 	);

@@ -26,7 +26,7 @@ export function CatalogTrigger({
 			title={copy.catalog}
 			{...props}
 		>
-			<LibraryIcon data-icon="inline-start" aria-hidden="true" />
+			<LibraryIcon aria-hidden="true" />
 			{copy.catalog}
 			<span className="hidden h-5 min-w-5 place-items-center rounded-full bg-card px-1.5 text-[10px] font-bold text-foreground tabular-nums shadow-xs md:grid">
 				{characterCount}

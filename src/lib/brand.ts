@@ -4,6 +4,8 @@ export const brand = {
 	language: "en",
 	repositoryUrl: "https://github.com/nmrisrl11/aniboop",
 	repositoryLabel: "AniBoop on GitHub",
+	supportUrl: "https://buymeacoffee.com/nmrisrl11",
+	supportLabel: "Support on Buy Me a Coffee",
 	title: "AniBoop | Interactive Chibi Anime Characters",
 	slogan: "Little characters. Big reactions.",
 	headline: "Pick a character. Give it a boop.",

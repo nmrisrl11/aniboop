@@ -2,7 +2,7 @@
 
 import { CREDITS_PROJECTS } from "@/components/credits/credits-data";
 import { brand } from "@/lib/brand";
-import { ExternalLinkIcon, UserStarIcon } from "lucide-react";
+import { CoffeeIcon, ExternalLinkIcon, UserStarIcon } from "lucide-react";
 
 const copy = brand.credits;
 
@@ -42,6 +42,23 @@ export function CreditsContent() {
 					</li>
 				))}
 			</ul>
+
+			<a
+				href={brand.supportUrl}
+				target="_blank"
+				rel="noreferrer"
+				className="group flex items-center justify-between gap-3 rounded-xl border border-border/70 bg-card p-3.5 text-xs text-muted-foreground transition-all duration-160 corner-squircle hover:border-border hover:bg-muted/50 hover:text-foreground squircle:rounded-3xl"
+			>
+				<div className="flex items-center gap-2.5">
+					<CoffeeIcon className="size-4 text-primary" aria-hidden="true" />
+					<span className="font-medium text-foreground">{brand.supportLabel}</span>
+				</div>
+				<ExternalLinkIcon
+					aria-hidden="true"
+					className="size-3.5 shrink-0 text-muted-foreground transition-all duration-160 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground motion-reduce:transition-none"
+				/>
+				<span className="sr-only"> (opens in a new tab)</span>
+			</a>
 
 			<section className="flex items-start gap-3 rounded-xl border border-border bg-background p-3.5 corner-squircle sm:p-4 dark:bg-input/30 squircle:rounded-3xl">
 				<UserStarIcon className="size-3.5 text-foreground" aria-hidden="true" />

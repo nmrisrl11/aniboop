@@ -10,6 +10,7 @@ import { ReactionSoundToggle } from "@/components/header/reaction-sound-toggle";
 import { MascotGuide } from "@/components/mascot-guide/mascot-guide";
 import type { BoopOrder } from "@/components/mascot/mascot";
 import { RepositoryLink } from "@/components/resources/repository-link";
+import { SupportLink } from "@/components/resources/support-link";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import type { GalleryCharacter } from "@/data/characters";
 import type { Ref } from "react";
@@ -39,11 +40,17 @@ export function AppHeader({
 		<header className="sticky inset-x-0 top-0 z-20 flex h-16 w-full shrink-0 items-center justify-between gap-4 border-b border-border bg-card px-4 shadow-xs select-none sm:px-5 md:h-14">
 			<div className="flex items-center gap-2">
 				<BrandLogo logoRef={logoRef} />
-				<div className="hidden items-center gap-2 md:flex">
+				<div className="hidden items-center gap-1.5 md:flex">
 					<div aria-hidden="true" className="mx-1 h-4 w-px bg-border" />
-					<MascotGuide />
-					<Credits />
-					<RepositoryLink />
+					<div className="flex items-center gap-1">
+						<MascotGuide />
+						<Credits />
+					</div>
+					<div aria-hidden="true" className="mx-1 h-4 w-px bg-border" />
+					<div className="flex items-center gap-0.5">
+						<RepositoryLink />
+						<SupportLink />
+					</div>
 				</div>
 			</div>
 

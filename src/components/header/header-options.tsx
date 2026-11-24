@@ -6,6 +6,7 @@ import { ReactionSoundToggle } from "@/components/header/reaction-sound-toggle";
 import { MascotGuide } from "@/components/mascot-guide/mascot-guide";
 import type { BoopOrder } from "@/components/mascot/mascot";
 import { RepositoryLink } from "@/components/resources/repository-link";
+import { SupportLink } from "@/components/resources/support-link";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -76,10 +77,13 @@ export function HeaderOptions({
 						className={optionClass}
 					/>
 				</div>
-				<div className="flex flex-col gap-0.5 pt-1.5">
+				<div className="flex flex-col gap-0.5 border-b border-border py-1.5">
 					<MascotGuide triggerClassName={optionClass} />
 					<Credits triggerClassName={optionClass} />
+				</div>
+				<div className="flex flex-col gap-0.5 pt-1.5">
 					<RepositoryLink showLabel className={optionClass} />
+					<SupportLink showLabel className={optionClass} />
 				</div>
 			</PopoverContent>
 		</Popover>

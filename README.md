@@ -30,7 +30,7 @@ Explore **139 chibi characters across 20 anime series** in an endless, pannable 
 - **Boop** by clicking, tapping, or pressing Enter or Space on a focused character. Hold or use a two-finger pinch for a different reaction. Boop order offers **In order**, **Random**, and **Build up**.
 - **Turn on Reaction sounds** with the speaker button or under More options on smaller screens. Each expression has its own sound, including during holds and pinches.
 - **Find a character** in Catalog. Search by name or series, or filter by series. Press **Ctrl+K** or **Cmd+K** to open it. The [catalog data](src/data/characters.json) drives both the responsive catalog (dialog on desktop, drawer on mobile) and the grid.
-- **Use More options** on smaller screens for boop order, appearance, the component guide, credits, and the GitHub link. Appearance supports System, Light, and Dark.
+- **Use More options** on smaller screens for boop order, appearance, the component guide, credits, support, and the GitHub link. Appearance supports System, Light, and Dark.
 
 - **View details & download assets** by clicking the card action on any tile or choosing a character from the Catalog. Download high-resolution master sheets (1080 × 1080 via Cloudflare R2) or lightweight web-ready sheets (504 × 504) for directional gazes and emotional reactions via an adaptive dialog on desktop and an ergonomic bottom-sheet drawer on mobile.
 
@@ -73,6 +73,8 @@ Open [localhost:3000](http://localhost:3000). Run `npm run lint:all` and `npm ru
 ## Credits
 
 The pannable grid adapts [Thiings Grid](https://github.com/charlieclark/thiings-grid) by Charlie Clark. The mascot interactions build on [page-mascot](https://github.com/nilbuild/page-mascot) by Kamran Ahmed. Reaction sounds use [ZzFX](https://github.com/KilledByAPixel/ZzFX) by Frank Force. Image loading placeholders adapt [Generative Loaders](https://generativeloaders.com) by Kasturi Khanke. Anime characters belong to their original creators and studios.
+
+If you enjoy AniBoop, consider [supporting on Buy Me a Coffee](https://buymeacoffee.com/nmrisrl11).
 
 ## License
 

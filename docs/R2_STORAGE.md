@@ -83,7 +83,8 @@ Without an active CORS policy on R2, cross-origin `fetch()` requests from `http:
 		"AllowedOrigins": [
 			"http://localhost:3000",
 			"https://aniboop.nmrisrl.dev",
-			"https://*.nmrisrl.dev"
+			"https://*.nmrisrl.dev",
+			"https://aniboop.vercel.app"
 		],
 		"AllowedMethods": ["GET", "HEAD"],
 		"AllowedHeaders": ["*"],
@@ -100,23 +101,23 @@ Without an active CORS policy on R2, cross-origin `fetch()` requests from `http:
 ### Local Development ([`.env.local`](../.env.local))
 
 ```env
-# Public domain used by the frontend to construct 1080 HD asset download URLs
+# Public domain used by the frontend to construct all mascot asset URLs
 NEXT_PUBLIC_R2_ASSETS_URL=https://aniboop-assets.nmrisrl.dev
 
-# R2 S3-Compatible API credentials for automated CLI syncing (Git-ignored)
-R2_ACCOUNT_ID=c9938330940299c315eccd466af023c1
+# R2 S3-Compatible API credentials for automated CLI syncing (Git-ignored, local only)
+R2_ACCOUNT_ID=your_cloudflare_account_id
 R2_ACCESS_KEY_ID=your_access_key_id
 R2_SECRET_ACCESS_KEY=your_secret_access_key
 R2_BUCKET_NAME=aniboop-assets
 ```
 
-### Production Deployments (Vercel / Cloudflare Pages)
+### Production & Preview Deployments (Vercel / Cloudflare Pages)
 
-Only the public URL is required in production hosting environments:
+Only the public URL is required on Vercel — set it for **both Production and Preview** (since local `previews/` and `gallery-sheets/` are Git-ignored):
 
 - **`NEXT_PUBLIC_R2_ASSETS_URL`**: `https://aniboop-assets.nmrisrl.dev`
 
-_(S3 upload credentials are never needed on production web servers)._
+_(S3 upload credentials `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, and `R2_BUCKET_NAME` stay strictly local in `.env.local` and should never be added to Vercel.)_
 
 ---
 

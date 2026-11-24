@@ -2,7 +2,7 @@
 
 Run `optimize.py` from the repository root. Install Pillow and NumPy with `python -m pip install Pillow numpy`.
 
-For a new catalog entry, use the [catalog workflow](../SKILL.md#add-mascots-to-the-catalog).
+For a new or updated catalog entry, use the [catalog workflow](../SKILL.md#add-or-update-mascots-in-the-catalog).
 
 ## Standalone Flow
 

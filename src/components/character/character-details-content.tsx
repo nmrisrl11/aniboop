@@ -88,7 +88,7 @@ export function CharacterDetailsContent({
 	onDownload: (url: string, filename: string, options?: DownloadOptions) => void;
 	isDownloading: (url: string) => boolean;
 }) {
-	const { id, name, galleryDirections, reactions } = character;
+	const { id, name, v, galleryDirections, reactions } = character;
 	const [quality, setQuality] = useState<SheetQuality>("1080");
 	const qualityLabelId = useId();
 	const qualityDescriptionId = useId();
@@ -97,6 +97,7 @@ export function CharacterDetailsContent({
 		id,
 		type: "directions",
 		quality,
+		version: v,
 		fallbackUrl: galleryDirections,
 	});
 
@@ -104,6 +105,7 @@ export function CharacterDetailsContent({
 		id,
 		type: "reactions",
 		quality,
+		version: v,
 		fallbackUrl: reactions,
 	});
 

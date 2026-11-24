@@ -26,10 +26,12 @@
 /temp/
 __pycache__/
 
-# Local mascot source sheets
+# Local mascot assets (served from Cloudflare R2 in production)
 /public/mascots/raw/*
 !/public/mascots/raw/README.md
 /public/mascots/sheets/
+/public/mascots/previews/
+/public/mascots/gallery-sheets/
 /public/old-version/
 
 # debug

@@ -9,19 +9,19 @@ Explore **139 chibi characters across 20 anime series** in an endless, pannable 
 ## Featured characters
 
 <p>
-  <img src="public/mascots/previews/naruto.webp" alt="Naruto Uzumaki" width="88">
-  <img src="public/mascots/previews/luffy.webp" alt="Monkey D. Luffy" width="88">
-  <img src="public/mascots/previews/goku.webp" alt="Son Goku" width="88">
-  <img src="public/mascots/previews/midoriya.webp" alt="Izuku Midoriya (Deku)" width="88">
-  <img src="public/mascots/previews/asta.webp" alt="Asta" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/naruto.webp" alt="Naruto Uzumaki" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/luffy.webp" alt="Monkey D. Luffy" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/goku.webp" alt="Son Goku" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/midoriya.webp" alt="Izuku Midoriya (Deku)" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/asta.webp" alt="Asta" width="88">
 </p>
 
 <p>
-  <img src="public/mascots/previews/eren.webp" alt="Eren Yeager" width="88">
-  <img src="public/mascots/previews/lelouch.webp" alt="Lelouch vi Britannia" width="88">
-  <img src="public/mascots/previews/saitama.webp" alt="Saitama" width="88">
-  <img src="public/mascots/previews/jinwoo.webp" alt="Sung Jinwoo" width="88">
-  <img src="public/mascots/previews/kaneki.webp" alt="Ken Kaneki" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/eren.webp" alt="Eren Yeager" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/lelouch.webp" alt="Lelouch vi Britannia" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/saitama.webp" alt="Saitama" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/jinwoo.webp" alt="Sung Jinwoo" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/kaneki.webp" alt="Ken Kaneki" width="88">
 </p>
 
 ## Explore the gallery
@@ -32,7 +32,7 @@ Explore **139 chibi characters across 20 anime series** in an endless, pannable 
 - **Find a character** in Catalog. Search by name or series, or filter by series. Press **Ctrl+K** or **Cmd+K** to open it. The [catalog data](src/data/characters.json) drives both the responsive catalog (dialog on desktop, drawer on mobile) and the grid.
 - **Use More options** on smaller screens for boop order, appearance, the component guide, credits, support, and the GitHub link. Appearance supports System, Light, and Dark.
 
-- **View details & download assets** by clicking the card action on any tile or choosing a character from the Catalog. Download high-resolution master sheets (1080 × 1080 via Cloudflare R2) or lightweight web-ready sheets (504 × 504) for directional gazes and emotional reactions via an adaptive dialog on desktop and an ergonomic bottom-sheet drawer on mobile.
+- **View details & download assets** by clicking the card action on any tile or choosing a character from the Catalog. Download high-resolution master sheets (1080 × 1080) or lightweight web-ready sheets (504 × 504) for directional gazes and emotional reactions — delivered via Cloudflare R2 — in an adaptive dialog on desktop and an ergonomic bottom-sheet drawer on mobile.
 
 ## Get started
 

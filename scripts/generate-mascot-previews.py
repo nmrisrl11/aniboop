@@ -3,6 +3,8 @@
 import argparse
 import json
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 from PIL import Image
@@ -10,6 +12,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS_DIR = ROOT / "public" / "mascots"
 CATALOG = ROOT / "src" / "data" / "characters.json"
+R2_SYNC = ROOT / "scripts" / "sync-r2.py"
 GALLERY_CELL_SIZE = 168
 PREVIEW_SIZE = 248
 NEUTRAL_POSE = 4
@@ -97,6 +100,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--character", help="Generate the gallery assets for one character ID")
     parser.add_argument("--assets-dir", type=Path, default=ASSETS_DIR)
+    parser.add_argument(
+        "--sync-r2",
+        action="store_true",
+        help="Upload regenerated assets to Cloudflare R2 after generation",
+    )
     args = parser.parse_args()
     assets = args.assets_dir.resolve()
     source = assets / "sheets"
@@ -136,6 +144,14 @@ def main():
             save_webp(render_sheet(reactions, layout), gallery_sheets / reaction_sheet.name, 65)
         except (OSError, ValueError) as error:
             parser.error(f"{character_id}: {error}")
+
+    if assets == ASSETS_DIR.resolve() and R2_SYNC.is_file():
+        subprocess.run([sys.executable, str(R2_SYNC), "--sync-versions"], cwd=ROOT, check=True)
+        if args.sync_r2:
+            cmd = [sys.executable, str(R2_SYNC)]
+            if args.character:
+                cmd.extend(["--character", args.character])
+            subprocess.run(cmd, cwd=ROOT, check=True)
 
 
 if __name__ == "__main__":

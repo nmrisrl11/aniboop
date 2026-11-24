@@ -1,5 +1,5 @@
 import { Gallery } from "@/components/gallery/gallery";
-import { getGalleryCharacters } from "@/data/characters";
+import { getCatalogCharacters } from "@/data/characters";
 import { brand } from "@/lib/brand";
 import { publicSiteUrl } from "@/lib/site";
 import type { Metadata } from "next";
@@ -31,8 +31,8 @@ const websiteJsonLd = publicSiteUrl && {
 	inLanguage: brand.language,
 };
 
-export default async function Home() {
-	const characters = await getGalleryCharacters();
+export default function Home() {
+	const characters = getCatalogCharacters();
 	return (
 		<>
 			{websiteJsonLd && (
@@ -43,7 +43,7 @@ export default async function Home() {
 					}}
 				/>
 			)}
-			<Gallery characters={characters} />
+			<Gallery catalog={characters} />
 		</>
 	);
 }

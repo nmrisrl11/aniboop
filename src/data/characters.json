@@ -2,696 +2,835 @@
 	{
 		"id": "edward",
 		"name": "Edward Elric",
-		"series": "Fullmetal Alchemist"
+		"series": "Fullmetal Alchemist",
+		"v": "5d444a5b"
 	},
 	{
 		"id": "asta",
 		"name": "Asta",
-		"series": "Black Clover"
+		"series": "Black Clover",
+		"v": "279039ee"
 	},
 	{
 		"id": "eren",
 		"name": "Eren Yeager",
-		"series": "Attack on Titan"
+		"series": "Attack on Titan",
+		"v": "a06964c4"
 	},
 	{
 		"id": "lelouch",
 		"name": "Lelouch vi Britannia",
-		"series": "Code Geass"
+		"series": "Code Geass",
+		"v": "a87c9c29"
 	},
 	{
 		"id": "natsu",
 		"name": "Natsu Dragneel",
-		"series": "Fairy Tail"
+		"series": "Fairy Tail",
+		"v": "3721ee57"
 	},
 	{
 		"id": "jinwoo",
 		"name": "Sung Jinwoo",
-		"series": "Solo Leveling"
+		"series": "Solo Leveling",
+		"v": "e9a4063f"
 	},
 	{
 		"id": "hinata",
 		"name": "Shoyo Hinata",
-		"series": "Haikyu!!"
+		"series": "Haikyu!!",
+		"v": "99eff191"
 	},
 	{
 		"id": "isagi",
 		"name": "Yoichi Isagi",
-		"series": "Blue Lock"
+		"series": "Blue Lock",
+		"v": "7411906b"
 	},
 	{
 		"id": "saitama",
 		"name": "Saitama",
-		"series": "One Punch Man"
+		"series": "One Punch Man",
+		"v": "3e54f6fb"
 	},
 	{
 		"id": "kaneki",
 		"name": "Ken Kaneki",
-		"series": "Tokyo Ghoul"
+		"series": "Tokyo Ghoul",
+		"v": "1d042a65"
 	},
 	{
 		"id": "tanjiro",
 		"name": "Tanjiro Kamado",
-		"series": "Demon Slayer"
+		"series": "Demon Slayer",
+		"v": "7b82f3f1"
 	},
 	{
 		"id": "luffy",
 		"name": "Monkey D. Luffy",
-		"series": "One Piece"
+		"series": "One Piece",
+		"v": "92fe2b0e"
 	},
 	{
 		"id": "naruto",
 		"name": "Naruto Uzumaki",
-		"series": "Naruto"
+		"series": "Naruto",
+		"v": "4b8a459d"
 	},
 	{
 		"id": "goku",
 		"name": "Son Goku",
-		"series": "Dragon Ball"
+		"series": "Dragon Ball",
+		"v": "2e74c5c6"
 	},
 	{
 		"id": "midoriya",
 		"name": "Izuku Midoriya (Deku)",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "b7d06547"
 	},
 	{
 		"id": "light",
 		"name": "Light Yagami",
-		"series": "Death Note"
+		"series": "Death Note",
+		"v": "2d1ffa30"
 	},
 	{
 		"id": "gon",
 		"name": "Gon Freecss",
-		"series": "Hunter × Hunter"
+		"series": "Hunter × Hunter",
+		"v": "81c7a2da"
 	},
 	{
 		"id": "bakugo",
 		"name": "Katsuki Bakugo",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "ce40756a"
 	},
 	{
 		"id": "todoroki",
 		"name": "Shoto Todoroki",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "840577f0"
 	},
 	{
 		"id": "sasuke",
 		"name": "Sasuke Uchiha",
-		"series": "Naruto"
+		"series": "Naruto",
+		"v": "25bb0a39"
 	},
 	{
 		"id": "sakura",
 		"name": "Sakura Haruno",
-		"series": "Naruto"
+		"series": "Naruto",
+		"v": "c58c079e"
 	},
 	{
 		"id": "ichigo",
 		"name": "Ichigo Kurosaki",
-		"series": "Bleach"
+		"series": "Bleach",
+		"v": "8cb1a709"
 	},
 	{
 		"id": "armin",
 		"name": "Armin Arlert",
-		"series": "Attack on Titan"
+		"series": "Attack on Titan",
+		"v": "2c01ed62"
 	},
 	{
 		"id": "boruto",
 		"name": "Boruto Uzumaki",
-		"series": "Boruto: Naruto Next Generations"
+		"series": "Boruto: Naruto Next Generations",
+		"v": "c8e35d13"
 	},
 	{
 		"id": "hinata-hyuga",
 		"name": "Hinata Hyuga",
-		"series": "Naruto"
+		"series": "Naruto",
+		"v": "fa14cbba"
 	},
 	{
 		"id": "kageyama",
 		"name": "Tobio Kageyama",
-		"series": "Haikyu!!"
+		"series": "Haikyu!!",
+		"v": "cb2427cf"
 	},
 	{
 		"id": "mikasa",
 		"name": "Mikasa Ackerman",
-		"series": "Attack on Titan"
+		"series": "Attack on Titan",
+		"v": "adf0c187"
 	},
 	{
 		"id": "yusuke",
 		"name": "Yusuke Urameshi",
-		"series": "Yu Yu Hakusho"
+		"series": "Yu Yu Hakusho",
+		"v": "5da399e3"
 	},
 	{
 		"id": "bachira",
 		"name": "Meguru Bachira",
-		"series": "Blue Lock"
+		"series": "Blue Lock",
+		"v": "1183b386"
 	},
 	{
 		"id": "gohan",
 		"name": "Son Gohan",
-		"series": "Dragon Ball"
+		"series": "Dragon Ball",
+		"v": "c4f6ae74"
 	},
 	{
 		"id": "hyoma",
 		"name": "Hyoma Chigiri",
-		"series": "Blue Lock"
+		"series": "Blue Lock",
+		"v": "d4216e13"
 	},
 	{
 		"id": "kawaki",
 		"name": "Kawaki",
-		"series": "Boruto: Naruto Next Generations"
+		"series": "Boruto: Naruto Next Generations",
+		"v": "85220d64"
 	},
 	{
 		"id": "mitsuki",
 		"name": "Mitsuki",
-		"series": "Boruto: Naruto Next Generations"
+		"series": "Boruto: Naruto Next Generations",
+		"v": "bb99b359"
 	},
 	{
 		"id": "nagi",
 		"name": "Seishiro Nagi",
-		"series": "Blue Lock"
+		"series": "Blue Lock",
+		"v": "25d84ce6"
 	},
 	{
 		"id": "noelle",
 		"name": "Noelle Silva",
-		"series": "Black Clover"
+		"series": "Black Clover",
+		"v": "e9445dba"
 	},
 	{
 		"id": "piccolo",
 		"name": "Piccolo",
-		"series": "Dragon Ball"
+		"series": "Dragon Ball",
+		"v": "ce91de73"
 	},
 	{
 		"id": "rukia",
 		"name": "Rukia Kuchiki",
-		"series": "Bleach"
+		"series": "Bleach",
+		"v": "b6821c8a"
 	},
 	{
 		"id": "sarada",
 		"name": "Sarada Uchiha",
-		"series": "Boruto: Naruto Next Generations"
+		"series": "Boruto: Naruto Next Generations",
+		"v": "8deb219c"
 	},
 	{
 		"id": "yuno",
 		"name": "Yuno Grinberryall",
-		"series": "Black Clover"
+		"series": "Black Clover",
+		"v": "0c3362bc"
 	},
 	{
 		"id": "beru",
 		"name": "Beru",
-		"series": "Solo Leveling"
+		"series": "Solo Leveling",
+		"v": "66180f13"
 	},
 	{
 		"id": "bulma",
 		"name": "Bulma",
-		"series": "Dragon Ball"
+		"series": "Dragon Ball",
+		"v": "7951fdf1"
 	},
 	{
 		"id": "cha-hae-in",
 		"name": "Cha Hae-In",
-		"series": "Solo Leveling"
+		"series": "Solo Leveling",
+		"v": "070053c3"
 	},
 	{
 		"id": "genos",
 		"name": "Genos",
-		"series": "One Punch Man"
+		"series": "One Punch Man",
+		"v": "dda7c3a2"
 	},
 	{
 		"id": "hiei",
 		"name": "Hiei",
-		"series": "Yu Yu Hakusho"
+		"series": "Yu Yu Hakusho",
+		"v": "d94bf3fa"
 	},
 	{
 		"id": "igris",
 		"name": "Igris",
-		"series": "Solo Leveling"
+		"series": "Solo Leveling",
+		"v": "135a9349"
 	},
 	{
 		"id": "krillin",
 		"name": "Krillin",
-		"series": "Dragon Ball"
+		"series": "Dragon Ball",
+		"v": "1a037607"
 	},
 	{
 		"id": "kurama",
 		"name": "Kurama",
-		"series": "Yu Yu Hakusho"
+		"series": "Yu Yu Hakusho",
+		"v": "53aadc8f"
 	},
 	{
 		"id": "kuwabara",
 		"name": "Kazuma Kuwabara",
-		"series": "Yu Yu Hakusho"
+		"series": "Yu Yu Hakusho",
+		"v": "d22aae11"
 	},
 	{
 		"id": "sanji",
 		"name": "Sanji",
-		"series": "One Piece"
+		"series": "One Piece",
+		"v": "1903e651"
 	},
 	{
 		"id": "touka",
 		"name": "Touka Kirishima",
-		"series": "Tokyo Ghoul"
+		"series": "Tokyo Ghoul",
+		"v": "7d5209a6"
 	},
 	{
 		"id": "trunks",
 		"name": "Trunks",
-		"series": "Dragon Ball"
+		"series": "Dragon Ball",
+		"v": "2ae6c9ba"
 	},
 	{
 		"id": "vegeta",
 		"name": "Vegeta",
-		"series": "Dragon Ball"
+		"series": "Dragon Ball",
+		"v": "0845728e"
 	},
 	{
 		"id": "yoo-jin-ho",
 		"name": "Yoo Jin-Ho",
-		"series": "Solo Leveling"
+		"series": "Solo Leveling",
+		"v": "622a8a13"
 	},
 	{
 		"id": "zoro",
 		"name": "Roronoa Zoro",
-		"series": "One Piece"
+		"series": "One Piece",
+		"v": "296208b0"
 	},
 	{
 		"id": "aizawa",
 		"name": "Shota Aizawa",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "06faacf5"
 	},
 	{
 		"id": "all-might",
 		"name": "All Might",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "b2f1a223"
 	},
 	{
 		"id": "alphonse",
 		"name": "Alphonse Elric",
-		"series": "Fullmetal Alchemist"
+		"series": "Fullmetal Alchemist",
+		"v": "ec48ce99"
 	},
 	{
 		"id": "amon",
 		"name": "Kōtarō Amon",
-		"series": "Tokyo Ghoul"
+		"series": "Tokyo Ghoul",
+		"v": "99daedd2"
 	},
 	{
 		"id": "brook",
 		"name": "Brook",
-		"series": "One Piece"
+		"series": "One Piece",
+		"v": "11869384"
 	},
 	{
 		"id": "carla",
 		"name": "Carla",
-		"series": "Fairy Tail"
+		"series": "Fairy Tail",
+		"v": "a805da52"
 	},
 	{
 		"id": "chopper",
 		"name": "Tony Tony Chopper",
-		"series": "One Piece"
+		"series": "One Piece",
+		"v": "d75866b2"
 	},
 	{
 		"id": "erza",
 		"name": "Erza Scarlet",
-		"series": "Fairy Tail"
+		"series": "Fairy Tail",
+		"v": "e293c3ae"
 	},
 	{
 		"id": "franky",
 		"name": "Franky",
-		"series": "One Piece"
+		"series": "One Piece",
+		"v": "7b263cf3"
 	},
 	{
 		"id": "gray",
 		"name": "Gray Fullbuster",
-		"series": "Fairy Tail"
+		"series": "Fairy Tail",
+		"v": "787495a1"
 	},
 	{
 		"id": "happy",
 		"name": "Happy",
-		"series": "Fairy Tail"
+		"series": "Fairy Tail",
+		"v": "3c6f2515"
 	},
 	{
 		"id": "hide",
 		"name": "Hideyoshi Nagachika",
-		"series": "Tokyo Ghoul"
+		"series": "Tokyo Ghoul",
+		"v": "d0173516"
 	},
 	{
 		"id": "iida",
 		"name": "Tenya Iida",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "710c2e15"
 	},
 	{
 		"id": "inosuke",
 		"name": "Inosuke Hashibira",
-		"series": "Demon Slayer"
+		"series": "Demon Slayer",
+		"v": "2dd30422"
 	},
 	{
 		"id": "jinbe",
 		"name": "Jinbe",
-		"series": "One Piece"
+		"series": "One Piece",
+		"v": "50ce9a8f"
 	},
 	{
 		"id": "kakashi",
 		"name": "Kakashi Hatake",
-		"series": "Naruto"
+		"series": "Naruto",
+		"v": "cfcce5be"
 	},
 	{
 		"id": "killua",
 		"name": "Killua Zoldyck",
-		"series": "Hunter × Hunter"
+		"series": "Hunter × Hunter",
+		"v": "958083a2"
 	},
 	{
 		"id": "kurapika",
 		"name": "Kurapika",
-		"series": "Hunter × Hunter"
+		"series": "Hunter × Hunter",
+		"v": "360dc411"
 	},
 	{
 		"id": "l-lawliet",
 		"name": "L Lawliet",
-		"series": "Death Note"
+		"series": "Death Note",
+		"v": "9b51d190"
 	},
 	{
 		"id": "leorio",
 		"name": "Leorio Paradinight",
-		"series": "Hunter × Hunter"
+		"series": "Hunter × Hunter",
+		"v": "efe054e9"
 	},
 	{
 		"id": "lucy",
 		"name": "Lucy Heartfilia",
-		"series": "Fairy Tail"
+		"series": "Fairy Tail",
+		"v": "af30c34c"
 	},
 	{
 		"id": "misa",
 		"name": "Misa Amane",
-		"series": "Death Note"
+		"series": "Death Note",
+		"v": "0357e930"
 	},
 	{
 		"id": "nami",
 		"name": "Nami",
-		"series": "One Piece"
+		"series": "One Piece",
+		"v": "e7e6bb5c"
 	},
 	{
 		"id": "nezuko",
 		"name": "Nezuko Kamado",
-		"series": "Demon Slayer"
+		"series": "Demon Slayer",
+		"v": "dc65e7f9"
 	},
 	{
 		"id": "ochaco",
 		"name": "Ochaco Uraraka",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "4a99789d"
 	},
 	{
 		"id": "robin",
 		"name": "Nico Robin",
-		"series": "One Piece"
+		"series": "One Piece",
+		"v": "27b35733"
 	},
 	{
 		"id": "ryuk",
 		"name": "Ryuk",
-		"series": "Death Note"
+		"series": "Death Note",
+		"v": "e2d51f06"
 	},
 	{
 		"id": "usopp",
 		"name": "Usopp",
-		"series": "One Piece"
+		"series": "One Piece",
+		"v": "6f1dc911"
 	},
 	{
 		"id": "wendy",
 		"name": "Wendy Marvell",
-		"series": "Fairy Tail"
+		"series": "Fairy Tail",
+		"v": "5d3c33fa"
 	},
 	{
 		"id": "zenitsu",
 		"name": "Zenitsu Agatsuma",
-		"series": "Demon Slayer"
+		"series": "Demon Slayer",
+		"v": "4cb18a85"
 	},
 	{
 		"id": "cc",
 		"name": "C.C.",
-		"series": "Code Geass"
+		"series": "Code Geass",
+		"v": "43abb7e6"
 	},
 	{
 		"id": "chad",
 		"name": "Yasutora Sado",
-		"series": "Bleach"
+		"series": "Bleach",
+		"v": "c31b3cef"
 	},
 	{
 		"id": "erwin",
 		"name": "Erwin Smith",
-		"series": "Attack on Titan"
+		"series": "Attack on Titan",
+		"v": "9ccc84f1"
 	},
 	{
 		"id": "hange",
 		"name": "Hange Zoë",
-		"series": "Attack on Titan"
+		"series": "Attack on Titan",
+		"v": "f85b55dc"
 	},
 	{
 		"id": "historia",
 		"name": "Historia Reiss",
-		"series": "Attack on Titan"
+		"series": "Attack on Titan",
+		"v": "ce13590b"
 	},
 	{
 		"id": "julius",
 		"name": "Julius Novachrono",
-		"series": "Black Clover"
+		"series": "Black Clover",
+		"v": "9376a4a3"
 	},
 	{
 		"id": "kallen",
 		"name": "Kallen Stadtfeld",
-		"series": "Code Geass"
+		"series": "Code Geass",
+		"v": "a309a7bc"
 	},
 	{
 		"id": "kunigami",
 		"name": "Rensuke Kunigami",
-		"series": "Blue Lock"
+		"series": "Blue Lock",
+		"v": "a049b55b"
 	},
 	{
 		"id": "levi",
 		"name": "Levi Ackerman",
-		"series": "Attack on Titan"
+		"series": "Attack on Titan",
+		"v": "24c21b2e"
 	},
 	{
 		"id": "liebe",
 		"name": "Liebe",
-		"series": "Black Clover"
+		"series": "Black Clover",
+		"v": "46f65651"
 	},
 	{
 		"id": "orihime",
 		"name": "Orihime Inoue",
-		"series": "Bleach"
+		"series": "Bleach",
+		"v": "69df4131"
 	},
 	{
 		"id": "reiner",
 		"name": "Reiner Braun",
-		"series": "Attack on Titan"
+		"series": "Attack on Titan",
+		"v": "9a1e4ad3"
 	},
 	{
 		"id": "renji",
 		"name": "Renji Abarai",
-		"series": "Bleach"
+		"series": "Bleach",
+		"v": "6081dea7"
 	},
 	{
 		"id": "suzaku",
 		"name": "Suzaku Kururugi",
-		"series": "Code Geass"
+		"series": "Code Geass",
+		"v": "26d840d3"
 	},
 	{
 		"id": "uryu",
 		"name": "Uryū Ishida",
-		"series": "Bleach"
+		"series": "Bleach",
+		"v": "d0459ca2"
 	},
 	{
 		"id": "yami",
 		"name": "Yami Sukehiro",
-		"series": "Black Clover"
+		"series": "Black Clover",
+		"v": "eb97c75f"
 	},
 	{
 		"id": "asahi",
 		"name": "Asahi Azumane",
-		"series": "Haikyu!!"
+		"series": "Haikyu!!",
+		"v": "ef7381b6"
 	},
 	{
 		"id": "daichi",
 		"name": "Daichi Sawamura",
-		"series": "Haikyu!!"
+		"series": "Haikyu!!",
+		"v": "b0f1f629"
 	},
 	{
 		"id": "gaara",
 		"name": "Gaara",
-		"series": "Naruto"
+		"series": "Naruto",
+		"v": "e62b312a"
 	},
 	{
 		"id": "genya",
 		"name": "Genya Shinazugawa",
-		"series": "Demon Slayer"
+		"series": "Demon Slayer",
+		"v": "baa6d1af"
 	},
 	{
 		"id": "hohenheim",
 		"name": "Van Hohenheim",
-		"series": "Fullmetal Alchemist"
+		"series": "Fullmetal Alchemist",
+		"v": "b82aea1f"
 	},
 	{
 		"id": "izumi",
 		"name": "Izumi Curtis",
-		"series": "Fullmetal Alchemist"
+		"series": "Fullmetal Alchemist",
+		"v": "7f84de3d"
 	},
 	{
 		"id": "jiraiya",
 		"name": "Jiraiya",
-		"series": "Naruto"
+		"series": "Naruto",
+		"v": "2de46ad3"
 	},
 	{
 		"id": "kanao",
 		"name": "Kanao Tsuyuri",
-		"series": "Demon Slayer"
+		"series": "Demon Slayer",
+		"v": "b3bc331c"
 	},
 	{
 		"id": "nishinoya",
 		"name": "Yū Nishinoya",
-		"series": "Haikyu!!"
+		"series": "Haikyu!!",
+		"v": "db495bfb"
 	},
 	{
 		"id": "riza",
 		"name": "Riza Hawkeye",
-		"series": "Fullmetal Alchemist"
+		"series": "Fullmetal Alchemist",
+		"v": "4b7552a1"
 	},
 	{
 		"id": "rock-lee",
 		"name": "Rock Lee",
-		"series": "Naruto"
+		"series": "Naruto",
+		"v": "2eed9bb8"
 	},
 	{
 		"id": "roy",
 		"name": "Roy Mustang",
-		"series": "Fullmetal Alchemist"
+		"series": "Fullmetal Alchemist",
+		"v": "af29329c"
 	},
 	{
 		"id": "shikamaru",
 		"name": "Shikamaru Nara",
-		"series": "Naruto"
+		"series": "Naruto",
+		"v": "01ac6718"
 	},
 	{
 		"id": "sugawara",
 		"name": "Kōshi Sugawara",
-		"series": "Haikyu!!"
+		"series": "Haikyu!!",
+		"v": "63e37948"
 	},
 	{
 		"id": "tanaka",
 		"name": "Ryūnosuke Tanaka",
-		"series": "Haikyu!!"
+		"series": "Haikyu!!",
+		"v": "1a4b029e"
 	},
 	{
 		"id": "tsukishima",
 		"name": "Kei Tsukishima",
-		"series": "Haikyu!!"
+		"series": "Haikyu!!",
+		"v": "07952e88"
 	},
 	{
 		"id": "tsunade",
 		"name": "Tsunade",
-		"series": "Naruto"
+		"series": "Naruto",
+		"v": "6f0d2fd2"
 	},
 	{
 		"id": "winry",
 		"name": "Winry Rockbell",
-		"series": "Fullmetal Alchemist"
+		"series": "Fullmetal Alchemist",
+		"v": "83bb4869"
 	},
 	{
 		"id": "yamaguchi",
 		"name": "Tadashi Yamaguchi",
-		"series": "Haikyu!!"
+		"series": "Haikyu!!",
+		"v": "2c727081"
 	},
 	{
 		"id": "aoyama",
 		"name": "Yuga Aoyama",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "e1c68558"
 	},
 	{
 		"id": "bang",
 		"name": "Bang",
-		"series": "One Punch Man"
+		"series": "One Punch Man",
+		"v": "8af06439"
 	},
 	{
 		"id": "fubuki",
 		"name": "Fubuki",
-		"series": "One Punch Man"
+		"series": "One Punch Man",
+		"v": "af94da26"
 	},
 	{
 		"id": "hagakure",
 		"name": "Toru Hagakure",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "2951f4b1"
 	},
 	{
 		"id": "jiro",
 		"name": "Kyoka Jiro",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "41d29526"
 	},
 	{
 		"id": "kaminari",
 		"name": "Denki Kaminari",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "c5ad38a9"
 	},
 	{
 		"id": "king",
 		"name": "King",
-		"series": "One Punch Man"
+		"series": "One Punch Man",
+		"v": "5c5d05cc"
 	},
 	{
 		"id": "kirishima",
 		"name": "Eijiro Kirishima",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "389bc07f"
 	},
 	{
 		"id": "koda",
 		"name": "Koji Koda",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "4f13c37c"
 	},
 	{
 		"id": "mina",
 		"name": "Mina Ashido",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "54501bf3"
 	},
 	{
 		"id": "mineta",
 		"name": "Minoru Mineta",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "f8b4af38"
 	},
 	{
 		"id": "momo",
 		"name": "Momo Yaoyorozu",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "1e607cb7"
 	},
 	{
 		"id": "mumen-rider",
 		"name": "Mumen Rider",
-		"series": "One Punch Man"
+		"series": "One Punch Man",
+		"v": "6c70f2a2"
 	},
 	{
 		"id": "ojiro",
 		"name": "Mashirao Ojiro",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "92106b80"
 	},
 	{
 		"id": "sato",
 		"name": "Rikido Sato",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "f779f4f9"
 	},
 	{
 		"id": "sero",
 		"name": "Hanta Sero",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "0785d44a"
 	},
 	{
 		"id": "shoji",
 		"name": "Mezo Shoji",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "f4acfa4d"
 	},
 	{
 		"id": "tatsumaki",
 		"name": "Tatsumaki",
-		"series": "One Punch Man"
+		"series": "One Punch Man",
+		"v": "26ffca05"
 	},
 	{
 		"id": "tokoyami",
 		"name": "Fumikage Tokoyami",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "0c19f473"
 	},
 	{
 		"id": "tsuyu",
 		"name": "Tsuyu Asui",
-		"series": "My Hero Academia"
+		"series": "My Hero Academia",
+		"v": "1435b2b5"
 	}
 ]

@@ -2,22 +2,23 @@
 
 Use Node.js 22.12 or later and npm. Install the lockfile dependencies with `npm ci`, then run `npm run dev`. On Windows PowerShell, use `npm.cmd` if execution policy blocks `npm.ps1`.
 
-| Command                     | Purpose                                                             |
-| --------------------------- | ------------------------------------------------------------------- |
-| `npm run dev`               | Run the Next.js development server                                  |
-| `npm run build`             | Build the app for production                                        |
-| `npm run start`             | Serve the production build locally                                  |
-| `npm run lint`              | Run Oxlint with React, TypeScript, and Next.js rules                |
-| `npm run lint:fix`          | Apply safe Oxlint fixes                                             |
-| `npm run lint:eslint`       | Run the remaining Next.js ESLint checks                             |
-| `npm run lint:all`          | Run Oxlint, Next.js ESLint, and Tailwind CSS lint                   |
-| `npm run lint:tailwind`     | Check Tailwind utilities against the app theme                      |
-| `npm run lint:tailwind:fix` | Apply available Tailwind CSS lint fixes                             |
-| `npm run format`            | Format project files and sort Tailwind classes                      |
-| `npm run format:check`      | Check formatting                                                    |
-| `npm run mascot:optimize`   | Optimize raw mascot sprite sheets in `public/mascots/raw`           |
-| `npm run mascot:add`        | Generate five WebPs, add the mascot, archive originals, and sync R2 |
-| `npm run mascot:sync-r2`    | Sync or audit 1080 master sheets with Cloudflare R2 storage         |
+| Command                     | Purpose                                                                                       |
+| --------------------------- | --------------------------------------------------------------------------------------------- |
+| `npm run dev`               | Run the Next.js development server                                                            |
+| `npm run build`             | Build the app for production                                                                  |
+| `npm run start`             | Serve the production build locally                                                            |
+| `npm run lint`              | Run Oxlint with React, TypeScript, and Next.js rules                                          |
+| `npm run lint:fix`          | Apply safe Oxlint fixes                                                                       |
+| `npm run lint:eslint`       | Run the remaining Next.js ESLint checks                                                       |
+| `npm run lint:all`          | Run Oxlint, Next.js ESLint, and Tailwind CSS lint                                             |
+| `npm run lint:tailwind`     | Check Tailwind utilities against the app theme                                                |
+| `npm run lint:tailwind:fix` | Apply available Tailwind CSS lint fixes                                                       |
+| `npm run format`            | Format project files and sort Tailwind classes                                                |
+| `npm run format:check`      | Check formatting                                                                              |
+| `npm run mascot:optimize`   | Optimize raw mascot sprite sheets in `public/mascots/raw`                                     |
+| `npm run mascot:add`        | Generate five WebPs, add the mascot with `v` hash, archive originals, and upload all 5 to R2  |
+| `npm run mascot:update`     | Replace an existing mascot's artwork, refresh its `v` hash, back up locally, and upload to R2 |
+| `npm run mascot:sync-r2`    | Sync or audit all mascot tiers (`previews/`, `gallery-sheets/`, `sheets/`) with Cloudflare R2 |
 
 The [VS Code workspace settings](../.vscode/settings.json) configure Oxfmt on save and point Tailwind IntelliSense at the global stylesheet. The workspace also includes tasks and Next.js debug profiles.
 
@@ -57,10 +58,10 @@ See [Corner shapes in the brand guide](BRAND.md#corner-shapes) and [AGENTS.md](.
 
 Copy `.env.example` to `.env.local` to customize settings during local development.
 
-| Variable                    | Scope            | Purpose                                                                                                                                                             | Default / Fallback                                                         |
-| --------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ANIBOOP_URL`               | Build / Server   | Official public URL (e.g. `https://aniboop.nmrisrl.dev`). Required in production builds for canonical metadata, sitemap generation, and search engine indexability. | Unset in local dev and preview builds (`noindex, follow`).                 |
-| `NEXT_PUBLIC_R2_ASSETS_URL` | Client / Browser | Base public origin for Cloudflare R2 holding full-size 1080 × 1080 master sheets (e.g. `https://aniboop-assets.nmrisrl.dev` or public R2 URL).                      | When unset, HD downloads fall back to local compact sheets without errors. |
+| Variable                    | Scope            | Purpose                                                                                                                                                             | Default / Fallback                                                          |
+| --------------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `ANIBOOP_URL`               | Build / Server   | Official public URL (e.g. `https://aniboop.nmrisrl.dev`). Required in production builds for canonical metadata, sitemap generation, and search engine indexability. | Unset in local dev and preview builds (`noindex, follow`).                  |
+| `NEXT_PUBLIC_R2_ASSETS_URL` | Client / Browser | Base public origin for Cloudflare R2 holding all mascot WebPs (`previews/`, `gallery-sheets/`, `sheets/`) (e.g. `https://aniboop-assets.nmrisrl.dev`).              | When unset, falls back to local `/mascots/*` files for offline development. |
 
 See the [SEO and site discovery guide](SEO.md) for domain verification and the [R2 storage guide](R2_STORAGE.md) for Cloudflare R2 setup, CORS, and sync workflows.
 

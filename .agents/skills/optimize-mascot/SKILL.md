@@ -11,12 +11,13 @@ Automates the end-to-end optimization of 3×3 chibi mascot sprite sheets from `p
 
 If `public/mascots/sheets/` does not exist yet in a project, this skill automatically creates it.
 
-## Add mascots to the catalog
+## Add or update mascots in the catalog
 
 - Scan only the top level of `public/mascots/raw/` for matching `<id>-directions` and `<id>-reactions` sheets. Each sheet must be 1080 × 1080. Check the catalog for existing IDs and use project metadata for each display name and series.
-- For each complete new pair, run `npm run mascot:add -- --id <id> --name "<name>" --series "<series>"` from the repository root. Run additions sequentially because they share a catalog.
-- Verify the catalog entry, five generated WebPs, and both originals under `public/mascots/raw/processed/`. Leave incomplete or failed pairs in the raw inbox and report the issue. The README is the tracked file in the raw folder. The source sheets and processed archive are Git-ignored.
-- After the last successful addition in a batch, update the README character and series totals from the catalog and check affected featured previews. Include the README edits with the catalog change.
+- For each complete **new** pair, run `npm run mascot:add -- --id <id> --name "<name>" --series "<series>"` from the repository root. This generates all five WebPs, records the character's content hash (`v`) in `src/data/characters.json`, archives originals under `public/mascots/raw/processed/`, and uploads all five WebPs (`previews/`, `gallery-sheets/`, `sheets/`) directly to Cloudflare R2. Run additions sequentially because they share a catalog.
+- For **updating/replacing** an existing character's artwork, run `npm run mascot:update -- --id <id>`. This backs up local WebPs to `public/old-version/mascots/`, regenerates all five WebPs, refreshes the `v` cache-busting hash in `src/data/characters.json`, archives originals, and uploads all five updated WebPs directly to Cloudflare R2.
+- All generated mascot assets (`previews/`, `gallery-sheets/`, `sheets/`) and raw/processed archives are Git-ignored; only `src/data/characters.json` (with `v` hashes) and `public/mascots/raw/README.md` are committed to Git. Verify R2 parity anytime with `npm run mascot:sync-r2 -- --check`.
+- After the last successful addition in a batch, update the README character and series totals from the catalog and check affected featured previews (served from `https://aniboop-assets.nmrisrl.dev/previews/`). Include the README edits with the catalog change.
 
 See [Adding a mascot](../../../docs/GALLERY_ASSETS.md#adding-a-mascot) for output paths and gallery checks.
 

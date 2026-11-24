@@ -8,7 +8,7 @@ See [character artwork licensing](LICENSING.md#artwork-and-branding) before reus
 
 ## Gallery loading
 
-The [homepage](../src/app/page.tsx) calls `getGalleryCharacters` in the [catalog adapter](../src/data/characters.ts). The adapter imports the center previews from `public/mascots/previews/` and the compact direction and reaction sheets from `public/mascots/gallery-sheets/`. [CharacterGrid](../src/components/gallery/character-grid.tsx) passes those three URLs to each visible mascot. The preview generator uses the local, Git-ignored full-size sheets in `public/mascots/sheets/`. Keep that folder out of deployment artifacts because Next.js serves files under `public/` directly. Cloudflare R2 serves full-size 1080 × 1080 downloads when `NEXT_PUBLIC_R2_ASSETS_URL` is configured (see the [R2 storage guide](R2_STORAGE.md)).
+The [homepage](../src/app/page.tsx) passes the lightweight catalog entries (`{ id, name, series, v }`) from [the catalog adapter](../src/data/characters.ts) to `<Gallery>`, which derives the versioned Cloudflare R2 asset URLs client-side via [`src/lib/assets.ts`](../src/lib/assets.ts) (keeping the SSR HTML payload compact). All three mascot WebP tiers — `previews/`, `gallery-sheets/`, and 1080 × 1080 `sheets/` — are Git-ignored locally and served from Cloudflare R2 (`NEXT_PUBLIC_R2_ASSETS_URL`) with `Cache-Control: public, max-age=31536000, immutable` and `?v=<hash>` cache busting (see the [R2 storage guide](R2_STORAGE.md)). When `NEXT_PUBLIC_R2_ASSETS_URL` is unset, URLs fall back to local `/mascots/` files for offline development.
 
 | Stage                | Asset loaded                                                                                                                                                                                                                             |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -19,7 +19,7 @@ The [homepage](../src/app/page.tsx) calls `getGalleryCharacters` in the [catalog
 
 Repeated tiles share asset URLs. The browser can reuse image responses, and the component shares in-flight sprite sheet decodes across copies. Focusing a card with Tab only needs its preview. A drag that begins on a mascot yields to the grid before triggering a reaction.
 
-The production build emits the gallery's center previews and compact pose sheets at content-hashed Next.js static URLs. Next.js serves them with `Cache-Control: public, max-age=31536000, immutable`. Editing a WebP changes its URL on the next build. The homepage passes these URLs to the grid, which requests the files at the stages above.
+All three mascot tiers are served from Cloudflare R2 with `Cache-Control: public, max-age=31536000, immutable`. Each catalog entry stores an 8-character SHA-256 content hash (`v`) appended as `?v=<hash>`, so replacing a character's artwork immediately busts both browser and Cloudflare caches. The root layout emits a `<link rel="preconnect">` hint for the R2 origin so TLS setup happens in parallel with HTML parsing.
 
 ### Gallery-wide cursor tracking
 
@@ -40,13 +40,19 @@ Run this from the repository root with your character's metadata.
 npm run mascot:add -- --id star-cat --name "Star Cat" --series "Original Characters"
 ```
 
-The command validates the pair, runs the optimizer, and generates the center-pose preview and two compact pose sheets. It writes two WebPs to `public/mascots/sheets/`, one still to `public/mascots/previews/`, and two playback sheets to `public/mascots/gallery-sheets/`. A successful run appends the catalog entry and moves the original pair to `public/mascots/raw/processed/`. The command rejects duplicate catalog IDs and existing archive files with the same names. For multiple characters, run the command once per complete pair. Git tracks the raw folder's README and ignores the source, processed, and full-size sheets. Open the gallery to check the framing, gaze, and boop, then commit the catalog change, center still, and two compact pose sheets.
+The command validates the pair, runs the optimizer, and generates the center-pose preview and two compact pose sheets. It writes two WebPs to `public/mascots/sheets/`, one still to `public/mascots/previews/`, and two playback sheets to `public/mascots/gallery-sheets/`. A successful run records `{ id, name, series, v }` in `src/data/characters.json`, moves the original pair to `public/mascots/raw/processed/`, and uploads all five WebPs directly to Cloudflare R2. The command rejects duplicate catalog IDs and existing archive files with the same names. For multiple characters, run the command once per complete pair. Git tracks only `public/mascots/raw/README.md` and `src/data/characters.json`; all local raw, processed, preview, compact, and master WebP folders are Git-ignored. Open the gallery to check the framing, gaze, and boop, then commit `src/data/characters.json` (and any README updates).
 
-When the catalog changes, update the [README](../README.md) using the number of catalog entries and the number of distinct `series` values. For a batch, update the totals after the final addition. Check the [featured previews](../README.md#featured-characters) when a featured character's ID, name, or preview path changes. Keep the lineup curated and include any README edits with the catalog change.
+When the catalog changes, update the [README](../README.md) using the number of catalog entries and the number of distinct `series` values. For a batch, update the totals after the final addition. Check the [featured previews](../README.md#featured-characters) when a featured character's ID, name, or preview changes. Keep the lineup curated and include any README edits with the catalog change.
 
 ## Replacing an existing mascot
 
-Before replacing artwork, copy and verify the five existing WebPs under `public/old-version/mascots/`, keeping their `sheets/`, `previews/`, and `gallery-sheets/` paths. Git ignores this backup folder. Use the asset-only workflow to regenerate the WebPs for the existing ID and keep its catalog entry intact. Verify the new preview, gaze, and boop in the gallery before archiving the incoming source pair.
+Place the revised 1080 × 1080 `<id>-directions` and `<id>-reactions` pair in `public/mascots/raw/` and run:
+
+```sh
+npm run mascot:update -- --id <character-id>
+```
+
+The command backs up any existing local WebPs under `public/old-version/mascots/`, re-optimizes the 1080 sheets, regenerates the preview and compact sheets, refreshes the character's `v` cache-busting hash in `src/data/characters.json`, archives the raw pair, and uploads all five updated WebPs directly to Cloudflare R2. Verify the new preview, gaze, and boop in the gallery, then commit the updated `src/data/characters.json`.
 
 ## Preparing sprite sheets
 
@@ -69,8 +75,6 @@ The [preview generator](../scripts/generate-mascot-previews.py) processes the ca
 
 ## Scaling the catalog
 
-The current catalog fits in the client bundle. If the metadata grows enough to affect startup, publish versioned static catalog pages keyed by index range and load the pages needed for the visible window. A distant pan should be able to request its pages directly. Use catalog revisions in cache keys. Consider a database when editing or search needs server-side queries.
+The current catalog fits cleanly in the initial HTML payload because only compact `{ id, name, series, v }` entries are serialized and URLs are derived client-side. If metadata grows far enough to affect startup, publish versioned static catalog pages keyed by index range and load the pages needed for the visible window. A distant pan should be able to request its pages directly. Use catalog revisions in cache keys. Consider a database when editing or search needs server-side queries.
 
-Git tracks the gallery previews and compact pose sheets. The gallery serves them from same-origin, content-hashed build output. Preserve content-versioned URLs if moving gallery assets to another host.
-
-Full-size 1080 × 1080 downloads fetch from Cloudflare R2 on demand using `NEXT_PUBLIC_R2_ASSETS_URL` to offload bandwidth and eliminate egress fees. When unset, downloads fall back to local compact sheets. See the [R2 storage guide](R2_STORAGE.md) for bucket configuration, CORS policy, and automated sync workflows. Show formats, usage terms, and applicable attribution. Profile long pans, cold transfer, first-boop latency, and image memory on a representative phone as the catalog grows.
+All three mascot WebP tiers (`previews/`, `gallery-sheets/`, and 1080 × 1080 `sheets/`) are Git-ignored and delivered from Cloudflare R2 (`NEXT_PUBLIC_R2_ASSETS_URL`) with `?v=<hash>` cache busting and \$0 egress. See the [R2 storage guide](R2_STORAGE.md) for bucket configuration, CORS policy, cache TTL settings, and automated sync workflows. Show formats, usage terms, and applicable attribution. Profile long pans, cold transfer, first-boop latency, and image memory on a representative phone as the catalog grows.

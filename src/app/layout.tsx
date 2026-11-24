@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { R2_ASSETS_ORIGIN } from "@/lib/assets";
 import { brand } from "@/lib/brand";
 import { publicSiteUrl } from "@/lib/site";
 import { splashInitScript } from "@/lib/splash";
@@ -41,6 +42,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 			suppressHydrationWarning
 		>
 			<head>
+				{R2_ASSETS_ORIGIN && (
+					<>
+						<link rel="preconnect" href={R2_ASSETS_ORIGIN} crossOrigin="anonymous" />
+						<link rel="dns-prefetch" href={R2_ASSETS_ORIGIN} />
+					</>
+				)}
 				<script dangerouslySetInnerHTML={{ __html: splashInitScript }} />
 			</head>
 			<body className="min-h-dvh antialiased">

@@ -1,32 +1,30 @@
-import type { StaticImageData } from "next/image";
+import { getGalleryAssetUrls } from "@/lib/assets";
 import catalog from "./characters.json";
 
-export type GalleryCharacter = {
+export type CatalogCharacter = {
 	id: string;
 	name: string;
 	series: string;
+	v?: string;
+};
+
+export type GalleryCharacter = CatalogCharacter & {
 	preview: string;
 	galleryDirections: string;
 	reactions: string;
 };
 
-export function getGalleryCharacters(): Promise<GalleryCharacter[]> {
-	return Promise.all(
-		catalog.map(async (character) => {
-			const { id } = character;
-			// Resolve the content-hashed assets at build time and send only their URLs to the grid.
-			const [preview, galleryDirections, reactions]: { default: StaticImageData }[] =
-				await Promise.all([
-					import(`../../public/mascots/previews/${id}.webp`),
-					import(`../../public/mascots/gallery-sheets/${id}-directions.webp`),
-					import(`../../public/mascots/gallery-sheets/${id}-reactions.webp`),
-				]);
-			return {
-				...character,
-				preview: preview.default.src,
-				galleryDirections: galleryDirections.default.src,
-				reactions: reactions.default.src,
-			};
-		}),
-	);
+export function getCatalogCharacters(): readonly CatalogCharacter[] {
+	return catalog;
+}
+
+export function resolveGalleryCharacters(entries: readonly CatalogCharacter[]): GalleryCharacter[] {
+	return entries.map((character) => ({
+		...character,
+		...getGalleryAssetUrls(character.id, character.v),
+	}));
+}
+
+export function getGalleryCharacters(): GalleryCharacter[] {
+	return resolveGalleryCharacters(catalog);
 }

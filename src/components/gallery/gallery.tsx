@@ -4,18 +4,23 @@ import { CharacterGrid } from "@/components/gallery/character-grid";
 import { AppHeader } from "@/components/header/app-header";
 import type { BoopOrder } from "@/components/mascot/mascot";
 import { SplashScreen } from "@/components/splash/splash-screen";
-import type { GalleryCharacter } from "@/data/characters";
+import {
+	resolveGalleryCharacters,
+	type CatalogCharacter,
+	type GalleryCharacter,
+} from "@/data/characters";
 import { useReactionSound } from "@/hooks/use-reaction-sound";
 import { brand } from "@/lib/brand";
 import dynamic from "next/dynamic";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 const CharacterDetails = dynamic(
 	() => import("@/components/character/character-details").then((mod) => mod.CharacterDetails),
 	{ ssr: false },
 );
 
-export function Gallery({ characters }: { characters: readonly GalleryCharacter[] }) {
+export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
+	const characters = useMemo(() => resolveGalleryCharacters(catalog), [catalog]);
 	const [boopOrder, setBoopOrder] = useState<BoopOrder>("cycle");
 	const [selectedCharacter, setSelectedCharacter] = useState<GalleryCharacter | null>(null);
 	const [catalogOpen, setCatalogOpen] = useState(false);

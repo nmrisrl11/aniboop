@@ -1,6 +1,7 @@
 """Prepare gallery assets, register a mascot, and archive its source sheets."""
 
 import argparse
+import hashlib
 import json
 import re
 import subprocess
@@ -64,20 +65,29 @@ def add_mascot(character, staging):
     )
 
     output_paths = [
-        Path("sheets") / f"{character_id}-directions.webp",
-        Path("sheets") / f"{character_id}-reactions.webp",
         Path("previews") / f"{character_id}.webp",
         Path("gallery-sheets") / f"{character_id}-directions.webp",
         Path("gallery-sheets") / f"{character_id}-reactions.webp",
+        Path("sheets") / f"{character_id}-directions.webp",
+        Path("sheets") / f"{character_id}-reactions.webp",
     ]
     for relative_path in output_paths:
         destination = ASSETS / relative_path
         if destination.exists() and destination.read_bytes() != (staging / relative_path).read_bytes():
             raise ValueError(f"Existing asset differs from the generated file at {destination.relative_to(ROOT)}.")
 
+    digest = hashlib.sha256()
+    for relative_path in output_paths:
+        remote_key = relative_path.as_posix()
+        digest.update(remote_key.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update((staging / relative_path).read_bytes())
+        digest.update(b"\0")
+    entry = {**character, "v": digest.hexdigest()[:8]}
+
     updated_catalog = staging / CATALOG.name
     updated_catalog.write_text(
-        json.dumps([*catalog, character], ensure_ascii=False, indent="\t") + "\n", encoding="utf-8"
+        json.dumps([*catalog, entry], ensure_ascii=False, indent="\t") + "\n", encoding="utf-8"
     )
     published = []
     archived = []

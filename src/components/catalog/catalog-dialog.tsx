@@ -51,6 +51,7 @@ export function CatalogDialog({
 						<DialogTitle>{copy.catalog}</DialogTitle>
 						<span
 							role="status"
+							aria-atomic="true"
 							className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium whitespace-nowrap text-muted-foreground tabular-nums"
 						>
 							{countLabel}

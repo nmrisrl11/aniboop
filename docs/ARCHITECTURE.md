@@ -36,7 +36,7 @@ The [character catalog](../src/components/catalog/character-catalog.tsx) decompo
 
 Shared dialogs, dropdowns, popovers, and selects fade in place when their transitions are enabled. The Boop order and Appearance menus use the shared dropdown radio group, which leaves 4 px between options. Boop order gives the selected option a checkmark and uses a stronger fill for the focused option.
 
-All modal surfaces ([CharacterCatalog](../src/components/catalog/character-catalog.tsx), [CharacterDetails](../src/components/character/character-details.tsx), [MascotGuide](../src/components/mascot-guide/mascot-guide.tsx), and [Credits](../src/components/credits/credits.tsx)) adapt responsively: rendering as centered Radix dialogs on desktop ($\ge 48\text{rem}$) and slide-up Vaul drawers with bottom-sheet drag-to-dismiss gestures on mobile ($< 48\text{rem}$), synchronized via [useMediaQuery](../src/hooks/use-media-query.ts) (`useSyncExternalStore`).
+All modal surfaces ([CharacterCatalog](../src/components/catalog/character-catalog.tsx), [CharacterDetails](../src/components/character/character-details.tsx), [MascotGuide](../src/components/mascot-guide/mascot-guide.tsx), and [Credits](../src/components/credits/credits.tsx)) adapt responsively: rendering as centered Radix dialogs on desktop ($\ge 48\text{rem}$) and slide-up Vaul drawers with both drag-to-dismiss gestures and an explicit close button on mobile ($< 48\text{rem}$), synchronized via [useMediaQuery](../src/hooks/use-media-query.ts) (`useSyncExternalStore`). A focus-revealed **Skip to gallery** link precedes the header, and shared UI primitives pair `ring-*` focus styles with `forced-colors` outline fallbacks and `prefers-reduced-motion` guards.
 
 ## Character details and downloads
 

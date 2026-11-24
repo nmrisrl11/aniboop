@@ -153,7 +153,7 @@ const CharacterTile = memo(function CharacterTile({
 					type="button"
 					tabIndex={visibility === "focusable" ? 0 : -1}
 					onClick={() => onSelectCharacter(character)}
-					className="absolute top-2.5 right-2.5 z-10 flex size-7 scale-80 items-center justify-center rounded-lg text-muted-foreground/70 opacity-0 transition-all duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] corner-squircle group-hover/tile:scale-100 group-hover/tile:opacity-100 hover:scale-110 hover:bg-muted hover:text-foreground focus-visible:scale-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-ring active:scale-95 motion-reduce:scale-100 motion-reduce:transition-opacity max-md:scale-100 max-md:opacity-75 squircle:rounded-full"
+					className="absolute top-2.5 right-2.5 z-10 flex size-8 scale-80 items-center justify-center rounded-lg text-muted-foreground opacity-0 transition-all duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] corner-squircle group-hover/tile:scale-100 group-hover/tile:opacity-100 hover:scale-110 hover:bg-muted hover:text-foreground focus-visible:scale-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-ring active:scale-95 motion-reduce:scale-100 motion-reduce:transition-opacity max-md:scale-100 max-md:opacity-100 squircle:rounded-full"
 					aria-label={`${brand.characterDetails.viewAndDownload}: ${character.name}`}
 					title={`${brand.characterDetails.viewAndDownload}: ${character.name}`}
 				>

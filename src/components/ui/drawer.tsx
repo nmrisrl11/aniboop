@@ -1,6 +1,8 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { cn } from "cn";
+import { XIcon } from "lucide-react";
 import * as React from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
 
@@ -28,7 +30,7 @@ function DrawerOverlay({
 		<DrawerPrimitive.Overlay
 			data-slot="drawer-overlay"
 			className={cn(
-				"fixed inset-0 z-50 bg-black/70 data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+				"fixed inset-0 z-50 bg-black/70 motion-reduce:animate-none data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
 				className,
 			)}
 			{...props}
@@ -39,8 +41,11 @@ function DrawerOverlay({
 function DrawerContent({
 	className,
 	children,
+	showCloseButton = true,
 	...props
-}: React.ComponentProps<typeof DrawerPrimitive.Content>) {
+}: React.ComponentProps<typeof DrawerPrimitive.Content> & {
+	showCloseButton?: boolean;
+}) {
 	return (
 		<DrawerPortal data-slot="drawer-portal">
 			<DrawerOverlay />
@@ -52,8 +57,23 @@ function DrawerContent({
 				)}
 				{...props}
 			>
-				<div className="mx-auto mt-3 h-1.5 w-12 shrink-0 rounded-full bg-muted-foreground/30 group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
+				<div
+					aria-hidden="true"
+					className="mx-auto mt-3 h-1.5 w-12 shrink-0 rounded-full bg-muted-foreground/30 group-data-[vaul-drawer-direction=bottom]/drawer-content:block"
+				/>
 				{children}
+				{showCloseButton && (
+					<DrawerPrimitive.Close data-slot="drawer-close" asChild>
+						<Button
+							variant="ghost"
+							size="icon"
+							className="absolute top-3 right-3 size-10 text-muted-foreground motion-reduce:transition-none"
+						>
+							<XIcon aria-hidden="true" />
+							<span className="sr-only">Close</span>
+						</Button>
+					</DrawerPrimitive.Close>
+				)}
 			</DrawerPrimitive.Content>
 		</DrawerPortal>
 	);

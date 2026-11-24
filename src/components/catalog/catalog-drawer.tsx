@@ -30,11 +30,12 @@ export function CatalogDrawer({
 		<Drawer open={open} onOpenChange={onOpenChange}>
 			<DrawerTrigger asChild>{trigger}</DrawerTrigger>
 			<DrawerContent className="max-h-[88dvh] overflow-hidden p-0">
-				<DrawerHeader className="px-4 pt-3 pb-2 sm:px-6">
+				<DrawerHeader className="px-4 pt-3 pr-14 pb-2 sm:px-6 sm:pr-14">
 					<div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
 						<DrawerTitle>{copy.catalog}</DrawerTitle>
 						<span
 							role="status"
+							aria-atomic="true"
 							className="rounded-full bg-muted px-2.5 py-1 text-xs font-medium whitespace-nowrap text-muted-foreground tabular-nums"
 						>
 							{countLabel}

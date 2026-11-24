@@ -40,6 +40,9 @@ export function CatalogSearchFilter({
 		<search className="shrink-0 border-b border-border px-4 pb-3 sm:px-6">
 			<div className="grid gap-2 min-[500px]:grid-cols-[minmax(0,1fr)_minmax(0,10rem)] sm:grid-cols-[minmax(0,1fr)_12rem] sm:gap-3">
 				<div className="relative flex items-center">
+					<label htmlFor={searchInputId} className="sr-only">
+						{copy.searchCatalog}
+					</label>
 					<SearchIcon
 						aria-hidden="true"
 						className="pointer-events-none absolute left-3 size-4 text-muted-foreground"
@@ -50,7 +53,6 @@ export function CatalogSearchFilter({
 						name="search"
 						type="text"
 						autoComplete="off"
-						aria-label={copy.searchCatalog}
 						value={searchQuery}
 						onChange={(event) => onSearchChange(event.target.value)}
 						placeholder={copy.catalogSearchPlaceholder}

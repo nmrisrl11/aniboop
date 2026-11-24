@@ -8,7 +8,7 @@ import { brand } from "@/lib/brand";
 import { decodeImage, isImageDecoded } from "@/lib/image-decode";
 import { cn } from "@/lib/utils";
 import { ShieldAlertIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { getSpriteStyle } from "./character-details-utils";
 
 const copy = brand.characterDetails;
@@ -87,6 +87,8 @@ export function CharacterDetailsContent({
 }) {
 	const { id, name, galleryDirections, reactions } = character;
 	const [quality, setQuality] = useState<SheetQuality>("1080");
+	const qualityLabelId = useId();
+	const qualityDescriptionId = useId();
 
 	const directionsAsset = getMascotAssetUrl({
 		id,
@@ -107,17 +109,25 @@ export function CharacterDetailsContent({
 			{/* Quality Selector Segmented Control with concentric padding and radii */}
 			<div className="flex flex-col gap-2.5 rounded-2xl border border-border/70 bg-muted/30 p-3.5 corner-squircle squircle:rounded-[32px]">
 				<div className="flex items-center justify-between px-0.5">
-					<span className="text-xs font-semibold text-foreground">{copy.qualityLabel}</span>
-					<span className="text-xs text-muted-foreground">
+					<span id={qualityLabelId} className="text-xs font-semibold text-foreground">
+						{copy.qualityLabel}
+					</span>
+					<span id={qualityDescriptionId} className="text-xs text-muted-foreground">
 						{quality === "1080" ? copy.qualityHDDescription : copy.qualityWebDescription}
 					</span>
 				</div>
-				<div className="grid grid-cols-2 gap-1 rounded-xl border border-border/50 bg-background/70 p-1 corner-squircle squircle:rounded-3xl">
+				<div
+					role="group"
+					aria-labelledby={qualityLabelId}
+					aria-describedby={qualityDescriptionId}
+					className="grid grid-cols-2 gap-1 rounded-xl border border-border/50 bg-background/70 p-1 corner-squircle squircle:rounded-3xl"
+				>
 					<button
 						type="button"
+						aria-pressed={quality === "1080"}
 						onClick={() => setQuality("1080")}
 						className={cn(
-							"h-8.5 cursor-pointer rounded-lg text-xs font-medium transition-all duration-160 ease-out select-none corner-squircle squircle:rounded-xl",
+							"h-8.5 cursor-pointer rounded-lg text-xs font-medium transition-all duration-160 ease-out select-none corner-squircle focus-visible:outline-2 focus-visible:outline-ring motion-reduce:transition-none squircle:rounded-xl",
 							quality === "1080"
 								? "bg-card text-foreground shadow-xs"
 								: "text-muted-foreground hover:text-foreground",
@@ -128,9 +138,10 @@ export function CharacterDetailsContent({
 
 					<button
 						type="button"
+						aria-pressed={quality === "504"}
 						onClick={() => setQuality("504")}
 						className={cn(
-							"h-8.5 cursor-pointer rounded-lg text-xs font-medium transition-all duration-160 ease-out select-none corner-squircle squircle:rounded-xl",
+							"h-8.5 cursor-pointer rounded-lg text-xs font-medium transition-all duration-160 ease-out select-none corner-squircle focus-visible:outline-2 focus-visible:outline-ring motion-reduce:transition-none squircle:rounded-xl",
 							quality === "504"
 								? "bg-card text-foreground shadow-xs"
 								: "text-muted-foreground hover:text-foreground",
@@ -152,7 +163,7 @@ export function CharacterDetailsContent({
 							alt={`${name} directions sheet preview`}
 						/>
 						<div className="flex min-w-0 flex-col gap-1">
-							<h4 className="text-sm font-semibold text-foreground">{copy.directions}</h4>
+							<h3 className="text-sm font-semibold text-foreground">{copy.directions}</h3>
 							<p className="text-xs leading-relaxed text-muted-foreground">
 								{copy.directionsDescription}
 							</p>
@@ -161,7 +172,7 @@ export function CharacterDetailsContent({
 					<Button
 						variant="secondary"
 						size="sm"
-						className="w-full text-xs font-semibold tracking-wide transition-all duration-160 ease-out hover:bg-secondary/80"
+						className="w-full text-xs font-semibold tracking-wide transition-all duration-160 ease-out hover:bg-secondary/80 motion-reduce:transition-none"
 						onClick={() => onDownload(directionsAsset.url, directionsAsset.filename)}
 					>
 						{copy.downloadDirections}
@@ -173,7 +184,7 @@ export function CharacterDetailsContent({
 					<div className="flex items-start gap-3">
 						<SheetPreview sheet={reactions} cell={2} alt={`${name} reactions sheet preview`} />
 						<div className="flex min-w-0 flex-col gap-1">
-							<h4 className="text-sm font-semibold text-foreground">{copy.reactions}</h4>
+							<h3 className="text-sm font-semibold text-foreground">{copy.reactions}</h3>
 							<p className="text-xs leading-relaxed text-muted-foreground">
 								{copy.reactionsDescription}
 							</p>
@@ -182,7 +193,7 @@ export function CharacterDetailsContent({
 					<Button
 						variant="secondary"
 						size="sm"
-						className="w-full text-xs font-semibold tracking-wide transition-all duration-160 ease-out hover:bg-secondary/80"
+						className="w-full text-xs font-semibold tracking-wide transition-all duration-160 ease-out hover:bg-secondary/80 motion-reduce:transition-none"
 						onClick={() => onDownload(reactionsAsset.url, reactionsAsset.filename)}
 					>
 						{copy.downloadReactions}
@@ -195,7 +206,7 @@ export function CharacterDetailsContent({
 				<ShieldAlertIcon className="size-3.5 text-foreground" aria-hidden="true" />
 
 				<div className="flex-1 space-y-1">
-					<h5 className="text-xs font-semibold text-foreground">{copy.licenseNoticeTitle}</h5>
+					<h3 className="text-xs font-semibold text-foreground">{copy.licenseNoticeTitle}</h3>
 					<p className="text-xs leading-relaxed text-muted-foreground">{copy.licenseNotice}</p>
 				</div>
 			</section>

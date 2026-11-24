@@ -48,32 +48,32 @@ export const CatalogResults = memo(function CatalogResults({
 							</h3>
 							<ul role="list" className="grid gap-2 min-[420px]:grid-cols-2 sm:grid-cols-3">
 								{members.map(({ character }) => {
-									const { id, name, series: charSeries, preview } = character;
+									const { id, name, preview } = character;
 									return (
 										<li key={id}>
 											<button
 												type="button"
 												onClick={() => onSelect?.(character)}
-												className="group flex w-full min-w-0 items-center justify-between gap-2.5 rounded-xl bg-muted/60 p-2 text-left transition-all duration-160 ease-out corner-squircle hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring active:scale-[0.98] squircle:rounded-3xl"
+												className="group flex w-full min-w-0 items-center justify-between gap-2.5 rounded-xl bg-muted/60 p-2 text-left transition-all duration-160 ease-out corner-squircle hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100 squircle:rounded-3xl"
 												aria-label={`${brand.characterDetails.viewAndDownload}: ${name}`}
 												title={`${brand.characterDetails.viewAndDownload}: ${name}`}
 											>
 												<div className="flex min-w-0 items-center gap-2.5">
 													<Image
 														src={preview}
-														alt={copy.portraitAlt(name)}
-														title={copy.portraitTitle(name, charSeries)}
+														alt=""
+														aria-hidden="true"
 														width={36}
 														height={36}
 														unoptimized
-														className="aspect-square size-9 shrink-0 rounded-lg bg-card transition-transform duration-160 ease-out corner-squircle group-hover:scale-105 squircle:rounded-xl"
+														className="aspect-square size-9 shrink-0 rounded-lg bg-card transition-transform duration-160 ease-out corner-squircle group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100 squircle:rounded-xl"
 													/>
-													<span className="truncate text-sm font-semibold transition-colors group-hover:text-primary">
+													<span className="truncate text-sm font-semibold transition-colors group-hover:text-primary motion-reduce:transition-none">
 														{name}
 													</span>
 												</div>
 												<ChevronRightIcon
-													className="size-4 shrink-0 text-muted-foreground/40 transition-all duration-160 ease-out group-hover:translate-x-0.5 group-hover:text-foreground"
+													className="size-4 shrink-0 text-muted-foreground/60 transition-all duration-160 ease-out group-hover:translate-x-0.5 group-hover:text-foreground motion-reduce:transition-none motion-reduce:group-hover:translate-x-0"
 													aria-hidden="true"
 												/>
 											</button>

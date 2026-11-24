@@ -53,6 +53,12 @@ export function Gallery({ characters }: { characters: readonly GalleryCharacter[
 
 	return (
 		<div className="relative flex h-dvh flex-col overflow-hidden">
+			<a
+				href="#gallery-content"
+				className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-primary-foreground focus:shadow-lg focus:outline-2 focus:outline-offset-2 focus:outline-ring focus:corner-squircle focus:squircle:rounded-2xl"
+			>
+				{brand.skipToGallery}
+			</a>
 			<SplashScreen targetRef={headerLogoRef} />
 			<AppHeader
 				characters={characters}
@@ -71,7 +77,9 @@ export function Gallery({ characters }: { characters: readonly GalleryCharacter[
 				onPointerUpCapture={resumeSound}
 				onClickCapture={resumeSound}
 			>
-				<h2 className="sr-only">{brand.galleryHeading}</h2>
+				<h2 id="gallery-content" tabIndex={-1} className="sr-only">
+					{brand.galleryHeading}
+				</h2>
 				<CharacterGrid
 					characters={characters}
 					boopOrder={boopOrder}

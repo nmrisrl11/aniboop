@@ -8,6 +8,7 @@ export const brand = {
 	slogan: "Little characters. Big reactions.",
 	headline: "Pick a character. Give it a boop.",
 	galleryHeading: "Chibi anime character gallery",
+	skipToGallery: "Skip to gallery",
 	galleryInstructions:
 		"Tap or hold a character to boop. Drag, scroll, or use arrow keys to explore.",
 	galleryControls: {

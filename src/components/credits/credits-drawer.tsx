@@ -18,7 +18,7 @@ export function CreditsDrawer({ trigger, children }: { trigger: ReactNode; child
 		<Drawer>
 			<DrawerTrigger asChild>{trigger}</DrawerTrigger>
 			<DrawerContent className="max-h-[85dvh] overflow-hidden p-0">
-				<DrawerHeader className="border-b border-border px-5 pt-3 pb-3 text-left sm:px-6">
+				<DrawerHeader className="border-b border-border px-5 pt-3 pr-14 pb-3 text-left sm:px-6 sm:pr-14">
 					<DrawerTitle className="font-heading text-xl font-bold tracking-tight">
 						{copy.title}
 					</DrawerTitle>

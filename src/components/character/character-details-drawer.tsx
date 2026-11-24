@@ -34,7 +34,7 @@ export function CharacterDetailsDrawer({
 	return (
 		<Drawer open={open} onOpenChange={onOpenChange}>
 			<DrawerContent className="max-h-[88dvh] overflow-hidden p-0">
-				<DrawerHeader className="border-b border-border px-5 pt-3 pb-4">
+				<DrawerHeader className="border-b border-border px-5 pt-3 pr-14 pb-4">
 					{onBackToCatalog && (
 						<div className="mb-2">
 							<Button
@@ -42,7 +42,7 @@ export function CharacterDetailsDrawer({
 								variant="ghost"
 								size="sm"
 								onClick={onBackToCatalog}
-								className="-ml-2 h-7 gap-1 rounded-lg px-2 text-xs font-semibold text-muted-foreground transition-all duration-160 ease-out hover:bg-muted hover:text-foreground active:scale-95 squircle:rounded-2xl"
+								className="-ml-2 h-7 gap-1 rounded-lg px-2 text-xs font-semibold text-muted-foreground transition-all duration-160 ease-out hover:bg-muted hover:text-foreground active:scale-95 motion-reduce:transition-none motion-reduce:active:scale-100 squircle:rounded-2xl"
 							>
 								<ArrowLeftIcon data-icon="inline-start" aria-hidden="true" />
 								Back to catalog

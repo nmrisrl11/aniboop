@@ -14,7 +14,7 @@ import { EllipsisIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const optionClass =
-	"h-10 w-full justify-start gap-2.5 rounded-md px-2.5 text-sm font-medium text-foreground transition-transform hover:bg-muted active:scale-[0.99] squircle:rounded-xl";
+	"h-10 w-full justify-start gap-2.5 rounded-md px-2.5 text-sm font-medium text-foreground transition-transform hover:bg-muted active:scale-[0.99] motion-reduce:transition-none motion-reduce:active:scale-100 squircle:rounded-xl";
 const copy = brand.galleryControls;
 
 export function HeaderOptions({

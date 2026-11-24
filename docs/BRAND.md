@@ -15,6 +15,7 @@ The table below lists the approved copy across gallery surfaces. The homepage di
 | Homepage description | Explore a collection of chibi anime characters. Tap one to see it react, then download its poses and reactions.                                |
 | Meta description     | Explore a pannable gallery of chibi anime characters. Boop mascots to see them react, or search the catalog by character name or anime series. |
 | Gallery heading      | Chibi anime character gallery                                                                                                                  |
+| Skip link            | Skip to gallery                                                                                                                                |
 | Gallery instructions | Tap or hold a character to boop. Drag, scroll, or use arrow keys to explore.                                                                   |
 | Card action          | View & download                                                                                                                                |
 | Detail labels        | Directions, Reactions, Resolution (1080 HD, 504 Web)                                                                                           |

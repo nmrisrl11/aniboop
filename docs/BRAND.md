@@ -4,7 +4,7 @@ AniBoop is an interactive collection of chibi anime characters. The signature in
 
 ## Copy
 
-The copy below includes planned gallery surfaces. The homepage displays character names and gallery controls. The gallery instructions are available to screen readers.
+The table below lists the approved copy across gallery surfaces. The homepage displays character names and gallery controls. The gallery instructions are available to screen readers.
 
 | Surface              | Copy                                                                                                                                           |
 | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -57,6 +57,12 @@ The body background repeats the [flat AniBoop wordmark](../public/aniboop-waterm
 
 ## Corner shapes
 
-Use `squircle` on cards, banners, tiles, and other surfaces that need adaptive corners. The radius scales with the element in both dimensions and caps at 2 rem for the rounded fallback and 2.5 rem for the native squircle. This keeps corners modest on short banners and compact tiles. For controls with a fixed radius, pair `corner-squircle` with the existing `rounded-*` utility. Keep `rounded-full` for circles such as the tap ripple.
+Pair a baseline fallback `rounded-*` utility with `corner-squircle` and the `squircle:` variant (`@supports (corner-shape: squircle)` in [globals.css](../src/app/globals.css)). Because `superellipse(2)` cuts less off each corner than a circular arc of the same radius, native squircles step up in radius so the continuous curve stays visually clear while unsupported browsers keep balanced rounded corners:
 
-Keep corner styling in the [global stylesheet](../src/app/globals.css) and shared component variants. `@toolwind/corner-shape` generates CSS at build time.
+- Controls, inputs, and buttons: `rounded-lg` → `squircle:rounded-2xl` (compact `sm`/`xs` controls: `squircle:rounded-xl`)
+- Cards, menus, popovers, and code blocks: `rounded-xl` → `squircle:rounded-3xl`
+- Dialogs and drawers: `rounded-2xl` → `squircle:rounded-[32px]` (directional on drawers)
+- Gallery tiles: `rounded-3xl` → `squircle:rounded-[44px]`
+- Square (`1:1`) icon containers and portrait frames: `rounded-lg` / `rounded-2xl` → `squircle:rounded-full`
+
+Reserve `squircle:rounded-full` for square elements so rectangular surfaces never distort into ovals or pills, and keep `rounded-full` alone for intentional circles, badges, and pills. Align nested inner and outer radii concentrically across both fallback and `squircle:` paths. Keep default corner styling in [globals.css](../src/app/globals.css) and shared component primitives in [`src/components/ui`](../src/components/ui). `@toolwind/corner-shape` generates CSS at build time. See [Corner-shape conventions](DEVELOPMENT.md#corner-shape-conventions) for usage rules.

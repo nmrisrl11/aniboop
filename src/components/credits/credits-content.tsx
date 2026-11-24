@@ -16,9 +16,9 @@ export function CreditsContent() {
 							href={href}
 							target="_blank"
 							rel="noreferrer"
-							className="group relative flex items-start gap-3.5 rounded-xl border border-transparent p-3 transition-all duration-160 ease-out corner-squircle hover:border-border hover:bg-muted/50 focus-visible:outline-2 focus-visible:outline-ring active:scale-[0.99]"
+							className="group relative flex items-start gap-3.5 rounded-xl border border-transparent p-3 transition-all duration-160 ease-out corner-squircle hover:border-border hover:bg-muted/50 focus-visible:outline-2 focus-visible:outline-ring active:scale-[0.99] squircle:rounded-3xl"
 						>
-							<div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground transition-colors duration-160 corner-squircle group-hover:bg-primary/10 group-hover:text-primary">
+							<div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground transition-colors duration-160 corner-squircle group-hover:bg-primary/10 group-hover:text-primary squircle:rounded-full">
 								<Icon className="size-4.5" aria-hidden="true" />
 							</div>
 
@@ -42,11 +42,10 @@ export function CreditsContent() {
 				))}
 			</ul>
 
-			<section className="flex items-start gap-3 rounded-xl border border-border/60 bg-muted/30 p-3.5 corner-squircle sm:p-4">
-				<div className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-md bg-muted text-muted-foreground corner-squircle">
-					<UserStarIcon className="size-3.5 text-muted-foreground" aria-hidden="true" />
-				</div>
-				<div className="mt-px flex-1 space-y-1">
+			<section className="flex items-start gap-3 rounded-xl border border-border bg-background p-3.5 corner-squircle sm:p-4 dark:bg-input/30 squircle:rounded-3xl">
+				<UserStarIcon className="size-3.5 text-foreground" aria-hidden="true" />
+
+				<div className="flex-1 space-y-1">
 					<h3 className="text-xs font-semibold text-foreground">{copy.artworkTitle}</h3>
 					<p className="text-xs leading-relaxed text-muted-foreground">{copy.artworkDescription}</p>
 				</div>

@@ -20,7 +20,7 @@ function HighlightedBlock({ code, filename }: { code: string; filename: string }
 	const lines = useHighlightedCode(code);
 
 	return (
-		<CodeBlock className="rounded-4xl border border-border bg-background text-foreground corner-squircle">
+		<CodeBlock className="rounded-2xl border-border bg-background squircle:rounded-4xl">
 			<CodeBlockHeader>
 				<CodeBlockTitle className="text-muted-foreground">
 					<FileCodeIcon />

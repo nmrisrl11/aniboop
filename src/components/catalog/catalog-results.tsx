@@ -54,7 +54,7 @@ export const CatalogResults = memo(function CatalogResults({
 											<button
 												type="button"
 												onClick={() => onSelect?.(character)}
-												className="group flex w-full min-w-0 items-center justify-between gap-2.5 rounded-xl bg-muted/60 p-2 text-left transition-all duration-160 ease-out corner-squircle hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring active:scale-[0.98]"
+												className="group flex w-full min-w-0 items-center justify-between gap-2.5 rounded-xl bg-muted/60 p-2 text-left transition-all duration-160 ease-out corner-squircle hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring active:scale-[0.98] squircle:rounded-3xl"
 												aria-label={`${brand.characterDetails.viewAndDownload}: ${name}`}
 												title={`${brand.characterDetails.viewAndDownload}: ${name}`}
 											>
@@ -66,7 +66,7 @@ export const CatalogResults = memo(function CatalogResults({
 														width={36}
 														height={36}
 														unoptimized
-														className="aspect-square size-9 shrink-0 rounded-lg bg-card transition-transform duration-160 ease-out corner-squircle group-hover:scale-105"
+														className="aspect-square size-9 shrink-0 rounded-lg bg-card transition-transform duration-160 ease-out corner-squircle group-hover:scale-105 squircle:rounded-xl"
 													/>
 													<span className="truncate text-sm font-semibold transition-colors group-hover:text-primary">
 														{name}

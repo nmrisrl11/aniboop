@@ -18,7 +18,7 @@ export function CatalogTrigger({
 			variant="secondary"
 			size="sm"
 			className={cn(
-				"h-11 gap-2 rounded-xl px-3.5 text-sm font-semibold md:h-8 md:rounded-lg md:px-2.5 md:text-xs",
+				"h-11 gap-2 rounded-xl px-3.5 text-sm font-semibold md:h-8 md:rounded-lg md:px-2.5 md:text-xs squircle:rounded-3xl md:squircle:rounded-2xl",
 				className,
 			)}
 			aria-label={`${copy.catalog}, ${copy.characterCount(characterCount)}`}

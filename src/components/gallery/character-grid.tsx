@@ -65,7 +65,7 @@ const CharacterTile = memo(function CharacterTile({
 
 	const { preview, galleryDirections, reactions } = character;
 	return (
-		<div className="group/tile absolute inset-2 flex flex-col items-center justify-center gap-2 squircle border bg-card px-4 py-2.5 text-card-foreground shadow-xs">
+		<div className="group/tile absolute inset-2 flex flex-col items-center justify-center gap-2 rounded-3xl border bg-card px-4 py-2.5 text-card-foreground shadow-xs corner-squircle squircle:rounded-[44px]">
 			<div
 				ref={observeArt}
 				className="shrink-0"
@@ -78,7 +78,7 @@ const CharacterTile = memo(function CharacterTile({
 						reactions={reactions}
 						label={character.name}
 						size={PREVIEW_SIZE}
-						className="squircle"
+						className="rounded-2xl corner-squircle squircle:rounded-4xl"
 						mode={boopOrder}
 						onReact={onReact}
 						dragThreshold={DRAG_THRESHOLD}
@@ -93,7 +93,7 @@ const CharacterTile = memo(function CharacterTile({
 					type="button"
 					tabIndex={visibility === "focusable" ? 0 : -1}
 					onClick={() => onSelectCharacter(character)}
-					className="absolute top-2.5 right-2.5 z-10 flex size-7 scale-80 items-center justify-center rounded-lg text-muted-foreground/70 opacity-0 transition-all duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] corner-squircle group-hover/tile:scale-100 group-hover/tile:opacity-100 hover:scale-110 hover:bg-muted hover:text-foreground focus-visible:scale-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-ring active:scale-95 motion-reduce:scale-100 motion-reduce:transition-opacity max-md:scale-100 max-md:opacity-75"
+					className="absolute top-2.5 right-2.5 z-10 flex size-7 scale-80 items-center justify-center rounded-lg text-muted-foreground/70 opacity-0 transition-all duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] corner-squircle group-hover/tile:scale-100 group-hover/tile:opacity-100 hover:scale-110 hover:bg-muted hover:text-foreground focus-visible:scale-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-ring active:scale-95 motion-reduce:scale-100 motion-reduce:transition-opacity max-md:scale-100 max-md:opacity-75 squircle:rounded-full"
 					aria-label={`${brand.characterDetails.viewAndDownload}: ${character.name}`}
 					title={`${brand.characterDetails.viewAndDownload}: ${character.name}`}
 				>

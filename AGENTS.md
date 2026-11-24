@@ -2,7 +2,7 @@
 
 ## Project
 
-AniBoop is a collection of chibi anime characters designed to react when booped. The homepage is a pannable, virtualized grid backed by the [character catalog](src/data/characters.json). The catalog dialog supports search by name or series and filtering by series. Character details and downloads are planned in the [feature blueprint](docs/FEATURE_BLUEPRINT.md).
+AniBoop is a collection of chibi anime characters designed to react when booped. The homepage is a pannable, virtualized grid backed by the [character catalog](src/data/characters.json). The catalog supports searching by name or series and filtering by series, and character details with sprite sheet downloads open from each grid tile or the catalog (see the [feature blueprint](docs/FEATURE_BLUEPRINT.md)).
 
 For a fresh agent conversation, use the [project context workflow](docs/HANDOFF.md) to load the codebase map and check the current checkout.
 
@@ -38,9 +38,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## Corner shapes
 
-- Use `squircle` when a card, banner, or other surface should have corners that scale with its dimensions. The utility supplies both radii in [`globals.css`](src/app/globals.css). Use it on its own so competing radius classes do not override the fallback.
-- When a shared component already has a size-specific `rounded-*` radius, add `corner-squircle` to enhance that radius. Use `rounded-full` alone for intentional circles and pills. Preserve keyboard focus indicators on interactive elements.
-- Keep the baseline radius outside the feature query and native-only changes inside `@supports (corner-shape: squircle)`. Verify both paths when changing the shared utility.
+- Always pair a baseline circular fallback (`rounded-*`) with `corner-squircle` (from `@toolwind/corner-shape`) and a scaled-up `squircle:rounded-*` utility via the `@custom-variant squircle` feature query (`@supports (corner-shape: squircle)`) in [`globals.css`](src/app/globals.css). Never ship bare `rounded-* corner-squircle` without a `squircle:` radius bump (because `superellipse(2)` cuts ~46% less corner area and looks sharper than the circular fallback), and never raise the unconditional fallback radius just to compensate for squircle softness.
+- Rely on the shared primitives in [`src/components/ui`](src/components/ui) for default corner-shape pairs instead of duplicating `corner-squircle` on callers. Follow the balanced radius ladder (`rounded-lg` → `squircle:rounded-2xl` on controls/inputs/buttons, `rounded-md` / compact `sm` / `xs` → `squircle:rounded-xl`, `rounded-xl` → `squircle:rounded-3xl` on cards/menus/popovers/code blocks, `rounded-2xl` → `squircle:rounded-[32px]` on dialogs and directional edges on drawers, `rounded-3xl` → `squircle:rounded-[44px]` on gallery tiles).
+- Use `squircle:rounded-full` only on square (`1:1`) icon boxes, portrait frames, or compact square controls — never on rectangular cards, dialogs, or full-width buttons where `rounded-full` distorts corners into an oval/pill. Keep bare `rounded-full` (without `corner-squircle`) for intentional circles, status badges, and pills.
+- Align nested inner and outer radii concentrically for both fallback (`outer - gap`) and native squircle (`outer - ~1.84 × gap`), e.g. a `rounded-xl p-1 squircle:rounded-3xl` parent with a `rounded-lg squircle:rounded-xl` child, or a `rounded-xl p-1.5 squircle:rounded-3xl` menu with `rounded-md squircle:rounded-xl` items.
+- When adding or updating shadcn/ui components, audit generated `rounded-*` classes to apply the triad above, preserve keyboard focus indicators, keep fallback radii outside `@supports`, and verify both fallback and native `corner-shape: squircle` paths. See [Corner-shape conventions](docs/DEVELOPMENT.md#corner-shape-conventions) and [Brand corner shapes](docs/BRAND.md#corner-shapes).
 
 ## Tailwind CSS lint
 

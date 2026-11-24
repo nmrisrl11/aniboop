@@ -14,7 +14,7 @@ import { EllipsisIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const optionClass =
-	"h-10 w-full justify-start gap-2.5 rounded-lg px-2.5 text-sm font-medium text-foreground hover:bg-muted active:scale-[0.99] transition-transform";
+	"h-10 w-full justify-start gap-2.5 rounded-md px-2.5 text-sm font-medium text-foreground transition-transform hover:bg-muted active:scale-[0.99] squircle:rounded-xl";
 const copy = brand.galleryControls;
 
 export function HeaderOptions({
@@ -47,7 +47,7 @@ export function HeaderOptions({
 				<Button
 					variant="ghost"
 					size="icon"
-					className="size-11 rounded-xl text-muted-foreground md:hidden"
+					className="size-11 rounded-xl text-muted-foreground md:hidden squircle:rounded-3xl"
 					aria-label={copy.moreOptions}
 					title={copy.moreOptions}
 				>
@@ -59,7 +59,7 @@ export function HeaderOptions({
 				sideOffset={8}
 				collisionPadding={12}
 				aria-label={copy.moreOptions}
-				className="max-h-(--radix-popover-content-available-height) w-72 max-w-(--radix-popover-content-available-width) gap-0 overflow-y-auto rounded-xl border border-border p-1.5 shadow-lg ring-0 corner-squircle md:hidden data-open:animate-none data-closed:animate-none"
+				className="max-h-(--radix-popover-content-available-height) w-72 max-w-(--radix-popover-content-available-width) gap-0 overflow-y-auto border border-border p-1.5 shadow-lg ring-0 md:hidden data-open:animate-none data-closed:animate-none"
 			>
 				<div className="flex flex-col gap-0.5 border-b border-border pb-1.5">
 					<BoopOrderSelect

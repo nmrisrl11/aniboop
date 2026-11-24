@@ -38,19 +38,19 @@ export function CharacterDetailsContent({
 	return (
 		<div className="catalog-scrollbar flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-4 sm:px-6 sm:py-5">
 			{/* Quality Selector Segmented Control with concentric padding and radii */}
-			<div className="flex flex-col gap-2.5 rounded-2xl border border-border/70 bg-muted/30 p-3.5 corner-squircle">
+			<div className="flex flex-col gap-2.5 rounded-2xl border border-border/70 bg-muted/30 p-3.5 corner-squircle squircle:rounded-[32px]">
 				<div className="flex items-center justify-between px-0.5">
 					<span className="text-xs font-semibold text-foreground">{copy.qualityLabel}</span>
 					<span className="text-xs text-muted-foreground">
 						{quality === "1080" ? copy.qualityHDDescription : copy.qualityWebDescription}
 					</span>
 				</div>
-				<div className="grid grid-cols-2 gap-1 rounded-xl border border-border/50 bg-background/70 p-1">
+				<div className="grid grid-cols-2 gap-1 rounded-xl border border-border/50 bg-background/70 p-1 corner-squircle squircle:rounded-3xl">
 					<button
 						type="button"
 						onClick={() => setQuality("1080")}
 						className={cn(
-							"h-8.5 cursor-pointer rounded-lg text-xs font-medium transition-all duration-160 ease-out select-none",
+							"h-8.5 cursor-pointer rounded-lg text-xs font-medium transition-all duration-160 ease-out select-none corner-squircle squircle:rounded-xl",
 							quality === "1080"
 								? "bg-card text-foreground shadow-xs"
 								: "text-muted-foreground hover:text-foreground",
@@ -63,7 +63,7 @@ export function CharacterDetailsContent({
 						type="button"
 						onClick={() => setQuality("504")}
 						className={cn(
-							"h-8.5 cursor-pointer rounded-lg text-xs font-medium transition-all duration-160 ease-out select-none",
+							"h-8.5 cursor-pointer rounded-lg text-xs font-medium transition-all duration-160 ease-out select-none corner-squircle squircle:rounded-xl",
 							quality === "504"
 								? "bg-card text-foreground shadow-xs"
 								: "text-muted-foreground hover:text-foreground",
@@ -77,10 +77,10 @@ export function CharacterDetailsContent({
 			{/* Asset Download Cards */}
 			<div className="grid gap-3 sm:grid-cols-2">
 				{/* Directions Card */}
-				<div className="flex flex-col justify-between gap-3.5 rounded-xl border border-border/70 bg-card p-4 shadow-xs corner-squircle">
+				<div className="flex flex-col justify-between gap-3.5 rounded-xl border border-border/70 bg-card p-4 shadow-xs corner-squircle squircle:rounded-3xl">
 					<div className="flex items-start gap-3">
 						<div
-							className="size-12 shrink-0 rounded-lg border border-border/50 bg-card/60 shadow-2xs"
+							className="size-12 shrink-0 rounded-lg border border-border/50 bg-card/60 shadow-2xs corner-squircle squircle:rounded-full"
 							style={getSpriteStyle(galleryDirections, 4)}
 							role="img"
 							aria-label={`${name} directions sheet preview`}
@@ -103,10 +103,10 @@ export function CharacterDetailsContent({
 				</div>
 
 				{/* Reactions Card */}
-				<div className="flex flex-col justify-between gap-3.5 rounded-xl border border-border/70 bg-card p-4 shadow-xs corner-squircle">
+				<div className="flex flex-col justify-between gap-3.5 rounded-xl border border-border/70 bg-card p-4 shadow-xs corner-squircle squircle:rounded-3xl">
 					<div className="flex items-start gap-3">
 						<div
-							className="size-12 shrink-0 rounded-lg border border-border/50 bg-card/60 shadow-2xs"
+							className="size-12 shrink-0 rounded-lg border border-border/50 bg-card/60 shadow-2xs corner-squircle squircle:rounded-full"
 							style={getSpriteStyle(reactions, 2)}
 							role="img"
 							aria-label={`${name} reactions sheet preview`}
@@ -130,11 +130,12 @@ export function CharacterDetailsContent({
 			</div>
 
 			{/* License and usage terms */}
-			<section className="flex gap-3 rounded-xl border border-border/80 bg-muted/40 p-3.5 text-xs text-muted-foreground corner-squircle">
-				<ShieldAlertIcon className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
-				<div className="flex flex-col gap-1">
-					<h5 className="font-semibold text-foreground">{copy.licenseNoticeTitle}</h5>
-					<p className="leading-relaxed">{copy.licenseNotice}</p>
+			<section className="flex items-start gap-3 rounded-xl border border-border bg-background p-3.5 corner-squircle sm:p-4 dark:bg-input/30 squircle:rounded-3xl">
+				<ShieldAlertIcon className="size-3.5 text-foreground" aria-hidden="true" />
+
+				<div className="flex-1 space-y-1">
+					<h5 className="text-xs font-semibold text-foreground">{copy.licenseNoticeTitle}</h5>
+					<p className="text-xs leading-relaxed text-muted-foreground">{copy.licenseNotice}</p>
 				</div>
 			</section>
 		</div>

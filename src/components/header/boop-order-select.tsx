@@ -73,7 +73,7 @@ export function BoopOrderSelect({
 				align="end"
 				sideOffset={8}
 				collisionPadding={8}
-				className="w-64 max-w-[calc(100vw-1rem)] rounded-xl border border-border p-1.5 shadow-lg ring-0 corner-squircle motion-reduce:animate-none"
+				className="w-64 max-w-[calc(100vw-1rem)] border border-border p-1.5 shadow-lg ring-0 motion-reduce:animate-none"
 			>
 				<DropdownMenuLabel className="px-2 pt-1.5 pb-2">{copy.boopOrder}</DropdownMenuLabel>
 				<DropdownMenuRadioGroup
@@ -89,11 +89,11 @@ export function BoopOrderSelect({
 								key={order}
 								value={order}
 								textValue={label}
-								className="min-h-12 gap-2.5 rounded-lg py-1.5 pl-2 data-[state=checked]:not-focus:bg-secondary"
+								className="min-h-12 gap-2.5 py-1.5 pl-2 data-[state=checked]:not-focus:bg-secondary"
 							>
 								<span
 									aria-hidden="true"
-									className="grid size-8 shrink-0 place-items-center rounded-lg border border-border bg-background text-muted-foreground corner-squircle"
+									className="grid size-8 shrink-0 place-items-center rounded-lg border border-border bg-background text-muted-foreground corner-squircle squircle:rounded-full"
 								>
 									<Icon />
 								</span>

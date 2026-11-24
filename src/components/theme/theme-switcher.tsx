@@ -61,7 +61,7 @@ export function ThemeSwitcher({
 				align="end"
 				sideOffset={8}
 				collisionPadding={8}
-				className="w-max rounded-xl border border-border p-1.5 shadow-lg ring-0 corner-squircle motion-reduce:animate-none"
+				className="w-max border border-border p-1.5 shadow-lg ring-0 motion-reduce:animate-none"
 			>
 				<DropdownMenuLabel className="px-2.5">{copy.appearance}</DropdownMenuLabel>
 				<DropdownMenuRadioGroup value={appearance} onValueChange={setTheme}>
@@ -72,7 +72,7 @@ export function ThemeSwitcher({
 							<DropdownMenuRadioItem
 								key={option}
 								value={option}
-								className="min-h-10 gap-2.5 rounded-lg pl-2.5"
+								className="min-h-10 gap-2.5 pl-2.5"
 							>
 								<Icon aria-hidden="true" />
 								{copy.themes[option]}

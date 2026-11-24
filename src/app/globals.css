@@ -5,6 +5,11 @@
 @plugin "@toolwind/corner-shape";
 
 @custom-variant dark (&:where(.dark, .dark *));
+@custom-variant squircle {
+	@supports (corner-shape: squircle) {
+		@slot;
+	}
+}
 
 @theme inline {
 	--color-background: var(--background);
@@ -104,15 +109,6 @@
 	--chart-3: #71717a;
 	--chart-4: #52525b;
 	--chart-5: #3f3f46;
-}
-
-@utility squircle {
-	border-radius: min(2rem, 20%);
-
-	@supports (corner-shape: squircle) {
-		@apply corner-squircle;
-		border-radius: min(2.5rem, 25%);
-	}
 }
 
 @utility catalog-scrollbar {

@@ -4,6 +4,7 @@ import {
 } from "@/components/catalog/character-catalog";
 import { Credits } from "@/components/credits/credits";
 import { BoopOrderSelect } from "@/components/header/boop-order-select";
+import { BrandLogo } from "@/components/header/brand-logo";
 import { HeaderOptions } from "@/components/header/header-options";
 import { ReactionSoundToggle } from "@/components/header/reaction-sound-toggle";
 import { MascotGuide } from "@/components/mascot-guide/mascot-guide";
@@ -11,8 +12,7 @@ import type { BoopOrder } from "@/components/mascot/mascot";
 import { RepositoryLink } from "@/components/resources/repository-link";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import type { GalleryCharacter } from "@/data/characters";
-import { brand } from "@/lib/brand";
-import Image from "next/image";
+import type { Ref } from "react";
 
 export function AppHeader({
 	characters,
@@ -23,6 +23,7 @@ export function AppHeader({
 	catalogOpen,
 	onCatalogOpenChange,
 	onSelectCharacter,
+	logoRef,
 }: {
 	characters: readonly CharacterCatalogEntry[];
 	boopOrder: BoopOrder;
@@ -32,21 +33,12 @@ export function AppHeader({
 	catalogOpen?: boolean;
 	onCatalogOpenChange?: (open: boolean) => void;
 	onSelectCharacter?: (character: GalleryCharacter) => void;
+	logoRef?: Ref<HTMLSpanElement>;
 }) {
 	return (
 		<header className="sticky inset-x-0 top-0 z-20 flex h-16 w-full shrink-0 items-center justify-between gap-4 border-b border-border bg-card px-4 shadow-xs select-none sm:px-5 md:h-14">
 			<div className="flex items-center gap-2">
-				<h1 className="shrink-0">
-					<Image
-						src="/brand/aniboop-logo.svg"
-						alt={brand.name}
-						title={brand.name}
-						width={90}
-						height={25}
-						priority
-						className="aspect-90/25 h-6.25 w-22.5"
-					/>
-				</h1>
+				<BrandLogo logoRef={logoRef} />
 				<div className="hidden items-center gap-2 md:flex">
 					<div aria-hidden="true" className="mx-1 h-4 w-px bg-border" />
 					<MascotGuide />

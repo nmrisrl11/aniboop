@@ -4,16 +4,18 @@ import { CharacterDetails } from "@/components/character/character-details";
 import { CharacterGrid } from "@/components/gallery/character-grid";
 import { AppHeader } from "@/components/header/app-header";
 import type { BoopOrder } from "@/components/mascot/mascot";
+import { SplashScreen } from "@/components/splash/splash-screen";
 import type { GalleryCharacter } from "@/data/characters";
 import { useReactionSound } from "@/hooks/use-reaction-sound";
 import { brand } from "@/lib/brand";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 export function Gallery({ characters }: { characters: readonly GalleryCharacter[] }) {
 	const [boopOrder, setBoopOrder] = useState<BoopOrder>("cycle");
 	const [selectedCharacter, setSelectedCharacter] = useState<GalleryCharacter | null>(null);
 	const [catalogOpen, setCatalogOpen] = useState(false);
 	const [openedFromCatalog, setOpenedFromCatalog] = useState(false);
+	const headerLogoRef = useRef<HTMLSpanElement>(null);
 	const { soundEnabled, toggleSound, resumeSound, playReactionSound } = useReactionSound();
 
 	const handleSelectFromCatalog = useCallback((character: GalleryCharacter) => {
@@ -51,6 +53,7 @@ export function Gallery({ characters }: { characters: readonly GalleryCharacter[
 
 	return (
 		<div className="relative flex h-dvh flex-col overflow-hidden">
+			<SplashScreen targetRef={headerLogoRef} />
 			<AppHeader
 				characters={characters}
 				boopOrder={boopOrder}
@@ -60,6 +63,7 @@ export function Gallery({ characters }: { characters: readonly GalleryCharacter[
 				catalogOpen={catalogOpen}
 				onCatalogOpenChange={handleCatalogOpenChange}
 				onSelectCharacter={handleSelectFromCatalog}
+				logoRef={headerLogoRef}
 			/>
 			<main
 				className="relative flex-1 overflow-hidden"

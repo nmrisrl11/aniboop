@@ -3,6 +3,7 @@
 @import "shadcn/tailwind.css";
 @import "../styles/scrollbars.css";
 @import "../styles/bloom-loader.css";
+@import "../styles/splash.css";
 
 @plugin "@toolwind/corner-shape";
 

@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { brand } from "@/lib/brand";
 import { publicSiteUrl } from "@/lib/site";
+import { splashInitScript } from "@/lib/splash";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -38,6 +39,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 			className={`${allo.variable} ${inter.variable}`}
 			suppressHydrationWarning
 		>
+			<head>
+				<script dangerouslySetInnerHTML={{ __html: splashInitScript }} />
+			</head>
 			<body className="min-h-dvh antialiased">
 				<ThemeProvider
 					attribute="class"

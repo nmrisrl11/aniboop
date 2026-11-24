@@ -1,0 +1,162 @@
+/* Intro splash screen and navbar logo boop. GPU-composited transforms and opacity only. */
+.aniboop-splash {
+	display: none;
+}
+
+.aniboop-splash-backdrop {
+	background-color: var(--background);
+	background-image: url("/aniboop-watermark.svg");
+	opacity: 1;
+	transition: opacity 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.aniboop-splash[data-phase="docking"] {
+	pointer-events: none;
+}
+
+.aniboop-splash[data-phase="docking"] .aniboop-splash-backdrop {
+	opacity: 0;
+}
+
+.aniboop-splash-dock {
+	transform-origin: center center;
+	will-change: transform;
+}
+
+.aniboop-splash-wobble,
+.aniboop-splash-jump,
+.aniboop-logo-boop {
+	transform-origin: bottom center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	:root[data-splash="active"] .aniboop-splash {
+		display: flex;
+	}
+
+	:root[data-splash="active"] [data-header-logo] {
+		opacity: 0;
+	}
+
+	.aniboop-splash-stage {
+		animation: aniboop-splash-pop 200ms cubic-bezier(0.22, 1, 0.36, 1) both;
+	}
+
+	.aniboop-splash-wobble {
+		animation: aniboop-sticker-wobble 980ms ease-in-out 80ms both;
+	}
+
+	.aniboop-splash-jump {
+		animation:
+			aniboop-sticker-hop 480ms ease-in-out 40ms both,
+			aniboop-sticker-hop 480ms ease-in-out 540ms forwards;
+	}
+
+	.aniboop-splash[data-phase="docking"] .aniboop-splash-stage,
+	.aniboop-splash[data-phase="docking"] .aniboop-splash-wobble,
+	.aniboop-splash[data-phase="docking"] .aniboop-splash-jump {
+		animation: none;
+	}
+
+	.aniboop-logo-trigger {
+		/* Standard curve fallback before physics-based linear() spring easing */
+		transition: scale 220ms cubic-bezier(0.22, 1, 0.36, 1);
+		transition-timing-function: linear(
+			0,
+			0.009,
+			0.035 2.1%,
+			0.141,
+			0.281 6.7%,
+			0.723 12.9%,
+			0.938 16.7%,
+			1.017,
+			1.077,
+			1.121,
+			1.149 24.3%,
+			1.159,
+			1.163,
+			1.161,
+			1.154 29.9%,
+			1.129 32.8%,
+			1.051 39.6%,
+			1.017 43.1%,
+			0.991,
+			0.977 51%,
+			0.974 53.8%,
+			0.975 57.1%,
+			0.997 69.8%,
+			1.003 76.9%,
+			1
+		);
+	}
+
+	.aniboop-logo-trigger:active {
+		scale: 0.94;
+		transition: scale 100ms ease-out;
+	}
+}
+
+@keyframes aniboop-splash-pop {
+	from {
+		opacity: 0;
+		scale: 0.9;
+	}
+	to {
+		opacity: 1;
+		scale: 1;
+	}
+}
+
+@keyframes aniboop-sticker-hop {
+	0%,
+	20% {
+		translate: 0 0;
+	}
+	50% {
+		translate: 0 -28%;
+	}
+	80%,
+	100% {
+		translate: 0 0;
+	}
+
+	0% {
+		scale: 1 1;
+	}
+	20% {
+		scale: 1.11 0.87;
+	}
+	50% {
+		scale: 0.96 1.12;
+	}
+	80% {
+		scale: 1.1 0.88;
+	}
+	100% {
+		scale: 1 1;
+	}
+}
+
+@keyframes aniboop-sticker-wobble {
+	0% {
+		rotate: 0deg;
+	}
+	22% {
+		rotate: 5.5deg;
+	}
+	55% {
+		rotate: -5.5deg;
+	}
+	84% {
+		rotate: 2.5deg;
+	}
+	100% {
+		rotate: 0deg;
+	}
+}
+
+@media (forced-colors: active) {
+	.aniboop-splash-backdrop {
+		background-image: none;
+	}
+}

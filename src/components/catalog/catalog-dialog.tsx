@@ -22,7 +22,7 @@ export function CatalogDialog({
 }: {
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
-	trigger: ReactNode;
+	trigger?: ReactNode;
 	countLabel: string;
 	children: ReactNode;
 }) {
@@ -30,7 +30,7 @@ export function CatalogDialog({
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
-			<DialogTrigger asChild>{trigger}</DialogTrigger>
+			{trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
 			<DialogContent
 				className="h-168 max-w-3xl"
 				onOpenAutoFocus={() => {

@@ -1,15 +1,28 @@
 "use client";
 
-import { CatalogDialog } from "./catalog-dialog";
-import { CatalogDrawer } from "./catalog-drawer";
-import { CatalogResults } from "./catalog-results";
-import { CatalogSearchFilter } from "./catalog-search-filter";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import dynamic from "next/dynamic";
+import { useState } from "react";
 import { CatalogTrigger } from "./catalog-trigger";
 import type { CharacterCatalogEntry } from "./types";
 import { useCharacterCatalog } from "./use-character-catalog";
-import { useMediaQuery } from "@/hooks/use-media-query";
 
 export type { CharacterCatalogEntry } from "./types";
+
+const CatalogDialog = dynamic(() => import("./catalog-dialog").then((mod) => mod.CatalogDialog), {
+	ssr: false,
+});
+const CatalogDrawer = dynamic(() => import("./catalog-drawer").then((mod) => mod.CatalogDrawer), {
+	ssr: false,
+});
+const CatalogResults = dynamic(
+	() => import("./catalog-results").then((mod) => mod.CatalogResults),
+	{ ssr: false },
+);
+const CatalogSearchFilter = dynamic(
+	() => import("./catalog-search-filter").then((mod) => mod.CatalogSearchFilter),
+	{ ssr: false },
+);
 
 export function CharacterCatalog({
 	characters,
@@ -23,6 +36,7 @@ export function CharacterCatalog({
 	onSelectCharacter?: (character: CharacterCatalogEntry) => void;
 }) {
 	const isDesktop = useMediaQuery("(min-width: 768px)");
+	const [hasOpened, setHasOpened] = useState(false);
 	const {
 		open,
 		setOpen,
@@ -44,9 +58,13 @@ export function CharacterCatalog({
 		onOpenChange: controlledOnOpenChange,
 	});
 
-	const trigger = <CatalogTrigger characterCount={characterCount} />;
+	if (open && !hasOpened) {
+		setHasOpened(true);
+	}
 
-	const body = (
+	const shouldMountSurface = open || hasOpened;
+
+	const body = shouldMountSurface ? (
 		<>
 			<CatalogSearchFilter
 				searchQuery={searchQuery}
@@ -64,19 +82,26 @@ export function CharacterCatalog({
 				onResetFilters={resetFilters}
 			/>
 		</>
-	);
-
-	if (isDesktop) {
-		return (
-			<CatalogDialog open={open} onOpenChange={setOpen} trigger={trigger} countLabel={countLabel}>
-				{body}
-			</CatalogDialog>
-		);
-	}
+	) : null;
 
 	return (
-		<CatalogDrawer open={open} onOpenChange={setOpen} trigger={trigger} countLabel={countLabel}>
-			{body}
-		</CatalogDrawer>
+		<>
+			<CatalogTrigger
+				characterCount={characterCount}
+				aria-haspopup="dialog"
+				aria-expanded={open}
+				onClick={() => setOpen(true)}
+			/>
+			{shouldMountSurface &&
+				(isDesktop ? (
+					<CatalogDialog open={open} onOpenChange={setOpen} countLabel={countLabel}>
+						{body}
+					</CatalogDialog>
+				) : (
+					<CatalogDrawer open={open} onOpenChange={setOpen} countLabel={countLabel}>
+						{body}
+					</CatalogDrawer>
+				))}
+		</>
 	);
 }

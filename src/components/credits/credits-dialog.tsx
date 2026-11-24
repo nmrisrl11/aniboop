@@ -13,10 +13,20 @@ import type { ReactNode } from "react";
 
 const copy = brand.credits;
 
-export function CreditsDialog({ trigger, children }: { trigger: ReactNode; children: ReactNode }) {
+export function CreditsDialog({
+	open,
+	onOpenChange,
+	trigger,
+	children,
+}: {
+	open?: boolean;
+	onOpenChange?: (open: boolean) => void;
+	trigger?: ReactNode;
+	children: ReactNode;
+}) {
 	return (
-		<Dialog>
-			<DialogTrigger asChild>{trigger}</DialogTrigger>
+		<Dialog open={open} onOpenChange={onOpenChange}>
+			{trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
 			<DialogContent className="max-h-[calc(100dvh-2rem)] max-w-lg overflow-hidden p-0 sm:max-h-[calc(100dvh-3rem)]">
 				<DialogHeader className="border-b border-border bg-muted/30 px-5 pt-5 pb-4 sm:px-6 sm:pt-6 sm:pb-5">
 					<DialogTitle className="font-heading text-xl font-bold tracking-tight sm:text-2xl">

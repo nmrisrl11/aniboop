@@ -17,6 +17,7 @@ const SECTOR = (Math.PI * 2) / CLOCKWISE_CELLS.length;
 const HYSTERESIS = 0.12;
 const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
 const GAZE_DELAY = 160;
+const MAX_PAGE_GAZE_DELAY = 480;
 const DIRECTION_RETRY_DELAY = 2000;
 const DEFAULT_PAYOFFS: readonly Reaction[] = ["heart", "sparkle", "delighted"];
 const BOOP_END = 560;
@@ -140,10 +141,27 @@ function MascotButton({
 		let retryAfter = 0;
 		let disposed = false;
 		let unsubscribe: (() => void) | undefined;
+		let cachedBox: DOMRect | null = null;
+		let loadController: AbortController | null = null;
 
-		const reset = () => {
+		const invalidateBox = () => {
+			cachedBox = null;
+		};
+
+		const getBox = () => {
+			cachedBox ??= button.getBoundingClientRect();
+			return cachedBox;
+		};
+
+		const cancelPendingLoad = () => {
 			window.clearTimeout(timer);
 			timer = undefined;
+			loadController?.abort();
+			loadController = null;
+		};
+
+		const reset = () => {
+			cancelPendingLoad();
 			currentSector = -1;
 			setSector(-1);
 		};
@@ -151,9 +169,15 @@ function MascotButton({
 		const load = async () => {
 			timer = undefined;
 			loading = true;
-			const loaded = await decodeImage(directions);
+			const controller = new AbortController();
+			loadController = controller;
+			const loaded = await decodeImage(directions, {
+				priority: trackAcrossPage ? "low" : "high",
+				signal: controller.signal,
+			});
 			loading = false;
-			if (disposed) return;
+			if (loadController === controller) loadController = null;
+			if (disposed || controller.signal.aborted) return;
 			if (!loaded) {
 				retryAfter = performance.now() + DIRECTION_RETRY_DELAY;
 				return;
@@ -167,7 +191,7 @@ function MascotButton({
 				reset();
 				return;
 			}
-			const box = button.getBoundingClientRect();
+			const box = getBox();
 			const deadZone = preview && trackAcrossPage ? 12 : box.width / 3;
 			const nextSector = aim(box, point.x, point.y, currentSector, deadZone);
 			const changed = nextSector !== currentSector;
@@ -177,8 +201,14 @@ function MascotButton({
 			} else if (!trackAcrossPage && currentSector === -1) {
 				reset();
 			} else if (!loading && timer === undefined && performance.now() >= retryAfter) {
-				if (trackAcrossPage) void load();
-				else timer = window.setTimeout(load, GAZE_DELAY);
+				const distance = Math.hypot(
+					point.x - (box.left + box.width / 2),
+					point.y - (box.top + box.height / 2),
+				);
+				const delay = trackAcrossPage
+					? Math.min(MAX_PAGE_GAZE_DELAY, Math.round(GAZE_DELAY + distance * 0.25))
+					: GAZE_DELAY;
+				timer = window.setTimeout(load, delay);
 			}
 		};
 
@@ -191,6 +221,7 @@ function MascotButton({
 		const syncTracking = () => {
 			unsubscribe?.();
 			unsubscribe = undefined;
+			invalidateBox();
 			reset();
 			if (reducedMotion.matches) {
 				animation.current?.cancel();
@@ -212,12 +243,14 @@ function MascotButton({
 		syncTracking();
 		if (trackAcrossPage) finePointer.addEventListener("change", syncTracking);
 		reducedMotion.addEventListener("change", syncTracking);
+		window.addEventListener("resize", invalidateBox, { passive: true });
 		return () => {
 			disposed = true;
+			cancelPendingLoad();
 			unsubscribe?.();
 			finePointer.removeEventListener("change", syncTracking);
 			reducedMotion.removeEventListener("change", syncTracking);
-			window.clearTimeout(timer);
+			window.removeEventListener("resize", invalidateBox);
 		};
 	}, [directions, preview, trackAcrossPage, trackPointer]);
 

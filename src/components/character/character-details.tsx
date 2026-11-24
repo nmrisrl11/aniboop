@@ -19,11 +19,17 @@ export function CharacterDetails({
 	onBackToCatalog?: () => void;
 }) {
 	const isDesktop = useMediaQuery("(min-width: 768px)");
-	const { downloadFile } = useDownload();
+	const { downloadFile, isDownloading } = useDownload();
 
 	if (!character) return null;
 
-	const content = <CharacterDetailsContent character={character} onDownload={downloadFile} />;
+	const content = (
+		<CharacterDetailsContent
+			character={character}
+			onDownload={downloadFile}
+			isDownloading={isDownloading}
+		/>
+	);
 
 	if (isDesktop) {
 		return (

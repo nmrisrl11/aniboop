@@ -1,30 +1,59 @@
 "use client";
 
 import { useMediaQuery } from "@/hooks/use-media-query";
-import type { ComponentProps } from "react";
-import { MascotGuideContent } from "./mascot-guide-content";
-import { MascotGuideDialog } from "./mascot-guide-dialog";
-import { MascotGuideDrawer } from "./mascot-guide-drawer";
+import dynamic from "next/dynamic";
+import { type ComponentProps, useState } from "react";
 import { MascotGuideTrigger } from "./mascot-guide-trigger";
+
+const MascotGuideContent = dynamic(
+	() => import("./mascot-guide-content").then((mod) => mod.MascotGuideContent),
+	{ ssr: false },
+);
+const MascotGuideDialog = dynamic(
+	() => import("./mascot-guide-dialog").then((mod) => mod.MascotGuideDialog),
+	{ ssr: false },
+);
+const MascotGuideDrawer = dynamic(
+	() => import("./mascot-guide-drawer").then((mod) => mod.MascotGuideDrawer),
+	{ ssr: false },
+);
 
 export function MascotGuide({
 	triggerClassName,
+	onClick,
 	...props
 }: ComponentProps<typeof MascotGuideTrigger> & { triggerClassName?: string } = {}) {
 	const isDesktop = useMediaQuery("(min-width: 768px)");
-	const trigger = <MascotGuideTrigger className={triggerClassName} {...props} />;
+	const [open, setOpen] = useState(false);
+	const [hasOpened, setHasOpened] = useState(false);
 
-	if (isDesktop) {
-		return (
-			<MascotGuideDialog trigger={trigger}>
-				<MascotGuideContent />
-			</MascotGuideDialog>
-		);
-	}
+	const handleOpen: ComponentProps<typeof MascotGuideTrigger>["onClick"] = (event) => {
+		onClick?.(event);
+		if (!event.defaultPrevented) {
+			setHasOpened(true);
+			setOpen(true);
+		}
+	};
 
 	return (
-		<MascotGuideDrawer trigger={trigger}>
-			<MascotGuideContent />
-		</MascotGuideDrawer>
+		<>
+			<MascotGuideTrigger
+				className={triggerClassName}
+				aria-haspopup="dialog"
+				aria-expanded={open}
+				onClick={handleOpen}
+				{...props}
+			/>
+			{hasOpened &&
+				(isDesktop ? (
+					<MascotGuideDialog open={open} onOpenChange={setOpen}>
+						<MascotGuideContent />
+					</MascotGuideDialog>
+				) : (
+					<MascotGuideDrawer open={open} onOpenChange={setOpen}>
+						<MascotGuideContent />
+					</MascotGuideDrawer>
+				))}
+		</>
 	);
 }

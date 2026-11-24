@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import type { CatalogGroup, CharacterCatalogEntry } from "./types";
 import { brand } from "@/lib/brand";
+import { cn } from "@/lib/utils";
 import { ChevronRightIcon } from "lucide-react";
 import Image from "next/image";
 import { memo, type RefObject } from "react";
@@ -38,8 +39,11 @@ export const CatalogResults = memo(function CatalogResults({
 				</div>
 			) : (
 				<div className="flex flex-col gap-5 sm:gap-6">
-					{groups.map(({ series, members }) => (
-						<section key={series} className="flex flex-col gap-2.5">
+					{groups.map(({ series, members }, groupIndex) => (
+						<section
+							key={series}
+							className={cn("flex flex-col gap-2.5", groupIndex >= 2 && "catalog-section-deferred")}
+						>
 							<h3 className="flex items-baseline justify-between gap-3 border-b border-border pb-2 text-sm font-semibold">
 								{series}
 								<span className="font-mono text-xs font-normal text-muted-foreground tabular-nums">

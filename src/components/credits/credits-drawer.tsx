@@ -13,10 +13,20 @@ import type { ReactNode } from "react";
 
 const copy = brand.credits;
 
-export function CreditsDrawer({ trigger, children }: { trigger: ReactNode; children: ReactNode }) {
+export function CreditsDrawer({
+	open,
+	onOpenChange,
+	trigger,
+	children,
+}: {
+	open?: boolean;
+	onOpenChange?: (open: boolean) => void;
+	trigger?: ReactNode;
+	children: ReactNode;
+}) {
 	return (
-		<Drawer>
-			<DrawerTrigger asChild>{trigger}</DrawerTrigger>
+		<Drawer open={open} onOpenChange={onOpenChange}>
+			{trigger && <DrawerTrigger asChild>{trigger}</DrawerTrigger>}
 			<DrawerContent className="max-h-[85dvh] overflow-hidden p-0">
 				<DrawerHeader className="border-b border-border px-5 pt-3 pr-14 pb-3 text-left sm:px-6 sm:pr-14">
 					<DrawerTitle className="font-heading text-xl font-bold tracking-tight">

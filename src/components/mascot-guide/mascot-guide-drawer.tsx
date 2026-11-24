@@ -14,15 +14,19 @@ import type { ReactNode } from "react";
 const copy = brand.componentGuide;
 
 export function MascotGuideDrawer({
+	open,
+	onOpenChange,
 	trigger,
 	children,
 }: {
-	trigger: ReactNode;
+	open?: boolean;
+	onOpenChange?: (open: boolean) => void;
+	trigger?: ReactNode;
 	children: ReactNode;
 }) {
 	return (
-		<Drawer>
-			<DrawerTrigger asChild>{trigger}</DrawerTrigger>
+		<Drawer open={open} onOpenChange={onOpenChange}>
+			{trigger && <DrawerTrigger asChild>{trigger}</DrawerTrigger>}
 			<DrawerContent className="max-h-[88dvh] overflow-hidden p-0">
 				<DrawerHeader className="border-b border-border px-4 pt-3 pr-14 pb-3 text-left sm:px-6 sm:pr-14">
 					<DrawerTitle className="font-heading text-xl font-bold tracking-tight">

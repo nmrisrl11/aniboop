@@ -3,11 +3,12 @@
 import { Button } from "@/components/ui/button";
 import { BloomImageLoader } from "@/components/ui/image-loader";
 import type { GalleryCharacter } from "@/data/characters";
+import type { DownloadOptions } from "@/hooks/use-download";
 import { getMascotAssetUrl, type SheetQuality } from "@/lib/assets";
 import { brand } from "@/lib/brand";
 import { decodeImage, isImageDecoded } from "@/lib/image-decode";
 import { cn } from "@/lib/utils";
-import { ShieldAlertIcon } from "lucide-react";
+import { LoaderCircleIcon, ShieldAlertIcon } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import { getSpriteStyle } from "./character-details-utils";
 
@@ -81,9 +82,11 @@ function SheetPreview({ sheet, cell, alt }: { sheet: string; cell: number; alt: 
 export function CharacterDetailsContent({
 	character,
 	onDownload,
+	isDownloading,
 }: {
 	character: GalleryCharacter;
-	onDownload: (url: string, filename: string) => void;
+	onDownload: (url: string, filename: string, options?: DownloadOptions) => void;
+	isDownloading: (url: string) => boolean;
 }) {
 	const { id, name, galleryDirections, reactions } = character;
 	const [quality, setQuality] = useState<SheetQuality>("1080");
@@ -103,6 +106,9 @@ export function CharacterDetailsContent({
 		quality,
 		fallbackUrl: reactions,
 	});
+
+	const downloadingDirections = isDownloading(directionsAsset.url);
+	const downloadingReactions = isDownloading(reactionsAsset.url);
 
 	return (
 		<div className="catalog-scrollbar flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain px-5 py-4 sm:px-6 sm:py-5">
@@ -172,10 +178,27 @@ export function CharacterDetailsContent({
 					<Button
 						variant="secondary"
 						size="sm"
+						disabled={downloadingDirections}
+						aria-busy={downloadingDirections || undefined}
 						className="w-full text-xs font-semibold tracking-wide transition-all duration-160 ease-out hover:bg-secondary/80 motion-reduce:transition-none"
-						onClick={() => onDownload(directionsAsset.url, directionsAsset.filename)}
+						onClick={() =>
+							onDownload(directionsAsset.url, directionsAsset.filename, {
+								fallbackUrl: galleryDirections,
+							})
+						}
 					>
-						{copy.downloadDirections}
+						{downloadingDirections ? (
+							<>
+								<LoaderCircleIcon
+									data-icon="inline-start"
+									className="animate-spin motion-reduce:animate-none"
+									aria-hidden="true"
+								/>
+								{copy.downloading}
+							</>
+						) : (
+							copy.downloadDirections
+						)}
 					</Button>
 				</div>
 
@@ -193,10 +216,27 @@ export function CharacterDetailsContent({
 					<Button
 						variant="secondary"
 						size="sm"
+						disabled={downloadingReactions}
+						aria-busy={downloadingReactions || undefined}
 						className="w-full text-xs font-semibold tracking-wide transition-all duration-160 ease-out hover:bg-secondary/80 motion-reduce:transition-none"
-						onClick={() => onDownload(reactionsAsset.url, reactionsAsset.filename)}
+						onClick={() =>
+							onDownload(reactionsAsset.url, reactionsAsset.filename, {
+								fallbackUrl: reactions,
+							})
+						}
 					>
-						{copy.downloadReactions}
+						{downloadingReactions ? (
+							<>
+								<LoaderCircleIcon
+									data-icon="inline-start"
+									className="animate-spin motion-reduce:animate-none"
+									aria-hidden="true"
+								/>
+								{copy.downloading}
+							</>
+						) : (
+							copy.downloadReactions
+						)}
 					</Button>
 				</div>
 			</div>

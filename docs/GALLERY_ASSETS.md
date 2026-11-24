@@ -10,12 +10,12 @@ See [character artwork licensing](LICENSING.md#artwork-and-branding) before reus
 
 The [homepage](../src/app/page.tsx) calls `getGalleryCharacters` in the [catalog adapter](../src/data/characters.ts). The adapter imports the center previews from `public/mascots/previews/` and the compact direction and reaction sheets from `public/mascots/gallery-sheets/`. [CharacterGrid](../src/components/gallery/character-grid.tsx) passes those three URLs to each visible mascot. The preview generator uses the local, Git-ignored full-size sheets in `public/mascots/sheets/`. Keep that folder out of deployment artifacts because Next.js serves files under `public/` directly. Cloudflare R2 serves full-size 1080 × 1080 downloads when `NEXT_PUBLIC_R2_ASSETS_URL` is configured (see the [R2 storage guide](R2_STORAGE.md)).
 
-| Stage                | Asset loaded                                                                                                                                                                                                             |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Initial SSR paint    | A centered 7 × 5 tile window renders with outer card chrome and centered, GPU-composited `bloom` placeholders before JS hydrates.                                                                                        |
-| Initial view or pan  | A 248 × 248 center-pose WebP for each mascot entering view. Mascots mount after decode completes, crossfading in with their captions; decoded URLs stay cached in memory so revisited or repeated tiles skip the loader. |
-| Cursor tracking      | A 504 × 504 WebP with nine poses for each visible mascot, requested when an unpressed fine pointer moves.                                                                                                                |
-| Boop, hold, or pinch | The selected mascot's 504 × 504 reaction sheet. The current pose stays visible until the sheet decodes.                                                                                                                  |
+| Stage                | Asset loaded                                                                                                                                                                                                                             |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Initial SSR paint    | A centered 7 × 5 tile window renders with outer card chrome and centered, GPU-composited `bloom` placeholders before JS hydrates.                                                                                                        |
+| Initial view or pan  | A 248 × 248 center-pose WebP for each mascot entering view. Mascots mount after decode completes, crossfading in with their captions; decoded URLs stay cached in memory so revisited or repeated tiles skip the loader.                 |
+| Cursor tracking      | A 504 × 504 WebP with nine poses for each visible mascot, proximity-staggered and concurrency-limited (max 4 low-priority decodes) when an unpressed fine pointer moves, cancelling queued loads if panning starts or the tile unmounts. |
+| Boop, hold, or pinch | The selected mascot's 504 × 504 reaction sheet. The current pose stays visible until the sheet decodes.                                                                                                                                  |
 
 Repeated tiles share asset URLs. The browser can reuse image responses, and the component shares in-flight sprite sheet decodes across copies. Focusing a card with Tab only needs its preview. A drag that begins on a mascot yields to the grid before triggering a reaction.
 
@@ -23,7 +23,7 @@ The production build emits the gallery's center previews and compact pose sheets
 
 ### Gallery-wide cursor tracking
 
-Visible mascots follow the cursor across the gallery, including over captions and gaps, once their direction sheets decode. One shared pointer listener delivers the latest position each animation frame. A press keeps each mascot's last gaze pose. Panning resets gaze to the center pose. Tracking resumes on the next unpressed movement once the grid is still. Touch-only and reduced-motion visitors use the center-pose previews until they trigger a reaction.
+Visible mascots follow the cursor across the gallery, including over captions and gaps, once their direction sheets decode. One shared pointer listener delivers the latest position each animation frame using cached tile bounding rects (invalidated on pan resume and resize). Direction sheet upgrades stagger by pointer distance and decode through a cancellable low-priority queue so quick pans or brief mouse movements do not flood bandwidth. A press keeps each mascot's last gaze pose. Panning resets gaze to the center pose. Tracking resumes on the next unpressed movement once the grid is still. Touch-only and reduced-motion visitors use the center-pose previews until they trigger a reaction.
 
 ## Adding a mascot
 

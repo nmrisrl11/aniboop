@@ -153,11 +153,11 @@ const CharacterTile = memo(function CharacterTile({
 					type="button"
 					tabIndex={visibility === "focusable" ? 0 : -1}
 					onClick={() => onSelectCharacter(character)}
-					className="absolute top-2.5 right-2.5 z-10 flex size-8 scale-80 items-center justify-center rounded-lg text-muted-foreground opacity-0 transition-all duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] corner-squircle group-hover/tile:scale-100 group-hover/tile:opacity-100 hover:scale-110 hover:bg-muted hover:text-foreground focus-visible:scale-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-ring active:scale-95 motion-reduce:scale-100 motion-reduce:transition-opacity max-md:scale-100 max-md:opacity-100 squircle:rounded-full"
+					className="absolute top-2.5 right-2.5 z-10 flex size-8 scale-80 items-center justify-center rounded-lg text-muted-foreground opacity-0 transition-all duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] corner-squircle group-hover/tile:scale-100 group-hover/tile:opacity-100 hover:scale-110 hover:bg-muted hover:text-foreground focus-visible:scale-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-ring active:scale-95 motion-reduce:scale-100 motion-reduce:transition-opacity max-md:top-1.5 max-md:right-1.5 max-md:size-10 max-md:scale-100 max-md:opacity-100 squircle:rounded-full"
 					aria-label={`${brand.characterDetails.viewAndDownload}: ${character.name}`}
 					title={`${brand.characterDetails.viewAndDownload}: ${character.name}`}
 				>
-					<Maximize2Icon className="size-3.5" aria-hidden="true" />
+					<Maximize2Icon className="size-3.5 max-md:size-4" aria-hidden="true" />
 				</button>
 			)}
 			<div

@@ -53,6 +53,7 @@ export const brand = {
 		reactionsDescription: "3 × 3 WebP sheet featuring nine expressive reaction animations.",
 		downloadDirections: "Download Directions",
 		downloadReactions: "Download Reactions",
+		downloading: "Downloading…",
 		qualityLabel: "Resolution",
 		qualityHD: "1080 × 1080 (HD)",
 		qualityHDDescription: "Full-resolution master",

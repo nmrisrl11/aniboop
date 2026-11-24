@@ -1,6 +1,5 @@
 "use client";
 
-import { CharacterDetails } from "@/components/character/character-details";
 import { CharacterGrid } from "@/components/gallery/character-grid";
 import { AppHeader } from "@/components/header/app-header";
 import type { BoopOrder } from "@/components/mascot/mascot";
@@ -8,7 +7,13 @@ import { SplashScreen } from "@/components/splash/splash-screen";
 import type { GalleryCharacter } from "@/data/characters";
 import { useReactionSound } from "@/hooks/use-reaction-sound";
 import { brand } from "@/lib/brand";
+import dynamic from "next/dynamic";
 import { useCallback, useRef, useState } from "react";
+
+const CharacterDetails = dynamic(
+	() => import("@/components/character/character-details").then((mod) => mod.CharacterDetails),
+	{ ssr: false },
+);
 
 export function Gallery({ characters }: { characters: readonly GalleryCharacter[] }) {
 	const [boopOrder, setBoopOrder] = useState<BoopOrder>("cycle");
@@ -87,12 +92,14 @@ export function Gallery({ characters }: { characters: readonly GalleryCharacter[
 					onSelectCharacter={handleSelectFromGrid}
 				/>
 			</main>
-			<CharacterDetails
-				character={selectedCharacter}
-				open={selectedCharacter !== null}
-				onOpenChange={handleDetailsOpenChange}
-				onBackToCatalog={openedFromCatalog ? handleBackToCatalog : undefined}
-			/>
+			{selectedCharacter !== null && (
+				<CharacterDetails
+					character={selectedCharacter}
+					open
+					onOpenChange={handleDetailsOpenChange}
+					onBackToCatalog={openedFromCatalog ? handleBackToCatalog : undefined}
+				/>
+			)}
 			<p id="grid-instructions" className="sr-only">
 				{brand.galleryInstructions}
 			</p>

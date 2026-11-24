@@ -1,36 +1,81 @@
 "use client";
 
 import { Mascot, type BoopOrder } from "@/components/mascot/mascot";
+import { BloomImageLoader } from "@/components/ui/image-loader";
 import type { GalleryCharacter } from "@/data/characters";
 import { brand } from "@/lib/brand";
+import { decodeImage, isImageDecoded } from "@/lib/image-decode";
 import type { Reaction } from "@/lib/mascot-sprites";
+import { cn } from "@/lib/utils";
 import { Maximize2Icon } from "lucide-react";
-import { memo, useCallback, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import ThiingsGrid, { DRAG_THRESHOLD, type ItemConfig } from "./thiings-grid";
 
 const GRID_SIZE = 252;
 const PREVIEW_SIZE = 168;
+const LOADER_FADE_MS = 220;
 const MIN_VISIBLE_RATIO = 0.01;
 const MIN_FOCUS_RATIO = 0.5;
 type TileVisibility = "outside" | "partial" | "focusable";
+type DecodeState = { url: string; status: "cached" | "loaded" | "failed" };
 
 const visibilityCallbacks = new WeakMap<Element, (entry: IntersectionObserverEntry) => void>();
 let tileObserver: IntersectionObserver | undefined;
 
 const CharacterTile = memo(function CharacterTile({
 	character,
+	bloomDelayMs,
 	isMoving,
 	boopOrder,
 	onReact,
 	onSelectCharacter,
 }: {
 	character: GalleryCharacter;
+	bloomDelayMs: number;
 	isMoving: boolean;
 	boopOrder: BoopOrder;
 	onReact?: (reaction: Reaction) => void;
 	onSelectCharacter?: (character: GalleryCharacter) => void;
 }) {
+	const { preview, galleryDirections, reactions } = character;
 	const [visibility, setVisibility] = useState<TileVisibility>("outside");
+	const [decodeState, setDecodeState] = useState<DecodeState | null>(() =>
+		isImageDecoded(preview) ? { url: preview, status: "cached" } : null,
+	);
+	const [dismissedPreview, setDismissedPreview] = useState<string | null>(() =>
+		isImageDecoded(preview) ? preview : null,
+	);
+
+	const activeStatus =
+		decodeState?.url === preview
+			? decodeState.status
+			: isImageDecoded(preview)
+				? "cached"
+				: "loading";
+	const previewReady = activeStatus === "cached" || activeStatus === "loaded";
+	const previewSettled = previewReady || activeStatus === "failed";
+	const showLoader = dismissedPreview !== preview;
+
+	useEffect(() => {
+		if (visibility === "outside" || previewSettled) return;
+		let active = true;
+		void decodeImage(preview).then((decoded) => {
+			if (active) setDecodeState({ url: preview, status: decoded ? "loaded" : "failed" });
+		});
+		return () => {
+			active = false;
+		};
+	}, [preview, previewSettled, visibility]);
+
+	useEffect(() => {
+		if (!previewSettled || dismissedPreview === preview) return;
+		const delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+			? 0
+			: LOADER_FADE_MS;
+		const timer = window.setTimeout(() => setDismissedPreview(preview), delay);
+		return () => window.clearTimeout(timer);
+	}, [dismissedPreview, preview, previewSettled]);
+
 	const observeArt = useCallback((element: HTMLDivElement | null) => {
 		if (!element) return;
 		const observer = (tileObserver ??= new IntersectionObserver(
@@ -53,6 +98,7 @@ const CharacterTile = memo(function CharacterTile({
 			} else {
 				restoreGridFocus();
 				setVisibility("outside");
+				setDecodeState((current) => (current?.status === "failed" ? null : current));
 			}
 		});
 		observer.observe(element);
@@ -63,22 +109,36 @@ const CharacterTile = memo(function CharacterTile({
 		};
 	}, []);
 
-	const { preview, galleryDirections, reactions } = character;
 	return (
 		<div className="group/tile absolute inset-2 flex flex-col items-center justify-center gap-2 rounded-3xl border bg-card px-4 py-2.5 text-card-foreground shadow-xs corner-squircle squircle:rounded-[44px]">
+			{showLoader && (
+				<div
+					aria-hidden="true"
+					className={cn(
+						"pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-200 ease-out motion-reduce:transition-none",
+						previewSettled ? "opacity-0" : "opacity-100",
+					)}
+				>
+					<BloomImageLoader delayMs={bloomDelayMs} className="size-40" />
+				</div>
+			)}
 			<div
 				ref={observeArt}
 				className="shrink-0"
 				style={{ width: PREVIEW_SIZE, height: PREVIEW_SIZE }}
 			>
-				{visibility !== "outside" && (
+				{visibility !== "outside" && previewReady && (
 					<Mascot
 						preview={preview}
 						directions={galleryDirections}
 						reactions={reactions}
 						label={character.name}
 						size={PREVIEW_SIZE}
-						className="rounded-2xl corner-squircle squircle:rounded-4xl"
+						className={cn(
+							"rounded-2xl corner-squircle squircle:rounded-4xl",
+							activeStatus === "loaded" &&
+								"animate-in duration-200 ease-out fade-in motion-reduce:animate-none",
+						)}
 						mode={boopOrder}
 						onReact={onReact}
 						dragThreshold={DRAG_THRESHOLD}
@@ -88,7 +148,7 @@ const CharacterTile = memo(function CharacterTile({
 					/>
 				)}
 			</div>
-			{visibility === "focusable" && onSelectCharacter && (
+			{visibility === "focusable" && previewSettled && onSelectCharacter && (
 				<button
 					type="button"
 					tabIndex={visibility === "focusable" ? 0 : -1}
@@ -100,7 +160,12 @@ const CharacterTile = memo(function CharacterTile({
 					<Maximize2Icon className="size-3.5" aria-hidden="true" />
 				</button>
 			)}
-			<div className="max-w-full text-center select-none">
+			<div
+				className={cn(
+					"max-w-full text-center transition-opacity duration-200 ease-out select-none motion-reduce:transition-none",
+					previewSettled ? "opacity-100" : "opacity-0",
+				)}
+			>
 				<p className="truncate text-sm font-semibold">{character.name}</p>
 				<p className="truncate text-xs text-muted-foreground">{character.series}</p>
 			</div>
@@ -120,11 +185,12 @@ export function CharacterGrid({
 	onSelectCharacter?: (character: GalleryCharacter) => void;
 }) {
 	const renderItem = useCallback(
-		({ gridIndex, isMoving }: ItemConfig) => {
+		({ gridIndex, isMoving, position }: ItemConfig) => {
 			const character = characters[gridIndex % characters.length];
 			return character ? (
 				<CharacterTile
 					character={character}
+					bloomDelayMs={-Math.round(Math.hypot(position.x, position.y) * 180)}
 					isMoving={isMoving}
 					boopOrder={boopOrder}
 					onReact={onReact}

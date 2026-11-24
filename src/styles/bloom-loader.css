@@ -1,0 +1,123 @@
+/* Bloom image loader adapted from Generative Loaders (MIT). GPU-composited transform + opacity only. */
+.bloom-loader {
+	--bloom-duration: 2.2s;
+	--bloom-delay: 0ms;
+	isolation: isolate;
+}
+
+.bloom-visual {
+	position: absolute;
+	inset: 8%;
+	display: block;
+}
+
+.bloom-ring,
+.bloom-orb,
+.bloom-core {
+	position: absolute;
+	display: block;
+	border-radius: 9999px;
+}
+
+.bloom-ring {
+	inset: 10%;
+	border: 1px solid color-mix(in oklab, currentColor 32%, transparent);
+	animation: bloom-ring var(--bloom-duration) cubic-bezier(0.22, 1, 0.36, 1) var(--bloom-delay)
+		infinite;
+}
+
+.bloom-orb {
+	inset: 16%;
+	background: radial-gradient(
+		circle,
+		color-mix(in oklab, currentColor 30%, transparent) 0%,
+		color-mix(in oklab, currentColor 14%, transparent) 46%,
+		transparent 72%
+	);
+	animation: bloom-orb var(--bloom-duration) ease-in-out var(--bloom-delay) infinite;
+}
+
+.bloom-core {
+	inset: 42%;
+	background: currentColor;
+	animation: bloom-core var(--bloom-duration) ease-in-out var(--bloom-delay) infinite;
+}
+
+@keyframes bloom-ring {
+	0%,
+	12%,
+	100% {
+		opacity: 0.08;
+		transform: scale(0.28);
+	}
+	58%,
+	78% {
+		opacity: 0.5;
+		transform: scale(1);
+	}
+}
+
+@keyframes bloom-orb {
+	0%,
+	100% {
+		opacity: 0.08;
+		transform: scale(0.48);
+	}
+	54%,
+	76% {
+		opacity: 0.72;
+		transform: scale(1.22);
+	}
+}
+
+@keyframes bloom-core {
+	0%,
+	100% {
+		opacity: 0.16;
+		transform: scale(0.62);
+	}
+	48%,
+	72% {
+		opacity: 0.84;
+		transform: scale(1);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bloom-ring,
+	.bloom-orb,
+	.bloom-core {
+		animation: none;
+	}
+
+	.bloom-ring {
+		opacity: 0.38;
+		transform: scale(0.86);
+	}
+
+	.bloom-orb {
+		opacity: 0.42;
+		transform: scale(0.96);
+	}
+
+	.bloom-core {
+		opacity: 0.56;
+		transform: scale(0.88);
+	}
+}
+
+@media (forced-colors: active) {
+	.bloom-ring {
+		border-color: CanvasText;
+	}
+
+	.bloom-orb {
+		forced-color-adjust: none;
+		background: radial-gradient(circle, CanvasText 0%, transparent 70%);
+	}
+
+	.bloom-core {
+		forced-color-adjust: none;
+		background: CanvasText;
+	}
+}

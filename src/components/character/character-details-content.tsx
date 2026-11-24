@@ -1,15 +1,82 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { BloomImageLoader } from "@/components/ui/image-loader";
 import type { GalleryCharacter } from "@/data/characters";
 import { getMascotAssetUrl, type SheetQuality } from "@/lib/assets";
 import { brand } from "@/lib/brand";
-import { cn } from "cn";
+import { decodeImage, isImageDecoded } from "@/lib/image-decode";
+import { cn } from "@/lib/utils";
 import { ShieldAlertIcon } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getSpriteStyle } from "./character-details-utils";
 
 const copy = brand.characterDetails;
+const LOADER_FADE_MS = 220;
+
+type SheetDecodeState = { url: string; status: "cached" | "loaded" | "failed" };
+
+function SheetPreview({ sheet, cell, alt }: { sheet: string; cell: number; alt: string }) {
+	const [decodeState, setDecodeState] = useState<SheetDecodeState | null>(() =>
+		isImageDecoded(sheet) ? { url: sheet, status: "cached" } : null,
+	);
+	const [dismissedSheet, setDismissedSheet] = useState<string | null>(() =>
+		isImageDecoded(sheet) ? sheet : null,
+	);
+	const activeStatus =
+		decodeState?.url === sheet ? decodeState.status : isImageDecoded(sheet) ? "cached" : "loading";
+	const ready = activeStatus === "cached" || activeStatus === "loaded";
+	const settled = ready || activeStatus === "failed";
+	const showLoader = dismissedSheet !== sheet;
+
+	useEffect(() => {
+		if (settled) return;
+		let active = true;
+		void decodeImage(sheet).then((decoded) => {
+			if (active) setDecodeState({ url: sheet, status: decoded ? "loaded" : "failed" });
+		});
+		return () => {
+			active = false;
+		};
+	}, [settled, sheet]);
+
+	useEffect(() => {
+		if (!settled || dismissedSheet === sheet) return;
+		const delay = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+			? 0
+			: LOADER_FADE_MS;
+		const timer = window.setTimeout(() => setDismissedSheet(sheet), delay);
+		return () => window.clearTimeout(timer);
+	}, [dismissedSheet, settled, sheet]);
+
+	return (
+		<div
+			className="relative size-12 shrink-0 overflow-hidden rounded-lg border border-border/50 bg-card/60 shadow-2xs corner-squircle squircle:rounded-full"
+			role="img"
+			aria-label={alt}
+		>
+			{showLoader && (
+				<BloomImageLoader
+					className={cn(
+						"pointer-events-none absolute inset-0 transition-opacity duration-200 ease-out motion-reduce:transition-none",
+						settled ? "opacity-0" : "opacity-100",
+					)}
+				/>
+			)}
+			{ready && (
+				<span
+					aria-hidden="true"
+					className={cn(
+						"absolute inset-0 block bg-no-repeat",
+						activeStatus === "loaded" &&
+							"animate-in duration-200 ease-out fade-in motion-reduce:animate-none",
+					)}
+					style={getSpriteStyle(sheet, cell)}
+				/>
+			)}
+		</div>
+	);
+}
 
 export function CharacterDetailsContent({
 	character,
@@ -79,11 +146,10 @@ export function CharacterDetailsContent({
 				{/* Directions Card */}
 				<div className="flex flex-col justify-between gap-3.5 rounded-xl border border-border/70 bg-card p-4 shadow-xs corner-squircle squircle:rounded-3xl">
 					<div className="flex items-start gap-3">
-						<div
-							className="size-12 shrink-0 rounded-lg border border-border/50 bg-card/60 shadow-2xs corner-squircle squircle:rounded-full"
-							style={getSpriteStyle(galleryDirections, 4)}
-							role="img"
-							aria-label={`${name} directions sheet preview`}
+						<SheetPreview
+							sheet={galleryDirections}
+							cell={4}
+							alt={`${name} directions sheet preview`}
 						/>
 						<div className="flex min-w-0 flex-col gap-1">
 							<h4 className="text-sm font-semibold text-foreground">{copy.directions}</h4>
@@ -105,12 +171,7 @@ export function CharacterDetailsContent({
 				{/* Reactions Card */}
 				<div className="flex flex-col justify-between gap-3.5 rounded-xl border border-border/70 bg-card p-4 shadow-xs corner-squircle squircle:rounded-3xl">
 					<div className="flex items-start gap-3">
-						<div
-							className="size-12 shrink-0 rounded-lg border border-border/50 bg-card/60 shadow-2xs corner-squircle squircle:rounded-full"
-							style={getSpriteStyle(reactions, 2)}
-							role="img"
-							aria-label={`${name} reactions sheet preview`}
-						/>
+						<SheetPreview sheet={reactions} cell={2} alt={`${name} reactions sheet preview`} />
 						<div className="flex min-w-0 flex-col gap-1">
 							<h4 className="text-sm font-semibold text-foreground">{copy.reactions}</h4>
 							<p className="text-xs leading-relaxed text-muted-foreground">

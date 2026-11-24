@@ -1,6 +1,7 @@
 "use client";
 
 // Adapted from nmrisrl-v2 and page-mascot. See THIRD_PARTY_NOTICES.txt.
+import { decodeImage } from "@/lib/image-decode";
 import { REACTIONS, type Reaction } from "@/lib/mascot-sprites";
 import { cn } from "@/lib/utils";
 import { type CSSProperties, useEffect, useRef, useState } from "react";
@@ -48,25 +49,6 @@ function sprite(sheet: string, cell?: number): CSSProperties {
 			cell === undefined ? "center" : `${(cell % 3) * 50}% ${Math.floor(cell / 3) * 50}%`,
 		backgroundSize: cell === undefined ? "100% 100%" : "300% 300%",
 	};
-}
-
-const pendingSheets = new Map<string, Promise<boolean>>();
-
-function decodeSheet(url: string) {
-	const pending = pendingSheets.get(url);
-	if (pending) return pending;
-
-	const image = new Image();
-	image.src = url;
-	const decoded = image
-		.decode()
-		.then(
-			() => true,
-			() => false,
-		)
-		.finally(() => pendingSheets.delete(url));
-	pendingSheets.set(url, decoded);
-	return decoded;
 }
 
 function aim(box: DOMRect, x: number, y: number, sector: number, deadZone: number) {
@@ -169,7 +151,7 @@ function MascotButton({
 		const load = async () => {
 			timer = undefined;
 			loading = true;
-			const loaded = await decodeSheet(directions);
+			const loaded = await decodeImage(directions);
 			loading = false;
 			if (disposed) return;
 			if (!loaded) {
@@ -250,7 +232,7 @@ function MascotButton({
 
 	const loadReactions = () => {
 		if (!reactionSheet.current) {
-			reactionSheet.current = decodeSheet(reactions).then((loaded) => {
+			reactionSheet.current = decodeImage(reactions).then((loaded) => {
 				if (!loaded) reactionSheet.current = null;
 				return loaded;
 			});

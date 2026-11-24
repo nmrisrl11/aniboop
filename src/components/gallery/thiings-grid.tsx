@@ -8,6 +8,8 @@ const FRICTION_PER_MS = 0.997;
 const MIN_VELOCITY = 0.05 / 16;
 const MAX_VELOCITY = 3;
 const RELEASE_DELAY = 100;
+const INITIAL_COLUMNS = 3;
+const INITIAL_ROWS = 2;
 
 const arrowOffsets = {
 	ArrowLeft: { x: 1, y: 0 },
@@ -17,6 +19,7 @@ const arrowOffsets = {
 };
 
 type Position = { x: number; y: number };
+type GridBounds = { x: number; y: number; columns: number; rows: number };
 
 type Gesture = {
 	pointerId: number;
@@ -31,6 +34,60 @@ type GridItem = { position: Position; gridIndex: number };
 type State = { gridItems: GridItem[]; isMoving: boolean; isDragging: boolean };
 export type ItemConfig = GridItem & { isMoving: boolean };
 
+function getItemIndexForPosition(x: number, y: number): number {
+	// Special case for center
+	if (x === 0 && y === 0) return 0;
+
+	// Determine which layer of the spiral we're in
+	const layer = Math.max(Math.abs(x), Math.abs(y));
+
+	// Calculate the size of all inner layers
+	const innerLayersSize = Math.pow(2 * layer - 1, 2);
+
+	// Calculate position within current layer
+	let positionInLayer = 0;
+
+	if (y === 0 && x === layer) {
+		// Starting position (middle right)
+		positionInLayer = 0;
+	} else if (y < 0 && x === layer) {
+		// Right side, bottom half
+		positionInLayer = -y;
+	} else if (y === -layer && x > -layer) {
+		// Bottom side
+		positionInLayer = layer + (layer - x);
+	} else if (x === -layer && y < layer) {
+		// Left side
+		positionInLayer = 3 * layer + (layer + y);
+	} else if (y === layer && x < layer) {
+		// Top side
+		positionInLayer = 5 * layer + (layer + x);
+	} else {
+		// Right side, top half (y > 0 && x === layer)
+		positionInLayer = 7 * layer + (layer - y);
+	}
+
+	return innerLayersSize + positionInLayer;
+}
+
+function buildGridItems(
+	centerX: number,
+	centerY: number,
+	columns: number,
+	rows: number,
+): GridItem[] {
+	const gridItems: GridItem[] = [];
+	for (let row = centerY - rows; row <= centerY + rows; row++) {
+		for (let column = centerX - columns; column <= centerX + columns; column++) {
+			gridItems.push({
+				position: { x: column, y: row },
+				gridIndex: getItemIndexForPosition(column, row),
+			});
+		}
+	}
+	return gridItems;
+}
+
 type ThiingsGridProps = {
 	gridSize: number;
 	renderItem: (item: ItemConfig) => ReactNode;
@@ -41,15 +98,29 @@ type ThiingsGridProps = {
 };
 
 class ThiingsGrid extends Component<ThiingsGridProps, State> {
-	state: State = { gridItems: [], isMoving: false, isDragging: false };
+	private offset = this.props.initialPosition ?? { x: 0, y: 0 };
+	private gridBounds: GridBounds = {
+		x: -Math.round(this.offset.x / this.props.gridSize),
+		y: -Math.round(this.offset.y / this.props.gridSize),
+		columns: INITIAL_COLUMNS,
+		rows: INITIAL_ROWS,
+	};
+	state: State = {
+		gridItems: buildGridItems(
+			this.gridBounds.x,
+			this.gridBounds.y,
+			this.gridBounds.columns,
+			this.gridBounds.rows,
+		),
+		isMoving: false,
+		isDragging: false,
+	};
 	private viewport = createRef<HTMLDivElement>();
 	private plane = createRef<HTMLDivElement>();
 	private resizeObserver: ResizeObserver | null = null;
 	private gesture: Gesture | null = null;
-	private offset = this.props.initialPosition ?? { x: 0, y: 0 };
 	private velocity: Position = { x: 0, y: 0 };
 	private viewportSize = { width: 0, height: 0 };
-	private gridCenter: Position | null = null;
 	private frame: number | null = null;
 	private coastTime: number | null = null;
 	private idleTimer: ReturnType<typeof setTimeout> | undefined;
@@ -58,9 +129,9 @@ class ThiingsGrid extends Component<ThiingsGridProps, State> {
 		const viewport = this.viewport.current;
 		if (!viewport) return;
 		viewport.addEventListener("wheel", this.handleWheel, { passive: false });
-		this.resizeObserver = new ResizeObserver(this.measure);
+		this.resizeObserver = new ResizeObserver(() => this.measure(false));
 		this.resizeObserver.observe(viewport);
-		this.measure();
+		this.measure(true);
 	}
 
 	componentWillUnmount() {
@@ -73,15 +144,14 @@ class ThiingsGrid extends Component<ThiingsGridProps, State> {
 		this.gesture = null;
 	}
 
-	private measure = () => {
+	private measure = (immediate = false) => {
 		const viewport = this.viewport.current;
 		if (!viewport) return;
 		const { width, height } = viewport.getBoundingClientRect();
-		if (width === this.viewportSize.width && height === this.viewportSize.height && this.gridCenter)
-			return;
+		if (width === this.viewportSize.width && height === this.viewportSize.height) return;
 		this.viewportSize = { width, height };
-		this.gridCenter = null;
-		this.schedulePaint();
+		if (immediate) this.updateGridItems();
+		else this.schedulePaint();
 	};
 
 	private updateGridItems = () => {
@@ -90,59 +160,20 @@ class ThiingsGrid extends Component<ThiingsGridProps, State> {
 		const { gridSize } = this.props;
 		const x = -Math.round(this.offset.x / gridSize);
 		const y = -Math.round(this.offset.y / gridSize);
-		if (x === this.gridCenter?.x && y === this.gridCenter.y) return;
-		this.gridCenter = { x, y };
 
 		// Keep one extra cell beyond the visible window while React commits the next one.
 		const columns = Math.ceil(width / (2 * gridSize)) + 1;
 		const rows = Math.ceil(height / (2 * gridSize)) + 1;
-		const gridItems: GridItem[] = [];
-		for (let row = y - rows; row <= y + rows; row++) {
-			for (let column = x - columns; column <= x + columns; column++) {
-				gridItems.push({
-					position: { x: column, y: row },
-					gridIndex: this.getItemIndexForPosition(column, row),
-				});
-			}
+		if (
+			x === this.gridBounds.x &&
+			y === this.gridBounds.y &&
+			columns === this.gridBounds.columns &&
+			rows === this.gridBounds.rows
+		) {
+			return;
 		}
-		this.setState({ gridItems });
-	};
-
-	private getItemIndexForPosition = (x: number, y: number): number => {
-		// Special case for center
-		if (x === 0 && y === 0) return 0;
-
-		// Determine which layer of the spiral we're in
-		const layer = Math.max(Math.abs(x), Math.abs(y));
-
-		// Calculate the size of all inner layers
-		const innerLayersSize = Math.pow(2 * layer - 1, 2);
-
-		// Calculate position within current layer
-		let positionInLayer = 0;
-
-		if (y === 0 && x === layer) {
-			// Starting position (middle right)
-			positionInLayer = 0;
-		} else if (y < 0 && x === layer) {
-			// Right side, bottom half
-			positionInLayer = -y;
-		} else if (y === -layer && x > -layer) {
-			// Bottom side
-			positionInLayer = layer + (layer - x);
-		} else if (x === -layer && y < layer) {
-			// Left side
-			positionInLayer = 3 * layer + (layer + y);
-		} else if (y === layer && x < layer) {
-			// Top side
-			positionInLayer = 5 * layer + (layer + x);
-		} else {
-			// Right side, top half (y > 0 && x === layer)
-			positionInLayer = 7 * layer + (layer - y);
-		}
-
-		const index = innerLayersSize + positionInLayer;
-		return index;
+		this.gridBounds = { x, y, columns, rows };
+		this.setState({ gridItems: buildGridItems(x, y, columns, rows) });
 	};
 
 	private schedulePaint = () => {
@@ -302,7 +333,18 @@ class ThiingsGrid extends Component<ThiingsGridProps, State> {
 				onLostPointerCapture={this.finishPointer}
 				onKeyDown={this.handleKeyDown}
 			>
-				<div ref={this.plane} style={{ position: "absolute", inset: 0, willChange: "transform" }}>
+				<div
+					ref={this.plane}
+					style={{
+						position: "absolute",
+						inset: 0,
+						willChange: "transform",
+						transform:
+							this.offset.x !== 0 || this.offset.y !== 0
+								? `translate3d(${this.offset.x}px, ${this.offset.y}px, 0)`
+								: undefined,
+					}}
+				>
 					{gridItems.map((item) => (
 						<div
 							key={item.gridIndex}

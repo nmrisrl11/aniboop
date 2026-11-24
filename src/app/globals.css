@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+@import "../styles/scrollbars.css";
+@import "../styles/bloom-loader.css";
 
 @plugin "@toolwind/corner-shape";
 
@@ -109,82 +111,6 @@
 	--chart-3: #71717a;
 	--chart-4: #52525b;
 	--chart-5: #3f3f46;
-}
-
-@utility catalog-scrollbar {
-	@media (forced-colors: none) {
-		--catalog-scrollbar-thumb: color-mix(in oklab, var(--muted-foreground) 60%, var(--card));
-
-		@supports not selector(::-webkit-scrollbar) {
-			scrollbar-width: thin;
-			scrollbar-color: var(--catalog-scrollbar-thumb) transparent;
-		}
-
-		&::-webkit-scrollbar {
-			width: 0.5rem;
-			height: 0.5rem;
-		}
-
-		&::-webkit-scrollbar-track {
-			margin: 0.25rem;
-			background: transparent;
-		}
-
-		&::-webkit-scrollbar-thumb {
-			border: 1px solid transparent;
-			border-radius: 9999px;
-			background: var(--catalog-scrollbar-thumb) padding-box;
-		}
-
-		&::-webkit-scrollbar-thumb:hover {
-			background-color: var(--muted-foreground);
-		}
-
-		&::-webkit-scrollbar-corner {
-			background: transparent;
-		}
-
-		&::-webkit-scrollbar-button {
-			display: none;
-		}
-	}
-}
-
-@utility code-scrollbar {
-	@media (forced-colors: none) {
-		--code-scrollbar-thumb: color-mix(in oklab, var(--muted-foreground) 40%, transparent);
-
-		scrollbar-width: thin;
-		scrollbar-color: var(--code-scrollbar-thumb) transparent;
-
-		&::-webkit-scrollbar {
-			width: 0.45rem;
-			height: 0.45rem;
-		}
-
-		&::-webkit-scrollbar-track {
-			margin: 0.25rem;
-			background: transparent;
-		}
-
-		&::-webkit-scrollbar-thumb {
-			border: 1px solid transparent;
-			border-radius: 9999px;
-			background: var(--code-scrollbar-thumb) padding-box;
-		}
-
-		&::-webkit-scrollbar-thumb:hover {
-			background-color: var(--muted-foreground);
-		}
-
-		&::-webkit-scrollbar-corner {
-			background: transparent;
-		}
-
-		&::-webkit-scrollbar-button {
-			display: none;
-		}
-	}
 }
 
 @layer base {

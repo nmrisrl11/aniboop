@@ -11,7 +11,7 @@ AniBoop's original source code, scripts, and associated documentation are licens
 
 Bundled fonts and third-party source retain their original terms. Keep the relevant notices when redistributing those materials.
 
-The MIT notices for Thiings Grid, page-mascot, shadcn/ui, and ZzFX are in [THIRD_PARTY_NOTICES.txt](../THIRD_PARTY_NOTICES.txt).
+The MIT notices for Thiings Grid, page-mascot, shadcn/ui, ZzFX, and Generative Loaders are in [THIRD_PARTY_NOTICES.txt](../THIRD_PARTY_NOTICES.txt).
 
 | Material       | License notice                                              |
 | -------------- | ----------------------------------------------------------- |

@@ -1,20 +1,72 @@
 import { reactionSounds } from "@/lib/audio/reaction-sounds";
 import { buildSound } from "@/lib/audio/zzfx";
 import type { Reaction } from "@/lib/mascot-sprites";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useSyncExternalStore } from "react";
+
+export const SOUND_STORAGE_KEY = "aniboop-reaction-sounds";
 
 const MAX_VOICES = 3;
 
+const soundStoreListeners = new Set<() => void>();
+
+function getSoundSnapshot(): boolean {
+	try {
+		return localStorage.getItem(SOUND_STORAGE_KEY) === "true";
+	} catch {
+		return false;
+	}
+}
+
+function getServerSoundSnapshot(): boolean {
+	return false;
+}
+
+function subscribeSound(onStoreChange: () => void) {
+	soundStoreListeners.add(onStoreChange);
+
+	const handleStorage = (event: StorageEvent) => {
+		if (event.key === SOUND_STORAGE_KEY) {
+			onStoreChange();
+		}
+	};
+
+	window.addEventListener("storage", handleStorage);
+
+	return () => {
+		soundStoreListeners.delete(onStoreChange);
+		window.removeEventListener("storage", handleStorage);
+	};
+}
+
+function notifySoundChange() {
+	for (const listener of soundStoreListeners) {
+		listener();
+	}
+}
+
 export function useReactionSound() {
-	const [soundEnabled, setSoundEnabled] = useState(false);
-	const enabled = useRef(false);
+	const soundEnabled = useSyncExternalStore(
+		subscribeSound,
+		getSoundSnapshot,
+		getServerSoundSnapshot,
+	);
+	const enabled = useRef(soundEnabled);
 	const context = useRef<AudioContext | null>(null);
 	const buffers = useRef(new Map<Reaction, AudioBuffer>());
 	const voices = useRef(new Set<AudioBufferSourceNode>());
 
 	useEffect(() => {
+		enabled.current = soundEnabled;
+		if (!soundEnabled) {
+			for (const voice of voices.current) voice.stop();
+			voices.current.clear();
+		}
+	}, [soundEnabled]);
+
+	useEffect(() => {
 		const cachedBuffers = buffers.current;
 		const activeVoices = voices.current;
+
 		return () => {
 			for (const voice of activeVoices) voice.stop();
 			activeVoices.clear();
@@ -25,15 +77,23 @@ export function useReactionSound() {
 	}, []);
 
 	const resumeSound = useCallback(() => {
+		if (!enabled.current) return;
+		if (!context.current) {
+			try {
+				context.current = new AudioContext();
+			} catch {
+				return;
+			}
+		}
 		const audio = context.current;
-		if (enabled.current && audio && audio.state !== "running") {
+		if (audio && audio.state !== "running") {
 			void audio.resume().catch(() => {});
 		}
 	}, []);
 
 	const toggleSound = () => {
-		if (enabled.current) {
-			enabled.current = false;
+		const next = !enabled.current;
+		if (!next) {
 			for (const voice of voices.current) voice.stop();
 			voices.current.clear();
 		} else {
@@ -42,16 +102,29 @@ export function useReactionSound() {
 			} catch {
 				return;
 			}
-			enabled.current = true;
-			// Resume inside the toggle's user activation, before any delayed gesture frames.
 			resumeSound();
 		}
-		setSoundEnabled(enabled.current);
+
+		try {
+			localStorage.setItem(SOUND_STORAGE_KEY, String(next));
+		} catch {
+			// Ignore localStorage write errors.
+		}
+
+		notifySoundChange();
 	};
 
 	const playReactionSound = useCallback((reaction: Reaction) => {
+		if (!enabled.current) return;
+		if (!context.current) {
+			try {
+				context.current = new AudioContext();
+			} catch {
+				return;
+			}
+		}
 		const audio = context.current;
-		if (!enabled.current || audio?.state !== "running") return;
+		if (audio.state !== "running") return;
 
 		let buffer = buffers.current.get(reaction);
 		if (!buffer) {

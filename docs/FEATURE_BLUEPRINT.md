@@ -11,7 +11,7 @@ The homepage repeats the character catalog across a pannable grid. On the first 
 
 ## Reaction sounds
 
-Use the speaker button in the header or **More options → Reaction sounds** on smaller screens. Sound starts off each time the page loads. Turn it on to hear a cue for each displayed expression across all boop orders. For a hold or pinch, the default cues are surprised when it starts, dizzy if it lasts 1.4 seconds, and delighted when released. Panning and gaze tracking are silent.
+Use the speaker button in the header or **More options → Reaction sounds** on smaller screens. Sound preference persists across visits via local storage (defaulting to off). Turn it on to hear a cue for each displayed expression across all boop orders. For a hold or pinch, the default cues are surprised when it starts, dizzy if it lasts 1.4 seconds, and delighted when released. Panning and gaze tracking are silent.
 
 See [Reaction audio](ARCHITECTURE.md#reaction-audio) for the sound mapping and callback integration.
 

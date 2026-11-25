@@ -6,6 +6,8 @@ export const brand = {
 	repositoryLabel: "AniBoop on GitHub",
 	supportUrl: "https://buymeacoffee.com/nmrisrl11",
 	supportLabel: "Support on Buy Me a Coffee",
+	upvoteUrl: "https://appbuildersph.com/apps/aniboop",
+	upvoteLabel: "Upvote on AppBuildersPH",
 	title: "AniBoop | Interactive Chibi Anime Characters",
 	slogan: "Little characters. Big reactions.",
 	headline: "Pick a character. Give it a boop.",
@@ -93,6 +95,27 @@ export const brand = {
 		artworkTitle: "Anime artwork & characters",
 		artworkDescription:
 			"Characters belong to their original creators and studios. AniBoop is an educational, non-commercial fan tribute.",
+	},
+	resources: {
+		trigger: "Support",
+		label: "Support AniBoop",
+		items: {
+			repository: {
+				label: "GitHub Repository",
+				description: "Star the repo or browse the code.",
+				href: "https://github.com/nmrisrl11/aniboop",
+			},
+			support: {
+				label: "Buy Me a Coffee",
+				description: "Fuel new mascots and updates.",
+				href: "https://buymeacoffee.com/nmrisrl11",
+			},
+			upvote: {
+				label: "Upvote on AppBuildersPH",
+				description: "Help more people discover AniBoop.",
+				href: "https://appbuildersph.com/apps/aniboop",
+			},
+		},
 	},
 	statusPages: {
 		notFound: {

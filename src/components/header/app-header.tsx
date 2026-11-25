@@ -9,8 +9,7 @@ import { HeaderOptions } from "@/components/header/header-options";
 import { ReactionSoundToggle } from "@/components/header/reaction-sound-toggle";
 import { MascotGuide } from "@/components/mascot-guide/mascot-guide";
 import type { BoopOrder } from "@/components/mascot/mascot";
-import { RepositoryLink } from "@/components/resources/repository-link";
-import { SupportLink } from "@/components/resources/support-link";
+import { ResourcesMenu } from "@/components/resources/resources-menu";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import type { GalleryCharacter } from "@/data/characters";
 import type { Ref } from "react";
@@ -47,10 +46,7 @@ export function AppHeader({
 						<Credits />
 					</div>
 					<div aria-hidden="true" className="mx-1 h-4 w-px bg-border" />
-					<div className="flex items-center gap-0.5">
-						<RepositoryLink />
-						<SupportLink />
-					</div>
+					<ResourcesMenu />
 				</div>
 			</div>
 

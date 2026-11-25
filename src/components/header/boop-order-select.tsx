@@ -50,21 +50,27 @@ export function BoopOrderSelect({
 							<span className="text-xs text-muted-foreground">{copy.orders[value].label}</span>
 							<ChevronDownIcon
 								aria-hidden="true"
-								className="size-3.5 shrink-0 text-muted-foreground"
+								className="size-3.5 shrink-0 text-muted-foreground transition-transform duration-150 group-aria-expanded/button:rotate-180 motion-reduce:transition-none"
 							/>
 						</>
 					) : (
-						<span className="grid">
-							{orders.map((order) => (
-								<span
-									key={order}
-									aria-hidden={order !== value || undefined}
-									className="col-start-1 row-start-1 aria-hidden:invisible"
-								>
-									{copy.orders[order].label}
-								</span>
-							))}
-						</span>
+						<>
+							<span className="grid">
+								{orders.map((order) => (
+									<span
+										key={order}
+										aria-hidden={order !== value || undefined}
+										className="col-start-1 row-start-1 aria-hidden:invisible"
+									>
+										{copy.orders[order].label}
+									</span>
+								))}
+							</span>
+							<ChevronDownIcon
+								aria-hidden="true"
+								className="size-3.5 shrink-0 text-muted-foreground transition-transform duration-150 group-aria-expanded/button:rotate-180 motion-reduce:transition-none"
+							/>
+						</>
 					)}
 				</Button>
 			</DropdownMenuTrigger>

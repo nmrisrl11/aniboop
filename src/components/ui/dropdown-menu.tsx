@@ -37,6 +37,39 @@ function DropdownMenuContent({
 	);
 }
 
+function DropdownMenuGroup({
+	className,
+	...props
+}: React.ComponentProps<typeof DropdownMenuPrimitive.Group>) {
+	return (
+		<DropdownMenuPrimitive.Group
+			data-slot="dropdown-menu-group"
+			className={cn("flex flex-col gap-1", className)}
+			{...props}
+		/>
+	);
+}
+
+function DropdownMenuItem({
+	className,
+	inset,
+	...props
+}: React.ComponentProps<typeof DropdownMenuPrimitive.Item> & {
+	inset?: boolean;
+}) {
+	return (
+		<DropdownMenuPrimitive.Item
+			data-slot="dropdown-menu-item"
+			data-inset={inset}
+			className={cn(
+				"relative flex cursor-default items-center gap-1.5 rounded-md px-1.5 py-1 text-sm outline-hidden select-none corner-squircle focus:bg-accent focus:text-accent-foreground focus:**:text-accent-foreground data-inset:pl-7 data-disabled:pointer-events-none data-disabled:opacity-50 squircle:rounded-xl [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+				className,
+			)}
+			{...props}
+		/>
+	);
+}
+
 function DropdownMenuRadioGroup({
 	className,
 	...props
@@ -105,6 +138,8 @@ export {
 	DropdownMenu,
 	DropdownMenuTrigger,
 	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuRadioGroup,
 	DropdownMenuRadioItem,

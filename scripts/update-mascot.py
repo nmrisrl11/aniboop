@@ -42,7 +42,7 @@ def find_raw_sheet(character_id: str, kind: str) -> Path:
     return sheet
 
 
-def update_mascot(character_id: str, staging: Path, keep_raw: bool = False) -> str:
+def update_mascot(character_id: str, staging: Path, keep_raw: bool = False, skip_r2: bool = False) -> str:
     original_catalog = CATALOG.read_bytes()
     catalog = json.loads(original_catalog)
     target_index = next((i for i, entry in enumerate(catalog) if entry["id"] == character_id), None)
@@ -80,6 +80,19 @@ def update_mascot(character_id: str, staging: Path, keep_raw: bool = False) -> s
         digest.update(b"\0")
     new_version = digest.hexdigest()[:8]
 
+    if CATALOG.read_bytes() != original_catalog:
+        raise ValueError("The catalog changed during generation. Run the command again.")
+
+    # Upload all five staged WebPs to R2 BEFORE publishing the new version hash in characters.json.
+    # Otherwise, an open dev server or client fetching ?v=<new_version> before R2 finishes would
+    # cause Cloudflare to cache the old object under the new immutable version query string.
+    if not skip_r2 and R2_SYNC.is_file():
+        subprocess.run(
+            [sys.executable, str(R2_SYNC), "--character", character_id, "--assets-dir", str(staging)],
+            cwd=ROOT,
+            check=True,
+        )
+
     # Back up any existing local WebPs to public/old-version/mascots/ before overwriting.
     for relative_path in output_paths:
         existing = ASSETS / relative_path
@@ -94,7 +107,7 @@ def update_mascot(character_id: str, staging: Path, keep_raw: bool = False) -> s
         (staging / relative_path).replace(destination)
 
     if CATALOG.read_bytes() != original_catalog:
-        raise ValueError("The catalog changed during generation. Run the command again.")
+        raise ValueError("The catalog changed during upload. Run the command again.")
 
     catalog[target_index] = {**catalog[target_index], "v": new_version}
     updated_catalog = staging / CATALOG.name
@@ -132,15 +145,19 @@ def main() -> None:
 
     try:
         with TemporaryDirectory(prefix="mascot-update-", dir=temp) as staging:
-            new_version = update_mascot(args.id, Path(staging), keep_raw=args.keep_raw)
+            new_version = update_mascot(args.id, Path(staging), keep_raw=args.keep_raw, skip_r2=args.skip_r2)
     except (OSError, ValueError, subprocess.CalledProcessError) as error:
         parser.exit(1, f"mascot:update: {error}\n")
     finally:
         lock.unlink()
 
     print(f"Updated {args.id} (v={new_version}) with five regenerated WebPs.")
-    if not args.skip_r2 and R2_SYNC.is_file():
-        subprocess.run([sys.executable, str(R2_SYNC), "--character", args.id], cwd=ROOT, check=True)
+    if args.skip_r2:
+        print(
+            f"[WARNING] --skip-r2 was used. Upload '{args.id}' with "
+            f"'npm run mascot:sync-r2 -- --character {args.id}' before loading the app against live R2 "
+            f"to avoid poisoning the Cloudflare cache for ?v={new_version}."
+        )
 
 
 if __name__ == "__main__":

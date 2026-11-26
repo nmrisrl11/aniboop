@@ -9,6 +9,8 @@ import hashlib
 import json
 import os
 import sys
+import urllib.error
+import urllib.request
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -165,9 +167,16 @@ def upload_single_file(
         return False
 
 
+def has_r2_credentials() -> bool:
+    """Return True if R2 upload credentials are configured in the environment or .env.local."""
+    env = load_env()
+    return bool(env.get("R2_ACCOUNT_ID") and env.get("R2_ACCESS_KEY_ID") and env.get("R2_SECRET_ACCESS_KEY"))
+
+
 def upload_character_assets(
     character_id: str,
     tiers: Tuple[str, ...] = ASSET_TIERS,
+    assets_dir: Path = MASCOTS_DIR,
     dry_run: bool = False,
     quiet: bool = False,
 ) -> bool:
@@ -181,7 +190,7 @@ def upload_character_assets(
     tier_set = set(tiers)
     pairs = [
         (local_path, remote_key)
-        for local_path, remote_key in character_asset_paths(character_id)
+        for local_path, remote_key in character_asset_paths(character_id, assets_dir)
         if remote_key.split("/", 1)[0] in tier_set
     ]
 
@@ -312,6 +321,79 @@ def check_catalog(tiers: Tuple[str, ...] = ASSET_TIERS) -> int:
     return 0
 
 
+def verify_cdn(
+    tiers: Tuple[str, ...] = ASSET_TIERS,
+    character_id: Optional[str] = None,
+    assets_dir: Path = MASCOTS_DIR,
+) -> int:
+    """Verify that the public R2 CDN serves bytes matching local WebPs for catalog ?v=<hash> URLs."""
+    env = load_env()
+    base_url = (env.get("NEXT_PUBLIC_R2_ASSETS_URL") or env.get("NEXT_PUBLIC_R2_URL") or "").strip().rstrip("/")
+    if not base_url:
+        print("[R2 ERROR] NEXT_PUBLIC_R2_ASSETS_URL is not configured.")
+        return 1
+
+    if not CATALOG_PATH.is_file():
+        print(f"[R2 ERROR] Catalog not found: {CATALOG_PATH}")
+        return 1
+
+    catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
+    if character_id:
+        catalog = [entry for entry in catalog if entry["id"] == character_id]
+        if not catalog:
+            print(f"[R2 ERROR] Character '{character_id}' not found in {CATALOG_PATH.relative_to(ROOT)}.")
+            return 1
+
+    tier_set = set(tiers)
+    checks: List[Tuple[Path, str, str]] = []
+    for entry in catalog:
+        version = entry.get("v")
+        for local_path, remote_key in character_asset_paths(entry["id"], assets_dir):
+            if remote_key.split("/", 1)[0] not in tier_set:
+                continue
+            url = f"{base_url}/{remote_key}"
+            if version:
+                url = f"{url}?v={version}"
+            checks.append((local_path, remote_key, url))
+
+    def _check_one(item: Tuple[Path, str, str]) -> Tuple[str, str, Optional[str]]:
+        local_path, remote_key, url = item
+        if not local_path.is_file():
+            return remote_key, url, f"missing local file ({local_path})"
+        local_sha = hashlib.sha256(local_path.read_bytes()).hexdigest()[:8]
+        req = urllib.request.Request(url, headers={"User-Agent": "AniBoop-CDN-Check/1.0"})
+        try:
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                remote_sha = hashlib.sha256(resp.read()).hexdigest()[:8]
+                cf_status = resp.headers.get("CF-Cache-Status", "unknown")
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            return remote_key, url, f"request failed: {exc}"
+        if remote_sha != local_sha:
+            return remote_key, url, f"stale CDN bytes (cdn={remote_sha}, local={local_sha}, CF-Cache-Status={cf_status})"
+        return remote_key, url, None
+
+    failures: List[Tuple[str, str, str]] = []
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        for remote_key, url, error in executor.map(_check_one, checks):
+            if error:
+                failures.append((remote_key, url, error))
+
+    fresh = len(checks) - len(failures)
+    print(f"CDN verification ({', '.join(tiers)}): {fresh}/{len(checks)} URLs match local WebPs.")
+    if failures:
+        print(f"\nMismatched or unreachable CDN URLs ({len(failures)}):")
+        for _, url, error in failures:
+            print(f"  - {url} -> {error}")
+        print(
+            "\nIf R2 already holds the new files, purge those URLs in Cloudflare Dashboard "
+            "(Caching -> Configuration -> Purge Cache)."
+        )
+        return 1
+
+    print("All checked public CDN URLs match local WebPs byte for byte!")
+    return 0
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--character", help="Specific character ID to upload across selected tiers")
@@ -321,22 +403,44 @@ def main() -> None:
         default="all",
         help="Restrict operation to one asset tier (default: all)",
     )
+    parser.add_argument(
+        "--assets-dir",
+        type=Path,
+        default=MASCOTS_DIR,
+        help="Directory containing previews/, gallery-sheets/, and sheets/ (default: public/mascots)",
+    )
     parser.add_argument("--check", action="store_true", help="Audit catalog characters against R2 without uploading")
+    parser.add_argument(
+        "--verify-cdn",
+        action="store_true",
+        help="Fetch public ?v=<hash> CDN URLs and verify their bytes match local WebPs",
+    )
     parser.add_argument("--sync-versions", action="store_true", help="Compute and update 'v' hashes in characters.json")
     parser.add_argument("--force", action="store_true", help="Re-upload files even if sizes match on R2")
     parser.add_argument("--dry-run", action="store_true", help="Show what would be uploaded without uploading")
+    parser.add_argument(
+        "--skip-if-unconfigured",
+        action="store_true",
+        help="Exit 0 with a warning instead of failing when R2 credentials are not set",
+    )
     args = parser.parse_args()
 
     tiers = ASSET_TIERS if args.tier == "all" else (args.tier,)
 
     if args.sync_versions:
-        sys.exit(sync_catalog_versions())
+        sys.exit(sync_catalog_versions(assets_dir=args.assets_dir))
+
+    if args.verify_cdn:
+        sys.exit(verify_cdn(tiers=tiers, character_id=args.character, assets_dir=args.assets_dir))
 
     if args.check:
         sys.exit(check_catalog(tiers))
 
     if args.character:
-        success = upload_character_assets(args.character, tiers=tiers, dry_run=args.dry_run)
+        if args.skip_if_unconfigured and not has_r2_credentials():
+            print("[R2 WARNING] R2 credentials are not configured; skipping R2 upload.")
+            sys.exit(0)
+        success = upload_character_assets(args.character, tiers=tiers, assets_dir=args.assets_dir, dry_run=args.dry_run)
         sys.exit(0 if success else 1)
 
     sys.exit(sync_all(tiers=tiers, dry_run=args.dry_run, force=args.force))

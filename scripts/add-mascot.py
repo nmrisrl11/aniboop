@@ -39,7 +39,7 @@ def find_raw_sheet(character_id, kind):
     return sheet
 
 
-def add_mascot(character, staging):
+def add_mascot(character, staging, skip_r2=False):
     original_catalog = CATALOG.read_bytes()
     catalog = json.loads(original_catalog)
     character_id = character["id"]
@@ -85,6 +85,26 @@ def add_mascot(character, staging):
         digest.update(b"\0")
     entry = {**character, "v": digest.hexdigest()[:8]}
 
+    if CATALOG.read_bytes() != original_catalog:
+        raise ValueError("The catalog changed during generation. Run the command again.")
+
+    # Upload all five staged WebPs to R2 BEFORE publishing the entry in characters.json so
+    # open dev tabs or clients never hit a 404 or stale cache entry on the new ?v=<hash> URL.
+    if not skip_r2 and R2_SYNC.is_file():
+        subprocess.run(
+            [
+                sys.executable,
+                str(R2_SYNC),
+                "--character",
+                character_id,
+                "--assets-dir",
+                str(staging),
+                "--skip-if-unconfigured",
+            ],
+            cwd=ROOT,
+            check=True,
+        )
+
     updated_catalog = staging / CATALOG.name
     updated_catalog.write_text(
         json.dumps([*catalog, entry], ensure_ascii=False, indent="\t") + "\n", encoding="utf-8"
@@ -99,7 +119,7 @@ def add_mascot(character, staging):
                 (staging / relative_path).replace(destination)
                 published.append(destination)
         if CATALOG.read_bytes() != original_catalog:
-            raise ValueError("The catalog changed during generation. Run the command again.")
+            raise ValueError("The catalog changed during upload. Run the command again.")
         PROCESSED.mkdir(exist_ok=True)
         for sheet, destination in archive_pairs:
             if destination.exists() or destination.is_symlink():
@@ -113,6 +133,7 @@ def add_mascot(character, staging):
         for destination in published:
             destination.unlink()
         raise
+    return entry["v"]
 
 
 def main():
@@ -120,6 +141,7 @@ def main():
     parser.add_argument("--id", required=True, help="Stable lowercase ID used in the raw filenames")
     parser.add_argument("--name", required=True, help="Name shown in the gallery")
     parser.add_argument("--series", required=True, help="Series or collection name")
+    parser.add_argument("--skip-r2", action="store_true", help="Skip uploading new assets to Cloudflare R2")
     args = parser.parse_args()
     if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", args.id):
         parser.error("--id must use lowercase letters, numbers, and single hyphens.")
@@ -136,14 +158,17 @@ def main():
     character = {"id": args.id, "name": args.name.strip(), "series": args.series.strip()}
     try:
         with TemporaryDirectory(prefix="mascot-add-", dir=temp) as staging:
-            add_mascot(character, Path(staging))
+            new_version = add_mascot(character, Path(staging), skip_r2=args.skip_r2)
     except (OSError, ValueError, subprocess.CalledProcessError) as error:
         parser.exit(1, f"mascot:add: {error}\n")
     finally:
         lock.unlink()
-    print(f"Added {args.id} to the catalog with five WebPs and moved its originals to raw/processed.")
-    if R2_SYNC.is_file():
-        subprocess.run([sys.executable, str(R2_SYNC), "--character", args.id], cwd=ROOT)
+    print(f"Added {args.id} (v={new_version}) to the catalog with five WebPs and moved its originals to raw/processed.")
+    if args.skip_r2:
+        print(
+            f"[WARNING] --skip-r2 was used. Upload '{args.id}' with "
+            f"'npm run mascot:sync-r2 -- --character {args.id}' before loading the app against live R2."
+        )
 
 
 if __name__ == "__main__":

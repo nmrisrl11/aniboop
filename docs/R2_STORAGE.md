@@ -127,15 +127,16 @@ The sync script provides automated upload, verification, and audit tools powered
 
 ### Command Overview
 
-| Command                                      | Purpose                                                                                            |
-| :------------------------------------------- | :------------------------------------------------------------------------------------------------- |
-| `npm run mascot:sync-r2`                     | Parallel-sync all missing or size-modified WebPs (`previews/`, `gallery-sheets/`, `sheets/`) to R2 |
-| `npm run mascot:sync-r2 -- --check`          | Audit that every character in `characters.json` has all 5 assets present on R2                     |
-| `npm run mascot:sync-r2 -- --character <id>` | Upload all 5 WebPs (`previews/`, `gallery-sheets/`, `sheets/`) for a single mascot                 |
-| `npm run mascot:sync-r2 -- --tier previews`  | Limit sync or audit to a single tier (`previews`, `gallery-sheets`, `sheets`, or `all`)            |
-| `npm run mascot:sync-r2 -- --sync-versions`  | Recompute and write 8-character SHA-256 revision hashes (`v`) into `src/data/characters.json`      |
-| `npm run mascot:sync-r2 -- --dry-run`        | Preview what would be uploaded without making any network changes                                  |
-| `npm run mascot:sync-r2 -- --force`          | Re-upload files even if file sizes already match in R2 (useful to refresh object headers)          |
+| Command                                      | Purpose                                                                                             |
+| :------------------------------------------- | :-------------------------------------------------------------------------------------------------- |
+| `npm run mascot:sync-r2`                     | Parallel-sync all missing or size-modified WebPs (`previews/`, `gallery-sheets/`, `sheets/`) to R2  |
+| `npm run mascot:sync-r2 -- --check`          | Audit that every character in `characters.json` has all 5 assets present on R2                      |
+| `npm run mascot:sync-r2 -- --verify-cdn`     | Fetch public `?v=<hash>` CDN URLs and verify their bytes match local WebPs (supports `--character`) |
+| `npm run mascot:sync-r2 -- --character <id>` | Upload all 5 WebPs (`previews/`, `gallery-sheets/`, `sheets/`) for a single mascot                  |
+| `npm run mascot:sync-r2 -- --tier previews`  | Limit sync or audit to a single tier (`previews`, `gallery-sheets`, `sheets`, or `all`)             |
+| `npm run mascot:sync-r2 -- --sync-versions`  | Recompute and write 8-character SHA-256 revision hashes (`v`) into `src/data/characters.json`       |
+| `npm run mascot:sync-r2 -- --dry-run`        | Preview what would be uploaded without making any network changes                                   |
+| `npm run mascot:sync-r2 -- --force`          | Re-upload files even if file sizes already match in R2 (useful to refresh object headers)           |
 
 ### Adding a Mascot with Automated R2 Upload
 
@@ -146,11 +147,10 @@ npm run mascot:add -- --id <id> --name "<Name>" --series "<Series>"
 ```
 
 1. Validates the 1080 × 1080 source sheets in `public/mascots/raw/`.
-2. Generates all 5 WebP assets (`sheets/`, `previews/`, and `gallery-sheets/`).
-3. Computes the 8-char SHA-256 content hash (`v`) and appends `{ id, name, series, v }` to `src/data/characters.json`.
-4. Archives original source sheets to `public/mascots/raw/processed/`.
-5. **Calls `scripts/sync-r2.py --character <id>`** to upload all 5 WebPs directly to Cloudflare R2 with `Cache-Control: public, max-age=31536000, immutable`.
-6. If credentials are unset or offline, it gracefully reports that R2 upload was skipped without failing the local addition.
+2. Generates all 5 WebP assets (`sheets/`, `previews/`, and `gallery-sheets/`) in a staging directory and computes the 8-char SHA-256 content hash (`v`).
+3. **Uploads all 5 staged WebPs to Cloudflare R2 first** (`scripts/sync-r2.py --character <id> --assets-dir <staging> --skip-if-unconfigured`) with `Cache-Control: public, max-age=31536000, immutable` — before touching `src/data/characters.json` so open dev tabs never request an un-uploaded `?v=<hash>` URL.
+4. Commits the local WebPs, appends `{ id, name, series, v }` to `src/data/characters.json`, and archives original source sheets to `public/mascots/raw/processed/`.
+5. If R2 credentials are unset, it gracefully skips R2 upload with a warning; if credentials are set and upload fails, it aborts before mutating the catalog.
 
 ### Updating an Existing Mascot's Artwork
 
@@ -160,10 +160,12 @@ Use [`scripts/update-mascot.py`](../scripts/update-mascot.py) when replacing an 
 npm run mascot:update -- --id <id>
 ```
 
-1. Backs up any existing local WebPs to `public/old-version/mascots/`.
-2. Re-optimizes the 1080 sheets and regenerates previews and compact playback sheets.
-3. Recomputes and updates `v` in `src/data/characters.json` so browser and Cloudflare caches invalidate immediately.
-4. Archives the source pair and uploads all 5 updated WebPs directly to Cloudflare R2.
+1. Re-optimizes the 1080 sheets and regenerates previews and compact playback sheets in a staging directory, then computes the new `v` hash.
+2. **Uploads all 5 updated WebPs to Cloudflare R2 first** — before updating `src/data/characters.json` — so Cloudflare can never cache the previous artwork under the new immutable `?v=<hash>` URL.
+3. Backs up any existing local WebPs to `public/old-version/mascots/`, moves the regenerated WebPs into place, updates `v` in `src/data/characters.json`, and archives the source pair.
+
+> [!NOTE]
+> Avoid using `--skip-r2` while `next dev` is open against live R2 (sync to R2 before loading the page). If you update a character featured in [`README.md`](../README.md), include `?v=<new_hash>` on its preview image URL so Cloudflare and GitHub's image proxy fetch the updated artwork.
 
 ---
 

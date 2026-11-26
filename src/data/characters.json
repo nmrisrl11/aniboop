@@ -3,7 +3,7 @@
 		"id": "edward",
 		"name": "Edward Elric",
 		"series": "Fullmetal Alchemist",
-		"v": "5d444a5b"
+		"v": "7d48d6f1"
 	},
 	{
 		"id": "asta",
@@ -21,13 +21,13 @@
 		"id": "lelouch",
 		"name": "Lelouch vi Britannia",
 		"series": "Code Geass",
-		"v": "a87c9c29"
+		"v": "6ff805e3"
 	},
 	{
 		"id": "natsu",
 		"name": "Natsu Dragneel",
 		"series": "Fairy Tail",
-		"v": "3721ee57"
+		"v": "4c87cd5a"
 	},
 	{
 		"id": "jinwoo",
@@ -39,7 +39,7 @@
 		"id": "hinata",
 		"name": "Shoyo Hinata",
 		"series": "Haikyu!!",
-		"v": "99eff191"
+		"v": "8cbd749c"
 	},
 	{
 		"id": "isagi",
@@ -63,7 +63,7 @@
 		"id": "tanjiro",
 		"name": "Tanjiro Kamado",
 		"series": "Demon Slayer",
-		"v": "7b82f3f1"
+		"v": "8ded81c4"
 	},
 	{
 		"id": "luffy",
@@ -831,6 +831,6 @@
 		"id": "tsuyu",
 		"name": "Tsuyu Asui",
 		"series": "My Hero Academia",
-		"v": "1435b2b5"
+		"v": "c987dbad"
 	}
 ]

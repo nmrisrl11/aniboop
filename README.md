@@ -18,7 +18,7 @@ Explore **139 chibi characters across 20 anime series** in an endless, pannable 
 
 <p>
   <img src="https://aniboop-assets.nmrisrl.dev/previews/eren.webp" alt="Eren Yeager" width="88">
-  <img src="https://aniboop-assets.nmrisrl.dev/previews/lelouch.webp" alt="Lelouch vi Britannia" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/lelouch.webp?v=6ff805e3" alt="Lelouch vi Britannia" width="88">
   <img src="https://aniboop-assets.nmrisrl.dev/previews/saitama.webp" alt="Saitama" width="88">
   <img src="https://aniboop-assets.nmrisrl.dev/previews/jinwoo.webp" alt="Sung Jinwoo" width="88">
   <img src="https://aniboop-assets.nmrisrl.dev/previews/kaneki.webp" alt="Ken Kaneki" width="88">

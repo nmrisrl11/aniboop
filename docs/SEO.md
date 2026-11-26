@@ -1,6 +1,6 @@
 # SEO and site discovery
 
-AniBoop uses the Next.js App Router Metadata API and file conventions. The homepage is the single public page. The catalog, component guide, and credits open inside the gallery.
+AniBoop uses the Next.js App Router Metadata API and file conventions. The homepage (`/`) and `/playground` are the public pages. The catalog, component guide, and credits open inside the gallery.
 
 ## Production origin
 
@@ -8,10 +8,10 @@ Set `ANIBOOP_URL=https://aniboop.nmrisrl.dev` in the production build environmen
 
 In the AniBoop project on Vercel, go to **Settings → Environment Variables**, add `ANIBOOP_URL` with the official URL as its value, select **Production** only, and deploy. Local development can leave it unset. The app also checks `VERCEL_ENV` when Vercel exposes it. On other hosts, leave `ANIBOOP_URL` unset in staging and preview builds.
 
-| Environment                                                  | Homepage                                                      | Sitemap                                              |
-| ------------------------------------------------------------ | ------------------------------------------------------------- | ---------------------------------------------------- |
-| Production build with `ANIBOOP_URL`                          | Canonical URL, `index, follow`, and `WebSite` structured data | Lists the homepage and is advertised in `robots.txt` |
-| `next dev`, Vercel previews, or builds without `ANIBOOP_URL` | `noindex, follow`                                             | Returns 404 and is omitted from `robots.txt`         |
+| Environment                                                  | Homepage                                                      | Sitemap                                                                |
+| ------------------------------------------------------------ | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Production build with `ANIBOOP_URL`                          | Canonical URL, `index, follow`, and `WebSite` structured data | Lists the homepage and `/playground` and is advertised in `robots.txt` |
+| `next dev`, Vercel previews, or builds without `ANIBOOP_URL` | `noindex, follow`                                             | Returns 404 and is omitted from `robots.txt`                           |
 
 On localhost and in preview builds, SEO extensions will show `noindex, follow` and an empty canonical field. `robots.txt` allows crawling in both cases so search crawlers can read the homepage's robots meta tag. Use deployment access controls for private previews. See [Google's robots meta tag documentation](https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag) and [Vercel's system environment variables](https://vercel.com/docs/environment-variables/system-environment-variables).
 
@@ -41,7 +41,7 @@ If the official hostname stops resolving or fails TLS, the browser cannot reach 
 | Title, description, application name, language, and keywords | Edit [brand copy](../src/lib/brand.ts). The [root layout](../src/app/layout.tsx) supplies the shared defaults and robots meta tag. The [homepage](../src/app/page.tsx) sets its keywords and canonical URL.                                                                                                   |
 | Open Graph and X (Twitter) cards                             | The [homepage metadata](../src/app/page.tsx) sets card text. Replace the [static 1200 × 630 PNG](../src/app/opengraph-image.png) and update its [alt text](../src/app/opengraph-image.alt.txt) when the artwork changes.                                                                                      |
 | `/robots.txt` and `/sitemap.xml`                             | Edit [robots.ts](../src/app/robots.ts) for crawl rules and [sitemap.ts](../src/app/sitemap.ts) when a new canonical public page ships. Use absolute URLs. Add `lastModified` only when the page has a trustworthy content update date.                                                                        |
-| `/llms.txt`                                                  | Edit the [Route Handler](../src/app/llms.txt/route.ts) when the gallery's capabilities or public links change. It serves a Markdown summary as UTF-8 plain text and includes the gallery link on indexable builds.                                                                                            |
+| `/llms.txt`                                                  | Edit the [Route Handler](../src/app/llms.txt/route.ts) when the gallery's capabilities or public links change. It serves a Markdown summary as UTF-8 plain text and includes the gallery and playground links on indexable builds.                                                                            |
 | `/manifest.webmanifest`                                      | Edit [manifest.ts](../src/app/manifest.ts) for the standalone launch settings and colors. It uses the shared name, description, and language, plus regular and maskable PNGs in [public/icons](../public/icons). The favicon, browser icon, and Apple touch icon use separate [App Router files](../src/app). |
 | JSON-LD                                                      | The [homepage](../src/app/page.tsx) renders a Schema.org `WebSite` object with the same name, description, language, and canonical URL. It escapes `<` during serialization before embedding the JSON in HTML.                                                                                                |
 

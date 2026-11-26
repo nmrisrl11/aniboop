@@ -15,11 +15,13 @@ export const CatalogResults = memo(function CatalogResults({
 	resultsRef,
 	onSelect,
 	onResetFilters,
+	actionLabel = brand.characterDetails.viewAndDownload,
 }: {
 	groups: readonly CatalogGroup[];
 	resultsRef: RefObject<HTMLDivElement | null>;
 	onSelect?: (character: CharacterCatalogEntry) => void;
 	onResetFilters: () => void;
+	actionLabel?: string;
 }) {
 	return (
 		<div
@@ -59,8 +61,8 @@ export const CatalogResults = memo(function CatalogResults({
 												type="button"
 												onClick={() => onSelect?.(character)}
 												className="group flex w-full min-w-0 items-center justify-between gap-2.5 rounded-xl bg-muted/60 p-2 text-left transition-all duration-160 ease-out corner-squircle hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring active:scale-[0.98] motion-reduce:transition-none motion-reduce:active:scale-100 squircle:rounded-3xl"
-												aria-label={`${brand.characterDetails.viewAndDownload}: ${name}`}
-												title={`${brand.characterDetails.viewAndDownload}: ${name}`}
+												aria-label={`${actionLabel}: ${name}`}
+												title={`${actionLabel}: ${name}`}
 											>
 												<div className="flex min-w-0 items-center gap-2.5">
 													<Image

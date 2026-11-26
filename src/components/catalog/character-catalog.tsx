@@ -29,11 +29,15 @@ export function CharacterCatalog({
 	open: controlledOpen,
 	onOpenChange: controlledOnOpenChange,
 	onSelectCharacter,
+	hideTrigger = false,
+	actionLabel,
 }: {
 	characters: readonly CharacterCatalogEntry[];
 	open?: boolean;
 	onOpenChange?: (open: boolean) => void;
 	onSelectCharacter?: (character: CharacterCatalogEntry) => void;
+	hideTrigger?: boolean;
+	actionLabel?: string;
 }) {
 	const isDesktop = useMediaQuery("(min-width: 768px)");
 	const [hasOpened, setHasOpened] = useState(false);
@@ -80,18 +84,21 @@ export function CharacterCatalog({
 				resultsRef={resultsRef}
 				onSelect={onSelectCharacter}
 				onResetFilters={resetFilters}
+				actionLabel={actionLabel}
 			/>
 		</>
 	) : null;
 
 	return (
 		<>
-			<CatalogTrigger
-				characterCount={characterCount}
-				aria-haspopup="dialog"
-				aria-expanded={open}
-				onClick={() => setOpen(true)}
-			/>
+			{!hideTrigger && (
+				<CatalogTrigger
+					characterCount={characterCount}
+					aria-haspopup="dialog"
+					aria-expanded={open}
+					onClick={() => setOpen(true)}
+				/>
+			)}
 			{shouldMountSurface &&
 				(isDesktop ? (
 					<CatalogDialog open={open} onOpenChange={setOpen} countLabel={countLabel}>

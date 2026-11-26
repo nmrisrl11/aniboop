@@ -5,6 +5,7 @@ import { BoopOrderSelect } from "@/components/header/boop-order-select";
 import { ReactionSoundToggle } from "@/components/header/reaction-sound-toggle";
 import { MascotGuide } from "@/components/mascot-guide/mascot-guide";
 import type { BoopOrder } from "@/components/mascot/mascot";
+import { PlaygroundLink } from "@/components/playground/playground-link";
 import { ResourceLinks } from "@/components/resources/resources-menu";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import { Button } from "@/components/ui/button";
@@ -77,6 +78,7 @@ export function HeaderOptions({
 					/>
 				</div>
 				<div className="flex flex-col gap-0.5 border-b border-border py-1.5">
+					<PlaygroundLink className={optionClass} />
 					<MascotGuide triggerClassName={optionClass} />
 					<Credits triggerClassName={optionClass} />
 				</div>

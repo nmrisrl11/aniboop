@@ -33,6 +33,7 @@ Explore **139 chibi characters across 20 anime series** in an endless, pannable 
 - **Use More options** on smaller screens for boop order, appearance, the component guide, credits, and Support links (GitHub Repository, Buy Me a Coffee, and Upvote on AppBuildersPH). Appearance supports System, Light, and Dark.
 
 - **View details & download assets** by clicking the card action on any tile or choosing a character from the Catalog. Download high-resolution master sheets (1080 × 1080) or lightweight web-ready sheets (504 × 504) for directional gazes and emotional reactions — delivered via Cloudflare R2 — in an adaptive dialog on desktop and an ergonomic bottom-sheet drawer on mobile.
+- **Test custom sheets** in the [Playground](https://aniboop.nmrisrl.dev/playground) (`/playground`). Drag and drop your own 3 × 3 Directions and Reactions sprite sheets locally in the browser — or pick any character from the catalog — to preview gaze tracking, boops, and reaction sounds.
 
 ## Get started
 

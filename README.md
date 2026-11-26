@@ -9,19 +9,19 @@ Explore **139 chibi characters across 20 anime series** in an endless, pannable 
 ## Featured characters
 
 <p>
-  <img src="https://aniboop-assets.nmrisrl.dev/previews/naruto.webp" alt="Naruto Uzumaki" width="88">
-  <img src="https://aniboop-assets.nmrisrl.dev/previews/luffy.webp" alt="Monkey D. Luffy" width="88">
-  <img src="https://aniboop-assets.nmrisrl.dev/previews/goku.webp" alt="Son Goku" width="88">
-  <img src="https://aniboop-assets.nmrisrl.dev/previews/midoriya.webp" alt="Izuku Midoriya (Deku)" width="88">
-  <img src="https://aniboop-assets.nmrisrl.dev/previews/asta.webp" alt="Asta" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/naruto.webp?v=4b8a459d" alt="Naruto Uzumaki" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/luffy.webp?v=92fe2b0e" alt="Monkey D. Luffy" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/goku.webp?v=2e74c5c6" alt="Son Goku" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/midoriya.webp?v=b7d06547" alt="Izuku Midoriya (Deku)" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/asta.webp?v=279039ee" alt="Asta" width="88">
 </p>
 
 <p>
-  <img src="https://aniboop-assets.nmrisrl.dev/previews/eren.webp" alt="Eren Yeager" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/eren.webp?v=a06964c4" alt="Eren Yeager" width="88">
   <img src="https://aniboop-assets.nmrisrl.dev/previews/lelouch.webp?v=6ff805e3" alt="Lelouch vi Britannia" width="88">
-  <img src="https://aniboop-assets.nmrisrl.dev/previews/saitama.webp" alt="Saitama" width="88">
-  <img src="https://aniboop-assets.nmrisrl.dev/previews/jinwoo.webp" alt="Sung Jinwoo" width="88">
-  <img src="https://aniboop-assets.nmrisrl.dev/previews/kaneki.webp" alt="Ken Kaneki" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/saitama.webp?v=3e54f6fb" alt="Saitama" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/jinwoo.webp?v=e9a4063f" alt="Sung Jinwoo" width="88">
+  <img src="https://aniboop-assets.nmrisrl.dev/previews/kaneki.webp?v=1d042a65" alt="Ken Kaneki" width="88">
 </p>
 
 ## Explore the gallery

@@ -976,5 +976,167 @@
 		"name": "Yuta Okkotsu",
 		"series": "Jujutsu Kaisen",
 		"v": "7f712c66"
+	},
+	{
+		"id": "aira",
+		"name": "Aira Shiratori",
+		"series": "Dandadan",
+		"v": "0c7768b3"
+	},
+	{
+		"id": "aizen",
+		"name": "Sosuke Aizen",
+		"series": "Bleach",
+		"v": "58795697"
+	},
+	{
+		"id": "amagi-daichi",
+		"name": "Daichi Amagi",
+		"series": "Inazuma Eleven GO",
+		"v": "a5e1ce5b"
+	},
+	{
+		"id": "aoyama-shunsuke",
+		"name": "Shunsuke Aoyama",
+		"series": "Inazuma Eleven GO",
+		"v": "8ac4877d"
+	},
+	{
+		"id": "byakuya",
+		"name": "Byakuya Kuchiki",
+		"series": "Bleach",
+		"v": "dcd91588"
+	},
+	{
+		"id": "hamano",
+		"name": "Kaiji Hamano",
+		"series": "Inazuma Eleven GO",
+		"v": "2d959d80"
+	},
+	{
+		"id": "hayami",
+		"name": "Tsurumasa Hayami",
+		"series": "Inazuma Eleven GO",
+		"v": "059a4f31"
+	},
+	{
+		"id": "ichino",
+		"name": "Nanasuke Ichino",
+		"series": "Inazuma Eleven GO",
+		"v": "077279b3"
+	},
+	{
+		"id": "jiji",
+		"name": "Jin Enjoji (Jiji)",
+		"series": "Dandadan",
+		"v": "a666a54d"
+	},
+	{
+		"id": "kageyama-hikaru",
+		"name": "Hikaru Kageyama",
+		"series": "Inazuma Eleven GO",
+		"v": "bd23d049"
+	},
+	{
+		"id": "kariya",
+		"name": "Masaki Kariya",
+		"series": "Inazuma Eleven GO",
+		"v": "b7dfac10"
+	},
+	{
+		"id": "kenpachi",
+		"name": "Kenpachi Zaraki",
+		"series": "Bleach",
+		"v": "b6366c86"
+	},
+	{
+		"id": "kirino",
+		"name": "Ranmaru Kirino",
+		"series": "Inazuma Eleven GO",
+		"v": "8f0f75ff"
+	},
+	{
+		"id": "kurama-norihito",
+		"name": "Norihito Kurama",
+		"series": "Inazuma Eleven GO",
+		"v": "8dcfb14a"
+	},
+	{
+		"id": "kurumada",
+		"name": "Gouichi Kurumada",
+		"series": "Inazuma Eleven GO",
+		"v": "6acf4789"
+	},
+	{
+		"id": "momo-ayase",
+		"name": "Momo Ayase",
+		"series": "Dandadan",
+		"v": "cc3b823a"
+	},
+	{
+		"id": "nishiki",
+		"name": "Ryouma Nishiki",
+		"series": "Inazuma Eleven GO",
+		"v": "a02058ff"
+	},
+	{
+		"id": "nishizono",
+		"name": "Shinsuke Nishizono",
+		"series": "Inazuma Eleven GO",
+		"v": "77a95639"
+	},
+	{
+		"id": "okarun",
+		"name": "Ken Takakura (Okarun)",
+		"series": "Dandadan",
+		"v": "d84c6f3e"
+	},
+	{
+		"id": "sangoku",
+		"name": "Taichi Sangoku",
+		"series": "Inazuma Eleven GO",
+		"v": "4a4a587b"
+	},
+	{
+		"id": "shindou",
+		"name": "Takuto Shindou",
+		"series": "Inazuma Eleven GO",
+		"v": "9c85c8d0"
+	},
+	{
+		"id": "tenma",
+		"name": "Tenma Matsukaze",
+		"series": "Inazuma Eleven GO",
+		"v": "24970dec"
+	},
+	{
+		"id": "toshiro",
+		"name": "Toshiro Hitsugaya",
+		"series": "Bleach",
+		"v": "9c398c9b"
+	},
+	{
+		"id": "tsurugi",
+		"name": "Kyousuke Tsurugi",
+		"series": "Inazuma Eleven GO",
+		"v": "ceef2b68"
+	},
+	{
+		"id": "turbo-granny",
+		"name": "Turbo Granny",
+		"series": "Dandadan",
+		"v": "1ed52a4c"
+	},
+	{
+		"id": "urahara",
+		"name": "Kisuke Urahara",
+		"series": "Bleach",
+		"v": "2e8c82d8"
+	},
+	{
+		"id": "yoruichi",
+		"name": "Yoruichi Shihouin",
+		"series": "Bleach",
+		"v": "61244d08"
 	}
 ]

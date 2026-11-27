@@ -2,7 +2,7 @@
 
 **Little characters. Big reactions.**
 
-Explore **163 chibi characters across 24 anime series** in an endless, pannable gallery. Move your cursor to see them look back, or boop one for a reaction.
+Explore **190 chibi characters across 26 anime series** in an endless, pannable gallery. Move your cursor to see them look back, or boop one for a reaction.
 
 [Open AniBoop](https://aniboop.nmrisrl.dev) at its official address. If the official domain is unavailable, open [aniboop.vercel.app](https://aniboop.vercel.app) directly. See the [domain and outage guide](docs/SEO.md#backup-access-on-vercel) for recovery steps.
 

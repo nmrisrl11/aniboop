@@ -10,6 +10,7 @@ import {
 	type GalleryCharacter,
 } from "@/data/characters";
 import { useBoopOrder } from "@/hooks/use-boop-order";
+import { useFavorites } from "@/hooks/use-favorites";
 import { useReactionSound } from "@/hooks/use-reaction-sound";
 import { brand } from "@/lib/brand";
 import {
@@ -91,8 +92,10 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 		[seriesOptions],
 	);
 	const { boopOrder, setBoopOrder } = useBoopOrder();
+	const { favoriteIds, toggleFavorite } = useFavorites();
 	const [selectedCharacter, setSelectedCharacter] = useState<GalleryCharacter | null>(null);
 	const [selectedSeriesSlug, setSelectedSeriesSlug] = useState<string | null>(null);
+	const [favoritesOnly, setFavoritesOnly] = useState(false);
 	const [catalogOpen, setCatalogOpen] = useState(false);
 	const [openedFromCatalog, setOpenedFromCatalog] = useState(false);
 	const headerLogoRef = useRef<HTMLSpanElement>(null);
@@ -105,11 +108,22 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 		selectedCharacterIdRef.current = selectedCharacter?.id ?? null;
 	}, [selectedCharacter]);
 
-	const selectedSeries = selectedSeriesSlug ? (seriesBySlug.get(selectedSeriesSlug) ?? null) : null;
+	const favoriteCharacters = useMemo(() => {
+		if (favoriteIds.size === 0) return [];
+		return characters.filter((character) => favoriteIds.has(character.id));
+	}, [characters, favoriteIds]);
+	const favoriteCount = favoriteCharacters.length;
+	const activeFavoritesOnly = favoritesOnly && favoriteCount > 0;
+
+	const selectedSeries =
+		!activeFavoritesOnly && selectedSeriesSlug
+			? (seriesBySlug.get(selectedSeriesSlug) ?? null)
+			: null;
 	const visibleCharacters = useMemo(() => {
+		if (activeFavoritesOnly) return favoriteCharacters;
 		if (!selectedSeries) return characters;
 		return characters.filter((character) => character.series === selectedSeries.series);
-	}, [characters, selectedSeries]);
+	}, [activeFavoritesOnly, favoriteCharacters, characters, selectedSeries]);
 
 	const handleQueryCharacterChange = useCallback(
 		(characterId: string | null) => {
@@ -149,15 +163,38 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 				return;
 			}
 
+			setFavoritesOnly(false);
 			setSelectedSeriesSlug(seriesSlug);
 		},
 		[seriesBySlug],
 	);
 
 	const handleSeriesChange = useCallback((seriesSlug: string | null) => {
+		setFavoritesOnly(false);
 		setSelectedSeriesSlug(seriesSlug);
 		void setSeriesQueryRef.current?.(seriesSlug, { history: "push" });
 	}, []);
+
+	const handleFavoritesToggle = useCallback(() => {
+		setFavoritesOnly((current) => {
+			const next = !current;
+			if (next) {
+				setSelectedSeriesSlug(null);
+				void setSeriesQueryRef.current?.(null, { history: "replace" });
+			}
+			return next;
+		});
+	}, []);
+
+	const handleToggleFavorite = useCallback(
+		(id: string) => {
+			if (favoritesOnly && favoriteIds.has(id) && favoriteCount <= 1) {
+				setFavoritesOnly(false);
+			}
+			toggleFavorite(id);
+		},
+		[favoritesOnly, favoriteIds, favoriteCount, toggleFavorite],
+	);
 
 	const handleSelectFromCatalog = useCallback((character: GalleryCharacter) => {
 		setCatalogOpen(false);
@@ -216,6 +253,7 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 			<SplashScreen targetRef={headerLogoRef} />
 			<AppHeader
 				characters={characters}
+				favoriteIds={favoriteIds}
 				boopOrder={boopOrder}
 				onBoopOrderChange={setBoopOrder}
 				soundEnabled={soundEnabled}
@@ -235,17 +273,22 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 					{brand.galleryHeading}
 				</h2>
 				<CharacterGrid
-					key={selectedSeries?.slug ?? "all"}
+					key={activeFavoritesOnly ? "favorites" : (selectedSeries?.slug ?? "all")}
 					characters={visibleCharacters}
 					boopOrder={boopOrder}
+					favoriteIds={favoriteIds}
 					onReact={playReactionSound}
 					onSelectCharacter={handleSelectFromGrid}
+					onToggleFavorite={handleToggleFavorite}
 				/>
 				<GalleryDock
 					seriesOptions={seriesOptions}
 					totalCount={characters.length}
 					selectedSeriesSlug={selectedSeries?.slug ?? null}
 					onSeriesChange={handleSeriesChange}
+					favoriteCount={favoriteCount}
+					favoritesOnly={activeFavoritesOnly}
+					onFavoritesToggle={handleFavoritesToggle}
 				/>
 			</main>
 			{selectedCharacter !== null && (
@@ -254,6 +297,8 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 					open
 					onOpenChange={handleDetailsOpenChange}
 					onBackToCatalog={openedFromCatalog ? handleBackToCatalog : undefined}
+					isFavorite={favoriteIds.has(selectedCharacter.id)}
+					onToggleFavorite={() => handleToggleFavorite(selectedCharacter.id)}
 				/>
 			)}
 			<p id="grid-instructions" className="sr-only">

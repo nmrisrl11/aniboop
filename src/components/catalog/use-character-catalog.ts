@@ -9,10 +9,12 @@ const SEARCH_DELAY_MS = 150;
 
 export function useCharacterCatalog({
 	characters,
+	favoriteIds,
 	open: controlledOpen,
 	onOpenChange: controlledOnOpenChange,
 }: {
 	characters: readonly CharacterCatalogEntry[];
+	favoriteIds?: ReadonlySet<string>;
 	open?: boolean;
 	onOpenChange?: (open: boolean) => void;
 }) {
@@ -82,27 +84,47 @@ export function useCharacterCatalog({
 		return [...bySeries.values()].sort((a, b) => a.series.localeCompare(b.series, "en"));
 	}, [characters]);
 
+	const favoriteCount = useMemo(() => {
+		if (!favoriteIds || favoriteIds.size === 0) return 0;
+		let count = 0;
+		for (const character of characters) {
+			if (favoriteIds.has(character.id)) count += 1;
+		}
+		return count;
+	}, [characters, favoriteIds]);
+
+	const activeSeries =
+		selectedSeries === "favorites" && favoriteCount === 0 ? "all" : selectedSeries;
+
 	const { groups, matchCount } = useMemo(() => {
 		const groups: CatalogGroup[] = [];
 		let matchCount = 0;
 		for (const group of catalogGroups) {
-			if (selectedSeries !== "all" && group.series !== selectedSeries) continue;
+			if (activeSeries !== "all" && activeSeries !== "favorites" && group.series !== activeSeries) {
+				continue;
+			}
 
-			const members =
+			const queryMembers =
 				!appliedQuery || group.searchSeries.includes(appliedQuery)
 					? group.members
 					: group.members.filter(({ searchName }) => searchName.includes(appliedQuery));
+
+			const members =
+				activeSeries === "favorites"
+					? queryMembers.filter(({ character }) => favoriteIds?.has(character.id) ?? false)
+					: queryMembers;
+
 			if (members.length === 0) continue;
 
 			groups.push(members === group.members ? group : { ...group, members });
 			matchCount += members.length;
 		}
 		return { groups, matchCount };
-	}, [catalogGroups, appliedQuery, selectedSeries]);
+	}, [catalogGroups, appliedQuery, activeSeries, favoriteIds]);
 
 	const characterCount = characters.length;
 	const countLabel =
-		appliedQuery || selectedSeries !== "all"
+		appliedQuery || activeSeries !== "all"
 			? copy.matchCount(matchCount)
 			: copy.characterCount(characterCount);
 
@@ -127,8 +149,9 @@ export function useCharacterCatalog({
 		searchQuery,
 		updateSearch,
 		clearSearch,
-		selectedSeries,
+		selectedSeries: activeSeries,
 		setSelectedSeries,
+		favoriteCount,
 		catalogGroups,
 		groups,
 		characterCount,

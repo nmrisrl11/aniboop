@@ -23,6 +23,7 @@ export function CatalogSearchFilter({
 	onClearSearch,
 	selectedSeries,
 	onSeriesChange,
+	favoriteCount = 0,
 	catalogGroups,
 	searchRef,
 }: {
@@ -31,6 +32,7 @@ export function CatalogSearchFilter({
 	onClearSearch: () => void;
 	selectedSeries: string;
 	onSeriesChange: (series: string) => void;
+	favoriteCount?: number;
 	catalogGroups: readonly CatalogGroup[];
 	searchRef: RefObject<HTMLInputElement | null>;
 }) {
@@ -86,6 +88,11 @@ export function CatalogSearchFilter({
 					>
 						<SelectGroup>
 							<SelectItem value="all">{copy.allSeries}</SelectItem>
+							{favoriteCount > 0 && (
+								<SelectItem value="favorites">
+									{copy.favorites} ({favoriteCount})
+								</SelectItem>
+							)}
 							{catalogGroups.map(({ series, members }) => (
 								<SelectItem key={series} value={series}>
 									{series} ({members.length})

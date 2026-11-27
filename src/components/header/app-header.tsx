@@ -17,6 +17,7 @@ import type { Ref } from "react";
 
 export function AppHeader({
 	characters,
+	favoriteIds,
 	boopOrder,
 	onBoopOrderChange,
 	soundEnabled,
@@ -27,6 +28,7 @@ export function AppHeader({
 	logoRef,
 }: {
 	characters: readonly CharacterCatalogEntry[];
+	favoriteIds?: ReadonlySet<string>;
 	boopOrder: BoopOrder;
 	onBoopOrderChange: (order: BoopOrder) => void;
 	soundEnabled: boolean;
@@ -58,6 +60,7 @@ export function AppHeader({
 				</div>
 				<CharacterCatalog
 					characters={characters}
+					favoriteIds={favoriteIds}
 					open={catalogOpen}
 					onOpenChange={onCatalogOpenChange}
 					onSelectCharacter={onSelectCharacter}

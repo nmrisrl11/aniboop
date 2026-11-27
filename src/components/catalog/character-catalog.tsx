@@ -26,6 +26,7 @@ const CatalogSearchFilter = dynamic(
 
 export function CharacterCatalog({
 	characters,
+	favoriteIds,
 	open: controlledOpen,
 	onOpenChange: controlledOnOpenChange,
 	onSelectCharacter,
@@ -33,6 +34,7 @@ export function CharacterCatalog({
 	actionLabel,
 }: {
 	characters: readonly CharacterCatalogEntry[];
+	favoriteIds?: ReadonlySet<string>;
 	open?: boolean;
 	onOpenChange?: (open: boolean) => void;
 	onSelectCharacter?: (character: CharacterCatalogEntry) => void;
@@ -49,6 +51,7 @@ export function CharacterCatalog({
 		clearSearch,
 		selectedSeries,
 		setSelectedSeries,
+		favoriteCount,
 		catalogGroups,
 		groups,
 		characterCount,
@@ -58,6 +61,7 @@ export function CharacterCatalog({
 		resetFilters,
 	} = useCharacterCatalog({
 		characters,
+		favoriteIds,
 		open: controlledOpen,
 		onOpenChange: controlledOnOpenChange,
 	});
@@ -76,6 +80,7 @@ export function CharacterCatalog({
 				onClearSearch={clearSearch}
 				selectedSeries={selectedSeries}
 				onSeriesChange={setSelectedSeries}
+				favoriteCount={favoriteCount}
 				catalogGroups={catalogGroups}
 				searchRef={searchRef}
 			/>

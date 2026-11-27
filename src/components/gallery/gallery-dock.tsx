@@ -12,7 +12,7 @@ import {
 import { brand } from "@/lib/brand";
 import type { SeriesOption } from "@/lib/series";
 import { cn } from "@/lib/utils";
-import { ListFilterIcon, XIcon } from "lucide-react";
+import { HeartIcon, ListFilterIcon, XIcon } from "lucide-react";
 
 const copy = brand.galleryControls;
 
@@ -21,13 +21,20 @@ export function GalleryDock({
 	totalCount,
 	selectedSeriesSlug,
 	onSeriesChange,
+	favoriteCount,
+	favoritesOnly,
+	onFavoritesToggle,
 }: {
 	seriesOptions: readonly SeriesOption[];
 	totalCount: number;
 	selectedSeriesSlug: string | null;
 	onSeriesChange: (slug: string | null) => void;
+	favoriteCount: number;
+	favoritesOnly: boolean;
+	onFavoritesToggle: () => void;
 }) {
 	const isFiltered = selectedSeriesSlug !== null;
+	const hasFavorites = favoriteCount > 0;
 
 	return (
 		<div className="pointer-events-none fixed inset-x-0 bottom-5 z-10 flex justify-center px-4 sm:bottom-6">
@@ -38,7 +45,7 @@ export function GalleryDock({
 				>
 					<SelectTrigger
 						aria-label={copy.filterSeries}
-						className="h-9 max-w-[min(17rem,calc(100vw-6rem))] min-w-0 gap-2 rounded-lg border-transparent bg-transparent pr-2.5 pl-1.5 text-xs font-medium text-foreground transition-[transform,background-color] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-muted active:scale-[0.98] data-[size=default]:h-9 *:data-[slot=select-value]:min-w-0 *:data-[slot=select-value]:truncate motion-reduce:transition-none motion-reduce:active:scale-100 dark:bg-transparent dark:hover:bg-muted squircle:rounded-xl"
+						className="h-9 max-w-[min(14.5rem,calc(100vw-11rem))] min-w-0 gap-2 rounded-lg border-transparent bg-transparent pr-2.5 pl-1.5 text-xs font-medium text-foreground transition-[transform,background-color] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-muted active:scale-[0.98] data-[size=default]:h-9 *:data-[slot=select-value]:min-w-0 *:data-[slot=select-value]:truncate motion-reduce:transition-none motion-reduce:active:scale-100 dark:bg-transparent dark:hover:bg-muted squircle:rounded-xl"
 					>
 						<span
 							aria-hidden="true"
@@ -86,6 +93,30 @@ export function GalleryDock({
 						<XIcon className="size-3.5" aria-hidden="true" />
 					</Button>
 				)}
+				<div aria-hidden="true" className="mx-0.5 h-5 w-px shrink-0 bg-border" />
+				<Button
+					type="button"
+					variant="ghost"
+					aria-pressed={favoritesOnly}
+					disabled={!hasFavorites && !favoritesOnly}
+					onClick={onFavoritesToggle}
+					title={hasFavorites ? copy.favorites : copy.noFavoritesHint}
+					className={cn(
+						"h-9 gap-1.5 rounded-lg px-2.5 text-xs font-medium transition-[transform,color,background-color] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100 squircle:rounded-xl",
+						favoritesOnly
+							? "bg-primary/12 text-foreground hover:bg-primary/18 dark:bg-primary/18 dark:hover:bg-primary/24"
+							: "text-muted-foreground hover:text-foreground",
+					)}
+				>
+					<HeartIcon
+						className={cn("size-3.5", hasFavorites && "fill-rose-500 text-rose-500")}
+						aria-hidden="true"
+					/>
+					<span className="hidden sm:inline">{copy.favorites}</span>
+					{hasFavorites && (
+						<span className="font-mono text-[11px] tabular-nums">{favoriteCount}</span>
+					)}
+				</Button>
 			</div>
 		</div>
 	);

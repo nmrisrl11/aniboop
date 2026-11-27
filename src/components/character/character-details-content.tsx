@@ -14,6 +14,7 @@ import {
 	ArrowUpRightIcon,
 	CheckIcon,
 	FlaskConicalIcon,
+	HeartIcon,
 	Link2Icon,
 	LoaderCircleIcon,
 	ShieldAlertIcon,
@@ -157,10 +158,14 @@ export function CharacterDetailsContent({
 	character,
 	onDownload,
 	isDownloading,
+	isFavorite = false,
+	onToggleFavorite,
 }: {
 	character: GalleryCharacter;
 	onDownload: (url: string, filename: string, options?: DownloadOptions) => void;
 	isDownloading: (url: string) => boolean;
+	isFavorite?: boolean;
+	onToggleFavorite?: () => void;
 }) {
 	const { id, name, v, galleryDirections, reactions } = character;
 	const [quality, setQuality] = useState<SheetQuality>("1080");
@@ -276,7 +281,7 @@ export function CharacterDetailsContent({
 				</section>
 			</div>
 
-			{/* Quiet pinned utility footer: Try in Playground + Copy shareable link */}
+			{/* Quiet pinned utility footer: Try in Playground + Favorite + Copy shareable link */}
 			<div className="flex shrink-0 items-center justify-between gap-2 border-t border-border bg-muted/30 px-4 py-2.5 sm:px-6">
 				<Button asChild variant="ghost" className={cn("group", FOOTER_ACTION_CLASS)}>
 					<Link href={getPlaygroundCharacterPath(id)}>
@@ -288,29 +293,48 @@ export function CharacterDetailsContent({
 						/>
 					</Link>
 				</Button>
-				<Button
-					type="button"
-					variant="ghost"
-					onClick={handleCopyLink}
-					className={cn(FOOTER_ACTION_CLASS, copied && "text-foreground")}
-				>
-					<span className="relative flex size-3.5 items-center justify-center" aria-hidden="true">
-						<Link2Icon
-							className={cn(
-								COPY_ICON_CLASS,
-								copied ? "scale-90 opacity-0 blur-[2px]" : "scale-100 opacity-100 blur-none",
-							)}
-						/>
-						<CheckIcon
-							className={cn(
-								COPY_ICON_CLASS,
-								"text-primary",
-								copied ? "scale-100 opacity-100 blur-none" : "scale-90 opacity-0 blur-[2px]",
-							)}
-						/>
-					</span>
-					<span>{copied ? copy.linkCopied : failed ? copy.copyLinkFailed : copy.copyLink}</span>
-				</Button>
+				<div className="flex items-center gap-1">
+					{onToggleFavorite && (
+						<Button
+							type="button"
+							variant="ghost"
+							aria-pressed={isFavorite}
+							onClick={onToggleFavorite}
+							className={cn(FOOTER_ACTION_CLASS, isFavorite && "text-foreground")}
+						>
+							<HeartIcon
+								className={cn("size-3.5", isFavorite && "fill-rose-500 text-rose-500")}
+								aria-hidden="true"
+							/>
+							<span className="hidden sm:inline">
+								{isFavorite ? brand.galleryControls.favorited : brand.galleryControls.favorite}
+							</span>
+						</Button>
+					)}
+					<Button
+						type="button"
+						variant="ghost"
+						onClick={handleCopyLink}
+						className={cn(FOOTER_ACTION_CLASS, copied && "text-foreground")}
+					>
+						<span className="relative flex size-3.5 items-center justify-center" aria-hidden="true">
+							<Link2Icon
+								className={cn(
+									COPY_ICON_CLASS,
+									copied ? "scale-90 opacity-0 blur-[2px]" : "scale-100 opacity-100 blur-none",
+								)}
+							/>
+							<CheckIcon
+								className={cn(
+									COPY_ICON_CLASS,
+									"text-primary",
+									copied ? "scale-100 opacity-100 blur-none" : "scale-90 opacity-0 blur-[2px]",
+								)}
+							/>
+						</span>
+						<span>{copied ? copy.linkCopied : failed ? copy.copyLinkFailed : copy.copyLink}</span>
+					</Button>
+				</div>
 			</div>
 		</>
 	);

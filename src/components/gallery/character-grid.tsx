@@ -7,7 +7,7 @@ import { brand } from "@/lib/brand";
 import { decodeImage, isImageDecoded } from "@/lib/image-decode";
 import type { Reaction } from "@/lib/mascot-sprites";
 import { cn } from "@/lib/utils";
-import { Maximize2Icon } from "lucide-react";
+import { HeartIcon, Maximize2Icon } from "lucide-react";
 import { memo, useCallback, useEffect, useState } from "react";
 import ThiingsGrid, { DRAG_THRESHOLD, type ItemConfig } from "./thiings-grid";
 
@@ -27,15 +27,19 @@ const CharacterTile = memo(function CharacterTile({
 	bloomDelayMs,
 	isMoving,
 	boopOrder,
+	isFavorite,
 	onReact,
 	onSelectCharacter,
+	onToggleFavorite,
 }: {
 	character: GalleryCharacter;
 	bloomDelayMs: number;
 	isMoving: boolean;
 	boopOrder: BoopOrder;
+	isFavorite: boolean;
 	onReact?: (reaction: Reaction) => void;
 	onSelectCharacter?: (character: GalleryCharacter) => void;
+	onToggleFavorite?: (id: string) => void;
 }) {
 	const { preview, galleryDirections, reactions } = character;
 	const [visibility, setVisibility] = useState<TileVisibility>("outside");
@@ -148,6 +152,27 @@ const CharacterTile = memo(function CharacterTile({
 					/>
 				)}
 			</div>
+			{visibility === "focusable" && previewSettled && onToggleFavorite && (
+				<button
+					type="button"
+					tabIndex={visibility === "focusable" ? 0 : -1}
+					aria-pressed={isFavorite}
+					onClick={() => onToggleFavorite(character.id)}
+					className={cn(
+						"absolute top-2.5 left-2.5 z-10 flex size-8 items-center justify-center rounded-lg transition-[transform,opacity,color,background-color] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] corner-squircle hover:bg-muted focus-visible:scale-100 focus-visible:opacity-100 focus-visible:outline-2 focus-visible:outline-ring active:scale-90 motion-reduce:scale-100 motion-reduce:transition-opacity motion-reduce:active:scale-100 max-md:top-1.5 max-md:left-1.5 max-md:size-10 max-md:scale-100 squircle:rounded-full",
+						isFavorite
+							? "scale-100 text-rose-500 opacity-100"
+							: "scale-90 text-muted-foreground opacity-0 group-hover/tile:scale-100 group-hover/tile:opacity-100 hover:text-foreground max-md:opacity-80",
+					)}
+					aria-label={`${isFavorite ? brand.galleryControls.removeFromFavorites : brand.galleryControls.addToFavorites}: ${character.name}`}
+					title={`${isFavorite ? brand.galleryControls.removeFromFavorites : brand.galleryControls.addToFavorites}: ${character.name}`}
+				>
+					<HeartIcon
+						className={cn("size-3.5 max-md:size-4", isFavorite && "fill-current")}
+						aria-hidden="true"
+					/>
+				</button>
+			)}
 			{visibility === "focusable" && previewSettled && onSelectCharacter && (
 				<button
 					type="button"
@@ -176,13 +201,17 @@ const CharacterTile = memo(function CharacterTile({
 export function CharacterGrid({
 	characters,
 	boopOrder,
+	favoriteIds,
 	onReact,
 	onSelectCharacter,
+	onToggleFavorite,
 }: {
 	characters: readonly GalleryCharacter[];
 	boopOrder: BoopOrder;
+	favoriteIds?: ReadonlySet<string>;
 	onReact?: (reaction: Reaction) => void;
 	onSelectCharacter?: (character: GalleryCharacter) => void;
+	onToggleFavorite?: (id: string) => void;
 }) {
 	const renderItem = useCallback(
 		({ gridIndex, isMoving, position }: ItemConfig) => {
@@ -193,12 +222,14 @@ export function CharacterGrid({
 					bloomDelayMs={-Math.round(Math.hypot(position.x, position.y) * 180)}
 					isMoving={isMoving}
 					boopOrder={boopOrder}
+					isFavorite={favoriteIds?.has(character.id) ?? false}
 					onReact={onReact}
 					onSelectCharacter={onSelectCharacter}
+					onToggleFavorite={onToggleFavorite}
 				/>
 			) : null;
 		},
-		[characters, boopOrder, onReact, onSelectCharacter],
+		[characters, boopOrder, favoriteIds, onReact, onSelectCharacter, onToggleFavorite],
 	);
 	return (
 		<ThiingsGrid

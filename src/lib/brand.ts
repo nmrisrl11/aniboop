@@ -35,6 +35,7 @@ export const brand = {
 		clearSearch: "Clear search",
 		filterSeries: "Filter by anime series",
 		allSeries: "All series",
+		clearSeriesFilter: "Clear series filter",
 		catalogResults: "Character results",
 		portraitAlt: (name: string) => `Chibi portrait of ${name}`,
 		portraitTitle: (name: string, series: string) => `${name} from ${series}`,

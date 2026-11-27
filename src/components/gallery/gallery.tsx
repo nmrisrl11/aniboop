@@ -1,6 +1,7 @@
 "use client";
 
 import { CharacterGrid } from "@/components/gallery/character-grid";
+import { GalleryDock } from "@/components/gallery/gallery-dock";
 import { AppHeader } from "@/components/header/app-header";
 import { SplashScreen } from "@/components/splash/splash-screen";
 import {
@@ -11,7 +12,13 @@ import {
 import { useBoopOrder } from "@/hooks/use-boop-order";
 import { useReactionSound } from "@/hooks/use-reaction-sound";
 import { brand } from "@/lib/brand";
-import { CHARACTER_QUERY_KEY, characterQueryParser } from "@/lib/search-params";
+import {
+	CHARACTER_QUERY_KEY,
+	SERIES_QUERY_KEY,
+	characterQueryParser,
+	seriesQueryParser,
+} from "@/lib/search-params";
+import { buildSeriesOptions } from "@/lib/series";
 import dynamic from "next/dynamic";
 import { useQueryState, type Options } from "nuqs";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -21,32 +28,53 @@ const CharacterDetails = dynamic(
 	{ ssr: false },
 );
 
-type SetCharacterQuery = (value: string | null, options?: Options) => Promise<URLSearchParams>;
+type SetQueryValue = (value: string | null, options?: Options) => Promise<URLSearchParams>;
 
-function GalleryCharacterQuerySync({
-	onQueryChange,
-	setQueryRef,
+function GalleryQuerySync({
+	onCharacterChange,
+	onSeriesChange,
+	setCharacterQueryRef,
+	setSeriesQueryRef,
 }: {
-	onQueryChange: (characterId: string | null) => void;
-	setQueryRef: React.RefObject<SetCharacterQuery | null>;
+	onCharacterChange: (characterId: string | null) => void;
+	onSeriesChange: (seriesSlug: string | null) => void;
+	setCharacterQueryRef: React.RefObject<SetQueryValue | null>;
+	setSeriesQueryRef: React.RefObject<SetQueryValue | null>;
 }) {
 	const [characterId, setCharacterId] = useQueryState(
 		CHARACTER_QUERY_KEY,
 		characterQueryParser.withOptions({ history: "push" }),
 	);
+	const [seriesSlug, setSeriesSlug] = useQueryState(
+		SERIES_QUERY_KEY,
+		seriesQueryParser.withOptions({ history: "push" }),
+	);
 
 	useEffect(() => {
-		setQueryRef.current = setCharacterId;
+		setCharacterQueryRef.current = setCharacterId;
 		return () => {
-			if (setQueryRef.current === setCharacterId) {
-				setQueryRef.current = null;
+			if (setCharacterQueryRef.current === setCharacterId) {
+				setCharacterQueryRef.current = null;
 			}
 		};
-	}, [setCharacterId, setQueryRef]);
+	}, [setCharacterId, setCharacterQueryRef]);
 
 	useEffect(() => {
-		onQueryChange(characterId);
-	}, [characterId, onQueryChange]);
+		setSeriesQueryRef.current = setSeriesSlug;
+		return () => {
+			if (setSeriesQueryRef.current === setSeriesSlug) {
+				setSeriesQueryRef.current = null;
+			}
+		};
+	}, [setSeriesSlug, setSeriesQueryRef]);
+
+	useEffect(() => {
+		onCharacterChange(characterId);
+	}, [characterId, onCharacterChange]);
+
+	useEffect(() => {
+		onSeriesChange(seriesSlug);
+	}, [seriesSlug, onSeriesChange]);
 
 	return null;
 }
@@ -57,18 +85,31 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 		() => new Map(characters.map((character) => [character.id, character])),
 		[characters],
 	);
+	const seriesOptions = useMemo(() => buildSeriesOptions(characters), [characters]);
+	const seriesBySlug = useMemo(
+		() => new Map(seriesOptions.map((option) => [option.slug, option])),
+		[seriesOptions],
+	);
 	const { boopOrder, setBoopOrder } = useBoopOrder();
 	const [selectedCharacter, setSelectedCharacter] = useState<GalleryCharacter | null>(null);
+	const [selectedSeriesSlug, setSelectedSeriesSlug] = useState<string | null>(null);
 	const [catalogOpen, setCatalogOpen] = useState(false);
 	const [openedFromCatalog, setOpenedFromCatalog] = useState(false);
 	const headerLogoRef = useRef<HTMLSpanElement>(null);
 	const selectedCharacterIdRef = useRef<string | null>(null);
-	const setCharacterQueryRef = useRef<SetCharacterQuery | null>(null);
+	const setCharacterQueryRef = useRef<SetQueryValue | null>(null);
+	const setSeriesQueryRef = useRef<SetQueryValue | null>(null);
 	const { soundEnabled, toggleSound, resumeSound, playReactionSound } = useReactionSound();
 
 	useEffect(() => {
 		selectedCharacterIdRef.current = selectedCharacter?.id ?? null;
 	}, [selectedCharacter]);
+
+	const selectedSeries = selectedSeriesSlug ? (seriesBySlug.get(selectedSeriesSlug) ?? null) : null;
+	const visibleCharacters = useMemo(() => {
+		if (!selectedSeries) return characters;
+		return characters.filter((character) => character.series === selectedSeries.series);
+	}, [characters, selectedSeries]);
 
 	const handleQueryCharacterChange = useCallback(
 		(characterId: string | null) => {
@@ -94,6 +135,29 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 		},
 		[charactersById],
 	);
+
+	const handleQuerySeriesChange = useCallback(
+		(seriesSlug: string | null) => {
+			if (!seriesSlug) {
+				setSelectedSeriesSlug(null);
+				return;
+			}
+
+			if (!seriesBySlug.has(seriesSlug)) {
+				setSelectedSeriesSlug(null);
+				void setSeriesQueryRef.current?.(null, { history: "replace" });
+				return;
+			}
+
+			setSelectedSeriesSlug(seriesSlug);
+		},
+		[seriesBySlug],
+	);
+
+	const handleSeriesChange = useCallback((seriesSlug: string | null) => {
+		setSelectedSeriesSlug(seriesSlug);
+		void setSeriesQueryRef.current?.(seriesSlug, { history: "push" });
+	}, []);
 
 	const handleSelectFromCatalog = useCallback((character: GalleryCharacter) => {
 		setCatalogOpen(false);
@@ -136,9 +200,11 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 	return (
 		<div className="relative flex h-dvh flex-col overflow-hidden">
 			<Suspense fallback={null}>
-				<GalleryCharacterQuerySync
-					onQueryChange={handleQueryCharacterChange}
-					setQueryRef={setCharacterQueryRef}
+				<GalleryQuerySync
+					onCharacterChange={handleQueryCharacterChange}
+					onSeriesChange={handleQuerySeriesChange}
+					setCharacterQueryRef={setCharacterQueryRef}
+					setSeriesQueryRef={setSeriesQueryRef}
 				/>
 			</Suspense>
 			<a
@@ -169,10 +235,17 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 					{brand.galleryHeading}
 				</h2>
 				<CharacterGrid
-					characters={characters}
+					key={selectedSeries?.slug ?? "all"}
+					characters={visibleCharacters}
 					boopOrder={boopOrder}
 					onReact={playReactionSound}
 					onSelectCharacter={handleSelectFromGrid}
+				/>
+				<GalleryDock
+					seriesOptions={seriesOptions}
+					totalCount={characters.length}
+					selectedSeriesSlug={selectedSeries?.slug ?? null}
+					onSeriesChange={handleSeriesChange}
 				/>
 			</main>
 			{selectedCharacter !== null && (

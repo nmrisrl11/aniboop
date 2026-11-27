@@ -1,8 +1,14 @@
 import { parseAsString } from "nuqs";
 
 export const CHARACTER_QUERY_KEY = "character";
+export const SERIES_QUERY_KEY = "series";
 
 export const characterQueryParser = parseAsString.withOptions({
+	shallow: true,
+	clearOnDefault: true,
+});
+
+export const seriesQueryParser = parseAsString.withOptions({
 	shallow: true,
 	clearOnDefault: true,
 });

@@ -61,6 +61,10 @@ export const brand = {
 		qualityHDDescription: "Full-resolution master",
 		qualityWeb: "504 × 504 (Web)",
 		qualityWebDescription: "Optimized for web",
+		tryInPlayground: "Try in Playground",
+		copyLink: "Copy link",
+		linkCopied: "Link copied",
+		copyLinkFailed: "Copy failed",
 		licenseNoticeTitle: "Artwork & Usage Terms",
 		licenseNotice:
 			"Characters belong to their original creators and studios. AniBoop is an educational, non-commercial fan tribute. The MIT software license excludes character artwork, names, and series identifiers.",

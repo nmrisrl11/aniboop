@@ -26,6 +26,10 @@
 /temp/
 __pycache__/
 
+# Local-only planning and release notes
+/docs/ROADMAP.local.md
+/docs/CHANGELOG.local.md
+
 # Local mascot assets (served from Cloudflare R2 in production)
 /public/mascots/raw/*
 !/public/mascots/raw/README.md

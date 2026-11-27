@@ -6,14 +6,16 @@ import {
 } from "@/components/catalog/character-catalog";
 import { BoopOrderSelect } from "@/components/header/boop-order-select";
 import { ReactionSoundToggle } from "@/components/header/reaction-sound-toggle";
-import { Mascot, type BoopOrder, type Reaction } from "@/components/mascot/mascot";
+import { Mascot, type Reaction } from "@/components/mascot/mascot";
 import { SheetDropzone, type UploadedSheet } from "@/components/playground/sheet-dropzone";
 import { ThemeSwitcher } from "@/components/theme/theme-switcher";
 import { Button } from "@/components/ui/button";
 import { resolveGalleryCharacters, type CatalogCharacter } from "@/data/characters";
+import { useBoopOrder } from "@/hooks/use-boop-order";
 import { useReactionSound } from "@/hooks/use-reaction-sound";
 import { getMascotAssetUrl } from "@/lib/assets";
 import { brand } from "@/lib/brand";
+import { CHARACTER_QUERY_KEY, characterQueryParser } from "@/lib/search-params";
 import {
 	ArrowLeftIcon,
 	ArrowUpRightIcon,
@@ -25,7 +27,8 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useQueryState, type Options } from "nuqs";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type SheetSlot = "directions" | "reactions";
 
@@ -71,11 +74,45 @@ function revokeIfBlobUrl(url: string | null) {
 	}
 }
 
+type SetCharacterQuery = (value: string | null, options?: Options) => Promise<URLSearchParams>;
+
+function PlaygroundCharacterQuerySync({
+	onQueryChange,
+	setQueryRef,
+}: {
+	onQueryChange: (characterId: string | null) => void;
+	setQueryRef: React.RefObject<SetCharacterQuery | null>;
+}) {
+	const [characterId, setCharacterId] = useQueryState(
+		CHARACTER_QUERY_KEY,
+		characterQueryParser.withOptions({ history: "replace" }),
+	);
+
+	useEffect(() => {
+		setQueryRef.current = setCharacterId;
+		return () => {
+			if (setQueryRef.current === setCharacterId) {
+				setQueryRef.current = null;
+			}
+		};
+	}, [setCharacterId, setQueryRef]);
+
+	useEffect(() => {
+		onQueryChange(characterId);
+	}, [characterId, onQueryChange]);
+
+	return null;
+}
+
 export function Playground({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 	const characters = useMemo(() => resolveGalleryCharacters(catalog), [catalog]);
+	const charactersById = useMemo(
+		() => new Map(characters.map((character) => [character.id, character])),
+		[characters],
+	);
 	const [catalogOpen, setCatalogOpen] = useState(false);
 	const [mascotLabel, setMascotLabel] = useState("Uploaded mascot preview");
-	const [boopOrder, setBoopOrder] = useState<BoopOrder>("cycle");
+	const { boopOrder, setBoopOrder } = useBoopOrder();
 	const [directions, setDirections] = useState<UploadedSheet | null>(null);
 	const [reactions, setReactions] = useState<UploadedSheet | null>(null);
 	const [errors, setErrors] = useState<Record<SheetSlot, string | null>>({
@@ -83,6 +120,8 @@ export function Playground({ catalog }: { catalog: readonly CatalogCharacter[] }
 		reactions: null,
 	});
 	const [lastReaction, setLastReaction] = useState<Reaction | null>(null);
+	const loadedCatalogIdRef = useRef<string | null>(null);
+	const setCharacterQueryRef = useRef<SetCharacterQuery | null>(null);
 	const { soundEnabled, toggleSound, resumeSound, playReactionSound } = useReactionSound();
 
 	const urlsRef = useRef<{ directions: string | null; reactions: string | null }>({
@@ -122,9 +161,11 @@ export function Playground({ catalog }: { catalog: readonly CatalogCharacter[] }
 			setErrors((prev) => ({ ...prev, [slot]: null }));
 			try {
 				const loaded = await loadImageSheet(file);
+				loadedCatalogIdRef.current = null;
 				setSheet(slot, loaded);
 				setMascotLabel("Uploaded mascot preview");
 				setLastReaction(null);
+				void setCharacterQueryRef.current?.(null, { history: "replace" });
 			} catch {
 				setErrors((prev) => ({ ...prev, [slot]: copy.loadError }));
 			}
@@ -176,16 +217,18 @@ export function Playground({ catalog }: { catalog: readonly CatalogCharacter[] }
 	);
 
 	const handleClearAll = useCallback(() => {
+		loadedCatalogIdRef.current = null;
 		setSheet("directions", null);
 		setSheet("reactions", null);
 		setErrors({ directions: null, reactions: null });
 		setMascotLabel("Uploaded mascot preview");
 		setLastReaction(null);
+		void setCharacterQueryRef.current?.(null, { history: "replace" });
 	}, [setSheet]);
 
-	const handleSelectCatalogCharacter = useCallback(
+	const loadCatalogCharacter = useCallback(
 		(character: CharacterCatalogEntry) => {
-			setCatalogOpen(false);
+			loadedCatalogIdRef.current = character.id;
 			const directionsAsset = getMascotAssetUrl({
 				id: character.id,
 				type: "directions",
@@ -221,6 +264,32 @@ export function Playground({ catalog }: { catalog: readonly CatalogCharacter[] }
 		[setSheet],
 	);
 
+	const handleSelectCatalogCharacter = useCallback(
+		(character: CharacterCatalogEntry) => {
+			setCatalogOpen(false);
+			loadCatalogCharacter(character);
+			void setCharacterQueryRef.current?.(character.id, { history: "replace" });
+		},
+		[loadCatalogCharacter],
+	);
+
+	const handleQueryCharacterChange = useCallback(
+		(characterId: string | null) => {
+			if (!characterId) return;
+
+			const match = charactersById.get(characterId);
+			if (!match) {
+				void setCharacterQueryRef.current?.(null, { history: "replace" });
+				return;
+			}
+
+			if (loadedCatalogIdRef.current !== match.id) {
+				loadCatalogCharacter(match);
+			}
+		},
+		[charactersById, loadCatalogCharacter],
+	);
+
 	const handleReact = useCallback(
 		(reaction: Reaction) => {
 			setLastReaction(reaction);
@@ -236,6 +305,12 @@ export function Playground({ catalog }: { catalog: readonly CatalogCharacter[] }
 
 	return (
 		<div className="flex min-h-dvh flex-col">
+			<Suspense fallback={null}>
+				<PlaygroundCharacterQuerySync
+					onQueryChange={handleQueryCharacterChange}
+					setQueryRef={setCharacterQueryRef}
+				/>
+			</Suspense>
 			<header className="sticky inset-x-0 top-0 z-20 flex h-16 w-full shrink-0 items-center justify-between gap-3 border-b border-border bg-card px-4 shadow-xs select-none sm:px-5 md:h-14">
 				<div className="flex items-center gap-2">
 					<Link
@@ -347,8 +422,10 @@ export function Playground({ catalog }: { catalog: readonly CatalogCharacter[] }
 										error={errors.directions}
 										onFilesSelected={(files) => handleFilesSelected("directions", files)}
 										onRemove={() => {
+											loadedCatalogIdRef.current = null;
 											setSheet("directions", null);
 											setErrors((prev) => ({ ...prev, directions: null }));
+											void setCharacterQueryRef.current?.(null, { history: "replace" });
 										}}
 									/>
 
@@ -360,8 +437,10 @@ export function Playground({ catalog }: { catalog: readonly CatalogCharacter[] }
 										error={errors.reactions}
 										onFilesSelected={(files) => handleFilesSelected("reactions", files)}
 										onRemove={() => {
+											loadedCatalogIdRef.current = null;
 											setSheet("reactions", null);
 											setErrors((prev) => ({ ...prev, reactions: null }));
+											void setCharacterQueryRef.current?.(null, { history: "replace" });
 										}}
 									/>
 								</div>

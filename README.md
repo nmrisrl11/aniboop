@@ -27,13 +27,13 @@ Explore **190 chibi characters across 26 anime series** in an endless, pannable 
 ## Explore the gallery
 
 - **Pan** by dragging, scrolling, or using the arrow keys while the gallery is focused.
-- **Boop** by clicking, tapping, or pressing Enter or Space on a focused character. Hold or use a two-finger pinch for a different reaction. Boop order offers **In order**, **Random**, and **Build up**.
+- **Boop** by clicking, tapping, or pressing Enter or Space on a focused character. Hold or use a two-finger pinch for a different reaction. Boop order offers **In order**, **Random**, and **Build up** (persisted across visits).
 - **Turn on Reaction sounds** with the speaker button or under More options on smaller screens. Each expression has its own sound, including during holds and pinches.
 - **Find a character** in Catalog. Search by name or series, or filter by series. Press **Ctrl+K** or **Cmd+K** to open it. The [catalog data](src/data/characters) drives both the responsive catalog (dialog on desktop, drawer on mobile) and the grid.
 - **Use More options** on smaller screens for boop order, appearance, the Playground, the component guide, credits, and Support links (GitHub Repository, Buy Me a Coffee, and Upvote on AppBuildersPH). Appearance supports System, Light, and Dark.
 
-- **View details & download assets** by clicking the card action on any tile or choosing a character from the Catalog. Download high-resolution master sheets (1080 × 1080) or lightweight web-ready sheets (504 × 504) for directional gazes and emotional reactions — delivered via Cloudflare R2 — in an adaptive dialog on desktop and an ergonomic bottom-sheet drawer on mobile.
-- **Test custom sheets** in the [Playground](https://aniboop.nmrisrl.dev/playground) (`/playground`). Drag and drop your own 3 × 3 Directions and Reactions sprite sheets locally in the browser — or pick any character from the catalog — to preview gaze tracking, boops, and reaction sounds.
+- **View details & download assets** by clicking the card action on any tile or choosing a character from the Catalog. Download high-resolution master sheets (1080 × 1080) or lightweight web-ready sheets (504 × 504) for directional gazes and emotional reactions — delivered via Cloudflare R2 — in an adaptive dialog on desktop and an ergonomic bottom-sheet drawer on mobile. Each detail modal updates the URL (`/?character=<id>`) for browser Back/Forward navigation and includes **Try in Playground** and **Copy link** actions in the footer.
+- **Test custom sheets** in the [Playground](https://aniboop.nmrisrl.dev/playground) (`/playground`). Drag and drop your own 3 × 3 Directions and Reactions sprite sheets locally in the browser — or pick any character from the catalog (or open `/playground?character=<id>`) — to preview gaze tracking, boops, and reaction sounds.
 
 ## Get started
 
@@ -50,7 +50,7 @@ Open [localhost:3000](http://localhost:3000). Run `npm run lint:all` and `npm ru
 
 | Area          | Stack                                                                              |
 | ------------- | ---------------------------------------------------------------------------------- |
-| App           | Next.js 16 App Router, React 19, TypeScript, Turbopack, and Vercel Analytics       |
+| App           | Next.js 16 App Router, React 19, TypeScript, Turbopack, nuqs, and Vercel Analytics |
 | Interface     | Tailwind CSS 4, shadcn/ui with Radix primitives & Vaul drawer, Lucide, next-themes |
 | Code examples | shadcn Code Block with Shiki syntax highlighting                                   |
 | Code quality  | Oxlint, Next.js ESLint, Tailwind CSS lint, and Oxfmt                               |

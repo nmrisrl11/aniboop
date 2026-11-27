@@ -6,6 +6,7 @@ import { splashInitScript } from "@/lib/splash";
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 
 const allo = localFont({
@@ -58,7 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 					enableSystem
 					disableTransitionOnChange
 				>
-					{children}
+					<NuqsAdapter>{children}</NuqsAdapter>
 				</ThemeProvider>
 				<Analytics />
 			</body>

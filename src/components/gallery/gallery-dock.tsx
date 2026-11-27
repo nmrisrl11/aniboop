@@ -12,7 +12,7 @@ import {
 import { brand } from "@/lib/brand";
 import type { SeriesOption } from "@/lib/series";
 import { cn } from "@/lib/utils";
-import { HeartIcon, ListFilterIcon, XIcon } from "lucide-react";
+import { DicesIcon, HeartIcon, ListFilterIcon, XIcon } from "lucide-react";
 
 const copy = brand.galleryControls;
 
@@ -24,6 +24,7 @@ export function GalleryDock({
 	favoriteCount,
 	favoritesOnly,
 	onFavoritesToggle,
+	onSurpriseMe,
 }: {
 	seriesOptions: readonly SeriesOption[];
 	totalCount: number;
@@ -32,6 +33,7 @@ export function GalleryDock({
 	favoriteCount: number;
 	favoritesOnly: boolean;
 	onFavoritesToggle: () => void;
+	onSurpriseMe: () => void;
 }) {
 	const isFiltered = selectedSeriesSlug !== null;
 	const hasFavorites = favoriteCount > 0;
@@ -116,6 +118,18 @@ export function GalleryDock({
 					{hasFavorites && (
 						<span className="font-mono text-[11px] tabular-nums">{favoriteCount}</span>
 					)}
+				</Button>
+				<div aria-hidden="true" className="mx-0.5 h-5 w-px shrink-0 bg-border" />
+				<Button
+					type="button"
+					variant="ghost"
+					size="icon"
+					onClick={onSurpriseMe}
+					aria-label={copy.surpriseMe}
+					title={copy.surpriseMe}
+					className="size-9 rounded-lg text-muted-foreground transition-[transform,color,background-color] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-90 motion-reduce:transition-none motion-reduce:active:scale-100 squircle:rounded-xl"
+				>
+					<DicesIcon className="size-4" aria-hidden="true" />
 				</Button>
 			</div>
 		</div>

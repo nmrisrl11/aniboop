@@ -14,6 +14,7 @@ export function CharacterDetails({
 	onBackToCatalog,
 	isFavorite = false,
 	onToggleFavorite,
+	onSurpriseMe,
 }: {
 	character: GalleryCharacter | null;
 	open: boolean;
@@ -21,6 +22,7 @@ export function CharacterDetails({
 	onBackToCatalog?: () => void;
 	isFavorite?: boolean;
 	onToggleFavorite?: () => void;
+	onSurpriseMe?: () => void;
 }) {
 	const isDesktop = useMediaQuery("(min-width: 768px)");
 	const { downloadFile, isDownloading } = useDownload();
@@ -34,6 +36,7 @@ export function CharacterDetails({
 			isDownloading={isDownloading}
 			isFavorite={isFavorite}
 			onToggleFavorite={onToggleFavorite}
+			onSurpriseMe={onSurpriseMe}
 		/>
 	);
 

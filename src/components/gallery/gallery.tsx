@@ -100,6 +100,7 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 	const [openedFromCatalog, setOpenedFromCatalog] = useState(false);
 	const headerLogoRef = useRef<HTMLSpanElement>(null);
 	const selectedCharacterIdRef = useRef<string | null>(null);
+	const lastRandomIdRef = useRef<string | null>(null);
 	const setCharacterQueryRef = useRef<SetQueryValue | null>(null);
 	const setSeriesQueryRef = useRef<SetQueryValue | null>(null);
 	const { soundEnabled, toggleSound, resumeSound, playReactionSound } = useReactionSound();
@@ -176,15 +177,13 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 	}, []);
 
 	const handleFavoritesToggle = useCallback(() => {
-		setFavoritesOnly((current) => {
-			const next = !current;
-			if (next) {
-				setSelectedSeriesSlug(null);
-				void setSeriesQueryRef.current?.(null, { history: "replace" });
-			}
-			return next;
-		});
-	}, []);
+		const next = !activeFavoritesOnly;
+		setFavoritesOnly(next);
+		if (next) {
+			setSelectedSeriesSlug(null);
+			void setSeriesQueryRef.current?.(null, { history: "replace" });
+		}
+	}, [activeFavoritesOnly]);
 
 	const handleToggleFavorite = useCallback(
 		(id: string) => {
@@ -195,6 +194,25 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 		},
 		[favoritesOnly, favoriteIds, favoriteCount, toggleFavorite],
 	);
+
+	const handleSurpriseMe = useCallback(() => {
+		const count = visibleCharacters.length;
+		if (count === 0) return;
+
+		const avoidId = selectedCharacterIdRef.current ?? lastRandomIdRef.current;
+		let index = Math.floor(Math.random() * count);
+		if (count > 1 && visibleCharacters[index].id === avoidId) {
+			index = (index + 1) % count;
+		}
+
+		const pick = visibleCharacters[index];
+		const isReroll = selectedCharacterIdRef.current !== null;
+		lastRandomIdRef.current = pick.id;
+		setCatalogOpen(false);
+		setOpenedFromCatalog(false);
+		setSelectedCharacter(pick);
+		void setCharacterQueryRef.current?.(pick.id, { history: isReroll ? "replace" : "push" });
+	}, [visibleCharacters]);
 
 	const handleSelectFromCatalog = useCallback((character: GalleryCharacter) => {
 		setCatalogOpen(false);
@@ -289,6 +307,7 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 					favoriteCount={favoriteCount}
 					favoritesOnly={activeFavoritesOnly}
 					onFavoritesToggle={handleFavoritesToggle}
+					onSurpriseMe={handleSurpriseMe}
 				/>
 			</main>
 			{selectedCharacter !== null && (
@@ -299,6 +318,7 @@ export function Gallery({ catalog }: { catalog: readonly CatalogCharacter[] }) {
 					onBackToCatalog={openedFromCatalog ? handleBackToCatalog : undefined}
 					isFavorite={favoriteIds.has(selectedCharacter.id)}
 					onToggleFavorite={() => handleToggleFavorite(selectedCharacter.id)}
+					onSurpriseMe={visibleCharacters.length > 1 ? handleSurpriseMe : undefined}
 				/>
 			)}
 			<p id="grid-instructions" className="sr-only">

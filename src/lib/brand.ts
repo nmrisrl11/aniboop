@@ -42,6 +42,7 @@ export const brand = {
 		noFavoritesHint: "Heart characters to build your favorites collection",
 		favorited: "Favorited",
 		favorite: "Favorite",
+		surpriseMe: "Surprise me",
 		catalogResults: "Character results",
 		portraitAlt: (name: string) => `Chibi portrait of ${name}`,
 		portraitTitle: (name: string, series: string) => `${name} from ${series}`,

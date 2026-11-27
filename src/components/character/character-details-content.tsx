@@ -13,6 +13,7 @@ import { cn } from "@/lib/utils";
 import {
 	ArrowUpRightIcon,
 	CheckIcon,
+	DicesIcon,
 	FlaskConicalIcon,
 	HeartIcon,
 	Link2Icon,
@@ -160,12 +161,14 @@ export function CharacterDetailsContent({
 	isDownloading,
 	isFavorite = false,
 	onToggleFavorite,
+	onSurpriseMe,
 }: {
 	character: GalleryCharacter;
 	onDownload: (url: string, filename: string, options?: DownloadOptions) => void;
 	isDownloading: (url: string) => boolean;
 	isFavorite?: boolean;
 	onToggleFavorite?: () => void;
+	onSurpriseMe?: () => void;
 }) {
 	const { id, name, v, galleryDirections, reactions } = character;
 	const [quality, setQuality] = useState<SheetQuality>("1080");
@@ -294,11 +297,35 @@ export function CharacterDetailsContent({
 					</Link>
 				</Button>
 				<div className="flex items-center gap-1">
+					{onSurpriseMe && (
+						<Button
+							type="button"
+							variant="ghost"
+							size="icon"
+							onClick={onSurpriseMe}
+							aria-label={brand.galleryControls.surpriseMe}
+							title={brand.galleryControls.surpriseMe}
+							className={FOOTER_ACTION_CLASS}
+						>
+							<DicesIcon className="size-3.5" aria-hidden="true" />
+						</Button>
+					)}
 					{onToggleFavorite && (
 						<Button
 							type="button"
 							variant="ghost"
+							size="icon"
 							aria-pressed={isFavorite}
+							aria-label={
+								isFavorite
+									? brand.galleryControls.removeFromFavorites
+									: brand.galleryControls.addToFavorites
+							}
+							title={
+								isFavorite
+									? brand.galleryControls.removeFromFavorites
+									: brand.galleryControls.addToFavorites
+							}
 							onClick={onToggleFavorite}
 							className={cn(FOOTER_ACTION_CLASS, isFavorite && "text-foreground")}
 						>
@@ -306,14 +333,14 @@ export function CharacterDetailsContent({
 								className={cn("size-3.5", isFavorite && "fill-rose-500 text-rose-500")}
 								aria-hidden="true"
 							/>
-							<span className="hidden sm:inline">
-								{isFavorite ? brand.galleryControls.favorited : brand.galleryControls.favorite}
-							</span>
 						</Button>
 					)}
 					<Button
 						type="button"
 						variant="ghost"
+						size="icon"
+						aria-label={copied ? copy.linkCopied : failed ? copy.copyLinkFailed : copy.copyLink}
+						title={copied ? copy.linkCopied : failed ? copy.copyLinkFailed : copy.copyLink}
 						onClick={handleCopyLink}
 						className={cn(FOOTER_ACTION_CLASS, copied && "text-foreground")}
 					>
@@ -332,7 +359,6 @@ export function CharacterDetailsContent({
 								)}
 							/>
 						</span>
-						<span>{copied ? copy.linkCopied : failed ? copy.copyLinkFailed : copy.copyLink}</span>
 					</Button>
 				</div>
 			</div>

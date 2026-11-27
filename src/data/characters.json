@@ -832,5 +832,149 @@
 		"name": "Tsuyu Asui",
 		"series": "My Hero Academia",
 		"v": "c987dbad"
+	},
+	{
+		"id": "aki",
+		"name": "Aki Hayakawa",
+		"series": "Chainsaw Man",
+		"v": "2b198b67"
+	},
+	{
+		"id": "anya",
+		"name": "Anya Forger",
+		"series": "SPY×FAMILY",
+		"v": "219c871e"
+	},
+	{
+		"id": "bond",
+		"name": "Bond Forger",
+		"series": "SPY×FAMILY",
+		"v": "a102d32a"
+	},
+	{
+		"id": "denji",
+		"name": "Denji",
+		"series": "Chainsaw Man",
+		"v": "708b0a8d"
+	},
+	{
+		"id": "fern",
+		"name": "Fern",
+		"series": "Frieren: Beyond Journey’s End",
+		"v": "361ce1f5"
+	},
+	{
+		"id": "frieren",
+		"name": "Frieren",
+		"series": "Frieren: Beyond Journey’s End",
+		"v": "b822ea1b"
+	},
+	{
+		"id": "gojo",
+		"name": "Satoru Gojo",
+		"series": "Jujutsu Kaisen",
+		"v": "c3ee35e6"
+	},
+	{
+		"id": "himmel",
+		"name": "Himmel",
+		"series": "Frieren: Beyond Journey’s End",
+		"v": "4f260d60"
+	},
+	{
+		"id": "loid",
+		"name": "Loid Forger",
+		"series": "SPY×FAMILY",
+		"v": "097032a1"
+	},
+	{
+		"id": "maki",
+		"name": "Maki Zenin",
+		"series": "Jujutsu Kaisen",
+		"v": "f95d10d9"
+	},
+	{
+		"id": "makima",
+		"name": "Makima",
+		"series": "Chainsaw Man",
+		"v": "fa8636f0"
+	},
+	{
+		"id": "megumi",
+		"name": "Megumi Fushiguro",
+		"series": "Jujutsu Kaisen",
+		"v": "28fbb468"
+	},
+	{
+		"id": "nanami",
+		"name": "Kento Nanami",
+		"series": "Jujutsu Kaisen",
+		"v": "eebfc30f"
+	},
+	{
+		"id": "nobara",
+		"name": "Nobara Kugisaki",
+		"series": "Jujutsu Kaisen",
+		"v": "453d0965"
+	},
+	{
+		"id": "panda",
+		"name": "Panda",
+		"series": "Jujutsu Kaisen",
+		"v": "44823df1"
+	},
+	{
+		"id": "pochita",
+		"name": "Pochita",
+		"series": "Chainsaw Man",
+		"v": "9c6c87a1"
+	},
+	{
+		"id": "power",
+		"name": "Power",
+		"series": "Chainsaw Man",
+		"v": "2becd666"
+	},
+	{
+		"id": "serie",
+		"name": "Serie",
+		"series": "Frieren: Beyond Journey’s End",
+		"v": "50ac1896"
+	},
+	{
+		"id": "stark",
+		"name": "Stark",
+		"series": "Frieren: Beyond Journey’s End",
+		"v": "6eb8482c"
+	},
+	{
+		"id": "toge",
+		"name": "Toge Inumaki",
+		"series": "Jujutsu Kaisen",
+		"v": "2326f0ec"
+	},
+	{
+		"id": "ubel",
+		"name": "Übel",
+		"series": "Frieren: Beyond Journey’s End",
+		"v": "93f69a7d"
+	},
+	{
+		"id": "yor",
+		"name": "Yor Forger",
+		"series": "SPY×FAMILY",
+		"v": "9409700e"
+	},
+	{
+		"id": "yuji",
+		"name": "Yuji Itadori",
+		"series": "Jujutsu Kaisen",
+		"v": "cd22097f"
+	},
+	{
+		"id": "yuta",
+		"name": "Yuta Okkotsu",
+		"series": "Jujutsu Kaisen",
+		"v": "7f712c66"
 	}
 ]

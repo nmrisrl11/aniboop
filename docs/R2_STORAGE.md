@@ -58,15 +58,15 @@ Files in R2 are stored under three top-level prefixes matching [`src/lib/assets.
 aniboop-assets (Bucket root)
 ├── previews/
 │   ├── aizawa.webp
-│   └── ... (139 files)
+│   └── ... (163 files)
 ├── gallery-sheets/
 │   ├── aizawa-directions.webp
 │   ├── aizawa-reactions.webp
-│   └── ... (278 files)
+│   └── ... (326 files)
 └── sheets/
     ├── aizawa-directions.webp
     ├── aizawa-reactions.webp
-    └── ... (278 files)
+    └── ... (326 files)
 ```
 
 ### CORS Policy
@@ -173,7 +173,7 @@ npm run mascot:update -- --id <id>
 
 Cloudflare R2 free tier allowances renew monthly with **\$0 cost**:
 
-- **Storage:** 10 GB / month free (AniBoop uses ~0.065 GB across all 695 WebPs for 139 characters; ~0.65% of quota).
+- **Storage:** 10 GB / month free (AniBoop’s 815 catalog WebPs for 163 characters total about 0.079 GB, or 0.79% of the quota).
 - **Class A Operations (Upload / Write / List):** 1,000,000 requests / month free (Adding or updating 1 character = 5 writes).
 - **Class B Operations (Download / Read):** 10,000,000 requests / month free (dramatically reduced by Cloudflare edge caching).
 - **Egress (Bandwidth):** **\$0.00 unlimited free** (no outbound transfer fees).

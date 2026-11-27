@@ -27,7 +27,7 @@ Visible mascots follow the cursor across the gallery, including over captions an
 
 ## Adding a mascot
 
-Install the Python image tools once with `python -m pip install Pillow numpy`. Put two 1080 × 1080 sheets in `public/mascots/raw/`. Each sheet must be a 3 × 3 grid of 360 × 360 tiles. Use PNG or WebP and the same lowercase, hyphenated character ID for both files.
+Install the Python tools once with `python -m pip install Pillow numpy boto3`. Put two 1080 × 1080 sheets in `public/mascots/raw/`. Each sheet must be a 3 × 3 grid of 360 × 360 tiles. Use PNG or WebP and the same lowercase, hyphenated character ID for both files.
 
 - `<id>-directions.png` or `<id>-directions.webp`
 - `<id>-reactions.png` or `<id>-reactions.webp`

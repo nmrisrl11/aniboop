@@ -2,7 +2,6 @@
 
 import argparse
 import hashlib
-import json
 import re
 import subprocess
 import sys
@@ -11,11 +10,12 @@ from tempfile import TemporaryDirectory
 
 from PIL import Image
 
+from catalog import CATALOG_INDEX, catalog_snapshot, load_catalog, stage_character_addition
+
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "public" / "mascots"
 RAW = ASSETS / "raw"
 PROCESSED = RAW / "processed"
-CATALOG = ROOT / "src" / "data" / "characters.json"
 OPTIMIZER = ROOT / ".agents" / "skills" / "optimize-mascot" / "scripts" / "optimize.py"
 PREVIEW_GENERATOR = ROOT / "scripts" / "generate-mascot-previews.py"
 R2_SYNC = ROOT / "scripts" / "sync-r2.py"
@@ -40,8 +40,8 @@ def find_raw_sheet(character_id, kind):
 
 
 def add_mascot(character, staging, skip_r2=False):
-    original_catalog = CATALOG.read_bytes()
-    catalog = json.loads(original_catalog)
+    original_snapshot = catalog_snapshot()
+    catalog = load_catalog()
     character_id = character["id"]
     if any(entry["id"] == character_id for entry in catalog):
         raise ValueError(f"{character_id} is already in the catalog.")
@@ -85,10 +85,10 @@ def add_mascot(character, staging, skip_r2=False):
         digest.update(b"\0")
     entry = {**character, "v": digest.hexdigest()[:8]}
 
-    if CATALOG.read_bytes() != original_catalog:
+    if catalog_snapshot() != original_snapshot:
         raise ValueError("The catalog changed during generation. Run the command again.")
 
-    # Upload all five staged WebPs to R2 BEFORE publishing the entry in characters.json so
+    # Upload all five staged WebPs to R2 BEFORE publishing the entry in src/data/characters/ so
     # open dev tabs or clients never hit a 404 or stale cache entry on the new ?v=<hash> URL.
     if not skip_r2 and R2_SYNC.is_file():
         subprocess.run(
@@ -105,10 +105,7 @@ def add_mascot(character, staging, skip_r2=False):
             check=True,
         )
 
-    updated_catalog = staging / CATALOG.name
-    updated_catalog.write_text(
-        json.dumps([*catalog, entry], ensure_ascii=False, indent="\t") + "\n", encoding="utf-8"
-    )
+    staged_series_json, target_series_json, staged_index = stage_character_addition(entry, staging)
     published = []
     archived = []
     try:
@@ -118,7 +115,7 @@ def add_mascot(character, staging, skip_r2=False):
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 (staging / relative_path).replace(destination)
                 published.append(destination)
-        if CATALOG.read_bytes() != original_catalog:
+        if catalog_snapshot() != original_snapshot:
             raise ValueError("The catalog changed during upload. Run the command again.")
         PROCESSED.mkdir(exist_ok=True)
         for sheet, destination in archive_pairs:
@@ -126,7 +123,9 @@ def add_mascot(character, staging, skip_r2=False):
                 raise ValueError(f"An archived source already exists in raw/processed for {destination.name}.")
             sheet.rename(destination)
             archived.append((sheet, destination))
-        updated_catalog.replace(CATALOG)
+        staged_series_json.replace(target_series_json)
+        if staged_index is not None:
+            staged_index.replace(CATALOG_INDEX)
     except Exception:
         for sheet, destination in reversed(archived):
             destination.rename(sheet)

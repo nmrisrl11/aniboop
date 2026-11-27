@@ -1,0 +1,25 @@
+{
+	"series": "SPY×FAMILY",
+	"characters": [
+		{
+			"id": "anya",
+			"name": "Anya Forger",
+			"v": "219c871e"
+		},
+		{
+			"id": "bond",
+			"name": "Bond Forger",
+			"v": "a102d32a"
+		},
+		{
+			"id": "loid",
+			"name": "Loid Forger",
+			"v": "097032a1"
+		},
+		{
+			"id": "yor",
+			"name": "Yor Forger",
+			"v": "9409700e"
+		}
+	]
+}

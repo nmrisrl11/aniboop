@@ -1,0 +1,25 @@
+{
+	"series": "Tokyo Ghoul",
+	"characters": [
+		{
+			"id": "kaneki",
+			"name": "Ken Kaneki",
+			"v": "1d042a65"
+		},
+		{
+			"id": "touka",
+			"name": "Touka Kirishima",
+			"v": "7d5209a6"
+		},
+		{
+			"id": "amon",
+			"name": "Kōtarō Amon",
+			"v": "99daedd2"
+		},
+		{
+			"id": "hide",
+			"name": "Hideyoshi Nagachika",
+			"v": "d0173516"
+		}
+	]
+}

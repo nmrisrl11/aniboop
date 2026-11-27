@@ -1,0 +1,25 @@
+{
+	"series": "Yu Yu Hakusho",
+	"characters": [
+		{
+			"id": "yusuke",
+			"name": "Yusuke Urameshi",
+			"v": "5da399e3"
+		},
+		{
+			"id": "hiei",
+			"name": "Hiei",
+			"v": "d94bf3fa"
+		},
+		{
+			"id": "kurama",
+			"name": "Kurama",
+			"v": "53aadc8f"
+		},
+		{
+			"id": "kuwabara",
+			"name": "Kazuma Kuwabara",
+			"v": "d22aae11"
+		}
+	]
+}

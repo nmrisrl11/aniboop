@@ -1,0 +1,35 @@
+{
+	"series": "Demon Slayer",
+	"characters": [
+		{
+			"id": "tanjiro",
+			"name": "Tanjiro Kamado",
+			"v": "8ded81c4"
+		},
+		{
+			"id": "inosuke",
+			"name": "Inosuke Hashibira",
+			"v": "2dd30422"
+		},
+		{
+			"id": "nezuko",
+			"name": "Nezuko Kamado",
+			"v": "dc65e7f9"
+		},
+		{
+			"id": "zenitsu",
+			"name": "Zenitsu Agatsuma",
+			"v": "4cb18a85"
+		},
+		{
+			"id": "genya",
+			"name": "Genya Shinazugawa",
+			"v": "baa6d1af"
+		},
+		{
+			"id": "kanao",
+			"name": "Kanao Tsuyuri",
+			"v": "b3bc331c"
+		}
+	]
+}

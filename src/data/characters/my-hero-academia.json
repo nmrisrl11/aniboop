@@ -1,0 +1,115 @@
+{
+	"series": "My Hero Academia",
+	"characters": [
+		{
+			"id": "midoriya",
+			"name": "Izuku Midoriya (Deku)",
+			"v": "b7d06547"
+		},
+		{
+			"id": "bakugo",
+			"name": "Katsuki Bakugo",
+			"v": "ce40756a"
+		},
+		{
+			"id": "todoroki",
+			"name": "Shoto Todoroki",
+			"v": "840577f0"
+		},
+		{
+			"id": "aizawa",
+			"name": "Shota Aizawa",
+			"v": "06faacf5"
+		},
+		{
+			"id": "all-might",
+			"name": "All Might",
+			"v": "b2f1a223"
+		},
+		{
+			"id": "iida",
+			"name": "Tenya Iida",
+			"v": "710c2e15"
+		},
+		{
+			"id": "ochaco",
+			"name": "Ochaco Uraraka",
+			"v": "4a99789d"
+		},
+		{
+			"id": "aoyama",
+			"name": "Yuga Aoyama",
+			"v": "e1c68558"
+		},
+		{
+			"id": "hagakure",
+			"name": "Toru Hagakure",
+			"v": "2951f4b1"
+		},
+		{
+			"id": "jiro",
+			"name": "Kyoka Jiro",
+			"v": "41d29526"
+		},
+		{
+			"id": "kaminari",
+			"name": "Denki Kaminari",
+			"v": "c5ad38a9"
+		},
+		{
+			"id": "kirishima",
+			"name": "Eijiro Kirishima",
+			"v": "389bc07f"
+		},
+		{
+			"id": "koda",
+			"name": "Koji Koda",
+			"v": "4f13c37c"
+		},
+		{
+			"id": "mina",
+			"name": "Mina Ashido",
+			"v": "54501bf3"
+		},
+		{
+			"id": "mineta",
+			"name": "Minoru Mineta",
+			"v": "f8b4af38"
+		},
+		{
+			"id": "momo",
+			"name": "Momo Yaoyorozu",
+			"v": "1e607cb7"
+		},
+		{
+			"id": "ojiro",
+			"name": "Mashirao Ojiro",
+			"v": "92106b80"
+		},
+		{
+			"id": "sato",
+			"name": "Rikido Sato",
+			"v": "f779f4f9"
+		},
+		{
+			"id": "sero",
+			"name": "Hanta Sero",
+			"v": "0785d44a"
+		},
+		{
+			"id": "shoji",
+			"name": "Mezo Shoji",
+			"v": "f4acfa4d"
+		},
+		{
+			"id": "tokoyami",
+			"name": "Fumikage Tokoyami",
+			"v": "0c19f473"
+		},
+		{
+			"id": "tsuyu",
+			"name": "Tsuyu Asui",
+			"v": "c987dbad"
+		}
+	]
+}

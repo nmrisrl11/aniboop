@@ -1,0 +1,30 @@
+{
+	"series": "Blue Lock",
+	"characters": [
+		{
+			"id": "isagi",
+			"name": "Yoichi Isagi",
+			"v": "7411906b"
+		},
+		{
+			"id": "bachira",
+			"name": "Meguru Bachira",
+			"v": "1183b386"
+		},
+		{
+			"id": "hyoma",
+			"name": "Hyoma Chigiri",
+			"v": "d4216e13"
+		},
+		{
+			"id": "nagi",
+			"name": "Seishiro Nagi",
+			"v": "25d84ce6"
+		},
+		{
+			"id": "kunigami",
+			"name": "Rensuke Kunigami",
+			"v": "a049b55b"
+		}
+	]
+}

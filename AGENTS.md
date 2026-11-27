@@ -2,7 +2,7 @@
 
 ## Project
 
-AniBoop is a collection of chibi anime characters designed to react when booped. The homepage is a pannable, virtualized grid backed by the [character catalog](src/data/characters.json). The catalog supports searching by name or series and filtering by series, and character details with sprite sheet downloads open from each grid tile or the catalog (see the [feature blueprint](docs/FEATURE_BLUEPRINT.md)).
+AniBoop is a collection of chibi anime characters designed to react when booped. The homepage is a pannable, virtualized grid backed by the [character catalog](src/data/characters.ts) (assembled from per-series JSON files in [`src/data/characters/`](src/data/characters)). The catalog supports searching by name or series and filtering by series, and character details with sprite sheet downloads open from each grid tile or the catalog (see the [feature blueprint](docs/FEATURE_BLUEPRINT.md)).
 
 For a fresh agent conversation, use the [project context workflow](docs/HANDOFF.md) to load the codebase map and check the current checkout.
 
@@ -58,7 +58,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ## Mascot assets
 
 - Place incoming or unoptimized sprite sheets in `public/mascots/raw/`.
-- Use `npm run mascot:add` to optimize both sheets, generate the preview and compact pose sheets, upload all five WebPs (`previews/`, `gallery-sheets/`, `sheets/`) to Cloudflare R2 first, record the character's content hash (`v`) in `src/data/characters.json`, and archive originals to `public/mascots/raw/processed/`.
+- Use `npm run mascot:add` to optimize both sheets, generate the preview and compact pose sheets, upload all five WebPs (`previews/`, `gallery-sheets/`, `sheets/`) to Cloudflare R2 first, record the character's content hash (`v`) in its series file under `src/data/characters/`, and archive originals to `public/mascots/raw/processed/`.
 - Use `npm run mascot:update -- --id <id>` to replace an existing character's artwork, upload all five updated WebPs to Cloudflare R2 first, back up local copies to `public/old-version/mascots/`, and refresh its `v` cache-busting hash. Avoid using `--skip-r2` while `next dev` is open against live R2 (sync to R2 before loading the page) so Cloudflare never caches previous artwork or 404s under a new immutable `?v=<hash>`. See [Adding a mascot](docs/GALLERY_ASSETS.md#adding-a-mascot), [Cloudflare R2 storage](docs/R2_STORAGE.md), and the [optimize-mascot skill](.agents/skills/optimize-mascot/SKILL.md).
 - After catalog changes, refresh the [README](README.md) character and series totals from the catalog and check any affected featured previews. When updating a character featured in `README.md`, include `?v=<new_hash>` on its image URL so Cloudflare and GitHub's image proxy fetch the updated preview. Include the README update with the catalog change.
 - All generated mascot assets (`public/mascots/previews/`, `public/mascots/gallery-sheets/`, and `public/mascots/sheets/`) are Git-ignored and served from Cloudflare R2 (`NEXT_PUBLIC_R2_ASSETS_URL`) with `?v=<hash>` cache busting.

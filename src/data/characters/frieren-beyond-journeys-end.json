@@ -1,0 +1,35 @@
+{
+	"series": "Frieren: Beyond Journey’s End",
+	"characters": [
+		{
+			"id": "fern",
+			"name": "Fern",
+			"v": "361ce1f5"
+		},
+		{
+			"id": "frieren",
+			"name": "Frieren",
+			"v": "b822ea1b"
+		},
+		{
+			"id": "himmel",
+			"name": "Himmel",
+			"v": "4f260d60"
+		},
+		{
+			"id": "serie",
+			"name": "Serie",
+			"v": "50ac1896"
+		},
+		{
+			"id": "stark",
+			"name": "Stark",
+			"v": "6eb8482c"
+		},
+		{
+			"id": "ubel",
+			"name": "Übel",
+			"v": "93f69a7d"
+		}
+	]
+}

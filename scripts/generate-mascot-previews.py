@@ -1,7 +1,6 @@
 """Generate consistently framed center previews and pose sheets for the gallery."""
 
 import argparse
-import json
 import re
 import subprocess
 import sys
@@ -9,9 +8,10 @@ from pathlib import Path
 
 from PIL import Image
 
+from catalog import load_catalog
+
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS_DIR = ROOT / "public" / "mascots"
-CATALOG = ROOT / "src" / "data" / "characters.json"
 R2_SYNC = ROOT / "scripts" / "sync-r2.py"
 GALLERY_CELL_SIZE = 168
 PREVIEW_SIZE = 248
@@ -112,7 +112,7 @@ def main():
         if args.character:
             characters = [args.character]
         elif assets == ASSETS_DIR:
-            characters = [entry["id"] for entry in json.loads(CATALOG.read_text(encoding="utf-8"))]
+            characters = [entry["id"] for entry in load_catalog()]
         else:
             characters = [
                 path.stem.removesuffix("-directions") for path in sorted(source.glob("*-directions.webp"))

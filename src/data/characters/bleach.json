@@ -1,0 +1,65 @@
+{
+	"series": "Bleach",
+	"characters": [
+		{
+			"id": "ichigo",
+			"name": "Ichigo Kurosaki",
+			"v": "8cb1a709"
+		},
+		{
+			"id": "rukia",
+			"name": "Rukia Kuchiki",
+			"v": "b6821c8a"
+		},
+		{
+			"id": "chad",
+			"name": "Yasutora Sado",
+			"v": "c31b3cef"
+		},
+		{
+			"id": "orihime",
+			"name": "Orihime Inoue",
+			"v": "69df4131"
+		},
+		{
+			"id": "renji",
+			"name": "Renji Abarai",
+			"v": "6081dea7"
+		},
+		{
+			"id": "uryu",
+			"name": "Uryū Ishida",
+			"v": "d0459ca2"
+		},
+		{
+			"id": "aizen",
+			"name": "Sosuke Aizen",
+			"v": "58795697"
+		},
+		{
+			"id": "byakuya",
+			"name": "Byakuya Kuchiki",
+			"v": "dcd91588"
+		},
+		{
+			"id": "kenpachi",
+			"name": "Kenpachi Zaraki",
+			"v": "b6366c86"
+		},
+		{
+			"id": "toshiro",
+			"name": "Toshiro Hitsugaya",
+			"v": "9c398c9b"
+		},
+		{
+			"id": "urahara",
+			"name": "Kisuke Urahara",
+			"v": "2e8c82d8"
+		},
+		{
+			"id": "yoruichi",
+			"name": "Yoruichi Shihouin",
+			"v": "61244d08"
+		}
+	]
+}

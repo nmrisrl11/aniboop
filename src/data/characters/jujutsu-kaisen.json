@@ -1,0 +1,50 @@
+{
+	"series": "Jujutsu Kaisen",
+	"characters": [
+		{
+			"id": "gojo",
+			"name": "Satoru Gojo",
+			"v": "c3ee35e6"
+		},
+		{
+			"id": "maki",
+			"name": "Maki Zenin",
+			"v": "f95d10d9"
+		},
+		{
+			"id": "megumi",
+			"name": "Megumi Fushiguro",
+			"v": "28fbb468"
+		},
+		{
+			"id": "nanami",
+			"name": "Kento Nanami",
+			"v": "eebfc30f"
+		},
+		{
+			"id": "nobara",
+			"name": "Nobara Kugisaki",
+			"v": "453d0965"
+		},
+		{
+			"id": "panda",
+			"name": "Panda",
+			"v": "44823df1"
+		},
+		{
+			"id": "toge",
+			"name": "Toge Inumaki",
+			"v": "2326f0ec"
+		},
+		{
+			"id": "yuji",
+			"name": "Yuji Itadori",
+			"v": "cd22097f"
+		},
+		{
+			"id": "yuta",
+			"name": "Yuta Okkotsu",
+			"v": "7f712c66"
+		}
+	]
+}

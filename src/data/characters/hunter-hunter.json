@@ -1,0 +1,25 @@
+{
+	"series": "Hunter × Hunter",
+	"characters": [
+		{
+			"id": "gon",
+			"name": "Gon Freecss",
+			"v": "81c7a2da"
+		},
+		{
+			"id": "killua",
+			"name": "Killua Zoldyck",
+			"v": "958083a2"
+		},
+		{
+			"id": "kurapika",
+			"name": "Kurapika",
+			"v": "360dc411"
+		},
+		{
+			"id": "leorio",
+			"name": "Leorio Paradinight",
+			"v": "efe054e9"
+		}
+	]
+}

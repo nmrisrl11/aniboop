@@ -1,0 +1,30 @@
+{
+	"series": "Dandadan",
+	"characters": [
+		{
+			"id": "aira",
+			"name": "Aira Shiratori",
+			"v": "0c7768b3"
+		},
+		{
+			"id": "jiji",
+			"name": "Jin Enjoji (Jiji)",
+			"v": "a666a54d"
+		},
+		{
+			"id": "momo-ayase",
+			"name": "Momo Ayase",
+			"v": "cc3b823a"
+		},
+		{
+			"id": "okarun",
+			"name": "Ken Takakura (Okarun)",
+			"v": "d84c6f3e"
+		},
+		{
+			"id": "turbo-granny",
+			"name": "Turbo Granny",
+			"v": "1ed52a4c"
+		}
+	]
+}

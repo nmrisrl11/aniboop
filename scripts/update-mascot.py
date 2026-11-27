@@ -3,7 +3,6 @@
 
 import argparse
 import hashlib
-import json
 import re
 import shutil
 import subprocess
@@ -13,12 +12,13 @@ from tempfile import TemporaryDirectory
 
 from PIL import Image
 
+from catalog import CATALOG_DIR, catalog_snapshot, find_character, update_character_version
+
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "public" / "mascots"
 BACKUP = ROOT / "public" / "old-version" / "mascots"
 RAW = ASSETS / "raw"
 PROCESSED = RAW / "processed"
-CATALOG = ROOT / "src" / "data" / "characters.json"
 OPTIMIZER = ROOT / ".agents" / "skills" / "optimize-mascot" / "scripts" / "optimize.py"
 PREVIEW_GENERATOR = ROOT / "scripts" / "generate-mascot-previews.py"
 R2_SYNC = ROOT / "scripts" / "sync-r2.py"
@@ -43,11 +43,9 @@ def find_raw_sheet(character_id: str, kind: str) -> Path:
 
 
 def update_mascot(character_id: str, staging: Path, keep_raw: bool = False, skip_r2: bool = False) -> str:
-    original_catalog = CATALOG.read_bytes()
-    catalog = json.loads(original_catalog)
-    target_index = next((i for i, entry in enumerate(catalog) if entry["id"] == character_id), None)
-    if target_index is None:
-        raise ValueError(f"{character_id} is not in {CATALOG.relative_to(ROOT)}. Use mascot:add for new characters.")
+    original_snapshot = catalog_snapshot()
+    if find_character(character_id) is None:
+        raise ValueError(f"{character_id} is not in {CATALOG_DIR.relative_to(ROOT)}. Use mascot:add for new characters.")
 
     sheets = [find_raw_sheet(character_id, kind) for kind in ("directions", "reactions")]
 
@@ -80,10 +78,10 @@ def update_mascot(character_id: str, staging: Path, keep_raw: bool = False, skip
         digest.update(b"\0")
     new_version = digest.hexdigest()[:8]
 
-    if CATALOG.read_bytes() != original_catalog:
+    if catalog_snapshot() != original_snapshot:
         raise ValueError("The catalog changed during generation. Run the command again.")
 
-    # Upload all five staged WebPs to R2 BEFORE publishing the new version hash in characters.json.
+    # Upload all five staged WebPs to R2 BEFORE publishing the new version hash in src/data/characters/.
     # Otherwise, an open dev server or client fetching ?v=<new_version> before R2 finishes would
     # cause Cloudflare to cache the old object under the new immutable version query string.
     if not skip_r2 and R2_SYNC.is_file():
@@ -106,13 +104,10 @@ def update_mascot(character_id: str, staging: Path, keep_raw: bool = False, skip
         destination.parent.mkdir(parents=True, exist_ok=True)
         (staging / relative_path).replace(destination)
 
-    if CATALOG.read_bytes() != original_catalog:
+    if catalog_snapshot() != original_snapshot:
         raise ValueError("The catalog changed during upload. Run the command again.")
 
-    catalog[target_index] = {**catalog[target_index], "v": new_version}
-    updated_catalog = staging / CATALOG.name
-    updated_catalog.write_text(json.dumps(catalog, ensure_ascii=False, indent="\t") + "\n", encoding="utf-8")
-    updated_catalog.replace(CATALOG)
+    update_character_version(character_id, new_version, staging)
 
     if not keep_raw:
         PROCESSED.mkdir(exist_ok=True)

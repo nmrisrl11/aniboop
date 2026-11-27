@@ -1,0 +1,40 @@
+{
+	"series": "One Punch Man",
+	"characters": [
+		{
+			"id": "saitama",
+			"name": "Saitama",
+			"v": "3e54f6fb"
+		},
+		{
+			"id": "genos",
+			"name": "Genos",
+			"v": "dda7c3a2"
+		},
+		{
+			"id": "bang",
+			"name": "Bang",
+			"v": "8af06439"
+		},
+		{
+			"id": "fubuki",
+			"name": "Fubuki",
+			"v": "af94da26"
+		},
+		{
+			"id": "king",
+			"name": "King",
+			"v": "5c5d05cc"
+		},
+		{
+			"id": "mumen-rider",
+			"name": "Mumen Rider",
+			"v": "6c70f2a2"
+		},
+		{
+			"id": "tatsumaki",
+			"name": "Tatsumaki",
+			"v": "26ffca05"
+		}
+	]
+}

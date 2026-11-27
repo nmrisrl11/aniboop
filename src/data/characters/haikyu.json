@@ -1,0 +1,50 @@
+{
+	"series": "Haikyu!!",
+	"characters": [
+		{
+			"id": "hinata",
+			"name": "Shoyo Hinata",
+			"v": "8cbd749c"
+		},
+		{
+			"id": "kageyama",
+			"name": "Tobio Kageyama",
+			"v": "cb2427cf"
+		},
+		{
+			"id": "asahi",
+			"name": "Asahi Azumane",
+			"v": "ef7381b6"
+		},
+		{
+			"id": "daichi",
+			"name": "Daichi Sawamura",
+			"v": "b0f1f629"
+		},
+		{
+			"id": "nishinoya",
+			"name": "Yū Nishinoya",
+			"v": "db495bfb"
+		},
+		{
+			"id": "sugawara",
+			"name": "Kōshi Sugawara",
+			"v": "63e37948"
+		},
+		{
+			"id": "tanaka",
+			"name": "Ryūnosuke Tanaka",
+			"v": "1a4b029e"
+		},
+		{
+			"id": "tsukishima",
+			"name": "Kei Tsukishima",
+			"v": "07952e88"
+		},
+		{
+			"id": "yamaguchi",
+			"name": "Tadashi Yamaguchi",
+			"v": "2c727081"
+		}
+	]
+}

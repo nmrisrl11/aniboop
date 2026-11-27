@@ -1,0 +1,85 @@
+{
+	"series": "Inazuma Eleven GO",
+	"characters": [
+		{
+			"id": "amagi-daichi",
+			"name": "Daichi Amagi",
+			"v": "a5e1ce5b"
+		},
+		{
+			"id": "aoyama-shunsuke",
+			"name": "Shunsuke Aoyama",
+			"v": "8ac4877d"
+		},
+		{
+			"id": "hamano",
+			"name": "Kaiji Hamano",
+			"v": "2d959d80"
+		},
+		{
+			"id": "hayami",
+			"name": "Tsurumasa Hayami",
+			"v": "059a4f31"
+		},
+		{
+			"id": "ichino",
+			"name": "Nanasuke Ichino",
+			"v": "077279b3"
+		},
+		{
+			"id": "kageyama-hikaru",
+			"name": "Hikaru Kageyama",
+			"v": "bd23d049"
+		},
+		{
+			"id": "kariya",
+			"name": "Masaki Kariya",
+			"v": "b7dfac10"
+		},
+		{
+			"id": "kirino",
+			"name": "Ranmaru Kirino",
+			"v": "8f0f75ff"
+		},
+		{
+			"id": "kurama-norihito",
+			"name": "Norihito Kurama",
+			"v": "8dcfb14a"
+		},
+		{
+			"id": "kurumada",
+			"name": "Gouichi Kurumada",
+			"v": "6acf4789"
+		},
+		{
+			"id": "nishiki",
+			"name": "Ryouma Nishiki",
+			"v": "a02058ff"
+		},
+		{
+			"id": "nishizono",
+			"name": "Shinsuke Nishizono",
+			"v": "77a95639"
+		},
+		{
+			"id": "sangoku",
+			"name": "Taichi Sangoku",
+			"v": "4a4a587b"
+		},
+		{
+			"id": "shindou",
+			"name": "Takuto Shindou",
+			"v": "9c85c8d0"
+		},
+		{
+			"id": "tenma",
+			"name": "Tenma Matsukaze",
+			"v": "24970dec"
+		},
+		{
+			"id": "tsurugi",
+			"name": "Kyousuke Tsurugi",
+			"v": "ceef2b68"
+		}
+	]
+}

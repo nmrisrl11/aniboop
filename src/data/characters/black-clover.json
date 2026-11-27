@@ -1,0 +1,35 @@
+{
+	"series": "Black Clover",
+	"characters": [
+		{
+			"id": "asta",
+			"name": "Asta",
+			"v": "279039ee"
+		},
+		{
+			"id": "noelle",
+			"name": "Noelle Silva",
+			"v": "e9445dba"
+		},
+		{
+			"id": "yuno",
+			"name": "Yuno Grinberryall",
+			"v": "0c3362bc"
+		},
+		{
+			"id": "julius",
+			"name": "Julius Novachrono",
+			"v": "9376a4a3"
+		},
+		{
+			"id": "liebe",
+			"name": "Liebe",
+			"v": "46f65651"
+		},
+		{
+			"id": "yami",
+			"name": "Yami Sukehiro",
+			"v": "eb97c75f"
+		}
+	]
+}

@@ -1,0 +1,30 @@
+{
+	"series": "Solo Leveling",
+	"characters": [
+		{
+			"id": "jinwoo",
+			"name": "Sung Jinwoo",
+			"v": "e9a4063f"
+		},
+		{
+			"id": "beru",
+			"name": "Beru",
+			"v": "66180f13"
+		},
+		{
+			"id": "cha-hae-in",
+			"name": "Cha Hae-In",
+			"v": "070053c3"
+		},
+		{
+			"id": "igris",
+			"name": "Igris",
+			"v": "135a9349"
+		},
+		{
+			"id": "yoo-jin-ho",
+			"name": "Yoo Jin-Ho",
+			"v": "622a8a13"
+		}
+	]
+}

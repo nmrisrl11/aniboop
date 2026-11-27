@@ -1,0 +1,40 @@
+{
+	"series": "Fairy Tail",
+	"characters": [
+		{
+			"id": "natsu",
+			"name": "Natsu Dragneel",
+			"v": "4c87cd5a"
+		},
+		{
+			"id": "carla",
+			"name": "Carla",
+			"v": "a805da52"
+		},
+		{
+			"id": "erza",
+			"name": "Erza Scarlet",
+			"v": "e293c3ae"
+		},
+		{
+			"id": "gray",
+			"name": "Gray Fullbuster",
+			"v": "787495a1"
+		},
+		{
+			"id": "happy",
+			"name": "Happy",
+			"v": "3c6f2515"
+		},
+		{
+			"id": "lucy",
+			"name": "Lucy Heartfilia",
+			"v": "af30c34c"
+		},
+		{
+			"id": "wendy",
+			"name": "Wendy Marvell",
+			"v": "5d3c33fa"
+		}
+	]
+}

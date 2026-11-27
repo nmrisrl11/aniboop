@@ -1,0 +1,40 @@
+{
+	"series": "Dragon Ball",
+	"characters": [
+		{
+			"id": "goku",
+			"name": "Son Goku",
+			"v": "2e74c5c6"
+		},
+		{
+			"id": "gohan",
+			"name": "Son Gohan",
+			"v": "c4f6ae74"
+		},
+		{
+			"id": "piccolo",
+			"name": "Piccolo",
+			"v": "ce91de73"
+		},
+		{
+			"id": "bulma",
+			"name": "Bulma",
+			"v": "7951fdf1"
+		},
+		{
+			"id": "krillin",
+			"name": "Krillin",
+			"v": "1a037607"
+		},
+		{
+			"id": "trunks",
+			"name": "Trunks",
+			"v": "2ae6c9ba"
+		},
+		{
+			"id": "vegeta",
+			"name": "Vegeta",
+			"v": "0845728e"
+		}
+	]
+}

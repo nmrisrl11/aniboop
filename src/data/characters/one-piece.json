@@ -1,0 +1,55 @@
+{
+	"series": "One Piece",
+	"characters": [
+		{
+			"id": "luffy",
+			"name": "Monkey D. Luffy",
+			"v": "92fe2b0e"
+		},
+		{
+			"id": "sanji",
+			"name": "Sanji",
+			"v": "1903e651"
+		},
+		{
+			"id": "zoro",
+			"name": "Roronoa Zoro",
+			"v": "296208b0"
+		},
+		{
+			"id": "brook",
+			"name": "Brook",
+			"v": "11869384"
+		},
+		{
+			"id": "chopper",
+			"name": "Tony Tony Chopper",
+			"v": "d75866b2"
+		},
+		{
+			"id": "franky",
+			"name": "Franky",
+			"v": "7b263cf3"
+		},
+		{
+			"id": "jinbe",
+			"name": "Jinbe",
+			"v": "50ce9a8f"
+		},
+		{
+			"id": "nami",
+			"name": "Nami",
+			"v": "e7e6bb5c"
+		},
+		{
+			"id": "robin",
+			"name": "Nico Robin",
+			"v": "27b35733"
+		},
+		{
+			"id": "usopp",
+			"name": "Usopp",
+			"v": "6f1dc911"
+		}
+	]
+}

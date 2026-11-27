@@ -1,0 +1,25 @@
+{
+	"series": "Code Geass",
+	"characters": [
+		{
+			"id": "lelouch",
+			"name": "Lelouch vi Britannia",
+			"v": "6ff805e3"
+		},
+		{
+			"id": "cc",
+			"name": "C.C.",
+			"v": "43abb7e6"
+		},
+		{
+			"id": "kallen",
+			"name": "Kallen Stadtfeld",
+			"v": "a309a7bc"
+		},
+		{
+			"id": "suzaku",
+			"name": "Suzaku Kururugi",
+			"v": "26d840d3"
+		}
+	]
+}

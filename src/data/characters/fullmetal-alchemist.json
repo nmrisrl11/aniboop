@@ -1,0 +1,40 @@
+{
+	"series": "Fullmetal Alchemist",
+	"characters": [
+		{
+			"id": "edward",
+			"name": "Edward Elric",
+			"v": "7d48d6f1"
+		},
+		{
+			"id": "alphonse",
+			"name": "Alphonse Elric",
+			"v": "ec48ce99"
+		},
+		{
+			"id": "hohenheim",
+			"name": "Van Hohenheim",
+			"v": "b82aea1f"
+		},
+		{
+			"id": "izumi",
+			"name": "Izumi Curtis",
+			"v": "7f84de3d"
+		},
+		{
+			"id": "riza",
+			"name": "Riza Hawkeye",
+			"v": "4b7552a1"
+		},
+		{
+			"id": "roy",
+			"name": "Roy Mustang",
+			"v": "af29329c"
+		},
+		{
+			"id": "winry",
+			"name": "Winry Rockbell",
+			"v": "83bb4869"
+		}
+	]
+}

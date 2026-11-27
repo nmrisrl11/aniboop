@@ -29,7 +29,7 @@ Explore **190 chibi characters across 26 anime series** in an endless, pannable 
 - **Pan** by dragging, scrolling, or using the arrow keys while the gallery is focused.
 - **Boop** by clicking, tapping, or pressing Enter or Space on a focused character. Hold or use a two-finger pinch for a different reaction. Boop order offers **In order**, **Random**, and **Build up**.
 - **Turn on Reaction sounds** with the speaker button or under More options on smaller screens. Each expression has its own sound, including during holds and pinches.
-- **Find a character** in Catalog. Search by name or series, or filter by series. Press **Ctrl+K** or **Cmd+K** to open it. The [catalog data](src/data/characters.json) drives both the responsive catalog (dialog on desktop, drawer on mobile) and the grid.
+- **Find a character** in Catalog. Search by name or series, or filter by series. Press **Ctrl+K** or **Cmd+K** to open it. The [catalog data](src/data/characters) drives both the responsive catalog (dialog on desktop, drawer on mobile) and the grid.
 - **Use More options** on smaller screens for boop order, appearance, the Playground, the component guide, credits, and Support links (GitHub Repository, Buy Me a Coffee, and Upvote on AppBuildersPH). Appearance supports System, Light, and Dark.
 
 - **View details & download assets** by clicking the card action on any tile or choosing a character from the Catalog. Download high-resolution master sheets (1080 × 1080) or lightweight web-ready sheets (504 × 504) for directional gazes and emotional reactions — delivered via Cloudflare R2 — in an adaptive dialog on desktop and an ergonomic bottom-sheet drawer on mobile.

@@ -1,0 +1,25 @@
+{
+	"series": "Death Note",
+	"characters": [
+		{
+			"id": "light",
+			"name": "Light Yagami",
+			"v": "2d1ffa30"
+		},
+		{
+			"id": "l-lawliet",
+			"name": "L Lawliet",
+			"v": "9b51d190"
+		},
+		{
+			"id": "misa",
+			"name": "Misa Amane",
+			"v": "0357e930"
+		},
+		{
+			"id": "ryuk",
+			"name": "Ryuk",
+			"v": "e2d51f06"
+		}
+	]
+}

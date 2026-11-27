@@ -1,0 +1,25 @@
+{
+	"series": "Boruto: Naruto Next Generations",
+	"characters": [
+		{
+			"id": "boruto",
+			"name": "Boruto Uzumaki",
+			"v": "c8e35d13"
+		},
+		{
+			"id": "kawaki",
+			"name": "Kawaki",
+			"v": "85220d64"
+		},
+		{
+			"id": "mitsuki",
+			"name": "Mitsuki",
+			"v": "bb99b359"
+		},
+		{
+			"id": "sarada",
+			"name": "Sarada Uchiha",
+			"v": "8deb219c"
+		}
+	]
+}

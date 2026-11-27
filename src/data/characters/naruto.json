@@ -1,0 +1,55 @@
+{
+	"series": "Naruto",
+	"characters": [
+		{
+			"id": "naruto",
+			"name": "Naruto Uzumaki",
+			"v": "4b8a459d"
+		},
+		{
+			"id": "sasuke",
+			"name": "Sasuke Uchiha",
+			"v": "25bb0a39"
+		},
+		{
+			"id": "sakura",
+			"name": "Sakura Haruno",
+			"v": "c58c079e"
+		},
+		{
+			"id": "hinata-hyuga",
+			"name": "Hinata Hyuga",
+			"v": "fa14cbba"
+		},
+		{
+			"id": "kakashi",
+			"name": "Kakashi Hatake",
+			"v": "cfcce5be"
+		},
+		{
+			"id": "gaara",
+			"name": "Gaara",
+			"v": "e62b312a"
+		},
+		{
+			"id": "jiraiya",
+			"name": "Jiraiya",
+			"v": "2de46ad3"
+		},
+		{
+			"id": "rock-lee",
+			"name": "Rock Lee",
+			"v": "2eed9bb8"
+		},
+		{
+			"id": "shikamaru",
+			"name": "Shikamaru Nara",
+			"v": "01ac6718"
+		},
+		{
+			"id": "tsunade",
+			"name": "Tsunade",
+			"v": "6f0d2fd2"
+		}
+	]
+}

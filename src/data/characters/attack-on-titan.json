@@ -1,0 +1,45 @@
+{
+	"series": "Attack on Titan",
+	"characters": [
+		{
+			"id": "eren",
+			"name": "Eren Yeager",
+			"v": "a06964c4"
+		},
+		{
+			"id": "armin",
+			"name": "Armin Arlert",
+			"v": "2c01ed62"
+		},
+		{
+			"id": "mikasa",
+			"name": "Mikasa Ackerman",
+			"v": "adf0c187"
+		},
+		{
+			"id": "erwin",
+			"name": "Erwin Smith",
+			"v": "9ccc84f1"
+		},
+		{
+			"id": "hange",
+			"name": "Hange Zoë",
+			"v": "f85b55dc"
+		},
+		{
+			"id": "historia",
+			"name": "Historia Reiss",
+			"v": "ce13590b"
+		},
+		{
+			"id": "levi",
+			"name": "Levi Ackerman",
+			"v": "24c21b2e"
+		},
+		{
+			"id": "reiner",
+			"name": "Reiner Braun",
+			"v": "9a1e4ad3"
+		}
+	]
+}

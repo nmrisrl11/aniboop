@@ -1,0 +1,30 @@
+{
+	"series": "Chainsaw Man",
+	"characters": [
+		{
+			"id": "aki",
+			"name": "Aki Hayakawa",
+			"v": "2b198b67"
+		},
+		{
+			"id": "denji",
+			"name": "Denji",
+			"v": "708b0a8d"
+		},
+		{
+			"id": "makima",
+			"name": "Makima",
+			"v": "fa8636f0"
+		},
+		{
+			"id": "pochita",
+			"name": "Pochita",
+			"v": "9c6c87a1"
+		},
+		{
+			"id": "power",
+			"name": "Power",
+			"v": "2becd666"
+		}
+	]
+}

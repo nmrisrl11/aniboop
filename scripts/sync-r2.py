@@ -6,7 +6,6 @@ from __future__ import annotations
 import argparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import hashlib
-import json
 import os
 import sys
 import urllib.error
@@ -14,9 +13,10 @@ import urllib.request
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
+from catalog import CATALOG_DIR, load_catalog, sync_all_versions
+
 ROOT = Path(__file__).resolve().parents[1]
 MASCOTS_DIR = ROOT / "public" / "mascots"
-CATALOG_PATH = ROOT / "src" / "data" / "characters.json"
 
 CACHE_CONTROL_IMMUTABLE = "public, max-age=31536000, immutable"
 ASSET_TIERS = ("sheets", "previews", "gallery-sheets")
@@ -111,21 +111,13 @@ def compute_character_version(character_id: str, assets_dir: Path = MASCOTS_DIR)
 
 
 def sync_catalog_versions(assets_dir: Path = MASCOTS_DIR) -> int:
-    """Compute and persist per-character content revision hashes ('v') in characters.json."""
-    if not CATALOG_PATH.is_file():
-        print(f"[R2 ERROR] Catalog not found: {CATALOG_PATH}")
+    """Compute and persist per-character content revision hashes ('v') in src/data/characters/."""
+    if not CATALOG_DIR.is_dir():
+        print(f"[R2 ERROR] Catalog directory not found: {CATALOG_DIR}")
         return 1
 
-    catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
-    updated = 0
-    for entry in catalog:
-        version = compute_character_version(entry["id"], assets_dir)
-        if entry.get("v") != version:
-            entry["v"] = version
-            updated += 1
-
-    CATALOG_PATH.write_text(json.dumps(catalog, ensure_ascii=False, indent="\t") + "\n", encoding="utf-8")
-    print(f"Updated version hashes for {updated}/{len(catalog)} characters in {CATALOG_PATH.relative_to(ROOT)}.")
+    updated, total = sync_all_versions(lambda character_id: compute_character_version(character_id, assets_dir))
+    print(f"Updated version hashes for {updated}/{total} characters in {CATALOG_DIR.relative_to(ROOT)}.")
     return 0
 
 
@@ -279,17 +271,17 @@ def sync_all(
 
 
 def check_catalog(tiers: Tuple[str, ...] = ASSET_TIERS) -> int:
-    """Verify that every character in characters.json has all expected assets on R2."""
+    """Verify that every character in src/data/characters/ has all expected assets on R2."""
     client, bucket, err = get_r2_client()
     if err:
         print(f"[R2 ERROR] {err}")
         return 1
 
-    if not CATALOG_PATH.is_file():
-        print(f"[R2 ERROR] Catalog not found: {CATALOG_PATH}")
+    if not CATALOG_DIR.is_dir():
+        print(f"[R2 ERROR] Catalog directory not found: {CATALOG_DIR}")
         return 1
 
-    catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
+    catalog = load_catalog()
     remote_objects = list_remote_objects(client, bucket, tiers)
     tier_set = set(tiers)
 
@@ -333,15 +325,15 @@ def verify_cdn(
         print("[R2 ERROR] NEXT_PUBLIC_R2_ASSETS_URL is not configured.")
         return 1
 
-    if not CATALOG_PATH.is_file():
-        print(f"[R2 ERROR] Catalog not found: {CATALOG_PATH}")
+    if not CATALOG_DIR.is_dir():
+        print(f"[R2 ERROR] Catalog directory not found: {CATALOG_DIR}")
         return 1
 
-    catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
+    catalog = load_catalog()
     if character_id:
         catalog = [entry for entry in catalog if entry["id"] == character_id]
         if not catalog:
-            print(f"[R2 ERROR] Character '{character_id}' not found in {CATALOG_PATH.relative_to(ROOT)}.")
+            print(f"[R2 ERROR] Character '{character_id}' not found in {CATALOG_DIR.relative_to(ROOT)}.")
             return 1
 
     tier_set = set(tiers)
@@ -415,7 +407,7 @@ def main() -> None:
         action="store_true",
         help="Fetch public ?v=<hash> CDN URLs and verify their bytes match local WebPs",
     )
-    parser.add_argument("--sync-versions", action="store_true", help="Compute and update 'v' hashes in characters.json")
+    parser.add_argument("--sync-versions", action="store_true", help="Compute and update 'v' hashes in src/data/characters/")
     parser.add_argument("--force", action="store_true", help="Re-upload files even if sizes match on R2")
     parser.add_argument("--dry-run", action="store_true", help="Show what would be uploaded without uploading")
     parser.add_argument(

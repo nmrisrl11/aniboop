@@ -24,7 +24,7 @@ The [VS Code workspace settings](../.vscode/settings.json) configure Oxfmt on sa
 
 Tailwind lint uses [`src/app/globals.css`](../src/app/globals.css) and checks source under `src/`. The CLI and IntelliSense share class extraction settings for `className`, `cn`, `clsx`, and `cva`. Canonical class suggestions and conflicts are warnings by default. Review these even when the command exits successfully. Preview available fixes with `npm run lint:tailwind -- --dry-run`. Oxfmt handles class ordering. See [Tailwind CSS lint rules](../AGENTS.md#tailwind-css-lint) for the project conventions.
 
-The [commit-and-push skill](../.agents/skills/commit-and-push/SKILL.md) documents the repository workflow for preparing a conventional commit and pushing it.
+The [sync-and-push skill](../.agents/skills/sync-and-push/SKILL.md) documents the repository workflow for synchronizing documentation, preparing a conventional commit, and pushing it.
 
 ## Icon conventions
 

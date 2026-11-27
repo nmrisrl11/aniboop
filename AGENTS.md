@@ -52,8 +52,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## Documentation and Git
 
-- Keep the affected guides in sync when changing behavior, configuration, commands, or project status. Use the [documentation map](docs/DOCUMENTATION.md) to find the right place and [`$sync-documentation`](.agents/skills/sync-documentation/SKILL.md) for a broader drift audit.
-- Use the [commit-and-push skill](.agents/skills/commit-and-push/SKILL.md) when asked to commit and push. It confirms the proposed commit and destination by default, with an explicit `--direct` option.
+- Keep the affected guides in sync when changing behavior, configuration, commands, or project status. Use the [documentation map](docs/DOCUMENTATION.md) to find the right place, and use the [sync-and-push skill](.agents/skills/sync-and-push/SKILL.md) (`$sync-and-push`) to sync documentation, run checks, and commit and push changes (confirming by default, with an explicit `--direct` option for unattended execution).
 
 ## Mascot assets
 

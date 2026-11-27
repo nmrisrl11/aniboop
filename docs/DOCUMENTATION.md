@@ -17,6 +17,6 @@ Update the guide affected by a change. Treat source and configuration as evidenc
 | Gallery, reactions, or download behavior                   | [Feature blueprint](FEATURE_BLUEPRINT.md), plus the README if project status changes | Implemented routes, components, and assets                                                                                |
 | Gallery rendering, caching, or asset delivery              | [Gallery assets](GALLERY_ASSETS.md) and [R2 storage guide](R2_STORAGE.md)            | Grid implementation, asset pipeline, R2 storage, and mobile performance traces                                            |
 
-Run [`$sync-documentation`](../.agents/skills/sync-documentation/SKILL.md) to audit and fix drift, or add `--check` for findings only. For a narrow change, name the subsystem or guide in the request. Report any claims that could not be verified.
+Run [`$sync-and-push`](../.agents/skills/sync-and-push/SKILL.md) to audit and fix documentation drift before committing and pushing (confirming by default, or pass `--direct` to skip optional checks and confirmation). For a narrow change, name the subsystem or guide in the request. Report any claims that could not be verified.
 
 Keep the framework-managed Next.js rules block in `AGENTS.md` intact. After editing Markdown, verify the affected links and run `npm run format:check`.

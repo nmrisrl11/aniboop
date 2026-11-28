@@ -25,6 +25,36 @@
 			"id": "kunigami",
 			"name": "Rensuke Kunigami",
 			"v": "a049b55b"
+		},
+		{
+			"id": "aiku",
+			"name": "Oliver Aiku",
+			"v": "0e393b4b"
+		},
+		{
+			"id": "baro",
+			"name": "Shoei Baro",
+			"v": "1f30ac1b"
+		},
+		{
+			"id": "reo",
+			"name": "Reo Mikage",
+			"v": "78b55611"
+		},
+		{
+			"id": "rin",
+			"name": "Rin Itoshi",
+			"v": "f08cad37"
+		},
+		{
+			"id": "sae",
+			"name": "Sae Itoshi",
+			"v": "9b7a6479"
+		},
+		{
+			"id": "shidou",
+			"name": "Ryusei Shidou",
+			"v": "251dd464"
 		}
 	]
 }

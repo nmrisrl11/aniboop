@@ -1,0 +1,45 @@
+{
+	"series": "Mob Psycho 100",
+	"characters": [
+		{
+			"id": "dimple",
+			"name": "Dimple",
+			"v": "fcf45fe7"
+		},
+		{
+			"id": "mob",
+			"name": "Shigeo Kageyama (Mob)",
+			"v": "44d55508"
+		},
+		{
+			"id": "reigen",
+			"name": "Arataka Reigen",
+			"v": "2ef6b109"
+		},
+		{
+			"id": "ritsu",
+			"name": "Ritsu Kageyama",
+			"v": "a3d87e7a"
+		},
+		{
+			"id": "serizawa",
+			"name": "Katsuya Serizawa",
+			"v": "39f8092a"
+		},
+		{
+			"id": "shou",
+			"name": "Shou Suzuki",
+			"v": "cf1074a8"
+		},
+		{
+			"id": "teru",
+			"name": "Teruki Hanazawa",
+			"v": "bfaedf19"
+		},
+		{
+			"id": "tome",
+			"name": "Tome Kurata",
+			"v": "04ff99bb"
+		}
+	]
+}

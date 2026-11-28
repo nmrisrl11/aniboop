@@ -30,6 +30,51 @@
 			"id": "kanao",
 			"name": "Kanao Tsuyuri",
 			"v": "b3bc331c"
+		},
+		{
+			"id": "giyu",
+			"name": "Giyu Tomioka",
+			"v": "fbe6f581"
+		},
+		{
+			"id": "gyomei",
+			"name": "Gyomei Himejima",
+			"v": "89f4cfd1"
+		},
+		{
+			"id": "mitsuri",
+			"name": "Mitsuri Kanroji",
+			"v": "a1c4a579"
+		},
+		{
+			"id": "muichiro",
+			"name": "Muichiro Tokito",
+			"v": "88b390f7"
+		},
+		{
+			"id": "obanai",
+			"name": "Obanai Iguro",
+			"v": "5064587f"
+		},
+		{
+			"id": "rengoku",
+			"name": "Kyojuro Rengoku",
+			"v": "86afd2bb"
+		},
+		{
+			"id": "sanemi",
+			"name": "Sanemi Shinazugawa",
+			"v": "35e41bbe"
+		},
+		{
+			"id": "shinobu",
+			"name": "Shinobu Kocho",
+			"v": "a6232704"
+		},
+		{
+			"id": "tengen",
+			"name": "Tengen Uzui",
+			"v": "ea2d36b2"
 		}
 	]
 }

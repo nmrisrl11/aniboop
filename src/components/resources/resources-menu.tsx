@@ -16,12 +16,13 @@ import {
 	ArrowUpRightIcon,
 	ChevronDownIcon,
 	CoffeeIcon,
+	LayersIcon,
 	SparklesIcon,
 } from "lucide-react";
 import type { ComponentProps } from "react";
 
 const copy = brand.resources;
-const resourceKeys = ["repository", "support", "upvote"] as const;
+const resourceKeys = ["repository", "support", "upvote", "stackinfolio"] as const;
 
 function GitHubMark({ className, ...props }: ComponentProps<"svg">) {
 	return (
@@ -46,6 +47,7 @@ const icons = {
 	repository: GitHubMark,
 	support: CoffeeIcon,
 	upvote: ArrowBigUpIcon,
+	stackinfolio: LayersIcon,
 };
 
 export function ResourcesMenu({ triggerClassName }: { triggerClassName?: string } = {}) {

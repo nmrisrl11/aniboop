@@ -2,7 +2,7 @@
 
 **Little characters. Big reactions.**
 
-Explore **190 chibi characters across 26 anime series** in an endless, pannable gallery. Move your cursor to see them look back, or boop one for a reaction.
+Explore **220 chibi characters across 27 anime series** in an endless, pannable gallery. Move your cursor to see them look back, or boop one for a reaction.
 
 [Open AniBoop](https://aniboop.nmrisrl.dev) at its official address. If the official domain is unavailable, open [aniboop.vercel.app](https://aniboop.vercel.app) directly. See the [domain and outage guide](docs/SEO.md#backup-access-on-vercel) for recovery steps.
 
@@ -29,9 +29,9 @@ Explore **190 chibi characters across 26 anime series** in an endless, pannable 
 - **Pan** by dragging, scrolling, or using the arrow keys while the gallery is focused.
 - **Boop** by clicking, tapping, or pressing Enter or Space on a focused character. Hold or use a two-finger pinch for a different reaction. Boop order offers **In order**, **Random**, and **Build up** (persisted across visits).
 - **Turn on Reaction sounds** with the speaker button or under More options on smaller screens. Each expression has its own sound, including during holds and pinches.
-- **Filter the live grid by series or Favorites** using the floating bottom dock (**All series**, any of the 26 anime series, your **Favorites** collection, or **Surprise me** to open a random mascot from the active pool). Heart mascots from any grid tile or Character Details (persisted locally in your browser), and filter by **Favorites** in both the live grid and Catalog. Selecting a series updates the URL (`/?series=<slug>`) with browser Back/Forward support and includes a one-click clear button.
+- **Filter the live grid by series or Favorites** using the floating bottom dock (**All series**, any of the 27 anime series, your **Favorites** collection, or **Surprise me** to open a random mascot from the active pool). Heart mascots from any grid tile or Character Details (persisted locally in your browser), and filter by **Favorites** in both the live grid and Catalog. Selecting a series updates the URL (`/?series=<slug>`) with browser Back/Forward support and includes a one-click clear button.
 - **Find a character** in Catalog. Search by name or series, or filter by series. Press **Ctrl+K** or **Cmd+K** to open it. The [catalog data](src/data/characters) drives both the responsive catalog (dialog on desktop, drawer on mobile) and the grid.
-- **Use More options** on smaller screens for boop order, appearance, the Playground, the component guide, credits, and Support links (GitHub Repository, Buy Me a Coffee, and Upvote on AppBuildersPH). Appearance supports System, Light, and Dark.
+- **Use More options** on smaller screens for boop order, appearance, the Playground, the component guide, credits, and Support links (GitHub Repository, Buy Me a Coffee, Upvote on AppBuildersPH, and View on Stackinfolio). Appearance supports System, Light, and Dark.
 
 - **View details & download assets** by clicking the card action on any tile or choosing a character from the Catalog. Download high-resolution master sheets (1080 × 1080) or lightweight web-ready sheets (504 × 504) for directional gazes and emotional reactions — delivered via Cloudflare R2 — in an adaptive dialog on desktop and an ergonomic bottom-sheet drawer on mobile. Each detail modal updates the URL (`/?character=<id>`) for browser Back/Forward navigation and includes **Try in Playground** and **Copy link** actions in the footer.
 - **Test custom sheets** in the [Playground](https://aniboop.nmrisrl.dev/playground) (`/playground`). Drag and drop your own 3 × 3 Directions and Reactions sprite sheets locally in the browser — or pick any character from the catalog (or open `/playground?character=<id>`) — to preview gaze tracking, boops, and reaction sounds.

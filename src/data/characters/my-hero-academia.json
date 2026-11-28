@@ -110,6 +110,41 @@
 			"id": "tsuyu",
 			"name": "Tsuyu Asui",
 			"v": "c987dbad"
+		},
+		{
+			"id": "gran-torino",
+			"name": "Gran Torino",
+			"v": "2f07e189"
+		},
+		{
+			"id": "hound-dog",
+			"name": "Ryo Inui (Hound Dog)",
+			"v": "362ef7b0"
+		},
+		{
+			"id": "lunch-rush",
+			"name": "Lunch Rush",
+			"v": "31066f32"
+		},
+		{
+			"id": "nezu",
+			"name": "Nezu",
+			"v": "ae229dea"
+		},
+		{
+			"id": "present-mic",
+			"name": "Present Mic",
+			"v": "e7a9d215"
+		},
+		{
+			"id": "recovery-girl",
+			"name": "Recovery Girl",
+			"v": "684b85a9"
+		},
+		{
+			"id": "thirteen",
+			"name": "Thirteen",
+			"v": "f582b79d"
 		}
 	]
 }

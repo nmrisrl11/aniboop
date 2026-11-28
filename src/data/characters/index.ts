@@ -24,6 +24,7 @@ import frierenBeyondJourneysEnd from "./frieren-beyond-journeys-end.json";
 import jujutsuKaisen from "./jujutsu-kaisen.json";
 import dandadan from "./dandadan.json";
 import inazumaElevenGo from "./inazuma-eleven-go.json";
+import mobPsycho100 from "./mob-psycho-100.json";
 
 export type SeriesCharacter = {
 	id: string;
@@ -63,4 +64,5 @@ export const SERIES_CATALOGS: readonly SeriesCatalog[] = [
 	jujutsuKaisen,
 	dandadan,
 	inazumaElevenGo,
+	mobPsycho100,
 ];
